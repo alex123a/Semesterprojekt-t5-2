@@ -9,6 +9,12 @@ import java.util.Scanner;
 public class Game {
     private Parser parser;
     private Room currentRoom;
+    final private String file = new File("worldofzuul\\textfiles\\roomDescription").getAbsolutePath();
+    final private String file2 = new File("worldofzuul\\textfiles\\gameDescription").getAbsolutePath();
+    final private String file3 = new File("worldofzuul\\textfiles\\help").getAbsolutePath();
+    final private File welcomeMessage = new File(file2.replace("\\","\\\\") + ".txt");
+    final private File roomDescription = new File(file.replace("\\","\\\\") + ".txt");
+    final private File help = new File(file3.replace("\\","\\\\") + ".txt");
 
 
     public Game() {
@@ -19,11 +25,10 @@ public class Game {
 
     private void createRooms() {
         Room RoadBuild, Town, Beach, Farm, Park, Sdu;
-        File description = new File("C:\\Users\\janik\\Documents\\GitHub\\Semesterprojekt-t5-2\\zuul-framework\\txt\\roomDescription.txt");
 
         Scanner reader;
         try {
-            reader = new Scanner(description);
+            reader = new Scanner(roomDescription);
             RoadBuild = new RoadBuild(reader.nextLine());
             Town = new Town(reader.nextLine());
             Beach = new Beach(reader.nextLine());
@@ -67,11 +72,10 @@ public class Game {
     }
 
     private void printWelcome() {
-        File gameDescription = new File("C:\\Users\\janik\\Documents\\GitHub\\Semesterprojekt-t5-2\\zuul-framework\\txt\\gameDescription.txt");
 
         Scanner reader;
         try {
-            reader = new Scanner(gameDescription);
+            reader = new Scanner(welcomeMessage);
             System.out.println(reader.nextLine());
             System.out.println(reader.nextLine());
             System.out.println(reader.nextLine());
@@ -106,11 +110,10 @@ public class Game {
     }
 
     private void printHelp() {
-        File gameDescription = new File("C:\\Users\\janik\\Documents\\GitHub\\Semesterprojekt-t5-2\\zuul-framework\\txt\\help.txt");
 
         Scanner reader;
         try {
-            reader = new Scanner(gameDescription);
+            reader = new Scanner(help);
             System.out.println(reader.nextLine());
             System.out.println(reader.nextLine());
             System.out.println(reader.nextLine());

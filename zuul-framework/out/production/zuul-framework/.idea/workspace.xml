@@ -20,19 +20,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ba6c8188-7ef2-4ea3-9d5b-5b6e3607b86a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/worldofzuul/Rooms/Beach.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/worldofzuul/Rooms/Farm.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/worldofzuul/Rooms/Park.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/worldofzuul/Rooms/RoadBuild.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/worldofzuul/Rooms/Sdu.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/worldofzuul/Rooms/Town.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/zuul-framework/txt/gameDescription.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/zuul-framework/txt/help.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/zuul-framework/txt/roomDescription.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/zuul-framework/worldofzuul/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/zuul-framework/worldofzuul/Game.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/txt/gameDescription.txt" beforeDir="false" afterPath="$PROJECT_DIR$/worldofzuul/tekstfiles/gameDescription.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/txt/help.txt" beforeDir="false" afterPath="$PROJECT_DIR$/worldofzuul/tekstfiles/help.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/txt/roomDescription.txt" beforeDir="false" afterPath="$PROJECT_DIR$/worldofzuul/tekstfiles/roomDescription.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/worldofzuul/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/worldofzuul/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/worldofzuul/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/worldofzuul/Room.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -95,24 +99,29 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1237" height="163" key="GridCell.Tab.0.bottom" timestamp="1603789856247">
+    <state width="1237" height="163" key="GridCell.Tab.0.bottom" timestamp="1603791968633">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="163" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1603789856247" />
-    <state width="1237" height="163" key="GridCell.Tab.0.center" timestamp="1603789856247">
+    <state width="1237" height="163" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1603791968633" />
+    <state width="1237" height="163" key="GridCell.Tab.0.center" timestamp="1603791968632">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="163" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1603789856247" />
-    <state width="1237" height="163" key="GridCell.Tab.0.left" timestamp="1603789856246">
+    <state width="1237" height="163" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1603791968632" />
+    <state width="1237" height="163" key="GridCell.Tab.0.left" timestamp="1603791968632">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="163" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1603789856246" />
-    <state width="1237" height="163" key="GridCell.Tab.0.right" timestamp="1603789856247">
+    <state width="1237" height="163" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1603791968632" />
+    <state width="1237" height="163" key="GridCell.Tab.0.right" timestamp="1603791968632">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="163" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1603789856247" />
+    <state width="1237" height="163" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1603791968632" />
+    <state x="347" y="73" width="587" height="534" key="find.popup" timestamp="1603791993608">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="347" y="73" width="587" height="534" key="find.popup/0.0.1280.680@0.0.1280.680" timestamp="1603791993608" />
     <state x="303" y="1" width="672" height="678" key="search.everywhere.popup" timestamp="1603788419370">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
