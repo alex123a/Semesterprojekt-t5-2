@@ -8,6 +8,7 @@ import worldofzuul.Room;
 
 public class Beach extends Room {
     private static Plastic[] numberOfPlastic;
+
     public Beach(String description) {
         super(description, generatePlasticArray());
     }
@@ -20,7 +21,7 @@ public class Beach extends Room {
         for (int i = 0; i < numberOfPlastic.length; i++) {
             if (i < juiceBottles) {
                 numberOfPlastic[i] = new JuiceBottle();
-            } else if (i >= juiceBottles && i < milkBottles) {
+            } else if (i >= juiceBottles && i < milkBottles + juiceBottles) {
                 numberOfPlastic[i] = new MilkBottle();
             } else {
                 numberOfPlastic[i] = new WaterBottle();

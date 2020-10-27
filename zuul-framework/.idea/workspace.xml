@@ -103,26 +103,30 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1237" height="138" key="GridCell.Tab.0.bottom" timestamp="1603795058882">
+    <state width="1237" height="163" key="GridCell.Tab.0.bottom" timestamp="1603805028029">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="138" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1603795058882" />
-    <state width="1237" height="138" key="GridCell.Tab.0.center" timestamp="1603795058882">
+    <state width="1237" height="163" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1603805028029" />
+    <state width="1237" height="163" key="GridCell.Tab.0.center" timestamp="1603805028029">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="138" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1603795058882" />
-    <state width="1237" height="138" key="GridCell.Tab.0.left" timestamp="1603795058882">
+    <state width="1237" height="163" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1603805028029" />
+    <state width="1237" height="163" key="GridCell.Tab.0.left" timestamp="1603805028029">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="138" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1603795058882" />
-    <state width="1237" height="138" key="GridCell.Tab.0.right" timestamp="1603795058882">
+    <state width="1237" height="163" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1603805028029" />
+    <state width="1237" height="163" key="GridCell.Tab.0.right" timestamp="1603805028029">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="138" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1603795058882" />
+    <state width="1237" height="163" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1603805028029" />
     <state x="347" y="73" width="587" height="534" key="find.popup" timestamp="1603791993608">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="347" y="73" width="587" height="534" key="find.popup/0.0.1280.680@0.0.1280.680" timestamp="1603791993608" />
+    <state x="297" y="151" key="run.anything.popup" timestamp="1603804045771">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="297" y="151" key="run.anything.popup/0.0.1280.680@0.0.1280.680" timestamp="1603804045771" />
     <state x="303" y="1" width="672" height="678" key="search.everywhere.popup" timestamp="1603793927774">
       <screen x="0" y="0" width="1280" height="680" />
     </state>

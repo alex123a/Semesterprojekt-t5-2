@@ -54,5 +54,30 @@ public class Room
     {
         return exits.get(direction);
     }
+
+    public void getPlasticTypes() {
+        int[] numberOfPlastic = new int[4];
+        for (worldofzuul.Plastic plastic: plasticInRoom) {
+            if (plastic instanceof worldofzuul.CleaningPlastic) {
+                numberOfPlastic[0]++;
+            } else if (plastic instanceof worldofzuul.JuiceBottle) {
+                numberOfPlastic[1]++;
+            } else if (plastic instanceof worldofzuul.MilkBottle) {
+                numberOfPlastic[2]++;
+            } else if (plastic instanceof worldofzuul.WaterBottle) {
+                numberOfPlastic[3]++;
+            }
+        }
+
+        String[] typer = {"Cleaning products", "Juice bottles", "Milk bottles", "Water bottles"};
+        System.out.println("Total of " + plasticInRoom.size() + " plastic pieces");
+        for (int i = 0; i < numberOfPlastic.length; i++) {
+            if (numberOfPlastic[i] != 0) {
+                System.out.print("There is " + numberOfPlastic[i] + " of the type " + typer[i] + " ");
+            }
+        }
+        System.out.println();
+
+    }
 }
 
