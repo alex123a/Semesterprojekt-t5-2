@@ -20,16 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ba6c8188-7ef2-4ea3-9d5b-5b6e3607b86a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/zuul-framework/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/zuul-framework/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/zuul-framework/txt/gameDescription.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/zuul-framework/txt/help.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/zuul-framework/txt/roomDescription.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/zuul-framework/worldofzuul/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/zuul-framework/worldofzuul/Game.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/txt/gameDescription.txt" beforeDir="false" afterPath="$PROJECT_DIR$/worldofzuul/textfiles/gameDescription.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/txt/help.txt" beforeDir="false" afterPath="$PROJECT_DIR$/worldofzuul/textfiles/help.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/txt/roomDescription.txt" beforeDir="false" afterPath="$PROJECT_DIR$/worldofzuul/textfiles/roomDescription.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/worldofzuul/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/worldofzuul/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/worldofzuul/CommandWord.java" beforeDir="false" afterPath="$PROJECT_DIR$/worldofzuul/CommandWord.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
