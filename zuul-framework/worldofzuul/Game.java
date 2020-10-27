@@ -1,102 +1,130 @@
 package worldofzuul;
 
-public class Game 
-{
+import worldofzuul.Rooms.*;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
+public class Game {
     private Parser parser;
     private Room currentRoom;
-        
 
-    public Game() 
-    {
+
+    public Game() {
         createRooms();
         parser = new Parser();
     }
 
 
-    private void createRooms()
-    {
-        Room outside, theatre, pub, lab, office;
-      
-        outside = new Room("outside the main entrance of the university");
-        theatre = new Room("in a lecture theatre");
-        pub = new Room("in the campus pub");
-        lab = new Room("in a computing lab");
-        office = new Room("in the computing admin office");
-        
-        outside.setExit("east", theatre);
-        outside.setExit("south", lab);
-        outside.setExit("west", pub);
+    private void createRooms() {
+        Room RoadBuild, Town, Beach, Farm, Park, Sdu;
+        File description = new File("C:\\Users\\janik\\Documents\\GitHub\\Semesterprojekt-t5-2\\zuul-framework\\txt\\roomDescription.txt");
 
-        theatre.setExit("west", outside);
+        Scanner reader;
+        try {
+            reader = new Scanner(description);
+            RoadBuild = new RoadBuild(reader.nextLine());
+            Town = new Town(reader.nextLine());
+            Beach = new Beach(reader.nextLine());
+            Farm = new Farm(reader.nextLine());
+            Park = new Park(reader.nextLine());
+            Sdu = new Sdu(reader.nextLine());
+            reader.close();
 
-        pub.setExit("east", outside);
+            RoadBuild.setExit("east", Farm);
+            RoadBuild.setExit("south", Sdu);
+            RoadBuild.setExit("west", Beach);
+            RoadBuild.setExit("north", Park);
 
-        lab.setExit("north", outside);
-        lab.setExit("east", office);
+            Sdu.setExit("north", RoadBuild);
 
-        office.setExit("west", lab);
+            Farm.setExit("west", RoadBuild);
 
-        currentRoom = outside;
+            Beach.setExit("east", RoadBuild);
+
+            Park.setExit("east", Town);
+            Park.setExit("south", RoadBuild);
+
+            Town.setExit("west", Park);
+
+            currentRoom = RoadBuild;
+        } catch (FileNotFoundException e) {
+            System.out.println("Cannot find the file");
+            e.printStackTrace();
+        }
     }
 
-    public void play() 
-    {            
+    public void play() {
         printWelcome();
 
-                
         boolean finished = false;
-        while (! finished) {
+        while (!finished) {
             Command command = parser.getCommand();
             finished = processCommand(command);
         }
-        System.out.println("Thank you for playing.  Good bye.");
+        System.out.println("You have completed 100% of the road in plastic.");
     }
 
-    private void printWelcome()
-    {
-        System.out.println();
-        System.out.println("Welcome to the World of Zuul!");
-        System.out.println("World of Zuul is a new, incredibly boring adventure game.");
-        System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
-        System.out.println();
+    private void printWelcome() {
+        File gameDescription = new File("C:\\Users\\janik\\Documents\\GitHub\\Semesterprojekt-t5-2\\zuul-framework\\txt\\gameDescription.txt");
+
+        Scanner reader;
+        try {
+            reader = new Scanner(gameDescription);
+            System.out.println(reader.nextLine());
+            System.out.println(reader.nextLine());
+            System.out.println(reader.nextLine());
+            System.out.println(reader.nextLine());
+            System.out.println();
+            reader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Cannot find the file");
+            e.printStackTrace();
+        }
         System.out.println(currentRoom.getLongDescription());
     }
 
-    private boolean processCommand(Command command) 
-    {
+    private boolean processCommand(Command command) {
         boolean wantToQuit = false;
 
         CommandWord commandWord = command.getCommandWord();
 
-        if(commandWord == CommandWord.UNKNOWN) {
+        if (commandWord == CommandWord.UNKNOWN) {
             System.out.println("I don't know what you mean...");
             return false;
         }
 
         if (commandWord == CommandWord.HELP) {
             printHelp();
-        }
-        else if (commandWord == CommandWord.GO) {
+        } else if (commandWord == CommandWord.GO) {
             goRoom(command);
-        }
-        else if (commandWord == CommandWord.QUIT) {
+        } else if (commandWord == CommandWord.QUIT) {
             wantToQuit = quit(command);
         }
         return wantToQuit;
     }
 
-    private void printHelp() 
-    {
-        System.out.println("You are lost. You are alone. You wander");
-        System.out.println("around at the university.");
-        System.out.println();
-        System.out.println("Your command words are:");
+    private void printHelp() {
+        File gameDescription = new File("C:\\Users\\janik\\Documents\\GitHub\\Semesterprojekt-t5-2\\zuul-framework\\txt\\help.txt");
+
+        Scanner reader;
+        try {
+            reader = new Scanner(gameDescription);
+            System.out.println(reader.nextLine());
+            System.out.println(reader.nextLine());
+            System.out.println(reader.nextLine());
+            System.out.println(reader.nextLine());
+            reader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Cannot find the file");
+            e.printStackTrace();
+        }
         parser.showCommands();
     }
 
-    private void goRoom(Command command) 
-    {
-        if(!command.hasSecondWord()) {
+    private void goRoom(Command command) {
+        if (!command.hasSecondWord()) {
             System.out.println("Go where?");
             return;
         }
@@ -107,20 +135,17 @@ public class Game
 
         if (nextRoom == null) {
             System.out.println("There is no door!");
-        }
-        else {
+        } else {
             currentRoom = nextRoom;
             System.out.println(currentRoom.getLongDescription());
         }
     }
 
-    private boolean quit(Command command) 
-    {
-        if(command.hasSecondWord()) {
+    private boolean quit(Command command) {
+        if (command.hasSecondWord()) {
             System.out.println("Quit what?");
             return false;
-        }
-        else {
+        } else {
             return true;
         }
     }
