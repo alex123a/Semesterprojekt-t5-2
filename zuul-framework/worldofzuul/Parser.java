@@ -31,7 +31,7 @@ public class Parser
             }
         }
 
-        return new Command(commands.getCommandWord(word1), word2);
+        return new Command(commands.getCommandWord(word1.toLowerCase()), word2.toLowerCase());
     }
 
     public void showCommands()

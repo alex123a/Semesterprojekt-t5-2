@@ -1,18 +1,27 @@
 package worldofzuul;
 
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Iterator;
+import java.util.Set;
 
 
 public class Room 
 {
     private String description;
+    private ArrayList<worldofzuul.Plastic> plasticInRoom;
     private HashMap<String, Room> exits;
 
-    public Room(String description) 
+    public Room(String description) {
+        this.description = description;
+        exits = new HashMap<String, Room>();
+        this.plasticInRoom = new ArrayList<>();
+    }
+
+    public Room(String description, worldofzuul.Plastic[] randomPlastic)
     {
         this.description = description;
+        this.plasticInRoom = new ArrayList<>(Arrays.asList(randomPlastic));
         exits = new HashMap<String, Room>();
     }
 
@@ -44,6 +53,31 @@ public class Room
     public Room getExit(String direction) 
     {
         return exits.get(direction);
+    }
+
+    public void getPlasticTypes() {
+        int[] numberOfPlastic = new int[4];
+        for (worldofzuul.Plastic plastic: plasticInRoom) {
+            if (plastic instanceof worldofzuul.CleaningPlastic) {
+                numberOfPlastic[0]++;
+            } else if (plastic instanceof worldofzuul.JuiceBottle) {
+                numberOfPlastic[1]++;
+            } else if (plastic instanceof worldofzuul.MilkBottle) {
+                numberOfPlastic[2]++;
+            } else if (plastic instanceof worldofzuul.WaterBottle) {
+                numberOfPlastic[3]++;
+            }
+        }
+
+        String[] typer = {"Cleaning products", "Juice bottles", "Milk bottles", "Water bottles"};
+        System.out.println("Total of " + plasticInRoom.size() + " plastic pieces");
+        for (int i = 0; i < numberOfPlastic.length; i++) {
+            if (numberOfPlastic[i] != 0) {
+                System.out.print("There is " + numberOfPlastic[i] + " of the type " + typer[i] + " ");
+            }
+        }
+        System.out.println();
+
     }
 }
 
