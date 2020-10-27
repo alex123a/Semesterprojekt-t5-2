@@ -4,6 +4,7 @@ import worldofzuul.Rooms.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Game {
@@ -105,6 +106,9 @@ public class Game {
             goRoom(command);
         } else if (commandWord == CommandWord.QUIT) {
             wantToQuit = quit(command);
+        } else if (commandWord == CommandWord.GIVE) {
+            givePlastic(command);
+
         }
         return wantToQuit;
     }
@@ -144,9 +148,20 @@ public class Game {
         }
     }
 
+    private void givePlastic(Command command) {
+        RoadBuilder machine = new RoadBuilder();
+        ArrayList<Command> com = machine.inventory(command);
+
+        if (com.size() == 30) {
+            System.out.println("The road is complete.");
+            quit(command);
+        }
+
+    }
+
     private boolean quit(Command command) {
         if (command.hasSecondWord()) {
-            System.out.println("Quit what?");
+            System.out.println("Quit");
             return false;
         } else {
             return true;
