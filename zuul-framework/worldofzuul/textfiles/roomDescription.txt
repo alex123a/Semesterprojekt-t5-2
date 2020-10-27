@@ -1,0 +1,6 @@
+the roadbuilder. Here you can build roads to complete the game.
+the town. Here you can talk with the trader and collect plastic.
+the beach. Here you can collect plastic.
+the farm. Here you can talk with the farmer and collect plastic.
+the park. Here you can collect plastic.
+SDU. Here you can talk with the old professor.
