@@ -9,7 +9,7 @@ import java.util.Set;
 public class Room 
 {
     private String description;
-    private ArrayList<Plastic> plasticInRoom;
+    private ArrayList<worldofzuul.Plastic> plasticInRoom;
     private HashMap<String, Room> exits;
 
     public Room(String description) {
@@ -18,7 +18,7 @@ public class Room
         this.plasticInRoom = new ArrayList<>();
     }
 
-    public Room(String description, Plastic[] randomPlastic)
+    public Room(String description, worldofzuul.Plastic[] randomPlastic)
     {
         this.description = description;
         this.plasticInRoom = new ArrayList<>(Arrays.asList(randomPlastic));
