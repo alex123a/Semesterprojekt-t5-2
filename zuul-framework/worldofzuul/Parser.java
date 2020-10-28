@@ -21,7 +21,7 @@ public class Parser
 
         System.out.print("> "); 
 
-        inputLine = reader.nextLine();
+        inputLine = reader.nextLine().toLowerCase();
 
         Scanner tokenizer = new Scanner(inputLine);
         if(tokenizer.hasNext()) {
@@ -31,7 +31,7 @@ public class Parser
             }
         }
 
-        return new Command(commands.getCommandWord(word1.toLowerCase()), word2.toLowerCase());
+        return new Command(commands.getCommandWord(word1), word2);
     }
 
     public void showCommands()

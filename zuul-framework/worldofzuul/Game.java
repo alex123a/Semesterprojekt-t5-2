@@ -137,7 +137,7 @@ public class Game {
         Room nextRoom = currentRoom.getExit(direction);
 
         if (nextRoom == null) {
-            System.out.println("There is no door!");
+            System.out.println("That is not possible!");
         } else {
             currentRoom = nextRoom;
             System.out.println(currentRoom.getLongDescription());
