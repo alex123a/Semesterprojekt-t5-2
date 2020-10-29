@@ -10,6 +10,7 @@ import java.util.Scanner;
 public class Game {
     private Parser parser;
     private Room currentRoom;
+    private String name;
     final private String file = new File("worldofzuul\\textfiles\\roomDescription").getAbsolutePath();
     final private String file2 = new File("worldofzuul\\textfiles\\gameDescription").getAbsolutePath();
     final private String file3 = new File("worldofzuul\\textfiles\\help").getAbsolutePath();
@@ -87,6 +88,19 @@ public class Game {
             System.out.println("Cannot find the file");
             e.printStackTrace();
         }
+        System.out.print("What is your name?\n> ");
+        boolean nameChosen = false;
+        while (!nameChosen) { // In this while loop we check for a name that is valid (No only space names) etc...
+            Scanner playerName = new Scanner(System.in);
+            name = playerName.nextLine();
+            if (name.matches(".*[0-9].*") || name.matches(".*[A-Z]*.")) {
+                nameChosen = true;
+            } else {
+                System.out.print("Name not vaild enter new name\n> ");
+            }
+
+        }
+        System.out.println("You have chosen " + name + " as your player name");
         System.out.println(currentRoom.getLongDescription());
     }
 
@@ -108,7 +122,8 @@ public class Game {
             wantToQuit = quit(command);
         } else if (commandWord == CommandWord.GIVE) {
             givePlastic(command);
-
+        } else if (commandWord == commandWord.COLLECT) {
+            Player.plasticCollect(currentRoom.getPlastic(),currentRoom);
         }
         return wantToQuit;
     }
