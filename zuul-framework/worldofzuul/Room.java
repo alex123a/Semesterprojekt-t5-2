@@ -1,15 +1,15 @@
 package worldofzuul;
 
+import worldofzuul.PlasticElements.*;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Set;
 
-
-public class Room 
-{
+public class Room {
     private String description;
-    private ArrayList<worldofzuul.Plastic> plasticInRoom;
+    private ArrayList<Plastic> plasticInRoom;
     private HashMap<String, Room> exits;
 
     public Room(String description) {
@@ -18,7 +18,7 @@ public class Room
         this.plasticInRoom = new ArrayList<>();
     }
 
-    public Room(String description, worldofzuul.Plastic[] randomPlastic)
+    public Room(String description, Plastic[] randomPlastic)
     {
         this.description = description;
         this.plasticInRoom = new ArrayList<>(Arrays.asList(randomPlastic));
@@ -57,14 +57,14 @@ public class Room
 
     public void getPlasticTypes() {
         int[] numberOfPlastic = new int[4];
-        for (worldofzuul.Plastic plastic: plasticInRoom) {
-            if (plastic instanceof worldofzuul.CleaningPlastic) {
+        for (Plastic plastic: plasticInRoom) {
+            if (plastic instanceof CleaningPlastic) {
                 numberOfPlastic[0]++;
-            } else if (plastic instanceof worldofzuul.JuiceBottle) {
+            } else if (plastic instanceof JuiceBottle) {
                 numberOfPlastic[1]++;
-            } else if (plastic instanceof worldofzuul.MilkBottle) {
+            } else if (plastic instanceof MilkBottle) {
                 numberOfPlastic[2]++;
-            } else if (plastic instanceof worldofzuul.WaterBottle) {
+            } else if (plastic instanceof WaterBottle) {
                 numberOfPlastic[3]++;
             }
         }

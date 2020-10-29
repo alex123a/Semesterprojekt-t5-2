@@ -22,14 +22,17 @@
     <list default="true" id="ba6c8188-7ef2-4ea3-9d5b-5b6e3607b86a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/zuul-framework/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/zuul-framework/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/zuul-framework/txt/gameDescription.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/zuul-framework/txt/help.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/zuul-framework/txt/roomDescription.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/zuul-framework/worldofzuul/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/zuul-framework/worldofzuul/Game.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/txt/gameDescription.txt" beforeDir="false" afterPath="$PROJECT_DIR$/worldofzuul/textfiles/gameDescription.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/txt/help.txt" beforeDir="false" afterPath="$PROJECT_DIR$/worldofzuul/textfiles/help.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/txt/roomDescription.txt" beforeDir="false" afterPath="$PROJECT_DIR$/worldofzuul/textfiles/roomDescription.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/worldofzuul/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/worldofzuul/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/worldofzuul/PlasticElements/CleaningPlastic.java" beforeDir="false" afterPath="$PROJECT_DIR$/worldofzuul/PlasticElements/CleaningPlastic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/worldofzuul/PlasticElements/JuiceBottle.java" beforeDir="false" afterPath="$PROJECT_DIR$/worldofzuul/PlasticElements/JuiceBottle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/worldofzuul/PlasticElements/MilkBottle.java" beforeDir="false" afterPath="$PROJECT_DIR$/worldofzuul/PlasticElements/MilkBottle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/worldofzuul/PlasticElements/Plastic.java" beforeDir="false" afterPath="$PROJECT_DIR$/worldofzuul/PlasticElements/Plastic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/worldofzuul/PlasticElements/WaterBottle.java" beforeDir="false" afterPath="$PROJECT_DIR$/worldofzuul/PlasticElements/WaterBottle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/worldofzuul/Rooms/Beach.java" beforeDir="false" afterPath="$PROJECT_DIR$/worldofzuul/Rooms/Beach.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/worldofzuul/Rooms/Farm.java" beforeDir="false" afterPath="$PROJECT_DIR$/worldofzuul/Rooms/Farm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/worldofzuul/Rooms/Park.java" beforeDir="false" afterPath="$PROJECT_DIR$/worldofzuul/Rooms/Park.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/worldofzuul/Rooms/RoadBuild.java" beforeDir="false" afterPath="$PROJECT_DIR$/worldofzuul/Rooms/RoadBuild.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/worldofzuul/Rooms/Town.java" beforeDir="false" afterPath="$PROJECT_DIR$/worldofzuul/Rooms/Town.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,26 +106,34 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1237" height="163" key="GridCell.Tab.0.bottom" timestamp="1603803934061">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1603978649473">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1237" height="163" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1603803934061" />
-    <state width="1237" height="163" key="GridCell.Tab.0.center" timestamp="1603803934061">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom/-1920.-221.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1603978649473" />
+    <state width="1237" height="163" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1603805982983" />
+    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1603978649472">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1237" height="163" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1603803934061" />
-    <state width="1237" height="163" key="GridCell.Tab.0.left" timestamp="1603803934061">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state width="1877" height="282" key="GridCell.Tab.0.center/-1920.-221.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1603978649472" />
+    <state width="1237" height="163" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1603805982983" />
+    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1603978649472">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1237" height="163" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1603803934061" />
-    <state width="1237" height="163" key="GridCell.Tab.0.right" timestamp="1603803934061">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state width="1877" height="282" key="GridCell.Tab.0.left/-1920.-221.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1603978649472" />
+    <state width="1237" height="163" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1603805982983" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1603978649472">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1237" height="163" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1603803934061" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right/-1920.-221.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1603978649472" />
+    <state width="1237" height="163" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1603805982983" />
     <state x="347" y="73" width="587" height="534" key="find.popup" timestamp="1603791993608">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="347" y="73" width="587" height="534" key="find.popup/0.0.1280.680@0.0.1280.680" timestamp="1603791993608" />
+    <state x="297" y="151" key="run.anything.popup" timestamp="1603804045771">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="297" y="151" key="run.anything.popup/0.0.1280.680@0.0.1280.680" timestamp="1603804045771" />
     <state x="303" y="1" width="672" height="678" key="search.everywhere.popup" timestamp="1603793927774">
       <screen x="0" y="0" width="1280" height="680" />
     </state>

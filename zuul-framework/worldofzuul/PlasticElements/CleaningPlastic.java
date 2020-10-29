@@ -1,6 +1,6 @@
-package worldofzuul;
+package worldofzuul.PlasticElements;
 
-public class CleaningPlastic extends worldofzuul.Plastic {
+public class CleaningPlastic extends Plastic {
     private static int counterForCleaningPlastic = 0;
 
     public CleaningPlastic() {
