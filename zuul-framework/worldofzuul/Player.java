@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Player {
     private String name;
-    private ArrayList<Plastic> plasticInv = new ArrayList();
+    private ArrayList<worldofzuul.Plastic> plasticInv = new ArrayList();
     // private ArrayList<Tool> toolInv = new ArrayList();
     // Her er der taget udgangspunkt i et "Tool" objekt og et "Plastic" objekt.
 
@@ -15,7 +15,7 @@ public class Player {
     }
 
     public static Player newPlayerObject() {
-        System.out.print("What is your name?> ");
+        System.out.print("What is your name?\n> ");
         boolean nameChosen = false;
         String name = "";
         while (!nameChosen) { // In this while loop we check for a name that is valid (No only space names) etc...
@@ -24,7 +24,7 @@ public class Player {
             if (name.matches(".*[0-9].*") || name.matches(".*[A-Z]*.")) {
                 nameChosen = true;
             } else {
-                System.out.print("Name not vaild enter new name> ");
+                System.out.print("Name not vaild enter new name\n> ");
             }
 
         }
@@ -32,7 +32,7 @@ public class Player {
         return new Player(name);
     }
 
-    public void plasticCollect(Plastic piece) {
+    public void plasticCollect(worldofzuul.Plastic piece) {
         this.plasticInv.add(piece);
 
     }
