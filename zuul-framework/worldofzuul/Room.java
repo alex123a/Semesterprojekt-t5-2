@@ -11,18 +11,20 @@ public class Room
     private String description;
     private ArrayList<worldofzuul.Plastic> plasticInRoom;
     private HashMap<String, Room> exits;
+    private int plasticCount;
 
     public Room(String description) {
         this.description = description;
         exits = new HashMap<String, Room>();
         this.plasticInRoom = new ArrayList<>();
+        this.plasticCount = this.plasticInRoom.size();
     }
 
-    public Room(String description, worldofzuul.Plastic[] randomPlastic)
-    {
+    public Room(String description, worldofzuul.Plastic[] randomPlastic) {
         this.description = description;
         this.plasticInRoom = new ArrayList<>(Arrays.asList(randomPlastic));
         exits = new HashMap<String, Room>();
+        this.plasticCount = this.plasticInRoom.size();
     }
 
     public void setExit(String direction, Room neighbor) 
@@ -78,6 +80,20 @@ public class Room
         }
         System.out.println();
 
+    }
+
+    public ArrayList<worldofzuul.Plastic> getPlasticInRoom() {
+            return plasticInRoom;
+    }
+
+    public worldofzuul.Plastic getPlastic() {
+        worldofzuul.Plastic plastic = new worldofzuul.Plastic();
+        if (plasticInRoom.size() > 0) {
+            plasticInRoom.remove(plasticCount-1);
+            plasticCount--;
+            System.out.println("You have collected 1 piece of plastic, there is " + plasticCount + " pieces of plastic left in the room");
+        }
+        return plastic;
     }
 }
 
