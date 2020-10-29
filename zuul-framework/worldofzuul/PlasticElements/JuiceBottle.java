@@ -1,4 +1,4 @@
-package worldofzuul;
+package worldofzuul.PlasticElements;
 
 public class JuiceBottle extends Plastic {
     private static int counterForJuiceBottles = 0;

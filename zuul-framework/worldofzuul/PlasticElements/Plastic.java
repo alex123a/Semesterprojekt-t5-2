@@ -1,4 +1,4 @@
-package worldofzuul;
+package worldofzuul.PlasticElements;
 
 public class Plastic {
     // private double[] position = new double[2]; // Used for GUI
@@ -29,6 +29,6 @@ public class Plastic {
 
     @Override
     public String toString() {
-        return "This plastic is a " + this.name;
+        return "" + this.name;
     }
 }
