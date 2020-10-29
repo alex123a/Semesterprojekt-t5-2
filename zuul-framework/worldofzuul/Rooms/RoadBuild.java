@@ -1,9 +1,7 @@
 package worldofzuul.Rooms;
 
-import worldofzuul.Plastic;
+import worldofzuul.PlasticElements.*;
 import worldofzuul.Room;
-import worldofzuul.WaterBottle;
-import worldofzuul.JuiceBottle;
 
 public class RoadBuild extends Room {
     private static Plastic[] numberOfPlastic;
