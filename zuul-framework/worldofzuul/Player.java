@@ -9,12 +9,10 @@ public class Player {
     private static ArrayList<Plastic> plasticInv = new ArrayList();
     // private ArrayList<Tool> toolInv = new ArrayList();
     // Her er der taget udgangspunkt i et "Tool" objekt og et "Plastic" objekt.
-
-
+    
     public Player(String name) {
         this.name = name;
     }
-
 
     public static void plasticCollect(Plastic piece, Room room) {
         if (room.getPlasticInRoom().size() > 0) {
