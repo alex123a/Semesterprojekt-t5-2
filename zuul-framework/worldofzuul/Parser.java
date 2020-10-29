@@ -1,7 +1,6 @@
 package worldofzuul;
 
 import java.util.Scanner;
-import java.util.StringTokenizer;
 
 public class Parser 
 {
@@ -22,7 +21,7 @@ public class Parser
 
         System.out.print("> "); 
 
-        inputLine = reader.nextLine();
+        inputLine = reader.nextLine().toLowerCase();
 
         Scanner tokenizer = new Scanner(inputLine);
         if(tokenizer.hasNext()) {
