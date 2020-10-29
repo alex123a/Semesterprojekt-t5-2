@@ -1,7 +1,6 @@
 package worldofzuul.Rooms;
 
-import worldofzuul.CleaningPlastic;
-import worldofzuul.Plastic;
+import worldofzuul.PlasticElements.*;
 import worldofzuul.Room;
 
 public class Farm extends Room {

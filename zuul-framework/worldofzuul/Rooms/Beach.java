@@ -1,9 +1,6 @@
 package worldofzuul.Rooms;
 
-import worldofzuul.JuiceBottle;
-import worldofzuul.MilkBottle;
-import worldofzuul.Plastic;
-import worldofzuul.WaterBottle;
+import worldofzuul.PlasticElements.*;
 import worldofzuul.Room;
 
 public class Beach extends Room {
