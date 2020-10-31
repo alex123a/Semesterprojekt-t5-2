@@ -13,6 +13,11 @@ public class Game {
     final private String file = new File("worldofzuul\\textfiles\\roomDescription").getAbsolutePath();
     final private String file2 = new File("worldofzuul\\textfiles\\gameDescription").getAbsolutePath();
     final private String file3 = new File("worldofzuul\\textfiles\\help").getAbsolutePath();
+    /*
+    final private String file = new File("worldofzuul/textfiles/roomDescription").getAbsolutePath();
+    final private String file2 = new File("worldofzuul/textfiles/gameDescription").getAbsolutePath();
+    final private String file3 = new File("worldofzuul/textfiles/help").getAbsolutePath();
+    */
     final private File welcomeMessage = new File(file2.replace("\\","\\\\") + ".txt");
     final private File roomDescription = new File(file.replace("\\","\\\\") + ".txt");
     final private File help = new File(file3.replace("\\","\\\\") + ".txt");
