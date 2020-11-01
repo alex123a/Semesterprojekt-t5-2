@@ -3,10 +3,11 @@ package worldofzuul;
 import worldofzuul.PlasticElements.Plastic;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Player {
     private String name;
-    private static ArrayList<Plastic> plasticInv = new ArrayList();
+    private static List<Plastic> plasticInv = new ArrayList();
     // private ArrayList<Tool> toolInv = new ArrayList();
     // Her er der taget udgangspunkt i et "Tool" objekt og et "Plastic" objekt.
     

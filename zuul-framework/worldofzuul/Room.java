@@ -6,10 +6,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Set;
+import java.util.List;
 
 public class Room {
     private String description;
-    private ArrayList<Plastic> plasticInRoom;
+    private List<Plastic> plasticInRoom;
     private HashMap<String, Room> exits;
     private int plasticCount;
 

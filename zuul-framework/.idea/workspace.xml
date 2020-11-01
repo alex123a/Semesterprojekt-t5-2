@@ -19,14 +19,8 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ba6c8188-7ef2-4ea3-9d5b-5b6e3607b86a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/zuul-framework/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/zuul-framework/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/worldofzuul/CommandWord.java" beforeDir="false" afterPath="$PROJECT_DIR$/worldofzuul/CommandWord.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/worldofzuul/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/worldofzuul/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/worldofzuul/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/worldofzuul/Main.java" afterDir="false" />
+    <list default="true" id="ba9af4cc-247a-49cd-afd4-c50dd122e9a4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/worldofzuul/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/worldofzuul/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/worldofzuul/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/worldofzuul/Room.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,7 +73,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="ba6c8188-7ef2-4ea3-9d5b-5b6e3607b86a" name="Default Changelist" comment="" />
+      <changelist id="ba9af4cc-247a-49cd-afd4-c50dd122e9a4" name="Default Changelist" comment="" />
       <created>1603785697967</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
