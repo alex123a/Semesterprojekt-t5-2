@@ -4,7 +4,6 @@ import worldofzuul.PlasticElements.CleaningPlastic;
 import worldofzuul.PlasticElements.Plastic;
 import worldofzuul.PlasticElements.WaterBottle;
 import worldofzuul.Player;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -29,6 +28,7 @@ public class Farmeren extends NPC {
             case "talk with farmer":
                 try {
                     String line = Files.readAllLines(Paths.get(this.file)).get(1);
+                    System.out.println(line);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -36,6 +36,7 @@ public class Farmeren extends NPC {
             case "information":
                 try {
                     String line = Files.readAllLines(Paths.get(this.file)).get(2);
+                    System.out.println(line);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -45,6 +46,7 @@ public class Farmeren extends NPC {
                     emptyPlasticForPlayer();
                     try {
                         String line = Files.readAllLines(Paths.get(this.file)).get(3);
+                        System.out.println(line);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -52,6 +54,7 @@ public class Farmeren extends NPC {
                 } else {
                     try {
                         String line = Files.readAllLines(Paths.get(this.file)).get(4);
+                        System.out.println(line);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -60,6 +63,7 @@ public class Farmeren extends NPC {
             case "bye":
                 try {
                     String line = Files.readAllLines(Paths.get(this.file)).get(5);
+                    System.out.println(line);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
