@@ -20,11 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ba6c8188-7ef2-4ea3-9d5b-5b6e3607b86a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/worldofzuul/CommandWord.java" beforeDir="false" afterPath="$PROJECT_DIR$/worldofzuul/CommandWord.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/worldofzuul/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/worldofzuul/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/worldofzuul/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/worldofzuul/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/worldofzuul/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/worldofzuul/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/worldofzuul/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/worldofzuul/Room.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,6 +50,7 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -98,22 +96,26 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1237" height="163" key="GridCell.Tab.0.bottom" timestamp="1603805982983">
+    <state width="1237" height="372" key="GridCell.Tab.0.bottom" timestamp="1603983743801">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="163" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1603805982983" />
-    <state width="1237" height="163" key="GridCell.Tab.0.center" timestamp="1603805982983">
+    <state width="1237" height="372" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1603983743801" />
+    <state width="1237" height="372" key="GridCell.Tab.0.center" timestamp="1603983743801">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="163" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1603805982983" />
-    <state width="1237" height="163" key="GridCell.Tab.0.left" timestamp="1603805982983">
+    <state width="1237" height="372" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1603983743801" />
+    <state width="1237" height="372" key="GridCell.Tab.0.left" timestamp="1603983743801">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="163" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1603805982983" />
-    <state width="1237" height="163" key="GridCell.Tab.0.right" timestamp="1603805982983">
+    <state width="1237" height="372" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1603983743801" />
+    <state width="1237" height="372" key="GridCell.Tab.0.right" timestamp="1603983743801">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="163" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1603805982983" />
+    <state width="1237" height="372" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1603983743801" />
+    <state x="461" y="165" key="SettingsEditor" timestamp="1604264688733">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="461" y="165" key="SettingsEditor/-1920.-221.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1604264688733" />
     <state x="347" y="73" width="587" height="534" key="find.popup" timestamp="1603791993608">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -126,5 +128,16 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="303" y="1" width="672" height="678" key="search.everywhere.popup/0.0.1280.680@0.0.1280.680" timestamp="1603793927774" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/worldofzuul/Main.java</url>
+          <line>2</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
