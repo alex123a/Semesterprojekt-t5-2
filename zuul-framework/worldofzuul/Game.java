@@ -11,9 +11,9 @@ public class Game {
     private Parser parser;
     private Room currentRoom;
     private String name;
-    final private File welcomeMessage = Paths.get(new File("worldofzuul\\textfiles\\gameDescription.txt").getAbsolutePath()).toFile();
-    final private File roomDescription = Paths.get(new File("worldofzuul\\textfiles\\roomDescription.txt").getAbsolutePath()).toFile();
-    final private File help = Paths.get(new File("worldofzuul\\textfiles\\help.txt").getAbsolutePath()).toFile();
+    final private File welcomeMessage = Paths.get(new File("worldofzuul/textfiles/gameDescription.txt").getAbsolutePath()).toFile();
+    final private File roomDescription = Paths.get(new File("worldofzuul/textfiles/roomDescription.txt").getAbsolutePath()).toFile();
+    final private File help = Paths.get(new File("worldofzuul/textfiles/help.txt").getAbsolutePath()).toFile();
 
 
     public Game() {
