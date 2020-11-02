@@ -1,5 +1,6 @@
 package worldofzuul;
 
+import worldofzuul.PlasticElements.Plastic;
 import worldofzuul.Rooms.*;
 
 import java.io.File;
@@ -12,9 +13,21 @@ public class Game {
     private Parser parser;
     private Room currentRoom;
     private String name;
+<<<<<<< Updated upstream
     final private File welcomeMessage = Paths.get(new File("worldofzuul/textfiles/gameDescription.txt").getAbsolutePath()).toFile();
     final private File roomDescription = Paths.get(new File("worldofzuul/textfiles/roomDescription.txt").getAbsolutePath()).toFile();
     final private File help = Paths.get(new File("worldofzuul/textfiles/help.txt").getAbsolutePath()).toFile();
+=======
+    private static final int roadDone = 30;
+    private Room RoadBuild, Town, Beach, Farm, Park, Sdu;
+
+    final private String file = new File("worldofzuul\\textfiles\\roomDescription").getAbsolutePath();
+    final private String file2 = new File("worldofzuul\\textfiles\\gameDescription").getAbsolutePath();
+    final private String file3 = new File("worldofzuul\\textfiles\\help").getAbsolutePath();
+    final private File welcomeMessage = new File(file2.replace("\\","\\\\") + ".txt");
+    final private File roomDescription = new File(file.replace("\\","\\\\") + ".txt");
+    final private File help = new File(file3.replace("\\","\\\\") + ".txt");
+>>>>>>> Stashed changes
 
 
     public Game() {
@@ -24,8 +37,6 @@ public class Game {
 
 
     private void createRooms() {
-        Room RoadBuild, Town, Beach, Farm, Park, Sdu;
-
         Scanner reader;
         try {
             reader = new Scanner(roomDescription);
@@ -72,10 +83,10 @@ public class Game {
     }
 
     private void printWelcome() {
-
         Scanner reader;
         try {
             reader = new Scanner(welcomeMessage);
+            System.out.println(reader.nextLine());
             System.out.println(reader.nextLine());
             System.out.println(reader.nextLine());
             System.out.println(reader.nextLine());
@@ -86,19 +97,7 @@ public class Game {
             System.out.println("Cannot find the file");
             e.printStackTrace();
         }
-        System.out.print("What is your name?\n> ");
-        boolean nameChosen = false;
-        while (!nameChosen) { // In this while loop we check for a name that is valid (No only space names) etc...
-            Scanner playerName = new Scanner(System.in);
-            name = playerName.nextLine();
-            if (name.matches(".*[0-9].*") || name.matches(".*[A-Z]*.")) {
-                nameChosen = true;
-            } else {
-                System.out.print("Name not vaild enter new name\n> ");
-            }
-
-        }
-        System.out.println("You have chosen " + name + " as your player name");
+        Player.setName();
         System.out.println(currentRoom.getLongDescription());
     }
 
@@ -119,7 +118,12 @@ public class Game {
         } else if (commandWord == CommandWord.QUIT) {
             wantToQuit = quit(command);
         } else if (commandWord == CommandWord.GIVE) {
-            givePlastic(command);
+            if (currentRoom == RoadBuild) {
+                givePlastic(command);
+            } else {
+                System.out.println("Go to the Roadbuilder to give plastic");
+            }
+
         } else if (commandWord == commandWord.COLLECT) {
             Player.plasticCollect(currentRoom.getPlastic(),currentRoom);
         }
@@ -163,10 +167,14 @@ public class Game {
     }
 
     private void givePlastic(Command command) {
-        RoadBuilder machine = new RoadBuilder();
-        ArrayList<Command> com = machine.inventory(command);
-
-        if (com.size() == 30) {
+        if (command.hasSecondWord()) {
+            System.out.println("Do you want to give plastic? Just write give");
+            return;
+        }
+        ArrayList<Plastic> plasticInv = Player.getPlasticInv();
+        ArrayList<Plastic> road = RoadBuilder.inventory(plasticInv);
+        Player.resetPlasticInv();
+        if (road.size() == roadDone) {
             System.out.println("The road is complete.");
             quit(command);
         }
@@ -181,4 +189,9 @@ public class Game {
             return true;
         }
     }
+
+    public static int getRoadDone() {
+        return roadDone;
+    }
+
 }
