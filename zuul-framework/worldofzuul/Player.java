@@ -21,5 +21,13 @@ public class Player {
             System.out.println("The room is empty");
         }
     }
+
+    public static void setPlasticInv(ArrayList<Plastic> newInv) {
+        plasticInv = newInv;
+    }
+
+    public static ArrayList<Plastic> getPlasticInv() {
+        return plasticInv;
+    }
 }
 

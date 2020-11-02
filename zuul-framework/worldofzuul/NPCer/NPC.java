@@ -7,7 +7,7 @@ public abstract class NPC {
         this.name = name;
     }
 
-    public abstract String description(String input);
+    public abstract void description(String input);
 
     public abstract String toString();
 
