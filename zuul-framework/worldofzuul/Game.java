@@ -68,7 +68,6 @@ public class Game {
             Command command = parser.getCommand();
             finished = processCommand(command);
         }
-        System.out.println("You have completed 100% of the road in plastic.");
     }
 
     private void printWelcome() {
@@ -108,11 +107,13 @@ public class Game {
             wantToQuit = quit(command);
         } else if (commandWord == CommandWord.GIVE) {
             if (currentRoom == RoadBuild) {
-                givePlastic(command);
+                if (givePlastic(command)) {
+                    System.out.println("You have completed 100% of the road in plastic.");
+                    wantToQuit = true;
+                }
             } else {
                 System.out.println("Go to the Roadbuilder to give plastic");
             }
-
         } else if (commandWord == commandWord.COLLECT) {
             Player.plasticCollect(currentRoom.getPlastic(),currentRoom);
         }
@@ -155,19 +156,19 @@ public class Game {
         }
     }
 
-    private void givePlastic(Command command) {
+    private boolean givePlastic(Command command) {
         if (command.hasSecondWord()) {
             System.out.println("Do you want to give plastic? Just write give");
-            return;
+            return false;
         }
         ArrayList<Plastic> plasticInv = Player.getPlasticInv();
         ArrayList<Plastic> road = RoadBuilder.inventory(plasticInv);
         Player.resetPlasticInv();
         if (road.size() == roadDone) {
             System.out.println("The road is complete.");
-            quit(command);
+            return true;
         }
-
+        return false;
     }
 
     private boolean quit(Command command) {
@@ -177,6 +178,7 @@ public class Game {
         } else {
             return true;
         }
+
     }
 
     public static int getRoadDone() {
