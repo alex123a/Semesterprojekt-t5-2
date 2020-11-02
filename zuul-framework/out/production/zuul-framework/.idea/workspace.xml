@@ -21,9 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ba6c8188-7ef2-4ea3-9d5b-5b6e3607b86a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-<<<<<<< Updated upstream
       <change beforePath="$PROJECT_DIR$/worldofzuul/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/worldofzuul/Game.java" afterDir="false" />
-=======
       <change beforePath="$PROJECT_DIR$/out/production/zuul-framework/worldofzuul/CommandWord.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/zuul-framework/worldofzuul/CommandWord.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/zuul-framework/worldofzuul/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/zuul-framework/worldofzuul/Game.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/zuul-framework/worldofzuul/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/zuul-framework/worldofzuul/Player.class" afterDir="false" />
@@ -31,7 +29,9 @@
       <change beforePath="$PROJECT_DIR$/out/production/zuul-framework/worldofzuul/Room.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/zuul-framework/worldofzuul/Room.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/worldofzuul/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/worldofzuul/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/worldofzuul/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/worldofzuul/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/worldofzuul/Road.java" beforeDir="false" afterPath="$PROJECT_DIR$/worldofzuul/Road.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/worldofzuul/RoadBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/worldofzuul/RoadBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/worldofzuul/textfiles/help.txt" beforeDir="false" afterPath="$PROJECT_DIR$/worldofzuul/textfiles/help.txt" afterDir="false" />
 >>>>>>> Stashed changes
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -107,20 +107,19 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-<<<<<<< Updated upstream
-    <state width="1237" height="372" key="GridCell.Tab.0.bottom" timestamp="1603983743801">
+    <state width="1237" height="205" key="GridCell.Tab.0.bottom" timestamp="1604325412676">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="372" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1603983743801" />
-    <state width="1237" height="372" key="GridCell.Tab.0.center" timestamp="1603983743801">
+    <state width="1237" height="205" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1604325412676" />
+    <state width="1237" height="205" key="GridCell.Tab.0.center" timestamp="1604325412676">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="372" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1603983743801" />
-    <state width="1237" height="372" key="GridCell.Tab.0.left" timestamp="1603983743801">
+    <state width="1237" height="205" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1604325412676" />
+    <state width="1237" height="205" key="GridCell.Tab.0.left" timestamp="1604325412676">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="372" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1603983743801" />
-    <state width="1237" height="372" key="GridCell.Tab.0.right" timestamp="1603983743801">
+    <state width="1237" height="205" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1604325412676" />
+    <state width="1237" height="205" key="GridCell.Tab.0.right" timestamp="1604325412676">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1237" height="372" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1603983743801" />
@@ -129,22 +128,7 @@
     </state>
     <state x="461" y="165" key="SettingsEditor/-1920.-221.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1604264688733" />
 =======
-    <state width="1237" height="372" key="GridCell.Tab.0.bottom" timestamp="1604322759437">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state width="1237" height="372" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1604322759437" />
-    <state width="1237" height="372" key="GridCell.Tab.0.center" timestamp="1604322759437">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state width="1237" height="372" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1604322759437" />
-    <state width="1237" height="372" key="GridCell.Tab.0.left" timestamp="1604322759437">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state width="1237" height="372" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1604322759437" />
-    <state width="1237" height="372" key="GridCell.Tab.0.right" timestamp="1604322759437">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state width="1237" height="372" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1604322759437" />
+    <state width="1237" height="205" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1604325412676" />
     <state x="142" y="0" key="SettingsEditor" timestamp="1604322830214">
       <screen x="0" y="0" width="1280" height="680" />
     </state>

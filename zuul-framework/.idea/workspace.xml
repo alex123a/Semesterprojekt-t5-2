@@ -21,9 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ba6c8188-7ef2-4ea3-9d5b-5b6e3607b86a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-<<<<<<< Updated upstream
       <change beforePath="$PROJECT_DIR$/worldofzuul/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/worldofzuul/Game.java" afterDir="false" />
-=======
       <change beforePath="$PROJECT_DIR$/out/production/zuul-framework/worldofzuul/CommandWord.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/zuul-framework/worldofzuul/CommandWord.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/zuul-framework/worldofzuul/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/zuul-framework/worldofzuul/Game.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/zuul-framework/worldofzuul/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/zuul-framework/worldofzuul/Player.class" afterDir="false" />
@@ -124,7 +122,6 @@
     <state width="1237" height="205" key="GridCell.Tab.0.right" timestamp="1604325412676">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-<<<<<<< Updated upstream
     <state width="1237" height="372" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1603983743801" />
     <state x="461" y="165" key="SettingsEditor" timestamp="1604264688733">
       <screen x="0" y="0" width="1920" height="1040" />

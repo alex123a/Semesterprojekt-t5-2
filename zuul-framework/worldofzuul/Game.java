@@ -13,22 +13,11 @@ public class Game {
     private Parser parser;
     private Room currentRoom;
     private String name;
-<<<<<<< Updated upstream
     final private File welcomeMessage = Paths.get(new File("worldofzuul/textfiles/gameDescription.txt").getAbsolutePath()).toFile();
     final private File roomDescription = Paths.get(new File("worldofzuul/textfiles/roomDescription.txt").getAbsolutePath()).toFile();
     final private File help = Paths.get(new File("worldofzuul/textfiles/help.txt").getAbsolutePath()).toFile();
-=======
     private static final int roadDone = 30;
     private Room RoadBuild, Town, Beach, Farm, Park, Sdu;
-
-    final private String file = new File("worldofzuul\\textfiles\\roomDescription").getAbsolutePath();
-    final private String file2 = new File("worldofzuul\\textfiles\\gameDescription").getAbsolutePath();
-    final private String file3 = new File("worldofzuul\\textfiles\\help").getAbsolutePath();
-    final private File welcomeMessage = new File(file2.replace("\\","\\\\") + ".txt");
-    final private File roomDescription = new File(file.replace("\\","\\\\") + ".txt");
-    final private File help = new File(file3.replace("\\","\\\\") + ".txt");
->>>>>>> Stashed changes
-
 
     public Game() {
         createRooms();

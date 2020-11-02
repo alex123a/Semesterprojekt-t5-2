@@ -1,7 +1,6 @@
 package worldofzuul;
 
 import worldofzuul.PlasticElements.Plastic;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
