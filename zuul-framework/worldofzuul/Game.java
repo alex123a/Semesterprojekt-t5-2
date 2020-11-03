@@ -65,6 +65,7 @@ public class Game {
 
         boolean finished = false;
         while (!finished) {
+            RoadBuilder.damagedMachine();
             Command command = parser.getCommand();
             finished = processCommand(command);
         }
@@ -106,7 +107,7 @@ public class Game {
             goRoom(command);
         } else if (commandWord == CommandWord.QUIT) {
             wantToQuit = quit(command);
-        } else if (commandWord == CommandWord.GIVE) {
+        } else if (commandWord == CommandWord.GIVE && RoadBuilder.getDamaged() == 0) {
             if (currentRoom == RoadBuild) {
                 if (givePlastic(command)) {
                     System.out.println("You have completed 100% of the road in plastic.");

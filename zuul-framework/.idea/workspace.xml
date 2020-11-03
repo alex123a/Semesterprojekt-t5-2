@@ -20,10 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ba9af4cc-247a-49cd-afd4-c50dd122e9a4" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/worldofzuul/NPCer/NPC-deskriptions/ProfessorText.txt" beforeDir="false" afterPath="$PROJECT_DIR$/worldofzuul/NPCer/NPC-deskriptions/ProfessorText.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/worldofzuul/NPCer/NPC.java" beforeDir="false" afterPath="$PROJECT_DIR$/worldofzuul/NPCer/NPC.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/worldofzuul/NPCer/Professor.java" beforeDir="false" afterPath="$PROJECT_DIR$/worldofzuul/NPCer/Professor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/worldofzuul/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/worldofzuul/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/worldofzuul/NPCer/Toolset.java" beforeDir="false" afterPath="$PROJECT_DIR$/worldofzuul/NPCer/Toolset.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/worldofzuul/RoadBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/worldofzuul/RoadBuilder.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
