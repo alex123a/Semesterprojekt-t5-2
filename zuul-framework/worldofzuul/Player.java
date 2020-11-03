@@ -26,6 +26,10 @@ public class Player {
         System.out.println("You have chosen " + name + " as your player name");
     }
 
+    public static String getName() {
+        return name;
+    }
+
     public static void plasticCollect(Plastic piece, Room room) {
         if (room.getPlasticInRoom().size() > 0) {
             plasticInv.add(piece);
