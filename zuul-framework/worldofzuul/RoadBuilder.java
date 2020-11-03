@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public class RoadBuilder {
     private static ArrayList<Plastic> inventory = new ArrayList<>();
     private static int damaged = 0;
+    private static boolean haveSpoken = false;
 
 
     public static ArrayList<Plastic> inventory(ArrayList<Plastic> plastic) {
@@ -19,8 +20,10 @@ public class RoadBuilder {
         return inventory;
     }
     public static void damagedMachine() {
-        if (Player.getPlasticInv().size() >= 20) {
+        if (inventory.size() >= 19 && !haveSpoken) {
             damaged = 100;
+            System.out.println("Machine: \"Oh no i have stopped working, talk to the mechanic in the village\"");
+            haveSpoken = true;
         }
     }
 
