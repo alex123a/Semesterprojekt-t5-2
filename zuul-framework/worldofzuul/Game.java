@@ -1,9 +1,6 @@
 package worldofzuul;
 
-import worldofzuul.NPCer.Farmer;
-import worldofzuul.NPCer.Professor;
-import worldofzuul.NPCer.Toolset;
-import worldofzuul.NPCer.Villager;
+import worldofzuul.NPCer.*;
 import worldofzuul.PlasticElements.Plastic;
 import worldofzuul.Rooms.*;
 
@@ -20,7 +17,7 @@ public class Game {
     final private File welcomeMessage = Paths.get(new File("worldofzuul/textfiles/gameDescription.txt").getAbsolutePath()).toFile();
     final private File roomDescription = Paths.get(new File("worldofzuul/textfiles/roomDescription.txt").getAbsolutePath()).toFile();
     final private File help = Paths.get(new File("worldofzuul/textfiles/help.txt").getAbsolutePath()).toFile();
-    private static final int roadDone = 2;
+    private static final int roadDone = 30;
     private Room RoadBuild, Town, Beach, Farm, Park, Sdu;
     private Farmer farmer = new Farmer("Farmer");
     private Villager villager = new Villager("Villager");
@@ -73,6 +70,7 @@ public class Game {
 
         boolean finished = false;
         while (!finished) {
+            RoadBuilder.damagedMachine();
             Command command = parser.getCommand();
             finished = processCommand(command);
         }
@@ -161,6 +159,24 @@ public class Game {
                     e.printStackTrace();
                 }
             }
+        } else if (commandWord == CommandWord.GIVE) {
+            if (RoadBuilder.getDamaged() == 0) {
+                if (currentRoom == RoadBuild) {
+                    if (givePlastic(command)) {
+                        System.out.println("You have completed 100% of the road in plastic.");
+                        Timer.setEndTime();
+                        Timer.timeScore();
+                        Timer.setHighScore();
+                        wantToQuit = true;
+                    }
+                } else {
+                    System.out.println("Go to the Roadbuilder to give plastic");
+                }
+            } else {
+                System.out.println("Machine \"i am broken, can't help you\"");
+            }
+        } else if (commandWord == commandWord.COLLECT) {
+            Player.plasticCollect(currentRoom.getPlastic(), currentRoom);
         }
         return wantToQuit;
     }
