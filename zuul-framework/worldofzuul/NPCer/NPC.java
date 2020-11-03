@@ -1,7 +1,5 @@
 package worldofzuul.NPCer;
 
-import worldofzuul.Command;
-
 public abstract class NPC {
     private String name;
     private boolean talking = false;
@@ -18,7 +16,7 @@ public abstract class NPC {
         this.name = name;
     }
 
-    public abstract void description(Command command);
+    public abstract void description(String command);
 
     public abstract String toString();
 

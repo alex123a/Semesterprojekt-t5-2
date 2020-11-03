@@ -1,8 +1,7 @@
 package worldofzuul.NPCer;
 
-import worldofzuul.Command;
-import worldofzuul.CommandWord;
 import worldofzuul.Player;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -10,50 +9,49 @@ import java.nio.file.Paths;
 
 public class Villager extends NPC {
     private boolean gaveToolset = false;
-    private String file = Paths.get(new File("worldofzuul/NPC/NPC-descriptions/VillagerText.txt").getAbsolutePath()).toString();
+    private String file = Paths.get(new File("worldofzuul/NPCer/NPC-descriptions/VillagerText.txt").getAbsolutePath()).toString();
 
     public Villager(String name) {
         super(name);
     }
 
     @Override
-    public void description(Command command) {
-        CommandWord commandWord = command.getCommandWord();
-        if (commandWord == CommandWord.TALK && !super.getTalking()) {
+    public void description(String command) {
+        if (!super.getTalking()) {
             try {
                 setTalking(true);
+                String line = Files.readAllLines(Paths.get(this.file)).get(0);
+                System.out.println(line);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else if (command.equals("information") && super.getTalking()) {
+            try {
                 String line = Files.readAllLines(Paths.get(this.file)).get(1);
                 System.out.println(line);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } else if (commandWord == CommandWord.INFORMATION && super.getTalking()) {
-            try {
-                String line = Files.readAllLines(Paths.get(this.file)).get(2);
-                System.out.println(line);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } else if (commandWord == CommandWord.TAKE && super.getTalking()) {
+        } else if (command.equals("take") && super.getTalking()) {
             if (!gaveToolset) {
                 giveToolset();
                 try {
-                    String line = Files.readAllLines(Paths.get(this.file)).get(3);
+                    String line = Files.readAllLines(Paths.get(this.file)).get(2);
                     System.out.println(line);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             } else {
                 try {
-                    String line = Files.readAllLines(Paths.get(this.file)).get(4);
+                    String line = Files.readAllLines(Paths.get(this.file)).get(3);
                     System.out.println(line);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
-        } else if (commandWord == CommandWord.BYE && super.getTalking()) {
+        } else if (command.equals("bye") && super.getTalking()) {
             try {
-                String line = Files.readAllLines(Paths.get(this.file)).get(5);
+                String line = Files.readAllLines(Paths.get(this.file)).get(4);
                 System.out.println(line);
             } catch (IOException e) {
                 e.printStackTrace();

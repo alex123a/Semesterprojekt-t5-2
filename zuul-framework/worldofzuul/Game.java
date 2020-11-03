@@ -1,12 +1,13 @@
 package worldofzuul;
 
+import worldofzuul.NPCer.*;
 import worldofzuul.PlasticElements.Plastic;
 import worldofzuul.Rooms.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Game {
@@ -18,6 +19,10 @@ public class Game {
     final private File help = Paths.get(new File("worldofzuul/textfiles/help.txt").getAbsolutePath()).toFile();
     private static final int roadDone = 30;
     private Room RoadBuild, Town, Beach, Farm, Park, Sdu;
+    private Farmer farmer = new Farmer("Farmer");
+    private Villager villager = new Villager("Villager");
+    private Professor professor = new Professor("Professor");
+    private Toolset toolset = new Toolset();
 
     public Game() {
         createRooms();
@@ -107,6 +112,44 @@ public class Game {
             goRoom(command);
         } else if (commandWord == CommandWord.QUIT) {
             wantToQuit = quit(command);
+        } else if (commandWord == CommandWord.TALK) {
+            if (currentRoom == Farm) {
+                farmer.description("talk");
+            } else if (currentRoom == Town) {
+                villager.description("talk");
+            } else if (currentRoom == Sdu) {
+                professor.description("talk");
+            }
+        } else if (commandWord == CommandWord.INFORMATION) {
+            if (currentRoom == Farm) {
+                farmer.description("information");
+            } else if (currentRoom == Town) {
+                villager.description("information");
+            }
+        } else if (commandWord == CommandWord.TAKE) {
+            if (currentRoom == Farm) {
+                farmer.description("take");
+            } else if (currentRoom == Town) {
+                villager.description("take");
+            }
+        } else if (commandWord == CommandWord.BYE) {
+            if (currentRoom == Farm) {
+                farmer.description("bye");
+            } else if (currentRoom == Sdu) {
+                professor.description("bye");
+            } else if (currentRoom == Town) {
+                villager.description("bye");
+            }
+        } else if (commandWord == commandWord.COLLECT) {
+            Player.plasticCollect(currentRoom.getPlastic(),currentRoom);
+        } else if (commandWord == commandWord.REPAIR && currentRoom == RoadBuild) {
+            if (Player.getHaveToolset()) {
+                try {
+                    toolset.repairMachine(RoadBuilder.getDamaged());
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
         } else if (commandWord == CommandWord.GIVE) {
             if (RoadBuilder.getDamaged() == 0) {
                 if (currentRoom == RoadBuild) {
