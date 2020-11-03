@@ -34,7 +34,11 @@ public class Villager extends NPC {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+<<<<<<< Updated upstream
         } else if (commandWord == CommandWord.TAKE && super.getTalking()) {
+=======
+        } else if (input.equals("take") && super.getTalking()) {
+>>>>>>> Stashed changes
             if (!gaveToolset) {
                 giveToolset();
                 try {

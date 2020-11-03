@@ -1,12 +1,13 @@
 package worldofzuul;
 
+import worldofzuul.NPCer.Farmeren;
 import worldofzuul.PlasticElements.Plastic;
 import worldofzuul.Rooms.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Game {
@@ -106,8 +107,15 @@ public class Game {
             goRoom(command);
         } else if (commandWord == CommandWord.QUIT) {
             wantToQuit = quit(command);
-        } else if (commandWord == CommandWord.GIVE) {
-            if (currentRoom == RoadBuild) {
+        } else if (commandWord == CommandWord.TALK && currentRoom == Farm) {
+            Farmeren.description(command);
+        } else if (commandWord == CommandWord.INFORMATION && currentRoom == Farm) {
+            Farmeren.description(command);
+        } else if (commandWord == CommandWord.TAKE && currentRoom == Farm) {
+            Farmeren.description(command);
+        } else if (commandWord == CommandWord.BYE && currentRoom == Farm) {
+            Farmeren.description(command);
+        } else if (commandWord == CommandWord.GIVE && currentRoom == RoadBuild) {
                 if (givePlastic(command)) {
                     System.out.println("You have completed 100% of the road in plastic.");
                     Timer.setEndTime();
@@ -115,9 +123,7 @@ public class Game {
                     Timer.setHighScore();
                     wantToQuit = true;
                 }
-            } else {
-                System.out.println("Go to the Roadbuilder to give plastic");
-            }
+
         } else if (commandWord == commandWord.COLLECT) {
             Player.plasticCollect(currentRoom.getPlastic(),currentRoom);
         }
