@@ -5,7 +5,8 @@ import worldofzuul.PlasticElements.Plastic;
 import java.util.ArrayList;
 
 public class RoadBuilder {
-    static ArrayList<Plastic> inventory = new ArrayList<>();
+    private static ArrayList<Plastic> inventory = new ArrayList<>();
+    private static int damaged = 0;
 
     public static ArrayList<Plastic> inventory(ArrayList<Plastic> plastic) {
         inventory.addAll(plastic);
@@ -21,6 +22,13 @@ public class RoadBuilder {
         return inventory;
     }
 
+    public static int getDamaged() {
+        return damaged;
+    }
+
+    public static void setDamaged(int newDamage) {
+        damaged = newDamage;
+    }
 
 
 }

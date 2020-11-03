@@ -1,8 +1,6 @@
 package worldofzuul.NPCer;
 
-import worldofzuul.PlasticElements.CleaningPlastic;
-import worldofzuul.PlasticElements.Plastic;
-import worldofzuul.PlasticElements.WaterBottle;
+import worldofzuul.PlasticElements.*;
 import worldofzuul.Player;
 import java.io.File;
 import java.io.IOException;
