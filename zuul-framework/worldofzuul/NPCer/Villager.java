@@ -17,17 +17,17 @@ public class Villager extends NPC {
 
     @Override
     public void description(String command) {
-        if (command.equals("talk") && !super.getTalking()) {
+        if (!super.getTalking()) {
             try {
                 setTalking(true);
-                String line = Files.readAllLines(Paths.get(this.file)).get(1);
+                String line = Files.readAllLines(Paths.get(this.file)).get(0);
                 System.out.println(line);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         } else if (command.equals("information") && super.getTalking()) {
             try {
-                String line = Files.readAllLines(Paths.get(this.file)).get(2);
+                String line = Files.readAllLines(Paths.get(this.file)).get(1);
                 System.out.println(line);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -36,14 +36,14 @@ public class Villager extends NPC {
             if (!gaveToolset) {
                 giveToolset();
                 try {
-                    String line = Files.readAllLines(Paths.get(this.file)).get(3);
+                    String line = Files.readAllLines(Paths.get(this.file)).get(2);
                     System.out.println(line);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             } else {
                 try {
-                    String line = Files.readAllLines(Paths.get(this.file)).get(4);
+                    String line = Files.readAllLines(Paths.get(this.file)).get(3);
                     System.out.println(line);
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -51,7 +51,7 @@ public class Villager extends NPC {
             }
         } else if (command.equals("bye") && super.getTalking()) {
             try {
-                String line = Files.readAllLines(Paths.get(this.file)).get(5);
+                String line = Files.readAllLines(Paths.get(this.file)).get(4);
                 System.out.println(line);
             } catch (IOException e) {
                 e.printStackTrace();

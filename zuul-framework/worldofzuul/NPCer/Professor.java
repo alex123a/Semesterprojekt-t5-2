@@ -15,10 +15,10 @@ public class Professor extends NPC {
 
     @Override
     public void description(String command) {
-        if (command.equals("talk") && !super.getTalking()){
+        if (!super.getTalking()){
             try {
                 String line;
-                line = Files.readAllLines(Paths.get(this.file)).get(1);
+                line = Files.readAllLines(Paths.get(this.file)).get(0);
                 System.out.println(line);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -27,7 +27,7 @@ public class Professor extends NPC {
         } else if (command.equals("bye") && super.getTalking()){
             try {
                 String line;
-                line = Files.readAllLines(Paths.get(this.file)).get(2);
+                line = Files.readAllLines(Paths.get(this.file)).get(1);
                 System.out.println(line);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -36,7 +36,7 @@ public class Professor extends NPC {
         } else {
             try {
                 String line;
-                line = Files.readAllLines(Paths.get(this.file)).get(3);
+                line = Files.readAllLines(Paths.get(this.file)).get(2);
                 System.out.println(line);
             } catch (IOException e) {
                 e.printStackTrace();
