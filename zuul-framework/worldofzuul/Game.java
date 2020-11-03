@@ -72,6 +72,7 @@ public class Game {
 
     private void printWelcome() {
         Scanner reader;
+        Timer.setStartTime();
         try {
             reader = new Scanner(welcomeMessage);
             System.out.println(reader.nextLine());
@@ -109,6 +110,8 @@ public class Game {
             if (currentRoom == RoadBuild) {
                 if (givePlastic(command)) {
                     System.out.println("You have completed 100% of the road in plastic.");
+                    Timer.setEndTime();
+                    Timer.timeScore();
                     wantToQuit = true;
                 }
             } else {
@@ -164,8 +167,7 @@ public class Game {
         ArrayList<Plastic> plasticInv = Player.getPlasticInv();
         ArrayList<Plastic> road = RoadBuilder.inventory(plasticInv);
         Player.resetPlasticInv();
-        if (road.size() == roadDone) {
-            System.out.println("The road is complete.");
+        if (road.size() >= roadDone) {
             return true;
         }
         return false;
