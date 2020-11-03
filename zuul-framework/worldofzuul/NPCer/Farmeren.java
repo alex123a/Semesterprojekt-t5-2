@@ -16,7 +16,6 @@ public class Farmeren extends NPC {
     private Plastic[] plasticForPlayer = new Plastic[randomNumber];
     // private File file = Paths.get(new File("worldofzuul/NPC/NPC-descriptions/FarmerenText.txt").getAbsolutePath()).toFile();
     private String file = Paths.get(new File("worldofzuul/NPC/NPC-descriptions/FarmerenText.txt").getAbsolutePath()).toString();
-    private boolean talking = false;
 
     public Farmeren(String name) {
         super(name);
@@ -25,21 +24,22 @@ public class Farmeren extends NPC {
 
     @Override
     public void description(String input) {
-        if (input.equals("talk") && !talking) {
+        if (input.equals("talk") && !super.getTalking()) {
             try {
+                setTalking(true);
                 String line = Files.readAllLines(Paths.get(this.file)).get(1);
                 System.out.println(line);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } else if (input.equals("information") && talking) {
+        } else if (input.equals("information") && super.getTalking()) {
             try {
                 String line = Files.readAllLines(Paths.get(this.file)).get(2);
                 System.out.println(line);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } else if (input.equals("take") && talking) {
+        } else if (input.equals("take") && super.getTalking()) {
             if (plasticForPlayer != null) {
                 emptyPlasticForPlayer();
                 try {
@@ -56,7 +56,7 @@ public class Farmeren extends NPC {
                     e.printStackTrace();
                 }
             }
-        } else if (input.equals("bye") && talking) {
+        } else if (input.equals("bye") && super.getTalking()) {
             try {
                 String line = Files.readAllLines(Paths.get(this.file)).get(5);
                 System.out.println(line);
@@ -66,12 +66,11 @@ public class Farmeren extends NPC {
         } else {
             System.out.println("Unknown conversation");
         }
-
     }
 
     @Override
     public String toString() {
-        return null;
+        return super.getName();
     }
 
     public void fillPlasticArray() {
@@ -93,4 +92,5 @@ public class Farmeren extends NPC {
         Player.setPlasticInv(newInv);
         this.plasticForPlayer = null;
     }
+
 }

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public class Player {
     private String name;
     private static ArrayList<Plastic> plasticInv = new ArrayList();
+    private static boolean haveToolset = false;
     // private ArrayList<Tool> toolInv = new ArrayList();
     // Her er der taget udgangspunkt i et "Tool" objekt og et "Plastic" objekt.
     
@@ -29,5 +30,14 @@ public class Player {
     public static ArrayList<Plastic> getPlasticInv() {
         return plasticInv;
     }
+
+    public static void setHaveToolset(boolean haveToolsetPara) {
+        haveToolset = haveToolsetPara;
+    }
+
+    public static boolean getHaveToolset() {
+        return haveToolset;
+    }
+
 }
 
