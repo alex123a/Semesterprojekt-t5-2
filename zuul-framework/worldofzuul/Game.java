@@ -16,7 +16,7 @@ public class Game {
     final private File welcomeMessage = Paths.get(new File("worldofzuul/textfiles/gameDescription.txt").getAbsolutePath()).toFile();
     final private File roomDescription = Paths.get(new File("worldofzuul/textfiles/roomDescription.txt").getAbsolutePath()).toFile();
     final private File help = Paths.get(new File("worldofzuul/textfiles/help.txt").getAbsolutePath()).toFile();
-    private static final int roadDone = 30;
+    private static final int roadDone = 2;
     private Room RoadBuild, Town, Beach, Farm, Park, Sdu;
 
     public Game() {
@@ -112,6 +112,7 @@ public class Game {
                     System.out.println("You have completed 100% of the road in plastic.");
                     Timer.setEndTime();
                     Timer.timeScore();
+                    Timer.setHighScore();
                     wantToQuit = true;
                 }
             } else {
