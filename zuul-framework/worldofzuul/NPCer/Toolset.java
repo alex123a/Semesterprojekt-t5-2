@@ -3,7 +3,7 @@ package worldofzuul.NPCer;
 import worldofzuul.RoadBuilder;
 
 public class Toolset {
-    final private int repair = -25;
+    final private int repair = 25;
 
     public boolean repairMachine(int damaged) throws InterruptedException {
         boolean repaired = false;
@@ -11,7 +11,7 @@ public class Toolset {
 
         while(RoadBuilder.getDamaged() <= 0) {
             long millis = System.currentTimeMillis();
-            RoadBuilder.setDamaged(repair);
+            RoadBuilder.setDamaged(RoadBuilder.getDamaged() - repair);
             Thread.sleep(1000 - millis % 1000);
         }
         return repaired = true;
