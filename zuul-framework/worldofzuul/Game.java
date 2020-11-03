@@ -16,7 +16,7 @@ public class Game {
     final private File welcomeMessage = Paths.get(new File("worldofzuul/textfiles/gameDescription.txt").getAbsolutePath()).toFile();
     final private File roomDescription = Paths.get(new File("worldofzuul/textfiles/roomDescription.txt").getAbsolutePath()).toFile();
     final private File help = Paths.get(new File("worldofzuul/textfiles/help.txt").getAbsolutePath()).toFile();
-    private static final int roadDone = 2;
+    private static final int roadDone = 30;
     private Room RoadBuild, Town, Beach, Farm, Park, Sdu;
 
     public Game() {
@@ -65,6 +65,7 @@ public class Game {
 
         boolean finished = false;
         while (!finished) {
+            RoadBuilder.damagedMachine();
             Command command = parser.getCommand();
             finished = processCommand(command);
         }
@@ -107,19 +108,23 @@ public class Game {
         } else if (commandWord == CommandWord.QUIT) {
             wantToQuit = quit(command);
         } else if (commandWord == CommandWord.GIVE) {
-            if (currentRoom == RoadBuild) {
-                if (givePlastic(command)) {
-                    System.out.println("You have completed 100% of the road in plastic.");
-                    Timer.setEndTime();
-                    Timer.timeScore();
-                    Timer.setHighScore();
-                    wantToQuit = true;
+            if (RoadBuilder.getDamaged() == 0) {
+                if (currentRoom == RoadBuild) {
+                    if (givePlastic(command)) {
+                        System.out.println("You have completed 100% of the road in plastic.");
+                        Timer.setEndTime();
+                        Timer.timeScore();
+                        Timer.setHighScore();
+                        wantToQuit = true;
+                    }
+                } else {
+                    System.out.println("Go to the Roadbuilder to give plastic");
                 }
             } else {
-                System.out.println("Go to the Roadbuilder to give plastic");
+                System.out.println("Machine \"i am broken, can't help you\"");
             }
         } else if (commandWord == commandWord.COLLECT) {
-            Player.plasticCollect(currentRoom.getPlastic(),currentRoom);
+            Player.plasticCollect(currentRoom.getPlastic(), currentRoom);
         }
         return wantToQuit;
     }

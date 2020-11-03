@@ -12,7 +12,9 @@ public class Toolset {
         while(RoadBuilder.getDamaged() <= 0) {
             long millis = System.currentTimeMillis();
             RoadBuilder.setDamaged(repair);
+            System.out.println(100-RoadBuilder.getDamaged() + "% repaired");
             Thread.sleep(1000 - millis % 1000);
+
         }
         return repaired = true;
     }
