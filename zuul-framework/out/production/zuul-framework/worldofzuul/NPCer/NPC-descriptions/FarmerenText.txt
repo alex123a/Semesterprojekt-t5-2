@@ -1,5 +1,5 @@
-What can I do for you?
-Would you like to get some plastic I have collected on my farm?
-Here you go.
+What can I do for you? Type 'information'
+Would you like to get some plastic I have collected on my farm? Type 'take'
+Here you go. Type 'bye'
 No plastic left.
 Bye, it was nice to meet you.
