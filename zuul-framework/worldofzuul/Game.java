@@ -140,15 +140,6 @@ public class Game {
             } else if (currentRoom == Town) {
                 villager.description("bye");
             }
-        } else if (commandWord == CommandWord.GIVE && currentRoom == RoadBuild) {
-                if (givePlastic(command)) {
-                    System.out.println("You have completed 100% of the road in plastic.");
-                    Timer.setEndTime();
-                    Timer.timeScore();
-                    Timer.setHighScore();
-                    wantToQuit = true;
-                }
-
         } else if (commandWord == commandWord.COLLECT) {
             Player.plasticCollect(currentRoom.getPlastic(),currentRoom);
         } else if (commandWord == commandWord.REPAIR && currentRoom == RoadBuild) {

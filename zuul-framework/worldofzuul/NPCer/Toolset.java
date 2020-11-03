@@ -5,7 +5,7 @@ import worldofzuul.RoadBuilder;
 public class Toolset {
     final private int repair = 25;
 
-    public void repairMachine(int damaged) throws InterruptedException {
+    public boolean repairMachine(int damaged) throws InterruptedException {
         boolean repaired = false;
         // Mangler at tilføje tid, således statementet under bliver kørt en gang i sekundet.
 
@@ -16,7 +16,7 @@ public class Toolset {
             Thread.sleep(1000 - millis % 1000);
 
         }
-        repaired = true;
+        return repaired = true;
     }
 
     public int getRepair() {
