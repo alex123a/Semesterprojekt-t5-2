@@ -15,8 +15,7 @@ public class Professor extends NPC {
 
     @Override
     public void description(String input) {
-        boolean talking=false;
-        if (input.equals("talk")){
+        if (input.equals("talk") && !super.getTalking()){
             try {
                 String line;
                 line = Files.readAllLines(Paths.get(this.file)).get(1);
@@ -25,7 +24,7 @@ public class Professor extends NPC {
                 e.printStackTrace();
                 System.out.println("Could not find text file");
             }
-        } else if (input.equals("bye") && talking){
+        } else if (input.equals("bye") && super.getTalking()){
             try {
                 String line;
                 line = Files.readAllLines(Paths.get(this.file)).get(2);
@@ -48,6 +47,6 @@ public class Professor extends NPC {
 
     @Override
     public String toString() {
-        return null;
+        return super.getName();
     }
 }
