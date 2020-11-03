@@ -16,7 +16,7 @@ public class Farmer extends NPC {
     final private int randomNumber = (new Random()).nextInt(8 - 5 + 1) + 5;
     private Plastic[] plasticForPlayer = new Plastic[randomNumber];
     // private File file = Paths.get(new File("worldofzuul/NPC/NPC-descriptions/FarmerenText.txt").getAbsolutePath()).toFile();
-    private String file = Paths.get(new File("worldofzuul/NPC/NPC-descriptions/FarmerenText.txt").getAbsolutePath()).toString();
+    private String file = Paths.get(new File("worldofzuul/NPCer/NPC-descriptions/FarmerenText.txt").getAbsolutePath()).toString();
 
     public Farmer(String name) {
         super(name);
@@ -25,7 +25,8 @@ public class Farmer extends NPC {
 
     @Override
     public void description(String command) {
-        if (command.equals("talk")) {
+        
+        if (command.equals("talk") && !super.getTalking()) {
             try {
                 setTalking(true);
                 String line = Files.readAllLines(Paths.get(this.file)).get(1);

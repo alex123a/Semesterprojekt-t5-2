@@ -9,7 +9,7 @@ import java.nio.file.Paths;
 
 public class Villager extends NPC {
     private boolean gaveToolset = false;
-    private String file = Paths.get(new File("worldofzuul/NPC/NPC-descriptions/VillagerText.txt").getAbsolutePath()).toString();
+    private String file = Paths.get(new File("worldofzuul/NPCer/NPC-descriptions/VillagerText.txt").getAbsolutePath()).toString();
 
     public Villager(String name) {
         super(name);
