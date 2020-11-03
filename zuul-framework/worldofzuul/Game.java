@@ -1,6 +1,8 @@
 package worldofzuul;
 
-import worldofzuul.NPCer.Farmeren;
+import worldofzuul.NPCer.Farmer;
+import worldofzuul.NPCer.Professor;
+import worldofzuul.NPCer.Villager;
 import worldofzuul.PlasticElements.Plastic;
 import worldofzuul.Rooms.*;
 
@@ -19,6 +21,9 @@ public class Game {
     final private File help = Paths.get(new File("worldofzuul/textfiles/help.txt").getAbsolutePath()).toFile();
     private static final int roadDone = 2;
     private Room RoadBuild, Town, Beach, Farm, Park, Sdu;
+    private Farmer farmer = new Farmer("Farmer");
+    private Villager villager = new Villager("Villager");
+    private Professor professor = new Professor("Professor");
 
     public Game() {
         createRooms();
@@ -107,14 +112,20 @@ public class Game {
             goRoom(command);
         } else if (commandWord == CommandWord.QUIT) {
             wantToQuit = quit(command);
-        } else if (commandWord == CommandWord.TALK && currentRoom == Farm) {
-            Farmeren.description(command);
-        } else if (commandWord == CommandWord.INFORMATION && currentRoom == Farm) {
-            Farmeren.description(command);
-        } else if (commandWord == CommandWord.TAKE && currentRoom == Farm) {
-            Farmeren.description(command);
-        } else if (commandWord == CommandWord.BYE && currentRoom == Farm) {
-            Farmeren.description(command);
+        } else if (commandWord == CommandWord.TALK) {
+            if (currentRoom == Farm) {
+                farmer.description("talk");
+            } else if (currentRoom == Town) {
+                villager.description("talk");
+            } else if (currentRoom == Sdu) {
+                professor.description("talk");
+            }
+        } else if (commandWord == CommandWord.INFORMATION) {
+            farmer.description("information");
+        } else if (commandWord == CommandWord.TAKE) {
+            farmer.description("take");
+        } else if (commandWord == CommandWord.BYE) {
+            farmer.description("bye");
         } else if (commandWord == CommandWord.GIVE && currentRoom == RoadBuild) {
                 if (givePlastic(command)) {
                     System.out.println("You have completed 100% of the road in plastic.");

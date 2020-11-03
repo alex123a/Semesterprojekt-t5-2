@@ -1,8 +1,7 @@
 package worldofzuul.NPCer;
 
-import worldofzuul.Command;
-import worldofzuul.CommandWord;
 import worldofzuul.Player;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -17,9 +16,8 @@ public class Villager extends NPC {
     }
 
     @Override
-    public void description(Command command) {
-        CommandWord commandWord = command.getCommandWord();
-        if (commandWord == CommandWord.TALK && !super.getTalking()) {
+    public void description(String command) {
+        if (command.equals("talk") && !super.getTalking()) {
             try {
                 setTalking(true);
                 String line = Files.readAllLines(Paths.get(this.file)).get(1);
@@ -27,18 +25,14 @@ public class Villager extends NPC {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } else if (commandWord == CommandWord.INFORMATION && super.getTalking()) {
+        } else if (command.equals("information") && super.getTalking()) {
             try {
                 String line = Files.readAllLines(Paths.get(this.file)).get(2);
                 System.out.println(line);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-<<<<<<< Updated upstream
-        } else if (commandWord == CommandWord.TAKE && super.getTalking()) {
-=======
-        } else if (input.equals("take") && super.getTalking()) {
->>>>>>> Stashed changes
+        } else if (command.equals("take") && super.getTalking()) {
             if (!gaveToolset) {
                 giveToolset();
                 try {
@@ -55,7 +49,7 @@ public class Villager extends NPC {
                     e.printStackTrace();
                 }
             }
-        } else if (commandWord == CommandWord.BYE && super.getTalking()) {
+        } else if (command.equals("bye") && super.getTalking()) {
             try {
                 String line = Files.readAllLines(Paths.get(this.file)).get(5);
                 System.out.println(line);

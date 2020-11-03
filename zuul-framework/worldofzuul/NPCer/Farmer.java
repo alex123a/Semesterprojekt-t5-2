@@ -1,7 +1,5 @@
 package worldofzuul.NPCer;
 
-import worldofzuul.Command;
-import worldofzuul.CommandWord;
 import worldofzuul.PlasticElements.CleaningPlastic;
 import worldofzuul.PlasticElements.Plastic;
 import worldofzuul.PlasticElements.WaterBottle;
@@ -14,21 +12,20 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Farmeren extends NPC {
-    final private int randomNumber = (new Random()).nextInt(8 - 5 - 1) - 5;
+public class Farmer extends NPC {
+    final private int randomNumber = (new Random()).nextInt(8 - 5 + 1) + 5;
     private Plastic[] plasticForPlayer = new Plastic[randomNumber];
     // private File file = Paths.get(new File("worldofzuul/NPC/NPC-descriptions/FarmerenText.txt").getAbsolutePath()).toFile();
     private String file = Paths.get(new File("worldofzuul/NPC/NPC-descriptions/FarmerenText.txt").getAbsolutePath()).toString();
 
-    public Farmeren(String name) {
+    public Farmer(String name) {
         super(name);
         fillPlasticArray();
     }
 
     @Override
-    public void description(Command command) {
-        CommandWord commandWord = command.getCommandWord();
-        if (commandWord == CommandWord.TALK && !super.getTalking()) {
+    public void description(String command) {
+        if (command.equals("talk")) {
             try {
                 setTalking(true);
                 String line = Files.readAllLines(Paths.get(this.file)).get(1);
@@ -36,14 +33,14 @@ public class Farmeren extends NPC {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } else if (commandWord == CommandWord.INFORMATION && super.getTalking()) {
+        } else if (command.equals("information") && super.getTalking()) {
             try {
                 String line = Files.readAllLines(Paths.get(this.file)).get(2);
                 System.out.println(line);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } else if (commandWord == CommandWord.TAKE && super.getTalking()) {
+        } else if (command.equals("take") && super.getTalking()) {
             if (plasticForPlayer != null) {
                 emptyPlasticForPlayer();
                 try {
@@ -60,7 +57,7 @@ public class Farmeren extends NPC {
                     e.printStackTrace();
                 }
             }
-        } else if (commandWord == CommandWord.BYE && super.getTalking()) {
+        } else if (command.equals("bye") && super.getTalking()) {
             try {
                 String line = Files.readAllLines(Paths.get(this.file)).get(5);
                 System.out.println(line);
@@ -78,7 +75,7 @@ public class Farmeren extends NPC {
     }
 
     public void fillPlasticArray() {
-        int random = (new Random()).nextInt(2 - 1 - 1) - 1;
+        int random = (new Random()).nextInt(2 - 1 + 1) + 1;
         for (int i = 0; i < this.plasticForPlayer.length; i++) {
             this.plasticForPlayer[i] = random == 1 ? new WaterBottle() : new CleaningPlastic();
         }
