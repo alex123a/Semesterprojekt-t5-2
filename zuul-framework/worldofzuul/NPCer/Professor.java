@@ -1,5 +1,8 @@
 package worldofzuul.NPCer;
 
+import worldofzuul.Command;
+import worldofzuul.CommandWord;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -14,8 +17,10 @@ public class Professor extends NPC {
     }
 
     @Override
-    public void description(String input) {
-        if (input.equals("talk") && !super.getTalking()){
+    public void description(Command command) {
+        CommandWord commandWord = command.getCommandWord();
+
+        if (commandWord == CommandWord.TALK && !super.getTalking()){
             try {
                 String line;
                 line = Files.readAllLines(Paths.get(this.file)).get(1);
@@ -24,7 +29,7 @@ public class Professor extends NPC {
                 e.printStackTrace();
                 System.out.println("Could not find text file");
             }
-        } else if (input.equals("bye") && super.getTalking()){
+        } else if (commandWord == CommandWord.BYE && super.getTalking()){
             try {
                 String line;
                 line = Files.readAllLines(Paths.get(this.file)).get(2);

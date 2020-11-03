@@ -1,7 +1,12 @@
 package worldofzuul.NPCer;
 
-import worldofzuul.PlasticElements.*;
+import worldofzuul.Command;
+import worldofzuul.CommandWord;
+import worldofzuul.PlasticElements.CleaningPlastic;
+import worldofzuul.PlasticElements.Plastic;
+import worldofzuul.PlasticElements.WaterBottle;
 import worldofzuul.Player;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -21,8 +26,9 @@ public class Farmeren extends NPC {
     }
 
     @Override
-    public void description(String input) {
-        if (input.equals("talk") && !super.getTalking()) {
+    public void description(Command command) {
+        CommandWord commandWord = command.getCommandWord();
+        if (commandWord == CommandWord.TALK && !super.getTalking()) {
             try {
                 setTalking(true);
                 String line = Files.readAllLines(Paths.get(this.file)).get(1);
@@ -30,14 +36,14 @@ public class Farmeren extends NPC {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } else if (input.equals("information") && super.getTalking()) {
+        } else if (commandWord == CommandWord.INFORMATION && super.getTalking()) {
             try {
                 String line = Files.readAllLines(Paths.get(this.file)).get(2);
                 System.out.println(line);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } else if (input.equals("take") && super.getTalking()) {
+        } else if (commandWord == CommandWord.TAKE && super.getTalking()) {
             if (plasticForPlayer != null) {
                 emptyPlasticForPlayer();
                 try {
@@ -54,7 +60,7 @@ public class Farmeren extends NPC {
                     e.printStackTrace();
                 }
             }
-        } else if (input.equals("bye") && super.getTalking()) {
+        } else if (commandWord == CommandWord.BYE && super.getTalking()) {
             try {
                 String line = Files.readAllLines(Paths.get(this.file)).get(5);
                 System.out.println(line);
