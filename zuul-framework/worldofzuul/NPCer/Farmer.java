@@ -25,7 +25,6 @@ public class Farmer extends NPC {
 
     @Override
     public void description(String command) {
-
         if (!super.getTalking()) {
             try {
                 setTalking(true);

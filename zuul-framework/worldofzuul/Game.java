@@ -2,6 +2,7 @@ package worldofzuul;
 
 import worldofzuul.NPCer.Farmer;
 import worldofzuul.NPCer.Professor;
+import worldofzuul.NPCer.Toolset;
 import worldofzuul.NPCer.Villager;
 import worldofzuul.PlasticElements.Plastic;
 import worldofzuul.Rooms.*;
@@ -24,6 +25,7 @@ public class Game {
     private Farmer farmer = new Farmer("Farmer");
     private Villager villager = new Villager("Villager");
     private Professor professor = new Professor("Professor");
+    private Toolset toolset = new Toolset();
 
     public Game() {
         createRooms();
@@ -121,11 +123,25 @@ public class Game {
                 professor.description("talk");
             }
         } else if (commandWord == CommandWord.INFORMATION) {
-            farmer.description("information");
+            if (currentRoom == Farm) {
+                farmer.description("information");
+            } else if (currentRoom == Town) {
+                villager.description("information");
+            }
         } else if (commandWord == CommandWord.TAKE) {
-            farmer.description("take");
+            if (currentRoom == Farm) {
+                farmer.description("take");
+            } else if (currentRoom == Town) {
+                villager.description("take");
+            }
         } else if (commandWord == CommandWord.BYE) {
-            farmer.description("bye");
+            if (currentRoom == Farm) {
+                farmer.description("bye");
+            } else if (currentRoom == Sdu) {
+                professor.description("bye");
+            } else if (currentRoom == Town) {
+                villager.description("bye");
+            }
         } else if (commandWord == CommandWord.GIVE && currentRoom == RoadBuild) {
                 if (givePlastic(command)) {
                     System.out.println("You have completed 100% of the road in plastic.");
@@ -137,6 +153,14 @@ public class Game {
 
         } else if (commandWord == commandWord.COLLECT) {
             Player.plasticCollect(currentRoom.getPlastic(),currentRoom);
+        } else if (commandWord == commandWord.REPAIR && currentRoom == RoadBuild) {
+            if (Player.getHaveToolset()) {
+                try {
+                    toolset.repairMachine(RoadBuilder.getDamaged());
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         return wantToQuit;
     }
