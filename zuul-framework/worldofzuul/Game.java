@@ -141,7 +141,11 @@ public class Game {
                 villager.description("bye");
             }
         } else if (commandWord == commandWord.COLLECT) {
-            Player.plasticCollect(currentRoom.getPlastic(),currentRoom);
+            if (Player.getPlasticInv().size() < 10) {
+                Player.plasticCollect(currentRoom.getPlastic(), currentRoom);
+            } else {
+                System.out.println("Your inventory is full");
+            }
         } else if (commandWord == commandWord.REPAIR && currentRoom == RoadBuild) {
             if (Player.getHaveToolset()) {
                 try {
