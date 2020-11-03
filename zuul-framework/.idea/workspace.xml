@@ -19,11 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ba6c8188-7ef2-4ea3-9d5b-5b6e3607b86a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/zuul-framework/worldofzuul/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/zuul-framework/worldofzuul/Game.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/worldofzuul/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/worldofzuul/Game.java" afterDir="false" />
-    </list>
+    <list default="true" id="ba6c8188-7ef2-4ea3-9d5b-5b6e3607b86a" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
