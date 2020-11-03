@@ -16,6 +16,7 @@ public class Farmeren extends NPC {
     private Plastic[] plasticForPlayer = new Plastic[randomNumber];
     // private File file = Paths.get(new File("worldofzuul/NPC/NPC-descriptions/FarmerenText.txt").getAbsolutePath()).toFile();
     private String file = Paths.get(new File("worldofzuul/NPC/NPC-descriptions/FarmerenText.txt").getAbsolutePath()).toString();
+    private boolean talking = false;
 
     public Farmeren(String name) {
         super(name);
@@ -24,51 +25,48 @@ public class Farmeren extends NPC {
 
     @Override
     public void description(String input) {
-        switch(input) {
-            case "talk with farmer":
+        if (input.equals("talk") && !talking) {
+            try {
+                String line = Files.readAllLines(Paths.get(this.file)).get(1);
+                System.out.println(line);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else if (input.equals("information") && talking) {
+            try {
+                String line = Files.readAllLines(Paths.get(this.file)).get(2);
+                System.out.println(line);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else if (input.equals("take") && talking) {
+            if (plasticForPlayer != null) {
+                emptyPlasticForPlayer();
                 try {
-                    String line = Files.readAllLines(Paths.get(this.file)).get(1);
+                    String line = Files.readAllLines(Paths.get(this.file)).get(3);
                     System.out.println(line);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                break;
-            case "information":
+            } else {
                 try {
-                    String line = Files.readAllLines(Paths.get(this.file)).get(2);
+                    String line = Files.readAllLines(Paths.get(this.file)).get(4);
                     System.out.println(line);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                break;
-            case "take":
-                if (plasticForPlayer != null) {
-                    emptyPlasticForPlayer();
-                    try {
-                        String line = Files.readAllLines(Paths.get(this.file)).get(3);
-                        System.out.println(line);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    break;
-                } else {
-                    try {
-                        String line = Files.readAllLines(Paths.get(this.file)).get(4);
-                        System.out.println(line);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    break;
-                }
-            case "bye":
-                try {
-                    String line = Files.readAllLines(Paths.get(this.file)).get(5);
-                    System.out.println(line);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                break;
+            }
+        } else if (input.equals("bye") && talking) {
+            try {
+                String line = Files.readAllLines(Paths.get(this.file)).get(5);
+                System.out.println(line);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Unknown conversation");
         }
+
     }
 
     @Override

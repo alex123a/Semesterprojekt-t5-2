@@ -51,6 +51,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="ToolWindowRun.ShowToolbar" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -124,6 +125,10 @@
     </state>
     <state width="1877" height="282" key="GridCell.Tab.0.right/-1920.-221.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1604330327612" />
     <state width="1237" height="372" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1603983743801" />
+    <state x="142" y="0" key="SettingsEditor" timestamp="1604391257539">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="142" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1604391257539" />
     <state x="347" y="73" width="587" height="534" key="find.popup" timestamp="1603791993608">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
