@@ -1,8 +1,6 @@
 package worldofzuul;
 
-import worldofzuul.NPCer.Farmer;
-import worldofzuul.NPCer.Professor;
-import worldofzuul.NPCer.Villager;
+import worldofzuul.NPCer.*;
 import worldofzuul.PlasticElements.Plastic;
 import worldofzuul.Rooms.*;
 
@@ -19,11 +17,12 @@ public class Game {
     final private File welcomeMessage = Paths.get(new File("worldofzuul/textfiles/gameDescription.txt").getAbsolutePath()).toFile();
     final private File roomDescription = Paths.get(new File("worldofzuul/textfiles/roomDescription.txt").getAbsolutePath()).toFile();
     final private File help = Paths.get(new File("worldofzuul/textfiles/help.txt").getAbsolutePath()).toFile();
-    private static final int roadDone = 2;
+    private static final int roadDone = 30;
     private Room RoadBuild, Town, Beach, Farm, Park, Sdu;
     private Farmer farmer = new Farmer("Farmer");
     private Villager villager = new Villager("Villager");
     private Professor professor = new Professor("Professor");
+    private Toolset toolset = new Toolset();
 
     public Game() {
         createRooms();
@@ -71,6 +70,7 @@ public class Game {
 
         boolean finished = false;
         while (!finished) {
+            RoadBuilder.damagedMachine();
             Command command = parser.getCommand();
             finished = processCommand(command);
         }
@@ -121,11 +121,25 @@ public class Game {
                 professor.description("talk");
             }
         } else if (commandWord == CommandWord.INFORMATION) {
-            farmer.description("information");
+            if (currentRoom == Farm) {
+                farmer.description("information");
+            } else if (currentRoom == Town) {
+                villager.description("information");
+            }
         } else if (commandWord == CommandWord.TAKE) {
-            farmer.description("take");
+            if (currentRoom == Farm) {
+                farmer.description("take");
+            } else if (currentRoom == Town) {
+                villager.description("take");
+            }
         } else if (commandWord == CommandWord.BYE) {
-            farmer.description("bye");
+            if (currentRoom == Farm) {
+                farmer.description("bye");
+            } else if (currentRoom == Sdu) {
+                professor.description("bye");
+            } else if (currentRoom == Town) {
+                villager.description("bye");
+            }
         } else if (commandWord == CommandWord.GIVE && currentRoom == RoadBuild) {
                 if (givePlastic(command)) {
                     System.out.println("You have completed 100% of the road in plastic.");
@@ -137,6 +151,32 @@ public class Game {
 
         } else if (commandWord == commandWord.COLLECT) {
             Player.plasticCollect(currentRoom.getPlastic(),currentRoom);
+        } else if (commandWord == commandWord.REPAIR && currentRoom == RoadBuild) {
+            if (Player.getHaveToolset()) {
+                try {
+                    toolset.repairMachine(RoadBuilder.getDamaged());
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        } else if (commandWord == CommandWord.GIVE) {
+            if (RoadBuilder.getDamaged() == 0) {
+                if (currentRoom == RoadBuild) {
+                    if (givePlastic(command)) {
+                        System.out.println("You have completed 100% of the road in plastic.");
+                        Timer.setEndTime();
+                        Timer.timeScore();
+                        Timer.setHighScore();
+                        wantToQuit = true;
+                    }
+                } else {
+                    System.out.println("Go to the Roadbuilder to give plastic");
+                }
+            } else {
+                System.out.println("Machine \"i am broken, can't help you\"");
+            }
+        } else if (commandWord == commandWord.COLLECT) {
+            Player.plasticCollect(currentRoom.getPlastic(), currentRoom);
         }
         return wantToQuit;
     }

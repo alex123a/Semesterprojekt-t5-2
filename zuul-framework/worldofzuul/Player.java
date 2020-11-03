@@ -22,7 +22,6 @@ public class Player {
             } else {
                 System.out.print("Name not vaild enter new name\n> ");
             }
-
         }
         System.out.println("You have chosen " + name + " as your player name");
     }
