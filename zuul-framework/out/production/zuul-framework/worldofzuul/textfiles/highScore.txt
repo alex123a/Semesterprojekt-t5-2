@@ -1,1 +1,1 @@
-0,07 dw 0,07 ja 0,08 jan 
+10,0 null 10,0 null 10,0 null
