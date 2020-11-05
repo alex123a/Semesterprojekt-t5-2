@@ -1,22 +1,28 @@
 package worldofzuul;
 
+import worldofzuul.NPCer.*;
+import worldofzuul.PlasticElements.Plastic;
 import worldofzuul.Rooms.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Game {
     private Parser parser;
     private Room currentRoom;
     private String name;
-    final private String file = new File("worldofzuul\\textfiles\\roomDescription").getAbsolutePath();
-    final private String file2 = new File("worldofzuul\\textfiles\\gameDescription").getAbsolutePath();
-    final private String file3 = new File("worldofzuul\\textfiles\\help").getAbsolutePath();
-    final private File welcomeMessage = new File(file2.replace("\\","\\\\") + ".txt");
-    final private File roomDescription = new File(file.replace("\\","\\\\") + ".txt");
-    final private File help = new File(file3.replace("\\","\\\\") + ".txt");
-
+    final private File welcomeMessage = Paths.get(new File("worldofzuul/textfiles/gameDescription.txt").getAbsolutePath()).toFile();
+    final private File roomDescription = Paths.get(new File("worldofzuul/textfiles/roomDescription.txt").getAbsolutePath()).toFile();
+    final private File help = Paths.get(new File("worldofzuul/textfiles/help.txt").getAbsolutePath()).toFile();
+    private static final int roadDone = 30;
+    private Room RoadBuild, Town, Beach, Farm, Park, Sdu;
+    private Farmer farmer = new Farmer("Farmer");
+    private Villager villager = new Villager("Villager");
+    private Professor professor = new Professor("Professor");
+    private Toolset toolset = new Toolset();
 
     public Game() {
         createRooms();
@@ -25,8 +31,6 @@ public class Game {
 
 
     private void createRooms() {
-        Room RoadBuild, Town, Beach, Farm, Park, Sdu;
-
         Scanner reader;
         try {
             reader = new Scanner(roomDescription);
@@ -66,17 +70,18 @@ public class Game {
 
         boolean finished = false;
         while (!finished) {
+            RoadBuilder.damagedMachine();
             Command command = parser.getCommand();
             finished = processCommand(command);
         }
-        System.out.println("You have completed 100% of the road in plastic.");
     }
 
     private void printWelcome() {
-
         Scanner reader;
+        Timer.setStartTime();
         try {
             reader = new Scanner(welcomeMessage);
+            System.out.println(reader.nextLine());
             System.out.println(reader.nextLine());
             System.out.println(reader.nextLine());
             System.out.println(reader.nextLine());
@@ -87,19 +92,7 @@ public class Game {
             System.out.println("Cannot find the file");
             e.printStackTrace();
         }
-        System.out.print("What is your name?\n> ");
-        boolean nameChosen = false;
-        while (!nameChosen) { // In this while loop we check for a name that is valid (No only space names) etc...
-            Scanner playerName = new Scanner(System.in);
-            name = playerName.nextLine();
-            if (name.matches(".*[0-9].*") || name.matches(".*[A-Z]*.")) {
-                nameChosen = true;
-            } else {
-                System.out.print("Name not vaild enter new name\n> ");
-            }
-
-        }
-        System.out.println("You have chosen " + name + " as your player name");
+        Player.setName();
         System.out.println(currentRoom.getLongDescription());
     }
 
@@ -119,8 +112,66 @@ public class Game {
             goRoom(command);
         } else if (commandWord == CommandWord.QUIT) {
             wantToQuit = quit(command);
+        } else if (commandWord == CommandWord.TALK) {
+            if (currentRoom == Farm) {
+                farmer.description("talk");
+            } else if (currentRoom == Town) {
+                villager.description("talk");
+            } else if (currentRoom == Sdu) {
+                professor.description("talk");
+            }
+        } else if (commandWord == CommandWord.INFORMATION) {
+            if (currentRoom == Farm) {
+                farmer.description("information");
+            } else if (currentRoom == Town) {
+                villager.description("information");
+            }
+        } else if (commandWord == CommandWord.TAKE) {
+            if (currentRoom == Farm) {
+                farmer.description("take");
+            } else if (currentRoom == Town) {
+                villager.description("take");
+            }
+        } else if (commandWord == CommandWord.BYE) {
+            if (currentRoom == Farm) {
+                farmer.description("bye");
+            } else if (currentRoom == Sdu) {
+                professor.description("bye");
+            } else if (currentRoom == Town) {
+                villager.description("bye");
+            }
         } else if (commandWord == commandWord.COLLECT) {
-            Player.plasticCollect(currentRoom.getPlastic(),currentRoom);
+            if (Player.getPlasticInv().size() < 10) {
+                Player.plasticCollect(currentRoom.getPlastic(), currentRoom);
+            } else {
+                System.out.println("Your inventory is full");
+            }
+        } else if (commandWord == commandWord.REPAIR && currentRoom == RoadBuild) {
+            if (Player.getHaveToolset()) {
+                try {
+                    toolset.repairMachine(RoadBuilder.getDamaged());
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        } else if (commandWord == CommandWord.GIVE) {
+            if (RoadBuilder.getDamaged() == 0) {
+                if (currentRoom == RoadBuild) {
+                    if (givePlastic(command)) {
+                        System.out.println("You have completed 100% of the road in plastic.");
+                        Timer.setEndTime();
+                        Timer.timeScore();
+                        Timer.setHighScore();
+                        wantToQuit = true;
+                    }
+                } else {
+                    System.out.println("Go to the Roadbuilder to give plastic");
+                }
+            } else {
+                System.out.println("Machine \"i am broken, can't help you\"");
+            }
+        } else if (commandWord == commandWord.COLLECT) {
+            Player.plasticCollect(currentRoom.getPlastic(), currentRoom);
         }
         return wantToQuit;
     }
@@ -161,12 +212,32 @@ public class Game {
         }
     }
 
+    private boolean givePlastic(Command command) {
+        if (command.hasSecondWord()) {
+            System.out.println("Do you want to give plastic? Just write give");
+            return false;
+        }
+        ArrayList<Plastic> plasticInv = Player.getPlasticInv();
+        ArrayList<Plastic> road = RoadBuilder.inventory(plasticInv);
+        Player.resetPlasticInv();
+        if (road.size() >= roadDone) {
+            return true;
+        }
+        return false;
+    }
+
     private boolean quit(Command command) {
         if (command.hasSecondWord()) {
-            System.out.println("Quit what?");
+            System.out.println("Quit");
             return false;
         } else {
             return true;
         }
+
     }
+
+    public static int getRoadDone() {
+        return roadDone;
+    }
+
 }

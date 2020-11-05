@@ -1,0 +1,5 @@
+How can I help you? Type 'information'
+I'm a mechanic and I have a spare toolset for you. Type 'take'
+Here you go! Type 'bye'
+Already gave you a spare toolset
+Good luck with repairing your machine!
