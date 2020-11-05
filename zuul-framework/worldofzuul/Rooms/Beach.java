@@ -4,13 +4,14 @@ import worldofzuul.PlasticElements.*;
 import worldofzuul.Room;
 
 public class Beach extends Room {
-    private static Plastic[] numberOfPlastic;
+    private Plastic[] numberOfPlastic;
 
     public Beach(String description) {
-        super(description, generatePlasticArray());
+        super(description);
+        super.setPlasticArray(generatePlasticArray());
     }
 
-    public static Plastic[] generatePlasticArray() {
+    public Plastic[] generatePlasticArray() {
         int juiceBottles = 2 + (int) (Math.random() * ((6 - 2) + 1));
         int milkBottles = 2 + (int) (Math.random() * ((4 - 2) + 1));
         int waterBottles = 5 + (int) (Math.random() * ((10 - 5) + 1));

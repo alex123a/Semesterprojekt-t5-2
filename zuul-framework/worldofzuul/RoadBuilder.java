@@ -3,14 +3,15 @@ package worldofzuul;
 import worldofzuul.PlasticElements.Plastic;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class RoadBuilder {
-    private static ArrayList<Plastic> inventory = new ArrayList<>();
+    private static List<Plastic> inventory = new ArrayList<>();
     private static int damaged = 0;
     private static boolean haveSpoken = false;
 
 
-    public static ArrayList<Plastic> inventory(ArrayList<Plastic> plastic) {
+    public static List<Plastic> inventory(List<Plastic> plastic) {
         inventory.addAll(plastic);
         if (inventory.size() < Game.getRoadDone()) {
             int inv = ((inventory.size()*100)/Game.getRoadDone());
@@ -27,7 +28,7 @@ public class RoadBuilder {
         }
     }
 
-    public static ArrayList<Plastic> getInventory() {
+    public static List<Plastic> getInventory() {
         return inventory;
     }
 

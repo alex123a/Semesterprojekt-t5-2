@@ -1,14 +1,16 @@
 package worldofzuul;
 
 import worldofzuul.PlasticElements.Plastic;
+
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Player {
     private static String name;
-    private static ArrayList<Plastic> plasticInv = new ArrayList();
+    private static List<Plastic> plasticInv = new ArrayList();
     private static boolean haveToolset = false;
-    // private ArrayList<Tool> toolInv = new ArrayList();
+    // private List<Tool> toolInv = new ArrayList();
     // Her er der taget udgangspunkt i et "Tool" objekt og et "Plastic" objekt.
 
     public static void setName() {
@@ -38,11 +40,11 @@ public class Player {
         }
     }
 
-    public static void setPlasticInv(ArrayList<Plastic> newInv) {
+    public static void setPlasticInv(List<Plastic> newInv) {
         plasticInv = newInv;
     }
 
-    public static ArrayList<Plastic> getPlasticInv() {
+    public static List<Plastic> getPlasticInv() {
         return plasticInv;
     }
 
