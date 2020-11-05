@@ -16,15 +16,9 @@ public abstract class Room {
 
     public Room(String description) {
         this.description = description;
-        exits = new HashMap<String, Room>();
+        exits = new HashMap<>();
         this.plasticInRoom = new ArrayList<>();
         this.plasticCount = this.plasticInRoom.size();
-    }
-
-    public Room(String description, Plastic[] randomPlastic)
-    {
-        this.description = description;
-        exits = new HashMap<String, Room>();
     }
 
     public void setPlasticArray(Plastic[] randomPlastic) {

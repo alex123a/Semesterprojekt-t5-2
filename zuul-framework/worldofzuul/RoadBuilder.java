@@ -23,7 +23,7 @@ public class RoadBuilder {
     public static void damagedMachine() {
         if (inventory.size() >= 19 && !haveSpoken) {
             damaged = 100;
-            System.out.println("Machine: \"Oh no i have stopped working, talk to the mechanic in the village\"");
+            System.out.println("Machine: \"Oh no i have stopped working, talk to the mechanic in the town\"");
             haveSpoken = true;
         }
     }

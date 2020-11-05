@@ -5,8 +5,7 @@ import worldofzuul.RoadBuilder;
 public class Toolset {
     final private int repair = 25;
 
-    public boolean repairMachine(int damaged) throws InterruptedException {
-        boolean repaired = false;
+    public void repairMachine(int damaged) throws InterruptedException {
         // Mangler at tilføje tid, således statementet under bliver kørt en gang i sekundet.
 
         while(RoadBuilder.getDamaged() != 0 || RoadBuilder.getDamaged() > 0) {
@@ -20,7 +19,6 @@ public class Toolset {
             }
 
         }
-        return repaired = true;
     }
 
     public int getRepair() {
