@@ -13,14 +13,13 @@ import java.util.Scanner;
 public class Game {
     private Parser parser;
     private Room currentRoom;
-    private String name;
     final private File welcomeMessage = Paths.get(new File("worldofzuul/textfiles/gameDescription.txt").getAbsolutePath()).toFile();
     final private File roomDescription = Paths.get(new File("worldofzuul/textfiles/roomDescription.txt").getAbsolutePath()).toFile();
     final private File help = Paths.get(new File("worldofzuul/textfiles/help.txt").getAbsolutePath()).toFile();
     private static final int roadDone = 30;
     private Room RoadBuild, Town, Beach, Farm, Park, Sdu;
     private Farmer farmer = new Farmer("Farmer");
-    private Villager villager = new Villager("Villager");
+    private Mechanic mechanic = new Mechanic("Mechanic");
     private Professor professor = new Professor("Professor");
     private Toolset toolset = new Toolset();
 
@@ -78,14 +77,11 @@ public class Game {
 
     private void printWelcome() {
         Scanner reader;
-        Timer.setStartTime();
         try {
             reader = new Scanner(welcomeMessage);
-            System.out.println(reader.nextLine());
-            System.out.println(reader.nextLine());
-            System.out.println(reader.nextLine());
-            System.out.println(reader.nextLine());
-            System.out.println(reader.nextLine());
+            while (reader.hasNextLine()) {
+                System.out.println(reader.nextLine());
+            }
             System.out.println();
             reader.close();
         } catch (FileNotFoundException e) {
@@ -93,6 +89,7 @@ public class Game {
             e.printStackTrace();
         }
         Player.setName();
+        Timer.setStartTime();
         System.out.println(currentRoom.getLongDescription());
     }
 
@@ -116,7 +113,7 @@ public class Game {
             if (currentRoom == Farm) {
                 farmer.description("talk");
             } else if (currentRoom == Town) {
-                villager.description("talk");
+                mechanic.description("talk");
             } else if (currentRoom == Sdu) {
                 professor.description("talk");
             }
@@ -124,13 +121,13 @@ public class Game {
             if (currentRoom == Farm) {
                 farmer.description("information");
             } else if (currentRoom == Town) {
-                villager.description("information");
+                mechanic.description("information");
             }
         } else if (commandWord == CommandWord.TAKE) {
             if (currentRoom == Farm) {
                 farmer.description("take");
             } else if (currentRoom == Town) {
-                villager.description("take");
+                mechanic.description("take");
             }
         } else if (commandWord == CommandWord.BYE) {
             if (currentRoom == Farm) {
@@ -138,7 +135,7 @@ public class Game {
             } else if (currentRoom == Sdu) {
                 professor.description("bye");
             } else if (currentRoom == Town) {
-                villager.description("bye");
+                mechanic.description("bye");
             }
         } else if (commandWord == commandWord.COLLECT) {
             if (Player.getPlasticInv().size() < 10) {
