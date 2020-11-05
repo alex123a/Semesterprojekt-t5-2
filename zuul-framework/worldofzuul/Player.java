@@ -10,7 +10,7 @@ public class Player {
     private static String name;
     private static List<Plastic> plasticInv = new ArrayList();
     private static boolean haveToolset = false;
-    // private ArrayList<Tool> toolInv = new ArrayList();
+    // private List<Tool> toolInv = new ArrayList();
     // Her er der taget udgangspunkt i et "Tool" objekt og et "Plastic" objekt.
 
     public static void setName() {

@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Set;
 import java.util.List;
 
-public class Room {
+public abstract class Room {
     private String description;
     private List<Plastic> plasticInRoom;
     private HashMap<String, Room> exits;
@@ -24,8 +24,12 @@ public class Room {
     public Room(String description, Plastic[] randomPlastic)
     {
         this.description = description;
-        this.plasticInRoom = new ArrayList<>(Arrays.asList(randomPlastic));
         exits = new HashMap<String, Room>();
+    }
+
+    public void setPlasticArray(Plastic[] randomPlastic) {
+        this.plasticInRoom = new ArrayList<>(Arrays.asList(randomPlastic));
+        this.plasticInRoom = new ArrayList<>(Arrays.asList(randomPlastic));
         this.plasticCount = this.plasticInRoom.size();
     }
 
@@ -97,5 +101,7 @@ public class Room {
         }
         return plastic;
     }
+
+    public abstract Plastic[] generatePlasticArray();
 }
 
