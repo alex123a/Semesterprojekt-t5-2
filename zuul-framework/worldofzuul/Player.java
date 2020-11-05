@@ -1,8 +1,10 @@
 package worldofzuul;
 
 import worldofzuul.PlasticElements.Plastic;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Player {
     private static String name;
@@ -38,11 +40,11 @@ public class Player {
         }
     }
 
-    public static void setPlasticInv(ArrayList<Plastic> newInv) {
+    public static void setPlasticInv(List<Plastic> newInv) {
         plasticInv = newInv;
     }
 
-    public static ArrayList<Plastic> getPlasticInv() {
+    public static List<Plastic> getPlasticInv() {
         return plasticInv;
     }
 

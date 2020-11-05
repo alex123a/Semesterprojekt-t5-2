@@ -84,7 +84,7 @@ public class Room {
 
     }
 
-    public ArrayList<Plastic> getPlasticInRoom() {
+    public List<Plastic> getPlasticInRoom() {
             return plasticInRoom;
     }
 

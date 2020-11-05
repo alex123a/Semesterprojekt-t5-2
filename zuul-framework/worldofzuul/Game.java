@@ -1,6 +1,9 @@
 package worldofzuul;
 
-import worldofzuul.NPCer.*;
+import worldofzuul.NPCer.Farmer;
+import worldofzuul.NPCer.Professor;
+import worldofzuul.NPCer.Toolset;
+import worldofzuul.NPCer.Villager;
 import worldofzuul.PlasticElements.Plastic;
 import worldofzuul.Rooms.*;
 
@@ -8,6 +11,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Game {
@@ -217,8 +221,8 @@ public class Game {
             System.out.println("Do you want to give plastic? Just write give");
             return false;
         }
-        ArrayList<Plastic> plasticInv = Player.getPlasticInv();
-        ArrayList<Plastic> road = RoadBuilder.inventory(plasticInv);
+        List<Plastic> plasticInv = Player.getPlasticInv();
+        List<Plastic> road = RoadBuilder.inventory(plasticInv);
         Player.resetPlasticInv();
         if (road.size() >= roadDone) {
             return true;

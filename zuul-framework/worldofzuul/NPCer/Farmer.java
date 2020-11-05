@@ -9,7 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class Farmer extends NPC {
@@ -86,7 +86,7 @@ public class Farmer extends NPC {
     }
 
     public void emptyPlasticForPlayer() {
-        ArrayList<Plastic> newInv = Player.getPlasticInv();;
+        List<Plastic> newInv = Player.getPlasticInv();;
         for (Plastic plastic: plasticForPlayer) {
             newInv.add(plastic);
         }
