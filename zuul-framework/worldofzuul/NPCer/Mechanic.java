@@ -7,11 +7,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class Villager extends NPC {
+public class Mechanic extends NPC {
     private boolean gaveToolset = false;
     private String file = Paths.get(new File("worldofzuul/NPCer/NPC-descriptions/VillagerText.txt").getAbsolutePath()).toString();
 
-    public Villager(String name) {
+    public Mechanic(String name) {
         super(name);
     }
 
