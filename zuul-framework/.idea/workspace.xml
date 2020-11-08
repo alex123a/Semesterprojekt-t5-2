@@ -20,22 +20,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ba9af4cc-247a-49cd-afd4-c50dd122e9a4" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/zuul-framework/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/zuul-framework/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/zuul-framework/worldofzuul/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/zuul-framework/worldofzuul/Game.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/zuul-framework/worldofzuul/NPCer/Professor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/zuul-framework/worldofzuul/NPCer/Professor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/zuul-framework/worldofzuul/NPCer/Villager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/zuul-framework/worldofzuul/Game.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/zuul-framework/worldofzuul/NPCer/NPC-descriptions/FarmerenText.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/zuul-framework/worldofzuul/NPCer/NPC-descriptions/FarmerenText.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/zuul-framework/worldofzuul/NPCer/NPC-descriptions/VillagerText.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/zuul-framework/worldofzuul/NPCer/NPC-descriptions/VillagerText.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/zuul-framework/worldofzuul/RoadBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/zuul-framework/worldofzuul/RoadBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/zuul-framework/worldofzuul/textfiles/highScore.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/zuul-framework/worldofzuul/textfiles/highScore.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/zuul-framework/worldofzuul/textfiles/roomDescription.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/zuul-framework/worldofzuul/textfiles/roomDescription.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/zuul-framework/worldofzuul/Room.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/zuul-framework/worldofzuul/Room.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/worldofzuul/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/worldofzuul/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/worldofzuul/NPCer/NPC-descriptions/ProfessorText.txt" beforeDir="false" afterPath="$PROJECT_DIR$/worldofzuul/NPCer/NPC-descriptions/ProfessorText.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/worldofzuul/NPCer/Mechanic.java" beforeDir="false" afterPath="$PROJECT_DIR$/worldofzuul/NPCer/Mechanic.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/worldofzuul/NPCer/Professor.java" beforeDir="false" afterPath="$PROJECT_DIR$/worldofzuul/NPCer/Professor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/worldofzuul/NPCer/Villager.java" beforeDir="false" afterPath="$PROJECT_DIR$/worldofzuul/NPCer/Mechanic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/worldofzuul/RoadBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/worldofzuul/RoadBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/worldofzuul/textfiles/gameDescription.txt" beforeDir="false" afterPath="$PROJECT_DIR$/worldofzuul/textfiles/gameDescription.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/worldofzuul/textfiles/highScore.txt" beforeDir="false" afterPath="$PROJECT_DIR$/worldofzuul/textfiles/highScore.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/worldofzuul/textfiles/roomDescription.txt" beforeDir="false" afterPath="$PROJECT_DIR$/worldofzuul/textfiles/roomDescription.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
