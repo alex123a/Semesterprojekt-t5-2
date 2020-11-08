@@ -1,9 +1,6 @@
 package worldofzuul;
 
-import worldofzuul.NPCer.Farmer;
-import worldofzuul.NPCer.Mechanic;
-import worldofzuul.NPCer.Professor;
-import worldofzuul.NPCer.Toolset;
+import worldofzuul.NPCer.*;
 import worldofzuul.PlasticElements.Plastic;
 import worldofzuul.Rooms.*;
 
