@@ -9,7 +9,7 @@ import java.nio.file.Paths;
 
 public class Mechanic extends NPC {
     private boolean gaveToolset = false;
-    private String file = Paths.get(new File("worldofzuul/NPCer/NPC-descriptions/VillagerText.txt").getAbsolutePath()).toString();
+    private String file = new File("worldofzuul/NPCer/NPC-descriptions/VillagerText.txt").toString();
 
     public Mechanic(String name) {
         super(name);

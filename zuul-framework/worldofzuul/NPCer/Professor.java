@@ -7,7 +7,7 @@ import java.nio.file.Paths;
 
 public class Professor extends NPC {
     //Insert path into config file.
-    private String file = Paths.get(new File("worldofzuul/NPCer/NPC-descriptions/ProfessorText.txt").getAbsolutePath()).toString();
+    private String file = new File("worldofzuul/NPCer/NPC-descriptions/ProfessorText.txt").toString();
 
     public Professor(String name) {
         super(name);

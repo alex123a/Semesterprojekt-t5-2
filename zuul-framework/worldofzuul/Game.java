@@ -6,16 +6,15 @@ import worldofzuul.Rooms.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.Scanner;
 
 public class Game {
     private Parser parser;
     private Room currentRoom;
-    final private File welcomeMessage = Paths.get(new File("worldofzuul/textfiles/gameDescription.txt").getAbsolutePath()).toFile();
-    final private File roomDescription = Paths.get(new File("worldofzuul/textfiles/roomDescription.txt").getAbsolutePath()).toFile();
-    final private File help = Paths.get(new File("worldofzuul/textfiles/help.txt").getAbsolutePath()).toFile();
+    final private File welcomeMessage = new File("worldofzuul/textfiles/gameDescription.txt");
+    final private File roomDescription = new File("worldofzuul/textfiles/roomDescription.txt");
+    final private File help = new File("worldofzuul/textfiles/help.txt");
     private static final int roadDone = 30;
     private Room RoadBuild, Town, Beach, Farm, Park, Sdu;
     private Farmer farmer = new Farmer("Farmer");
