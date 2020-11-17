@@ -6,8 +6,8 @@ import sample.domain.Room;
 public class Farm extends Room {
     private Plastic[] numberOfPlastic;
 
-    public Farm(String description) {
-        super(description, "src/sample/presentation/pictures/Farm.png");
+    public Farm() {
+        super("src/sample/presentation/pictures/Farm.png");
         super.setPlasticArray(generatePlasticArray());
     }
 

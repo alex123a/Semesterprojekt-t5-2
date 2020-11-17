@@ -15,7 +15,6 @@ public class Game {
     private Parser parser;
     private Room currentRoom;
     final private File welcomeMessage = new File("src/sample/data/textfiles/gameDescriptions/gameDescription.txt");
-    final private File roomDescription = new File("src/sample/data/textfiles/gameDescriptions/roomDescription.txt");
     final private File help = new File("src/sample/data/textfiles/gameDescriptions/help.txt");
     private static final int roadDone = 30;
     private Room RoadBuild, Town, Beach, Farm, Park, Sdu;
@@ -31,38 +30,30 @@ public class Game {
 
 
     private void createRooms() {
-        Scanner reader;
-        try {
-            reader = new Scanner(roomDescription);
-            RoadBuild = new RoadBuild(reader.nextLine());
-            Town = new Town(reader.nextLine());
-            Beach = new Beach(reader.nextLine());
-            Farm = new Farm(reader.nextLine());
-            Park = new Park(reader.nextLine());
-            Sdu = new Sdu(reader.nextLine());
-            reader.close();
+        RoadBuild = new RoadBuild();
+        Town = new Town();
+        Beach = new Beach();
+        Farm = new Farm();
+        Park = new Park();
+        Sdu = new Sdu();
 
-            RoadBuild.setExit("east", Farm);
-            RoadBuild.setExit("south", Sdu);
-            RoadBuild.setExit("west", Beach);
-            RoadBuild.setExit("north", Park);
+        RoadBuild.setExit("east", Farm);
+        RoadBuild.setExit("south", Sdu);
+        RoadBuild.setExit("west", Beach);
+        RoadBuild.setExit("north", Park);
 
-            Sdu.setExit("north", RoadBuild);
+        Sdu.setExit("north", RoadBuild);
 
-            Farm.setExit("west", RoadBuild);
+        Farm.setExit("west", RoadBuild);
 
-            Beach.setExit("east", RoadBuild);
+        Beach.setExit("east", RoadBuild);
 
-            Park.setExit("east", Town);
-            Park.setExit("south", RoadBuild);
+        Park.setExit("east", Town);
+        Park.setExit("south", RoadBuild);
 
-            Town.setExit("west", Park);
+        Town.setExit("west", Park);
 
-            currentRoom = RoadBuild;
-        } catch (FileNotFoundException e) {
-            System.out.println("Cannot find the file");
-            e.printStackTrace();
-        }
+        currentRoom = RoadBuild;
     }
 
     public void play() {
@@ -91,7 +82,6 @@ public class Game {
         }
         Player.setName();
         Timer.setStartTime();
-        System.out.println(currentRoom.getLongDescription());
     }
 
     private boolean processCommand(Command command) {

@@ -17,12 +17,8 @@ public class Controller {
     private Button changePic;
 
     public void changeBackground() {
-        try {
-            backgroundRoom.setImage(new Image("file:" + background));
-            System.out.println("Hej");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        backgroundRoom.setImage(new Image("file:" + background));
+        System.out.println("Hej");
     }
 
 }
