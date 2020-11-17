@@ -6,8 +6,7 @@ import sample.domain.Room;
 public class RoadBuild extends Room {
     private Plastic[] numberOfPlastic;
 
-    public RoadBuild(String description) {
-        super(description);
+    public RoadBuild() {
         super.setPlasticArray(generatePlasticArray());
     }
 
