@@ -7,7 +7,7 @@ public class Beach extends Room {
     private Plastic[] numberOfPlastic;
 
     public Beach(String description) {
-        super(description);
+        super(description, "src/sample/presentation/pictures/Beach.png");
         super.setPlasticArray(generatePlasticArray());
     }
 

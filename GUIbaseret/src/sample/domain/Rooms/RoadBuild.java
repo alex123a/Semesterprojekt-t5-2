@@ -7,7 +7,7 @@ public class RoadBuild extends Room {
     private Plastic[] numberOfPlastic;
 
     public RoadBuild(String description) {
-        super(description);
+        super(description, "src/sample/presentation/pictures/RoadBuild.png");
         super.setPlasticArray(generatePlasticArray());
     }
 

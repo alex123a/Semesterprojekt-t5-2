@@ -8,7 +8,7 @@ import javafx.scene.image.ImageView;
 
 public class Controller {
 
-    public static String background = "file:src/sample/presentation/pictures/RoadBuild.png";
+    public static String background;
 
     @FXML
     private ImageView backgroundRoom;
@@ -16,9 +16,13 @@ public class Controller {
     @FXML
     private Button changePic;
 
-    public void changeBackground(ActionEvent event) {
-        backgroundRoom.setImage(new Image(background));
-        System.out.println("Hej");
+    public void changeBackground() {
+        try {
+            backgroundRoom.setImage(new Image("file:" + background));
+            System.out.println("Hej");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

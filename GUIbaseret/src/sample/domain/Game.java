@@ -9,6 +9,8 @@ import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Scanner;
 
+import sample.presentation.Controller;
+
 public class Game {
     private Parser parser;
     private Room currentRoom;
@@ -203,8 +205,8 @@ public class Game {
             System.out.println("That is not possible!");
         } else {
             currentRoom = nextRoom;
-            System.out.println(currentRoom.getLongDescription());
             currentRoom.getPlasticTypes();
+            Controller.background = currentRoom.getPictureRoom();
         }
     }
 
