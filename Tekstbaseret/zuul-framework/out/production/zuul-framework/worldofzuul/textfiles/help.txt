@@ -1,0 +1,4 @@
+You are lost.
+You have to find plastic and give it to the Roadbuilder.
+Go around the map and find plastic.
+Use the commands below to get going.

@@ -1,0 +1,6 @@
+Welcome to the game "Plastic Roads"
+Your task is to collect as much plastic as possible and deliver it to the roadbuilder, 
+and let the roadbuilder build road until you reach 100%. 
+You can interract with people around the map and gain tips and knowlegde.
+To get started you can use the commands: etc. 'go north/south/east/west', 'collect', 'give'
+Type 'help' if you need help.

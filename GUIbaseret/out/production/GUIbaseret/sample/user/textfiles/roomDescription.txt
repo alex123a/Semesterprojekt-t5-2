@@ -1,0 +1,6 @@
+the roadbuilder. Here you can build roads to complete the game. Type 'give'
+the town. Here you can talk with the mechanic and collect plastic. Type 'talk'
+the beach. Here you can collect plastic.
+the farm. Here you can talk with the farmer and collect plastic. Type 'talk'
+the park. Here you can collect plastic.
+SDU. Here you can talk with the old professor. Type 'talk'
