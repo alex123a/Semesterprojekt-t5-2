@@ -11,9 +11,9 @@ import java.util.Scanner;
 
 public class Game {
     private Room currentRoom;
-    final private File welcomeMessage = new File("src/sample/domain/textfiles/gameDescription.txt");
-    final private File roomDescription = new File("src/sample/domain/textfiles/roomDescription.txt");
-    final private File help = new File("src/sample/domain/textfiles/help.txt");
+    final private File welcomeMessage = new File("src/sample/data/textfiles/gameDescriptions/gameDescription.txt");
+    final private File roomDescription = new File("src/sample/data/textfiles/gameDescriptions/roomDescription.txt");
+    final private File help = new File("src/sample/data/textfiles/gameDescriptions/help.txt");
     private static final int roadDone = 30;
     private Room RoadBuild, Town, Beach, Farm, Park, Sdu;
     private Farmer farmer = new Farmer("Farmer");

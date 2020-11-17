@@ -14,7 +14,7 @@ public class Timer {
     private static double time, time1, time2, time3;
     private static String name;
     private static String name1, name2, name3;
-    final private static File highScore = Paths.get(new File("src/sample/domain/textfiles/highScore.txt").getAbsolutePath()).toFile();
+    final private static File highScore = Paths.get(new File("src/sample/data/textfiles/gameDescriptions/highScore.txt").getAbsolutePath()).toFile();
 
     public static void setStartTime() {
         startTime = new Date();
