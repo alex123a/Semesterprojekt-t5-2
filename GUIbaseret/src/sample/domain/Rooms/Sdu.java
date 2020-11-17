@@ -5,6 +5,7 @@ import sample.domain.Room;
 
 public class Sdu extends Room {
     public Sdu() {
+        super("src/sample/presentation/pictures/SDU.png");
     }
 
     public Plastic[] generatePlasticArray() {

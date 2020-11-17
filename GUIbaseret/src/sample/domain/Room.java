@@ -12,11 +12,13 @@ public abstract class Room {
     private List<Plastic> plasticInRoom;
     private HashMap<String, Room> exits;
     private int plasticCount;
+    private String pictureRoom;
 
-    public Room() {
+    public Room(String pictureRoom) {
         exits = new HashMap<>();
         this.plasticInRoom = new ArrayList<>();
         this.plasticCount = this.plasticInRoom.size();
+        this.pictureRoom = pictureRoom;
     }
 
     public void setPlasticArray(Plastic[] randomPlastic) {
@@ -85,5 +87,9 @@ public abstract class Room {
     }
 
     public abstract Plastic[] generatePlasticArray();
+
+    public String getPictureRoom() {
+        return this.pictureRoom;
+    }
 }
 

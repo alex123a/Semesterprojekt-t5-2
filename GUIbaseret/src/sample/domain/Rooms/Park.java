@@ -7,6 +7,7 @@ public class Park extends Room {
     private Plastic[] numberOfPlastic;
 
     public Park() {
+        super("src/sample/presentation/pictures/Park.png");
         super.setPlasticArray(generatePlasticArray());
     }
 

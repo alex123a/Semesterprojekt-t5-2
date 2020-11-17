@@ -9,10 +9,11 @@ import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Scanner;
 
+import sample.presentation.Controller;
+
 public class Game {
     private Room currentRoom;
     final private File welcomeMessage = new File("src/sample/data/textfiles/gameDescriptions/gameDescription.txt");
-    final private File roomDescription = new File("src/sample/data/textfiles/gameDescriptions/roomDescription.txt");
     final private File help = new File("src/sample/data/textfiles/gameDescriptions/help.txt");
     private static final int roadDone = 30;
     private Room RoadBuild, Town, Beach, Farm, Park, Sdu;
@@ -24,6 +25,7 @@ public class Game {
     public Game() {
         createRooms();
     }
+
 
     private void createRooms() {
         RoadBuild = new RoadBuild();
@@ -56,17 +58,34 @@ public class Game {
         printWelcome();
 
         boolean finished = false;
+        /*
         while (!finished) {
             RoadBuilder.damagedMachine();
         }
+        */
     }
 
     private void printWelcome() {
+        Scanner reader;
+        try {
+            reader = new Scanner(welcomeMessage);
+            while (reader.hasNextLine()) {
+                System.out.println(reader.nextLine());
+            }
+            System.out.println();
+            reader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Cannot find the file");
+            e.printStackTrace();
+        }
         Player.setName();
         Timer.setStartTime();
     }
 
+
+
     private void printHelp() {
+
         Scanner reader;
         try {
             reader = new Scanner(help);
@@ -81,7 +100,19 @@ public class Game {
         }
     }
 
-    private void goRoom() {
+    // private void goRoom() {
+
+    public void goRoom() {
+        // Room nextRoom = currentRoom.getExit();
+        Room nextRoom = Park;
+
+        if (nextRoom == null) {
+            System.out.println("That is not possible!");
+        } else {
+            currentRoom = nextRoom;
+            currentRoom.getPlasticTypes();
+            Controller.background = currentRoom.getPictureRoom();
+        }
     }
 
     private boolean givePlastic() {
@@ -97,4 +128,5 @@ public class Game {
     public static int getRoadDone() {
         return roadDone;
     }
+
 }
