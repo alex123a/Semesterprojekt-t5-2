@@ -1,8 +1,29 @@
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.GridPane?>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<GridPane fx:controller="sample.Controller"
-          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+
+<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.presentation.Controller">
+   <columnConstraints>
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+   </rowConstraints>
+   <children>
+      <StackPane prefHeight="500.0" prefWidth="720.0">
+         <children>
+            <ImageView fx:id="backgroundRoom" fitHeight="500.0" fitWidth="720.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@pictures/RoadBuild.png" />
+               </image></ImageView>
+            <Button fx:id="changePic" mnemonicParsing="false" text="Button" />
+         </children>
+      </StackPane>
+   </children>
 </GridPane>

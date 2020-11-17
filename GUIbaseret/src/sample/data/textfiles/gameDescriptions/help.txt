@@ -1,4 +1,4 @@
 You are lost.
 You have to find plastic and give it to the Roadbuilder.
 Go around the map and find plastic.
-Use the arrows to get going, and space to interact with items/persons in the game.
+Use the arrows to move around the screen, and space to interact with items/persons close to you.
