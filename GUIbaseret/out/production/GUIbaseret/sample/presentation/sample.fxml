@@ -22,7 +22,7 @@
                <image>
                   <Image url="@pictures/RoadBuild.png" />
                </image></ImageView>
-            <Button fx:id="changePic" mnemonicParsing="false" text="Button" />
+            <Button fx:id="changePic" onAction="#changeBackground" mnemonicParsing="false" text="Button" />
          </children>
       </StackPane>
    </children>
