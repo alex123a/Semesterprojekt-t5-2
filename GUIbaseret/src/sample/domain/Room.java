@@ -9,13 +9,11 @@ import java.util.Set;
 import java.util.List;
 
 public abstract class Room {
-    private String description;
     private List<Plastic> plasticInRoom;
     private HashMap<String, Room> exits;
     private int plasticCount;
 
-    public Room(String description) {
-        this.description = description;
+    public Room() {
         exits = new HashMap<>();
         this.plasticInRoom = new ArrayList<>();
         this.plasticCount = this.plasticInRoom.size();
@@ -30,16 +28,6 @@ public abstract class Room {
     public void setExit(String direction, Room neighbor) 
     {
         exits.put(direction, neighbor);
-    }
-
-    public String getShortDescription()
-    {
-        return description;
-    }
-
-    public String getLongDescription()
-    {
-        return "You are at " + description + "\n" + getExitString();
     }
 
     private String getExitString()
