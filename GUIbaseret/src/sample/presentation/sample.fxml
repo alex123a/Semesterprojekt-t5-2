@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 
@@ -22,7 +24,26 @@
                <image>
                   <Image url="@pictures/RoadBuild.png" />
                </image></ImageView>
-            <Button fx:id="changePic" onAction="#changeBackground" mnemonicParsing="false" text="Button" />
+            <Button fx:id="westBut" mnemonicParsing="false" onAction="#changeBackground" text="West">
+               <StackPane.margin>
+                  <Insets right="600.0" />
+               </StackPane.margin></Button>
+            <Button fx:id="changePic1" mnemonicParsing="false" onAction="#changeBackground" text="East">
+               <StackPane.margin>
+                  <Insets left="600.0" />
+               </StackPane.margin>
+            </Button>
+            <Button fx:id="northBut" mnemonicParsing="false" onAction="#changeBackground" text="North">
+               <StackPane.margin>
+                  <Insets bottom="400.0" right="26.0" />
+               </StackPane.margin>
+            </Button>
+            <Button fx:id="southBut" mnemonicParsing="false" onAction="#changeBackground" text="South">
+               <StackPane.margin>
+                  <Insets right="26.0" top="400.0" />
+               </StackPane.margin>
+            </Button>
+            <Pane fx:id="eastBut" prefHeight="500.0" prefWidth="720.0" />
          </children>
       </StackPane>
    </children>
