@@ -1,5 +1,6 @@
 package sample.presentation;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -48,8 +49,9 @@ public class Controller {
             player.setTranslateX(player.getTranslateX() + 4);
             System.out.println(player.getTranslateX());
         } else if (keyEvent.getCode() == KeyCode.SPACE) {
-            
+
         }
+    }
 
     public void hideButtons() {
         westBut.setVisible(true);
