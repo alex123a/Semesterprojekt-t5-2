@@ -9,6 +9,7 @@ import sample.domain.Game;
 import sample.domain.Room;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Controller {
@@ -29,41 +30,49 @@ public class Controller {
     @FXML
     private ImageView backgroundRoom;
 
-    public void initialize(){
-        westBut.setVisible(false);
-        eastBut.setVisible(false);
-        southBut.setVisible(false);
-        northBut.setVisible(false);
+    public void hideButtons() {
+        westBut.setVisible(true);
+        eastBut.setVisible(true);
+        southBut.setVisible(true);
+        northBut.setVisible(true);
         if(!roomExit.contains("west")){
-            westBut.setVisible(true);
+            westBut.setVisible(false);
         }
         if(!roomExit.contains("east")){
-            eastBut.setVisible(true);
+            eastBut.setVisible(false);
         }
         if(!roomExit.contains("south")){
-            southBut.setVisible(true);
+            southBut.setVisible(false);
         }
         if(!roomExit.contains("north")){
-            northBut.setVisible(true);
+            northBut.setVisible(false);
         }
-
     }
 
     public void changeNorth() {
+        System.out.println("Test");
         Game.changedRoom = "north";
+        Main.game.goRoom();
         backgroundRoom.setImage(new Image("file:" + background));
+        hideButtons();
     }
     public void changeSouth(){
         Game.changedRoom = "south";
+        Main.game.goRoom();
         backgroundRoom.setImage(new Image("file:" + background));
+        hideButtons();
     }
     public void changeWest(){
         Game.changedRoom = "west";
+        Main.game.goRoom();
         backgroundRoom.setImage(new Image("file:" + background));
+        hideButtons();
     }
     public void changeEast(){
         Game.changedRoom = "east";
+        Main.game.goRoom();
         backgroundRoom.setImage(new Image("file:" + background));
+        hideButtons();
     }
 
 

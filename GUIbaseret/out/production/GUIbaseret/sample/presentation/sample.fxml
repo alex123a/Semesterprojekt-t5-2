@@ -6,7 +6,6 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 
@@ -43,7 +42,6 @@
                   <Insets right="26.0" top="400.0" />
                </StackPane.margin>
             </Button>
-            <Pane fx:id="playerPane" prefHeight="500.0" prefWidth="720.0" />
          </children>
       </StackPane>
    </children>
