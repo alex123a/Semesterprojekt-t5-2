@@ -1,9 +1,12 @@
 <component name="libraryTable">
-  <library name="lib">
+  <library name="javafx">
     <CLASSES>
       <root url="file://$PROJECT_DIR$/../../Game2/javafx-sdk-15.0.1/lib" />
     </CLASSES>
     <JAVADOC />
+    <NATIVE>
+      <root url="file://$PROJECT_DIR$/../../Game2/javafx-sdk-15.0.1/lib" />
+    </NATIVE>
     <SOURCES>
       <root url="file://$PROJECT_DIR$/../../Game2/javafx-sdk-15.0.1/lib" />
     </SOURCES>
