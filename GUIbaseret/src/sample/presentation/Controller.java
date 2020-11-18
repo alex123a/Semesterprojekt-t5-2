@@ -56,25 +56,22 @@ public class Controller {
         backgroundRoom.setImage(new Image("file:" + background));
         hideButtons();
     }
-    public void changeSouth(){
+    public void changeSouth() {
         Game.changedRoom = "south";
         Main.game.goRoom();
         backgroundRoom.setImage(new Image("file:" + background));
         hideButtons();
     }
-    public void changeWest(){
+    public void changeWest() {
         Game.changedRoom = "west";
         Main.game.goRoom();
         backgroundRoom.setImage(new Image("file:" + background));
         hideButtons();
     }
-    public void changeEast(){
+    public void changeEast() {
         Game.changedRoom = "east";
         Main.game.goRoom();
         backgroundRoom.setImage(new Image("file:" + background));
         hideButtons();
     }
-
-
-
 }

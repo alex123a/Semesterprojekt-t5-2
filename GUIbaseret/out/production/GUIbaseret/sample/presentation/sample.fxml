@@ -42,6 +42,11 @@
                   <Insets right="26.0" top="400.0" />
                </StackPane.margin>
             </Button>
+            <Button fx:id="test" mnemonicParsing="false" onAction="#changePosition" text="test">
+               <StackPane.margin>
+                  <Insets right="60.0" top="300.0" />
+               </StackPane.margin>
+            </Button>
          </children>
       </StackPane>
    </children>
