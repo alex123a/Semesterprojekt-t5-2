@@ -28,7 +28,7 @@
                <StackPane.margin>
                   <Insets right="600.0" />
                </StackPane.margin></Button>
-            <Button fx:id="changePic1" mnemonicParsing="false" onAction="#changeBackground" text="East">
+            <Button fx:id="eastBut" mnemonicParsing="false" onAction="#changeBackground" text="East">
                <StackPane.margin>
                   <Insets left="600.0" />
                </StackPane.margin>
@@ -43,7 +43,7 @@
                   <Insets right="26.0" top="400.0" />
                </StackPane.margin>
             </Button>
-            <Pane fx:id="eastBut" prefHeight="500.0" prefWidth="720.0" />
+            <Pane fx:id="playerPane" prefHeight="500.0" prefWidth="720.0" />
          </children>
       </StackPane>
    </children>
