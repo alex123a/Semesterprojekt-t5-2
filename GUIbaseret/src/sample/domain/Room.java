@@ -91,5 +91,9 @@ public abstract class Room {
     public String getPictureRoom() {
         return this.pictureRoom;
     }
+
+    public HashMap<String, Room> getExits() {
+        return exits;
+    }
 }
 

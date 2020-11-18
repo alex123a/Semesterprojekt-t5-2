@@ -12,7 +12,11 @@ import javafx.stage.Stage;
 import sample.domain.Game;
 import sample.domain.Player;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class Main extends Application {
+    public static Game game;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -24,8 +28,9 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-        Game game = new Game();
+        game = new Game();
         game.goRoom();
+        Controller.roomExit = new ArrayList<>(Arrays.asList(Game.startDirections));
         launch(args);
     }
 

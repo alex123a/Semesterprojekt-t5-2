@@ -7,7 +7,7 @@ public class Farm extends Room {
     private Plastic[] numberOfPlastic;
 
     public Farm() {
-        super("src/sample/presentation/pictures/Farm.png");
+        super("src/sample/presentation/pictures/Backgrounds/Farm.png");
         super.setPlasticArray(generatePlasticArray());
     }
 

@@ -3,15 +3,18 @@ package sample.domain;
 import sample.domain.NPCer.*;
 import sample.domain.PlasticElements.Plastic;
 import sample.domain.Rooms.*;
-
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-
 import sample.presentation.Controller;
 
+
 public class Game {
+    public static String[] startDirections = {"north", "south", "west", "east"};
+
     private Room currentRoom;
     final private File welcomeMessage = new File("src/sample/data/textfiles/gameDescriptions/gameDescription.txt");
     final private File help = new File("src/sample/data/textfiles/gameDescriptions/help.txt");
@@ -21,6 +24,10 @@ public class Game {
     private Mechanic mechanic = new Mechanic("Mechanic");
     private Professor professor = new Professor("Professor");
     private Toolset toolset = new Toolset();
+    // private List<String> currentDirections = new ArrayList<>(Arrays.asList(startDirections));
+    private List<String> currentDirections = new ArrayList<>();
+    //sæt privat
+    public static String changedRoom;
 
     public Game() {
         createRooms();
@@ -103,16 +110,25 @@ public class Game {
     // private void goRoom() {
 
     public void goRoom() {
-        // Room nextRoom = currentRoom.getExit();
-        Room nextRoom = Park;
+        Room nextRoom = changedRoom != null ? currentRoom.getExit(changedRoom) : RoadBuild;
 
         if (nextRoom == null) {
             System.out.println("That is not possible!");
         } else {
             currentRoom = nextRoom;
+
+            Controller.roomExit.removeAll(currentDirections);
+            for (String directions : currentRoom.getExits().keySet()){
+                currentDirections.add(directions);
+            }
+
+            Controller.roomExit.addAll(currentDirections);
+            currentDirections.removeAll(currentDirections);
             currentRoom.getPlasticTypes();
             Controller.background = currentRoom.getPictureRoom();
         }
+
+
     }
 
     private boolean givePlastic() {

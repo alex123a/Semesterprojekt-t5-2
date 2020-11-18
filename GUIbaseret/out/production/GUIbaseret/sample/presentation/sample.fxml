@@ -6,7 +6,6 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 
@@ -18,33 +17,34 @@
       <RowConstraints />
    </rowConstraints>
    <children>
-      <StackPane fx:id="stackPane" prefHeight="500.0" prefWidth="720.0" onKeyPressed="#movePlayer">
+      <StackPane prefHeight="500.0" prefWidth="720.0">
          <children>
             <ImageView fx:id="backgroundRoom" fitHeight="500.0" fitWidth="720.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@pictures/RoadBuild.png" />
+                  <Image url="@pictures/Backgrounds/RoadBuild.png" />
                </image></ImageView>
-            <ImageView fx:id="player" fitHeight="45.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@pictures/Playergame.png"/>
-               </image></ImageView>
-            <Button fx:id="westBut" mnemonicParsing="false" onAction="#changeBackground" text="West">
+            <Button fx:id="westBut" mnemonicParsing="false" onAction="#changeWest" text="West">
                <StackPane.margin>
                   <Insets right="600.0" />
                </StackPane.margin></Button>
-            <Button fx:id="eastBut" mnemonicParsing="false" onAction="#changeBackground" text="East">
+            <Button fx:id="eastBut" mnemonicParsing="false" onAction="#changeEast" text="East">
                <StackPane.margin>
                   <Insets left="600.0" />
                </StackPane.margin>
             </Button>
-            <Button fx:id="northBut" mnemonicParsing="false" onAction="#changeBackground" text="North">
+            <Button fx:id="northBut" mnemonicParsing="false" onAction="#changeNorth" text="North">
                <StackPane.margin>
                   <Insets bottom="400.0" right="26.0" />
                </StackPane.margin>
             </Button>
-            <Button fx:id="southBut" mnemonicParsing="false" onAction="#changeBackground" text="South">
+            <Button fx:id="southBut" mnemonicParsing="false" onAction="#changeSouth" text="South">
                <StackPane.margin>
                   <Insets right="26.0" top="400.0" />
+               </StackPane.margin>
+            </Button>
+            <Button fx:id="test" mnemonicParsing="false" onAction="#changePosition" text="test">
+               <StackPane.margin>
+                  <Insets right="60.0" top="300.0" />
                </StackPane.margin>
             </Button>
          </children>
