@@ -1,7 +1,7 @@
 package sample.domain;
 
+import javafx.scene.input.KeyEvent;
 import sample.domain.PlasticElements.Plastic;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;

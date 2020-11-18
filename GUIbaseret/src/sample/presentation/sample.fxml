@@ -18,11 +18,15 @@
       <RowConstraints />
    </rowConstraints>
    <children>
-      <StackPane prefHeight="500.0" prefWidth="720.0">
+      <StackPane fx:id="stackPane" prefHeight="500.0" prefWidth="720.0" onKeyPressed="#movePlayer">
          <children>
             <ImageView fx:id="backgroundRoom" fitHeight="500.0" fitWidth="720.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@pictures/RoadBuild.png" />
+               </image></ImageView>
+            <ImageView fx:id="player" fitHeight="45.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@pictures/Playergame.png"/>
                </image></ImageView>
             <Button fx:id="westBut" mnemonicParsing="false" onAction="#changeBackground" text="West">
                <StackPane.margin>
@@ -43,7 +47,6 @@
                   <Insets right="26.0" top="400.0" />
                </StackPane.margin>
             </Button>
-            <Pane fx:id="playerPane" prefHeight="500.0" prefWidth="720.0" />
          </children>
       </StackPane>
    </children>
