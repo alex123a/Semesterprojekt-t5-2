@@ -17,7 +17,6 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-
     public static void main(String[] args) {
         Game game = new Game();
         game.goRoom();
