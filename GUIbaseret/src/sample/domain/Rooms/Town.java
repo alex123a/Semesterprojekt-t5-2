@@ -7,7 +7,7 @@ public class Town extends Room {
     private Plastic[] numberOfPlastic;
 
     public Town() {
-        super("src/sample/presentation/pictures/Town.png");
+        super("src/sample/presentation/pictures/Backgrounds/Town.png");
         super.setPlasticArray(generatePlasticArray());
     }
 
