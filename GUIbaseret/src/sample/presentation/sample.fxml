@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 
-<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.presentation.Controller">
+<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" onKeyPressed="#movePlayer" onKeyReleased="#stopPlayer" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.presentation.Controller">
    <columnConstraints>
       <ColumnConstraints />
    </columnConstraints>
@@ -17,7 +17,7 @@
       <RowConstraints />
    </rowConstraints>
    <children>
-      <StackPane prefHeight="500.0" prefWidth="720.0" onKeyPressed="#movePlayer">
+      <StackPane prefHeight="500.0" prefWidth="720.0">
          <children>
             <ImageView fx:id="backgroundRoom" fitHeight="500.0" fitWidth="720.0" pickOnBounds="true" preserveRatio="true">
                <image>
