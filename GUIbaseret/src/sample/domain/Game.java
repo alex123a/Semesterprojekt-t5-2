@@ -107,8 +107,6 @@ public class Game {
         }
     }
 
-    // private void goRoom() {
-
     public void goRoom() {
         Room nextRoom = changedRoom != null ? currentRoom.getExit(changedRoom) : RoadBuild;
 
@@ -127,8 +125,6 @@ public class Game {
             currentRoom.getPlasticTypes();
             Controller.background = currentRoom.getPictureRoom();
         }
-
-
     }
 
     private boolean givePlastic() {
