@@ -28,6 +28,7 @@ public class Controller {
     private String[] direction = {"North", "South", "West", "East"};
     private SpriteAnimation playerAnimation = new SpriteAnimation(direction[0]);
     private int[] numbersPlayer;
+    private long animationWalk = 0;
 
     @FXML
     private ImageView backgroundRoom;
@@ -45,27 +46,39 @@ public class Controller {
         public void handle(long l) {
             if (north && player.getTranslateY() > -220) {
                 playerAnimation.setDirection(direction[0]);
-                numbersPlayer = playerAnimation.changePic();
-                player.setViewport(new Rectangle2D(numbersPlayer[0], numbersPlayer[1], numbersPlayer[2], numbersPlayer[3]));
-                player.setTranslateY(player.getTranslateY() - 2);
+                if (animationWalk % 13 == 0) {
+                    numbersPlayer = playerAnimation.changePic();
+                    player.setViewport(new Rectangle2D(numbersPlayer[0], numbersPlayer[1], numbersPlayer[2], numbersPlayer[3]));
+                }
+                player.setTranslateY(player.getTranslateY() - 2.5);
+                animationWalk++;
             }
             if (south && player.getTranslateY() < 220) {
                 playerAnimation.setDirection(direction[1]);
-                numbersPlayer = playerAnimation.changePic();
-                player.setViewport(new Rectangle2D(numbersPlayer[0], numbersPlayer[1], numbersPlayer[2], numbersPlayer[3]));
-                player.setTranslateY(player.getTranslateY() + 2);
+                if (animationWalk % 13 == 0) {
+                    numbersPlayer = playerAnimation.changePic();
+                    player.setViewport(new Rectangle2D(numbersPlayer[0], numbersPlayer[1], numbersPlayer[2], numbersPlayer[3]));
+                }
+                player.setTranslateY(player.getTranslateY() + 2.5);
+                animationWalk++;
             }
             if (east && player.getTranslateX() > -340) {
                 playerAnimation.setDirection(direction[2]);
-                numbersPlayer = playerAnimation.changePic();
-                player.setViewport(new Rectangle2D(numbersPlayer[0], numbersPlayer[1], numbersPlayer[2], numbersPlayer[3]));
-                player.setTranslateX(player.getTranslateX() - 2);
+                if (animationWalk % 13 == 0) {
+                    numbersPlayer = playerAnimation.changePic();
+                    player.setViewport(new Rectangle2D(numbersPlayer[0], numbersPlayer[1], numbersPlayer[2], numbersPlayer[3]));
+                }
+                player.setTranslateX(player.getTranslateX() - 2.5);
+                animationWalk++;
             }
             if (west && player.getTranslateX() < 340) {
                 playerAnimation.setDirection(direction[3]);
-                numbersPlayer = playerAnimation.changePic();
-                player.setViewport(new Rectangle2D(numbersPlayer[0], numbersPlayer[1], numbersPlayer[2], numbersPlayer[3]));
-                player.setTranslateX(player.getTranslateX() + 2);
+                if (animationWalk % 13 == 0) {
+                    numbersPlayer = playerAnimation.changePic();
+                    player.setViewport(new Rectangle2D(numbersPlayer[0], numbersPlayer[1], numbersPlayer[2], numbersPlayer[3]));
+                }
+                player.setTranslateX(player.getTranslateX() + 2.5);
+                animationWalk++;
             }
 
         }
@@ -109,18 +122,22 @@ public class Controller {
         switch (keyEvent.getCode()) {
             case W:
                 timer.stop();
+                animationWalk = 0;
                 north = false;
                 break;
             case S:
                 timer.stop();
+                animationWalk = 0;
                 south = false;
                 break;
             case A:
                 timer.stop();
+                animationWalk = 0;
                 east = false;
                 break;
             case D:
                 timer.stop();
+                animationWalk = 0;
                 west = false;
                 break;
         }
