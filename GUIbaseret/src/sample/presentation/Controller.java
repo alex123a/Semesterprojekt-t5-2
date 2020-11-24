@@ -22,6 +22,7 @@ public class Controller {
     public static String background;
     private boolean north, south, east, west;
 
+    /*
     @FXML
     private Button westBut;
     @FXML
@@ -30,6 +31,7 @@ public class Controller {
     private Button northBut;
     @FXML
     private Button southBut;
+    */
 
     @FXML
     private ImageView backgroundRoom;
@@ -80,7 +82,7 @@ public class Controller {
             case M:
                 if (player.getTranslateY() < -212) {
                     changeNorth();
-                } else if (player.getTranslateY() > 212) {
+                } else if (player.getTranslateX() > 212) {
                     changeSouth();
                 } else if (player.getTranslateX() < -332) {
                     changeWest();
@@ -108,25 +110,6 @@ public class Controller {
                 timer.stop();
                 west = false;
                 break;
-        }
-    }
-
-    public void hideButtons() {
-        westBut.setVisible(true);
-        eastBut.setVisible(true);
-        southBut.setVisible(true);
-        northBut.setVisible(true);
-        if (!roomExit.contains("west")) {
-            westBut.setVisible(false);
-        }
-        if (!roomExit.contains("east")) {
-            eastBut.setVisible(false);
-        }
-        if (!roomExit.contains("south")) {
-            southBut.setVisible(false);
-        }
-        if (!roomExit.contains("north")) {
-            northBut.setVisible(false);
         }
     }
 

@@ -9,13 +9,16 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 
+<?import javafx.scene.control.Label?>
 <GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" onKeyPressed="#movePlayer" onKeyReleased="#stopPlayer" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.presentation.Controller">
+   <!--
    <columnConstraints>
       <ColumnConstraints />
    </columnConstraints>
    <rowConstraints>
       <RowConstraints />
    </rowConstraints>
+   -->
    <children>
       <StackPane prefHeight="500.0" prefWidth="720.0">
          <children>
@@ -27,6 +30,7 @@
                <image>
                   <Image url="@pictures/Playergame.png"/>
                </image></ImageView>
+            <!--
             <Button fx:id="westBut" mnemonicParsing="false" onAction="#changeWest" text="West">
                <StackPane.margin>
                   <Insets right="600.0" />
@@ -46,6 +50,7 @@
                   <Insets right="26.0" top="400.0" />
                </StackPane.margin>
             </Button>
+            -->
          </children>
       </StackPane>
    </children>
