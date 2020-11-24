@@ -12,6 +12,8 @@ import javafx.scene.layout.Pane;
 import sample.domain.Game;
 import sample.domain.Player;
 import sample.domain.Room;
+import sample.domain.Rooms.*;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -27,7 +29,7 @@ public class Controller {
     private ImageView backgroundRoom;
 
     @FXML
-    private ImageView player;
+    private ImageView player = new ImageView("file:" + playerObject.getImage());
 
     public void initialize() {
         player.setImage(new Image("file:" + playerObject.getImage()));
@@ -36,20 +38,57 @@ public class Controller {
     AnimationTimer timer = new AnimationTimer() {
         @Override
         public void handle(long l) {
-            if (north && player.getTranslateY() > -220) {
-                player.setTranslateY(player.getTranslateY() - 2);
+
+                if (north && player.getTranslateY() > -220) {
+                    if(!blockMap(0,-2)) {
+                        player.setTranslateY(player.getTranslateY() - 2);
+                    }
+                }
+                if (south && player.getTranslateY() < 220) {
+                    if(!blockMap(0,2)) {
+
+                        player.setTranslateY(player.getTranslateY() + 2);
+                    }
+                }
+
+                if (east && player.getTranslateX() > -340) {
+                    if(!blockMap(-2,0)) {
+                        player.setTranslateX(player.getTranslateX() - 2);
+                    }
+                }
+                if (west && player.getTranslateX() < 340) {
+                    if(!blockMap(2,0)) {
+                        player.setTranslateX(player.getTranslateX() + 2);
+                    }
+                }
             }
-            if (south && player.getTranslateY() < 220) {
-                player.setTranslateY(player.getTranslateY() + 2);
-            }
-            if (east && player.getTranslateX() > -340) {
-                player.setTranslateX(player.getTranslateX() - 2);
-            }
-            if (west && player.getTranslateX() < 340) {
-                player.setTranslateX(player.getTranslateX() + 2);
+
+    };
+
+    public boolean blockMap (int x, int y){
+        boolean cantMove = false;
+        if(Main.game.getCurrentRoom() instanceof RoadBuild){
+            if(player.getTranslateX()+x < -140 && player.getTranslateY()+y < -90){
+                cantMove = true;
             }
         }
-    };
+        if(Main.game.getCurrentRoom() instanceof Beach){
+
+        }
+        if(Main.game.getCurrentRoom() instanceof Farm){
+
+        }
+        if(Main.game.getCurrentRoom() instanceof Town){
+
+        }
+        if(Main.game.getCurrentRoom() instanceof Sdu){
+
+        }
+        if(Main.game.getCurrentRoom() instanceof Park){
+
+        }
+        return cantMove;
+    }
 
     public void movePlayer(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {
@@ -75,20 +114,17 @@ public class Controller {
                 break;
             case M:
                 if (player.getTranslateY() < -212) {
-                    Main.game.goRoom();
                     changeNorth();
                 } else if (player.getTranslateY() > 212) {
-                    Main.game.goRoom();
                     changeSouth();
                 } else if (player.getTranslateX() < -332) {
-                    Main.game.goRoom();
                     changeWest();
                 } else if (player.getTranslateX() > 332) {
-                    Main.game.goRoom();
                     changeEast();
                 }
         }
     }
+
 
     public void stopPlayer(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {

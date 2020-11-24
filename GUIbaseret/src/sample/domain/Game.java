@@ -145,4 +145,7 @@ public class Game {
         return roadDone;
     }
 
+    public Room getCurrentRoom() {
+        return currentRoom;
+    }
 }
