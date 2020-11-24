@@ -11,7 +11,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import sample.domain.Game;
 import sample.domain.Room;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -21,17 +20,6 @@ public class Controller {
     public static List<String> roomExit = new ArrayList<>();
     public static String background;
     private boolean north, south, east, west;
-
-    /*
-    @FXML
-    private Button westBut;
-    @FXML
-    private Button eastBut;
-    @FXML
-    private Button northBut;
-    @FXML
-    private Button southBut;
-    */
 
     @FXML
     private ImageView backgroundRoom;
@@ -81,12 +69,16 @@ public class Controller {
                 break;
             case M:
                 if (player.getTranslateY() < -212) {
+                    Main.game.goRoom();
                     changeNorth();
-                } else if (player.getTranslateX() > 212) {
+                } else if (player.getTranslateY() > 212) {
+                    Main.game.goRoom();
                     changeSouth();
                 } else if (player.getTranslateX() < -332) {
+                    Main.game.goRoom();
                     changeWest();
                 } else if (player.getTranslateX() > 332) {
+                    Main.game.goRoom();
                     changeEast();
                 }
         }
