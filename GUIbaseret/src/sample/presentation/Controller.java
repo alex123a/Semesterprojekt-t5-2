@@ -37,6 +37,7 @@ public class Controller {
 
     public void initialize() {
         player.setImage(new Image("file:" + playerObject.getImage()));
+        player.setViewport(new Rectangle2D(0, 0, 32, 48));
     }
 
     AnimationTimer timer = new AnimationTimer() {
