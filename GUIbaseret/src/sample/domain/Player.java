@@ -1,7 +1,10 @@
 package sample.domain;
 
+import javafx.animation.AnimationTimer;
 import javafx.scene.input.KeyEvent;
 import sample.domain.PlasticElements.Plastic;
+import sample.presentation.Controller;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;

@@ -13,6 +13,8 @@ import javafx.scene.layout.Pane;
 import sample.domain.Game;
 import sample.domain.Player;
 import sample.domain.Room;
+import sample.domain.Rooms.*;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -91,17 +93,13 @@ public class Controller {
                 System.out.println(player.getTranslateX());
                 break;
             case M:
-                if (player.getTranslateY() < -212) {
-                    Main.game.goRoom();
+                if (player.getTranslateY() < -208 && player.getTranslateX() > -100 && player.getTranslateX() < 100) {
                     changeNorth();
-                } else if (player.getTranslateY() > 212) {
-                    Main.game.goRoom();
+                } else if (player.getTranslateY() > 208 && player.getTranslateX() > -100 && player.getTranslateX() < 100) {
                     changeSouth();
-                } else if (player.getTranslateX() < -332) {
-                    Main.game.goRoom();
+                } else if (player.getTranslateX() < -328 && player.getTranslateY() > -140 && player.getTranslateY() < 140) {
                     changeWest();
-                } else if (player.getTranslateX() > 332) {
-                    Main.game.goRoom();
+                } else if (player.getTranslateX() > 328 && player.getTranslateY() > -140 && player.getTranslateY() < 140) {
                     changeEast();
                 }
         }
@@ -129,24 +127,36 @@ public class Controller {
     }
 
     public void changeNorth() {
+        if (!(Main.game.getCurrentRoom() instanceof Beach || Main.game.getCurrentRoom() instanceof Farm || Main.game.getCurrentRoom() instanceof Town || Main.game.getCurrentRoom() instanceof Park)) {
+            player.setTranslateY(220);
+        }
         Game.changedRoom = "north";
         Main.game.goRoom();
         backgroundRoom.setImage(new Image("file:" + background));
     }
 
     public void changeSouth() {
+        if (!(Main.game.getCurrentRoom() instanceof Beach || Main.game.getCurrentRoom() instanceof Farm || Main.game.getCurrentRoom() instanceof Town || Main.game.getCurrentRoom() instanceof Sdu)) {
+            player.setTranslateY(-220);
+        }
         Game.changedRoom = "south";
         Main.game.goRoom();
         backgroundRoom.setImage(new Image("file:" + background));
     }
 
     public void changeWest() {
+        if (!(Main.game.getCurrentRoom() instanceof Beach || Main.game.getCurrentRoom() instanceof Sdu || Main.game.getCurrentRoom() instanceof Park)) {
+            player.setTranslateX(340);
+        }
         Game.changedRoom = "west";
         Main.game.goRoom();
         backgroundRoom.setImage(new Image("file:" + background));
     }
 
     public void changeEast() {
+        if (!(Main.game.getCurrentRoom() instanceof Sdu || Main.game.getCurrentRoom() instanceof Town || Main.game.getCurrentRoom() instanceof Farm)) {
+            player.setTranslateX(-340);
+        }
         Game.changedRoom = "east";
         Main.game.goRoom();
         backgroundRoom.setImage(new Image("file:" + background));
