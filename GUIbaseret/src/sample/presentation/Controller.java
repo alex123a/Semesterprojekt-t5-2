@@ -1,5 +1,6 @@
 package sample.presentation;
 
+import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,6 +11,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import sample.domain.Game;
 import sample.domain.Room;
+import sample.domain.Rooms.*;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -18,16 +21,7 @@ public class Controller {
 
     public static List<String> roomExit = new ArrayList<>();
     public static String background;
-
-
-    @FXML
-    private Button westBut;
-    @FXML
-    private Button eastBut;
-    @FXML
-    private Button northBut;
-    @FXML
-    private Button southBut;
+    private boolean north, south, east, west;
 
     @FXML
     private ImageView backgroundRoom;
@@ -35,66 +29,114 @@ public class Controller {
     @FXML
     private ImageView player;
 
-    public void movePlayer(KeyEvent keyEvent) {
-        if (keyEvent.getCode() == KeyCode.W) {
-            player.setTranslateY(player.getTranslateY() - 4);
-            System.out.println(player.getTranslateY());
-        } else if (keyEvent.getCode() == KeyCode.S) {
-            player.setTranslateY(player.getTranslateY() + 4);
-            System.out.println(player.getTranslateY());
-        } else if (keyEvent.getCode() == KeyCode.A) {
-            player.setTranslateX(player.getTranslateX() - 4);
-            System.out.println(player.getTranslateX());
-        } else if (keyEvent.getCode() == KeyCode.D) {
-            player.setTranslateX(player.getTranslateX() + 4);
-            System.out.println(player.getTranslateX());
-        } else if (keyEvent.getCode() == KeyCode.SPACE) {
+    AnimationTimer timer = new AnimationTimer() {
+        @Override
+        public void handle(long l) {
+            if (north && player.getTranslateY() > -220) {
+                player.setTranslateY(player.getTranslateY() - 2);
+            }
+            if (south && player.getTranslateY() < 220) {
+                player.setTranslateY(player.getTranslateY() + 2);
+            }
+            if (east && player.getTranslateX() > -340) {
+                player.setTranslateX(player.getTranslateX() - 2);
+            }
+            if (west && player.getTranslateX() < 340) {
+                player.setTranslateX(player.getTranslateX() + 2);
+            }
+        }
+    };
 
+    public void movePlayer(KeyEvent keyEvent) {
+        switch (keyEvent.getCode()) {
+            case W:
+                timer.start();
+                north = true;
+                System.out.println(player.getTranslateY());
+                break;
+            case S:
+                timer.start();
+                south = true;
+                System.out.println(player.getTranslateY());
+                break;
+            case A:
+                timer.start();
+                east = true;
+                System.out.println(player.getTranslateX());
+                break;
+            case D:
+                timer.start();
+                west = true;
+                System.out.println(player.getTranslateX());
+                break;
+        }
+        if (player.getTranslateY() < -208 && player.getTranslateX() > -108 && player.getTranslateX() < -30) {
+            changeNorth();
+        } else if (player.getTranslateY() > 208 && player.getTranslateX() > -140 && player.getTranslateX() < 20) {
+            changeSouth();
+        } else if (player.getTranslateX() < -328 && player.getTranslateY() > -60 && player.getTranslateY() < 0) {
+            changeWest();
+        } else if (player.getTranslateX() > 328 && player.getTranslateY() > -60 && player.getTranslateY() < 0) {
+            changeEast();
         }
     }
 
-    public void hideButtons() {
-        westBut.setVisible(true);
-        eastBut.setVisible(true);
-        southBut.setVisible(true);
-        northBut.setVisible(true);
-        if(!roomExit.contains("west")){
-            westBut.setVisible(false);
-        }
-        if(!roomExit.contains("east")){
-            eastBut.setVisible(false);
-        }
-        if(!roomExit.contains("south")){
-            southBut.setVisible(false);
-        }
-        if(!roomExit.contains("north")){
-            northBut.setVisible(false);
+    public void stopPlayer(KeyEvent keyEvent) {
+        switch (keyEvent.getCode()) {
+            case W:
+                timer.stop();
+                north = false;
+                break;
+            case S:
+                timer.stop();
+                south = false;
+                break;
+            case A:
+                timer.stop();
+                east = false;
+                break;
+            case D:
+                timer.stop();
+                west = false;
+                break;
         }
     }
 
     public void changeNorth() {
-        System.out.println("Test");
+        if (!(Main.game.getCurrentRoom() instanceof Beach || Main.game.getCurrentRoom() instanceof Farm || Main.game.getCurrentRoom() instanceof Town || Main.game.getCurrentRoom() instanceof Park)) {
+            player.setTranslateY(204);
+        }
         Game.changedRoom = "north";
         Main.game.goRoom();
         backgroundRoom.setImage(new Image("file:" + background));
-        hideButtons();
     }
+
     public void changeSouth() {
+        if (!(Main.game.getCurrentRoom() instanceof Beach || Main.game.getCurrentRoom() instanceof Farm || Main.game.getCurrentRoom() instanceof Town || Main.game.getCurrentRoom() instanceof Sdu)) {
+            player.setTranslateY(-204);
+        }
         Game.changedRoom = "south";
         Main.game.goRoom();
         backgroundRoom.setImage(new Image("file:" + background));
-        hideButtons();
     }
+
     public void changeWest() {
+        if (!(Main.game.getCurrentRoom() instanceof Beach || Main.game.getCurrentRoom() instanceof Sdu || Main.game.getCurrentRoom() instanceof Park)) {
+            player.setTranslateX(330);
+        }
         Game.changedRoom = "west";
         Main.game.goRoom();
         backgroundRoom.setImage(new Image("file:" + background));
-        hideButtons();
     }
+
     public void changeEast() {
+        if (!(Main.game.getCurrentRoom() instanceof Sdu || Main.game.getCurrentRoom() instanceof Town || Main.game.getCurrentRoom() instanceof Farm)) {
+            player.setTranslateX(-330);
+        }
         Game.changedRoom = "east";
         Main.game.goRoom();
         backgroundRoom.setImage(new Image("file:" + background));
-        hideButtons();
     }
+
+
 }
