@@ -26,12 +26,28 @@ public class SpriteAnimation {
             lastDirection = direction;
         }
         // Skal måske minus med en under i gange stykket
-        int picture = count % (widthNumPictures * heightNumPictures);
+        // int picture = count % (widthNumPictures * heightNumPictures);
         int whichPicWidth = 0;
         int whichPicHeight = 0;
 
+        if (direction.equals("South")) {
+            whichPicWidth = (count % 4) * picWidth;
+            whichPicHeight = 0;
+        } else if (direction.equals("West")) {
+            whichPicWidth = (count % 4) * picWidth;
+            whichPicHeight = picHeight;
+        } else if (direction.equals("East")) {
+            whichPicWidth = (count % 4) * picWidth;
+            whichPicHeight = picHeight * 2;
+        } else if (direction.equals("North")) {
+            whichPicWidth = (count % 4) * picWidth;
+            whichPicHeight = picHeight * 3;
+        }
+
+        /*
         if (picture <= 3) {
             whichPicWidth = picture * picWidth;
+            whichPicHeight = 0;
         } else if (picture > 3 && picture <= 7) {
             whichPicWidth = (picture % 4) * picWidth;
             whichPicHeight = picHeight;
@@ -42,6 +58,9 @@ public class SpriteAnimation {
             whichPicWidth = (picture % 4) * picWidth;
             whichPicHeight = picHeight * 3;
         }
+        */
+
+        System.out.println("Width " + whichPicWidth + " height " + whichPicHeight);
         count++;
         int[] numbers = {whichPicWidth, whichPicHeight, picWidth, picHeight};
         return numbers;
