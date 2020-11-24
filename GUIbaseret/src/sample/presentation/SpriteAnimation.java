@@ -1,8 +1,5 @@
 package sample.presentation;
 
-import javafx.geometry.Rectangle2D;
-import javafx.scene.image.Image;
-
 public class SpriteAnimation {
     private int count = 0;
     private int widthNumPictures = 4;
@@ -43,22 +40,6 @@ public class SpriteAnimation {
             whichPicWidth = (count % 4) * picWidth;
             whichPicHeight = picHeight * 3;
         }
-
-        /*
-        if (picture <= 3) {
-            whichPicWidth = picture * picWidth;
-            whichPicHeight = 0;
-        } else if (picture > 3 && picture <= 7) {
-            whichPicWidth = (picture % 4) * picWidth;
-            whichPicHeight = picHeight;
-        } else if (picture > 7 && picture <= 11) {
-            whichPicWidth = (picture % 4) * picWidth;
-            whichPicHeight = picHeight * 2;
-        } else if (picture > 11 && picture <= 15) {
-            whichPicWidth = (picture % 4) * picWidth;
-            whichPicHeight = picHeight * 3;
-        }
-        */
 
         System.out.println("Width " + whichPicWidth + " height " + whichPicHeight);
         count++;
