@@ -20,6 +20,7 @@ public class RoadBuilder {
         }
         return inventory;
     }
+
     public static void damagedMachine() {
         if (inventory.size() >= 19 && !haveSpoken) {
             damaged = 100;

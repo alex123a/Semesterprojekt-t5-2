@@ -17,10 +17,11 @@
                <image>
                   <Image url="@pictures/Backgrounds/RoadBuild.png" />
                </image></ImageView>
-            <ImageView fx:id="player" fitHeight="45.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true"></ImageView>
+            <ImageView fx:id="roadView" fitHeight="77.0" fitWidth="707.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="player" fitHeight="45.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true" />
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <ListView layoutX="77.0" layoutY="453.0" prefHeight="45.0" prefWidth="539.0" opacity="0.2"/>
+                  <ListView layoutX="77.0" layoutY="453.0" opacity="0.2" prefHeight="45.0" prefWidth="539.0" />
                </children>
             </AnchorPane>
          </children>

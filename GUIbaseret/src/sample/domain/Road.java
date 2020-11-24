@@ -1,8 +1,16 @@
 package sample.domain;
 
+import sample.presentation.Controller;
+
 public class Road {
-    //Til når der kommer en GUI
+    private String image = "src/sample/presentation/pictures/Road.png";
 
     public void printRoad() {
     }
+
+    public String getImage() {
+        return image;
+    }
+
+
 }

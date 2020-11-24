@@ -1,28 +1,23 @@
 package sample.presentation;
 
 import javafx.animation.AnimationTimer;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.Pane;
 import sample.domain.Game;
 import sample.domain.Player;
-import sample.domain.Room;
+import sample.domain.Road;
 import sample.domain.Rooms.*;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Controller {
 
     public static List<String> roomExit = new ArrayList<>();
     public static String background;
+    public static Road road = new Road();
     private boolean north, south, east, west;
     public static Player playerObject = new Player();
     private String[] direction = {"North", "South", "West", "East"};
@@ -34,11 +29,16 @@ public class Controller {
     private ImageView backgroundRoom;
 
     @FXML
+    public ImageView roadView = new ImageView("file:" + road.getImage());
+
+    @FXML
     public ImageView player = new ImageView("file:" + playerObject.getImage());
 
     public void initialize() {
         player.setImage(new Image("file:" + playerObject.getImage()));
         player.setViewport(new Rectangle2D(0, 0, 32, 48));
+        roadView.setImage(new Image("file:" + road.getImage()));
+        roadView.setViewport(new Rectangle2D(-681, 0, 681, 69));
     }
 
     AnimationTimer timer = new AnimationTimer() {
@@ -89,21 +89,29 @@ public class Controller {
             case W:
                 timer.start();
                 north = true;
+                west = false;
+                east = false;
                 System.out.println(player.getTranslateY());
                 break;
             case S:
                 timer.start();
                 south = true;
+                west = false;
+                east = false;
                 System.out.println(player.getTranslateY());
                 break;
             case A:
                 timer.start();
                 east = true;
+                north = false;
+                south = false;
                 System.out.println(player.getTranslateX());
                 break;
             case D:
                 timer.start();
                 west = true;
+                north = false;
+                south = false;
                 System.out.println(player.getTranslateX());
                 break;
         }
@@ -177,6 +185,9 @@ public class Controller {
         Game.changedRoom = "east";
         Main.game.goRoom();
         backgroundRoom.setImage(new Image("file:" + background));
+    }
+
+    public void showRoad() {
     }
 
 
