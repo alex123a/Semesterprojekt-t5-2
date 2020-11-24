@@ -3,6 +3,7 @@ package sample.presentation;
 import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -10,6 +11,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import sample.domain.Game;
+import sample.domain.Player;
 import sample.domain.Room;
 import sample.domain.Rooms.*;
 
@@ -22,28 +24,49 @@ public class Controller {
     public static List<String> roomExit = new ArrayList<>();
     public static String background;
     private boolean north, south, east, west;
+    public static Player playerObject = new Player();
+    private String[] direction = {"North", "South", "West", "East"};
+    private SpriteAnimation playerAnimation = new SpriteAnimation(direction[0]);
+    private int[] numbersPlayer;
 
     @FXML
     private ImageView backgroundRoom;
 
     @FXML
-    private ImageView player;
+    public ImageView player = new ImageView("file:" + playerObject.getImage());
+
+    public void initialize() {
+        player.setImage(new Image("file:" + playerObject.getImage()));
+    }
 
     AnimationTimer timer = new AnimationTimer() {
         @Override
         public void handle(long l) {
             if (north && player.getTranslateY() > -220) {
+                playerAnimation.setDirection(direction[0]);
+                numbersPlayer = playerAnimation.changePic();
+                player.setViewport(new Rectangle2D(numbersPlayer[0], numbersPlayer[1], numbersPlayer[2], numbersPlayer[3]));
                 player.setTranslateY(player.getTranslateY() - 2);
             }
             if (south && player.getTranslateY() < 220) {
+                playerAnimation.setDirection(direction[1]);
+                numbersPlayer = playerAnimation.changePic();
+                player.setViewport(new Rectangle2D(numbersPlayer[0], numbersPlayer[1], numbersPlayer[2], numbersPlayer[3]));
                 player.setTranslateY(player.getTranslateY() + 2);
             }
             if (east && player.getTranslateX() > -340) {
+                playerAnimation.setDirection(direction[2]);
+                numbersPlayer = playerAnimation.changePic();
+                player.setViewport(new Rectangle2D(numbersPlayer[0], numbersPlayer[1], numbersPlayer[2], numbersPlayer[3]));
                 player.setTranslateX(player.getTranslateX() - 2);
             }
             if (west && player.getTranslateX() < 340) {
+                playerAnimation.setDirection(direction[3]);
+                numbersPlayer = playerAnimation.changePic();
+                player.setViewport(new Rectangle2D(numbersPlayer[0], numbersPlayer[1], numbersPlayer[2], numbersPlayer[3]));
                 player.setTranslateX(player.getTranslateX() + 2);
             }
+
         }
     };
 

@@ -44,7 +44,7 @@ public class Timer {
             name2 = reader.next();
             time3 = reader.nextDouble();
             name3 = reader.next();
-            name = Player.getName();
+            // name = Player.getName();
             reader.close();
         } catch (FileNotFoundException e) {
             System.out.println("Cannot find the file");

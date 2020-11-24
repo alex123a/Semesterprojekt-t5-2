@@ -85,7 +85,7 @@ public class Game {
             System.out.println("Cannot find the file");
             e.printStackTrace();
         }
-        Player.setName();
+        // Controller.playerObject.setName();
         Timer.setStartTime();
     }
 
@@ -128,9 +128,9 @@ public class Game {
     }
 
     private boolean givePlastic() {
-        List<Plastic> plasticInv = Player.getPlasticInv();
+        List<Plastic> plasticInv = Controller.playerObject.getPlasticInv();
         List<Plastic> road = RoadBuilder.inventory(plasticInv);
-        Player.resetPlasticInv();
+        Controller.playerObject.resetPlasticInv();
         if (road.size() >= roadDone) {
             return true;
         }

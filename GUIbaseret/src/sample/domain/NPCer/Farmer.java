@@ -2,6 +2,7 @@ package sample.domain.NPCer;
 
 import sample.domain.PlasticElements.*;
 import sample.domain.Player;
+import sample.presentation.Controller;
 
 import java.io.File;
 import java.io.IOException;
@@ -84,11 +85,11 @@ public class Farmer extends NPC {
     }
 
     public void emptyPlasticForPlayer() {
-        List<Plastic> newInv = Player.getPlasticInv();;
+        List<Plastic> newInv = Controller.playerObject.getPlasticInv();;
         for (Plastic plastic: plasticForPlayer) {
             newInv.add(plastic);
         }
-        Player.setPlasticInv(newInv);
+        Controller.playerObject.setPlasticInv(newInv);
         this.plasticForPlayer = null;
     }
 
