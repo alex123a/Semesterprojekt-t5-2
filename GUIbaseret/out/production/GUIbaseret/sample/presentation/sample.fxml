@@ -23,7 +23,7 @@
                </image></ImageView>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <ListView layoutX="77.0" layoutY="453.0" prefHeight="45.0" prefWidth="539.0" opacity="0.4"/>
+                  <ListView layoutX="77.0" layoutY="453.0" prefHeight="45.0" prefWidth="539.0" opacity="0.2"/>
                </children>
             </AnchorPane>
          </children>

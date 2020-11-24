@@ -11,6 +11,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import sample.domain.Game;
 import sample.domain.Room;
+import sample.domain.Rooms.*;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -68,17 +70,13 @@ public class Controller {
                 System.out.println(player.getTranslateX());
                 break;
             case M:
-                if (player.getTranslateY() < -212) {
-                    Main.game.goRoom();
+                if (player.getTranslateY() < -208 && player.getTranslateX() > -100 && player.getTranslateX() < 100) {
                     changeNorth();
-                } else if (player.getTranslateY() > 212) {
-                    Main.game.goRoom();
+                } else if (player.getTranslateY() > 208 && player.getTranslateX() > -100 && player.getTranslateX() < 100) {
                     changeSouth();
-                } else if (player.getTranslateX() < -332) {
-                    Main.game.goRoom();
+                } else if (player.getTranslateX() < -328 && player.getTranslateY() > -140 && player.getTranslateY() < 140) {
                     changeWest();
-                } else if (player.getTranslateX() > 332) {
-                    Main.game.goRoom();
+                } else if (player.getTranslateX() > 328 && player.getTranslateY() > -140 && player.getTranslateY() < 140) {
                     changeEast();
                 }
         }
@@ -109,24 +107,28 @@ public class Controller {
         Game.changedRoom = "north";
         Main.game.goRoom();
         backgroundRoom.setImage(new Image("file:" + background));
+        player.setTranslateY(220);
     }
 
     public void changeSouth() {
         Game.changedRoom = "south";
         Main.game.goRoom();
         backgroundRoom.setImage(new Image("file:" + background));
+        player.setTranslateY(-220);
     }
 
     public void changeWest() {
         Game.changedRoom = "west";
         Main.game.goRoom();
         backgroundRoom.setImage(new Image("file:" + background));
+        player.setTranslateX(340);
     }
 
     public void changeEast() {
         Game.changedRoom = "east";
         Main.game.goRoom();
         backgroundRoom.setImage(new Image("file:" + background));
+        player.setTranslateX(-340);
     }
 
 
