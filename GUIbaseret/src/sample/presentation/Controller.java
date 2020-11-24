@@ -10,6 +10,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import sample.domain.Game;
+import sample.domain.Player;
 import sample.domain.Room;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,12 +21,17 @@ public class Controller {
     public static List<String> roomExit = new ArrayList<>();
     public static String background;
     private boolean north, south, east, west;
+    public static Player playerObject = new Player();
 
     @FXML
     private ImageView backgroundRoom;
 
     @FXML
     private ImageView player;
+
+    public void initialize() {
+        player.setImage(new Image("file:" + playerObject.getImage()));
+    }
 
     AnimationTimer timer = new AnimationTimer() {
         @Override

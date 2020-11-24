@@ -1,6 +1,7 @@
 package sample.domain.NPCer;
 
 import sample.domain.Player;
+import sample.presentation.Controller;
 
 import java.io.File;
 import java.io.IOException;
@@ -68,7 +69,7 @@ public class Mechanic extends NPC {
 
     public Toolset giveToolset() {
         this.gaveToolset = true;
-        Player.setHaveToolset(true);
+        Controller.playerObject.setHaveToolset(true);
         return new Toolset();
     }
 }

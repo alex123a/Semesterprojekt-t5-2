@@ -7,12 +7,14 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Player {
-    private static String name;
-    private static List<Plastic> plasticInv = new ArrayList();
-    private static boolean haveToolset = false;
+    private String name;
+    private List<Plastic> plasticInv = new ArrayList();
+    private boolean haveToolset = false;
+    private String image = "src/sample/presentation/pictures/Playergame.png";
     // private List<Tool> toolInv = new ArrayList();
     // Her er der taget udgangspunkt i et "Tool" objekt og et "Plastic" objekt.
 
+    /*
     public static void setName() {
         System.out.print("What is your name?\n> ");
         boolean nameChosen = false;
@@ -27,12 +29,13 @@ public class Player {
         }
         System.out.println("You have chosen " + name + " as your player name");
     }
+    */
 
-    public static String getName() {
+    public String getName() {
         return name;
     }
 
-    public static void plasticCollect(Plastic piece, Room room) {
+    public void plasticCollect(Plastic piece, Room room) {
         if (room.getPlasticInRoom().size() > 0) {
             plasticInv.add(piece);
         } else {
@@ -40,24 +43,32 @@ public class Player {
         }
     }
 
-    public static void setPlasticInv(List<Plastic> newInv) {
+    public void setPlasticInv(List<Plastic> newInv) {
         plasticInv = newInv;
     }
 
-    public static List<Plastic> getPlasticInv() {
+    public List<Plastic> getPlasticInv() {
         return plasticInv;
     }
 
-    public static void setHaveToolset(boolean haveToolsetPara) {
+    public void setHaveToolset(boolean haveToolsetPara) {
         haveToolset = haveToolsetPara;
     }
 
-    public static boolean getHaveToolset() {
+    public boolean getHaveToolset() {
         return haveToolset;
     }
 
-    public static void resetPlasticInv() {
+    public void resetPlasticInv() {
         plasticInv = new ArrayList<>();
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }
 
