@@ -9,6 +9,7 @@ import javafx.scene.input.KeyEvent;
 import sample.domain.Game;
 import sample.domain.Player;
 import sample.domain.Road;
+import sample.domain.RoadBuilder;
 import sample.domain.Rooms.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -86,6 +87,7 @@ public class Controller {
 
     public void movePlayer(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {
+            case UP:
             case W:
                 timer.start();
                 north = true;
@@ -93,6 +95,7 @@ public class Controller {
                 east = false;
                 System.out.println(player.getTranslateY());
                 break;
+            case DOWN:
             case S:
                 timer.start();
                 south = true;
@@ -100,6 +103,7 @@ public class Controller {
                 east = false;
                 System.out.println(player.getTranslateY());
                 break;
+            case LEFT:
             case A:
                 timer.start();
                 east = true;
@@ -107,6 +111,7 @@ public class Controller {
                 south = false;
                 System.out.println(player.getTranslateX());
                 break;
+            case RIGHT:
             case D:
                 timer.start();
                 west = true;
@@ -115,7 +120,11 @@ public class Controller {
                 System.out.println(player.getTranslateX());
                 break;
         }
-        if (player.getTranslateY() < -208 && player.getTranslateX() > -108 && player.getTranslateX() < -30) {
+        NewRoom();
+    }
+
+    private void NewRoom() {
+        if (player.getTranslateY() < -208 && player.getTranslateX() > -150 && player.getTranslateX() < -10) {
             changeNorth();
         } else if (player.getTranslateY() > 208 && player.getTranslateX() > -140 && player.getTranslateX() < 20) {
             changeSouth();
@@ -128,21 +137,25 @@ public class Controller {
 
     public void stopPlayer(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {
+            case UP:
             case W:
                 timer.stop();
                 animationWalk = 0;
                 north = false;
                 break;
+            case DOWN:
             case S:
                 timer.stop();
                 animationWalk = 0;
                 south = false;
                 break;
+            case LEFT:
             case A:
                 timer.stop();
                 animationWalk = 0;
                 east = false;
                 break;
+            case RIGHT:
             case D:
                 timer.stop();
                 animationWalk = 0;
@@ -158,6 +171,7 @@ public class Controller {
         Game.changedRoom = "north";
         Main.game.goRoom();
         backgroundRoom.setImage(new Image("file:" + background));
+        showRoad();
     }
 
     public void changeSouth() {
@@ -167,6 +181,7 @@ public class Controller {
         Game.changedRoom = "south";
         Main.game.goRoom();
         backgroundRoom.setImage(new Image("file:" + background));
+        showRoad();
     }
 
     public void changeWest() {
@@ -176,6 +191,7 @@ public class Controller {
         Game.changedRoom = "west";
         Main.game.goRoom();
         backgroundRoom.setImage(new Image("file:" + background));
+        showRoad();
     }
 
     public void changeEast() {
@@ -185,10 +201,18 @@ public class Controller {
         Game.changedRoom = "east";
         Main.game.goRoom();
         backgroundRoom.setImage(new Image("file:" + background));
+        showRoad();
     }
 
     public void showRoad() {
+        if (Main.game.getCurrentRoom() instanceof RoadBuild) {
+            roadView.setViewport(new Rectangle2D(-681+((double)RoadBuilder.getInventoryCount()*22.7), 0, 681, 69));
+        } else {
+            roadView.setViewport(new Rectangle2D(-681, 0, 681, 69));
+        }
     }
 
+    public void showRoadbuilder() {
 
+    }
 }
