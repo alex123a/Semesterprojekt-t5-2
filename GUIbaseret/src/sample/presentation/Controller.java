@@ -19,8 +19,9 @@ public class Controller {
     public static List<String> roomExit = new ArrayList<>();
     public static String background;
     public static Road road = new Road();
-    private boolean north, south, east, west;
     public static Player playerObject = new Player();
+    public static RoadBuilder roadBuilder = new RoadBuilder();
+    private boolean north, south, east, west;
     private String[] direction = {"North", "South", "West", "East"};
     private SpriteAnimation playerAnimation = new SpriteAnimation(direction[0]);
     private int[] numbersPlayer;
@@ -33,13 +34,17 @@ public class Controller {
     public ImageView roadView = new ImageView("file:" + road.getImage());
 
     @FXML
+    public ImageView roadBuilderView = new ImageView("file:" + roadBuilder.getImage());
+
+    @FXML
     public ImageView player = new ImageView("file:" + playerObject.getImage());
 
     public void initialize() {
         player.setImage(new Image("file:" + playerObject.getImage()));
         player.setViewport(new Rectangle2D(0, 0, 32, 48));
         roadView.setImage(new Image("file:" + road.getImage()));
-        roadView.setViewport(new Rectangle2D(-681, 0, 681, 69));
+        roadBuilderView.setImage(new Image("file:" + roadBuilder.getImage()));
+        showRoadBuilderRoad();
     }
 
     AnimationTimer timer = new AnimationTimer() {
@@ -171,7 +176,7 @@ public class Controller {
         Game.changedRoom = "north";
         Main.game.goRoom();
         backgroundRoom.setImage(new Image("file:" + background));
-        showRoad();
+        showRoadBuilderRoad();
     }
 
     public void changeSouth() {
@@ -181,7 +186,7 @@ public class Controller {
         Game.changedRoom = "south";
         Main.game.goRoom();
         backgroundRoom.setImage(new Image("file:" + background));
-        showRoad();
+        showRoadBuilderRoad();
     }
 
     public void changeWest() {
@@ -191,7 +196,7 @@ public class Controller {
         Game.changedRoom = "west";
         Main.game.goRoom();
         backgroundRoom.setImage(new Image("file:" + background));
-        showRoad();
+        showRoadBuilderRoad();
     }
 
     public void changeEast() {
@@ -201,18 +206,24 @@ public class Controller {
         Game.changedRoom = "east";
         Main.game.goRoom();
         backgroundRoom.setImage(new Image("file:" + background));
-        showRoad();
+        showRoadBuilderRoad();
     }
 
-    public void showRoad() {
+    public void showRoadBuilderRoad() {
         if (Main.game.getCurrentRoom() instanceof RoadBuild) {
-            roadView.setViewport(new Rectangle2D(-681+((double)RoadBuilder.getInventoryCount()*22.7), 0, 681, 69));
+            roadView.setViewport(new Rectangle2D(-681 + (RoadBuilder.getInventoryCount()*22.7), 0, 681, 69));
         } else {
             roadView.setViewport(new Rectangle2D(-681, 0, 681, 69));
         }
+        showRoadBuilder();
     }
 
-    public void showRoadbuilder() {
-
+    public void showRoadBuilder() {
+        if (Main.game.getCurrentRoom() instanceof RoadBuild) {
+            roadBuilderView.setViewport(new Rectangle2D(0, 0, 484, 323));
+            roadBuilderView.setTranslateX(300 - (RoadBuilder.getInventoryCount() * 20));
+        } else {
+            roadBuilderView.setViewport(new Rectangle2D(-484, 0, 484, 323));
+        }
     }
 }

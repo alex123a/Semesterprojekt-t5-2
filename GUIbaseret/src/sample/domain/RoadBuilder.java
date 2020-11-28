@@ -8,6 +8,7 @@ public class RoadBuilder {
     private static int inventoryCount = 0;
     private static int damaged = 0;
     private static boolean haveSpoken = false;
+    private String image = "src/sample/presentation/pictures/RoadBuilder.png";
 
 
     public static int inventory(List<Plastic> plastic) {
@@ -28,7 +29,7 @@ public class RoadBuilder {
         }
     }
 
-    public static int getInventoryCount() {
+    public static double getInventoryCount() {
         return inventoryCount;
     }
 
@@ -40,5 +41,7 @@ public class RoadBuilder {
         damaged = newDamage;
     }
 
-
+    public String getImage() {
+        return image;
+    }
 }
