@@ -1,30 +1,27 @@
 package sample.presentation;
 
 import javafx.animation.AnimationTimer;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.Pane;
 import sample.domain.Game;
 import sample.domain.Player;
-import sample.domain.Room;
+import sample.domain.Road;
+import sample.domain.RoadBuilder;
 import sample.domain.Rooms.*;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Controller {
 
     public static List<String> roomExit = new ArrayList<>();
     public static String background;
-    private boolean north, south, east, west;
+    public static Road road = new Road();
     public static Player playerObject = new Player();
+    public static RoadBuilder roadBuilder = new RoadBuilder();
+    private boolean north, south, east, west;
     private String[] direction = {"North", "South", "West", "East"};
     private SpriteAnimation playerAnimation = new SpriteAnimation(direction[0]);
     private int[] numbersPlayer;
@@ -34,11 +31,20 @@ public class Controller {
     private ImageView backgroundRoom;
 
     @FXML
+    public ImageView roadView = new ImageView("file:" + road.getImage());
+
+    @FXML
+    public ImageView roadBuilderView = new ImageView("file:" + roadBuilder.getImage());
+
+    @FXML
     public ImageView player = new ImageView("file:" + playerObject.getImage());
 
     public void initialize() {
         player.setImage(new Image("file:" + playerObject.getImage()));
         player.setViewport(new Rectangle2D(0, 0, 32, 48));
+        roadView.setImage(new Image("file:" + road.getImage()));
+        roadBuilderView.setImage(new Image("file:" + roadBuilder.getImage()));
+        showRoadBuilderRoad();
     }
 
     AnimationTimer timer = new AnimationTimer() {
@@ -86,28 +92,44 @@ public class Controller {
 
     public void movePlayer(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {
+            case UP:
             case W:
                 timer.start();
                 north = true;
+                west = false;
+                east = false;
                 System.out.println(player.getTranslateY());
                 break;
+            case DOWN:
             case S:
                 timer.start();
                 south = true;
+                west = false;
+                east = false;
                 System.out.println(player.getTranslateY());
                 break;
+            case LEFT:
             case A:
                 timer.start();
                 east = true;
+                north = false;
+                south = false;
                 System.out.println(player.getTranslateX());
                 break;
+            case RIGHT:
             case D:
                 timer.start();
                 west = true;
+                north = false;
+                south = false;
                 System.out.println(player.getTranslateX());
                 break;
         }
-        if (player.getTranslateY() < -208 && player.getTranslateX() > -108 && player.getTranslateX() < -30) {
+        NewRoom();
+    }
+
+    private void NewRoom() {
+        if (player.getTranslateY() < -208 && player.getTranslateX() > -150 && player.getTranslateX() < -10) {
             changeNorth();
         } else if (player.getTranslateY() > 208 && player.getTranslateX() > -140 && player.getTranslateX() < 20) {
             changeSouth();
@@ -120,21 +142,25 @@ public class Controller {
 
     public void stopPlayer(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {
+            case UP:
             case W:
                 timer.stop();
                 animationWalk = 0;
                 north = false;
                 break;
+            case DOWN:
             case S:
                 timer.stop();
                 animationWalk = 0;
                 south = false;
                 break;
+            case LEFT:
             case A:
                 timer.stop();
                 animationWalk = 0;
                 east = false;
                 break;
+            case RIGHT:
             case D:
                 timer.stop();
                 animationWalk = 0;
@@ -150,6 +176,7 @@ public class Controller {
         Game.changedRoom = "north";
         Main.game.goRoom();
         backgroundRoom.setImage(new Image("file:" + background));
+        showRoadBuilderRoad();
     }
 
     public void changeSouth() {
@@ -159,6 +186,7 @@ public class Controller {
         Game.changedRoom = "south";
         Main.game.goRoom();
         backgroundRoom.setImage(new Image("file:" + background));
+        showRoadBuilderRoad();
     }
 
     public void changeWest() {
@@ -168,6 +196,7 @@ public class Controller {
         Game.changedRoom = "west";
         Main.game.goRoom();
         backgroundRoom.setImage(new Image("file:" + background));
+        showRoadBuilderRoad();
     }
 
     public void changeEast() {
@@ -177,7 +206,24 @@ public class Controller {
         Game.changedRoom = "east";
         Main.game.goRoom();
         backgroundRoom.setImage(new Image("file:" + background));
+        showRoadBuilderRoad();
     }
 
+    public void showRoadBuilderRoad() {
+        if (Main.game.getCurrentRoom() instanceof RoadBuild) {
+            roadView.setViewport(new Rectangle2D(-681 + (RoadBuilder.getInventoryCount()*22.7), 0, 681, 69));
+        } else {
+            roadView.setViewport(new Rectangle2D(-681, 0, 681, 69));
+        }
+        showRoadBuilder();
+    }
 
+    public void showRoadBuilder() {
+        if (Main.game.getCurrentRoom() instanceof RoadBuild) {
+            roadBuilderView.setViewport(new Rectangle2D(0, 0, 484, 323));
+            roadBuilderView.setTranslateX(300 - (RoadBuilder.getInventoryCount() * 20));
+        } else {
+            roadBuilderView.setViewport(new Rectangle2D(-484, 0, 484, 323));
+        }
+    }
 }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -11,20 +12,23 @@
 
 <GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.presentation.Controller">
    <children>
-      <StackPane onKeyPressed="#movePlayer" onKeyReleased="#stopPlayer">
+      <StackPane>
          <children>
             <ImageView fx:id="backgroundRoom" fitHeight="500.0" fitWidth="720.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@pictures/Backgrounds/RoadBuild.png" />
                </image></ImageView>
-            <ImageView fx:id="player" fitHeight="45.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true"></ImageView>
+            <ImageView fx:id="roadView" fitHeight="77.0" fitWidth="707.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="roadBuilderView" translateY="-30" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true"/>
+            <ImageView fx:id="player" fitHeight="45.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true" />
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <ListView layoutX="77.0" layoutY="453.0" prefHeight="45.0" prefWidth="539.0" opacity="0.2"/>
+                  <ListView layoutX="77.0" layoutY="453.0" opacity="0.2" prefHeight="45.0" prefWidth="539.0" />
                </children>
             </AnchorPane>
          </children>
       </StackPane>
+      <TabPane layoutX="29.0" layoutY="-1.0" onKeyPressed="#movePlayer" onKeyReleased="#stopPlayer" /><!--TabPane only for movement with arrows, because the other Panes is not in focus to use arrow keys-->
    </children>
    <columnConstraints>
       <ColumnConstraints />
