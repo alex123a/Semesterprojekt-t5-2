@@ -4,7 +4,7 @@ public class MilkBottle extends Plastic {
     private static int counterForMilkBottles = 0;
 
     public MilkBottle() {
-        super("Milk bottle");
+        super("Milk bottle", "src/sample/presentation/pictures/plastic/milkBottle.png");
         counterForMilkBottles++;
     }
 
