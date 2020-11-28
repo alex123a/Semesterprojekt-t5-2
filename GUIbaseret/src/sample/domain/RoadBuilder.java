@@ -29,7 +29,7 @@ public class RoadBuilder {
         }
     }
 
-    public static double getInventoryCount() {
+    public static int getInventoryCount() {
         return inventoryCount;
     }
 
