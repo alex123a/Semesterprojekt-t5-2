@@ -2,6 +2,7 @@ package sample.domain.Rooms;
 
 import sample.domain.PlasticElements.*;
 import sample.domain.Room;
+import sample.presentation.Controller;
 
 public class RoadBuild extends Room {
     private Plastic[] numberOfPlastic;
