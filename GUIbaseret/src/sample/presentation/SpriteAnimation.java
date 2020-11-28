@@ -22,8 +22,7 @@ public class SpriteAnimation {
             count = 0;
             lastDirection = direction;
         }
-        // Skal måske minus med en under i gange stykket
-        // int picture = count % (widthNumPictures * heightNumPictures);
+
         int whichPicWidth = 0;
         int whichPicHeight = 0;
 
@@ -41,17 +40,11 @@ public class SpriteAnimation {
             whichPicHeight = picHeight * 3;
         }
 
-        System.out.println("Width " + whichPicWidth + " height " + whichPicHeight);
+        // System.out.println("Width " + whichPicWidth + " height " + whichPicHeight);
         count++;
         int[] numbers = {whichPicWidth, whichPicHeight, picWidth, picHeight};
         return numbers;
     }
-
-
-
-
-    // Gør så billede bliver scalet op til en rimlig størrelse
-
 
     public void setDirection(String direction) {
         this.direction = direction;
