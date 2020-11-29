@@ -129,14 +129,18 @@ public class Controller {
 
     private void NewRoom() {
         //North
-        if (Main.game.getCurrentRoom() instanceof RoadBuild && player.getTranslateY() < -199 && player.getTranslateX() > -142.5 && player.getTranslateX() < -82.5) {
+        if (Main.game.getCurrentRoom() instanceof RoadBuild && player.getTranslateY() < -202 && player.getTranslateX() > -142.5 && player.getTranslateX() < -82.5) {
             changeNorth();
         } else if (Main.game.getCurrentRoom() instanceof Sdu && player.getTranslateY() < -199 && player.getTranslateX() > -80 && player.getTranslateX() < 14) {
+            changeNorth();
+        } else if (Main.game.getCurrentRoom() instanceof RoadBuild && player.getTranslateY() < -199 && player.getTranslateX() > 68 && player.getTranslateX() < 128) {
             changeNorth();
         //South
         } else if (Main.game.getCurrentRoom() instanceof RoadBuild && player.getTranslateY() > 208 && player.getTranslateX() > -80 && player.getTranslateX() < 14) {
             changeSouth();
         } else if (Main.game.getCurrentRoom() instanceof Park && player.getTranslateY() > 208 && player.getTranslateX() > -142.5 && player.getTranslateX() < -82.5) {
+            changeSouth();
+        } else if (Main.game.getCurrentRoom() instanceof Park && player.getTranslateY() > 208 && player.getTranslateX() > 68 && player.getTranslateX() < 126) {
             changeSouth();
         //West
         } else if (player.getTranslateX() < -328 && player.getTranslateY() > -116.5 && player.getTranslateY() < -61.5) {
