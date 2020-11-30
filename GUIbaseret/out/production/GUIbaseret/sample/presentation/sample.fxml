@@ -43,7 +43,7 @@
             <ImageView fx:id="player" fitHeight="45.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true" />
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <ListView fx:id="inventory" layoutX="210.0" layoutY="453.0" opacity="0.5" prefHeight="45.0" prefWidth="300.0" />
+                  <ListView fx:id="inventory" layoutX="210.0" layoutY="453.0" prefHeight="45.0" prefWidth="300.0" />
                </children>
             </AnchorPane>
          </children>

@@ -29,7 +29,7 @@ public class Controller {
     private SpriteAnimation playerAnimation = new SpriteAnimation(direction[0]);
     private int[] numbersPlayer;
     private long animationWalk = 0;
-    private int spaceCount = 0;
+    private boolean gameNotStarted = true;
     private ObservableList<ImageView> inventoryObservable = FXCollections.observableList(new ArrayList<ImageView>());
 
     @FXML
@@ -46,6 +46,9 @@ public class Controller {
 
 
     public void initialize() {
+        if (gameNotStarted) {
+            inventory.setOpacity(0);
+        }
         backgroundRoom.setImage(new Image("file:src/sample/presentation/pictures/Backgrounds/StartScreen.png"));
         showRoadBuilderRoad();
     }
@@ -157,7 +160,7 @@ public class Controller {
         switch (keyEvent.getCode()) {
             case UP:
             case W:
-                if (spaceCount == 0) {
+                if (gameNotStarted) {
                     north = false;
                     break;
                 }
@@ -169,7 +172,7 @@ public class Controller {
                 break;
             case DOWN:
             case S:
-                if (spaceCount == 0) {
+                if (gameNotStarted) {
                     south = false;
                     break;
                 }
@@ -181,7 +184,7 @@ public class Controller {
                 break;
             case LEFT:
             case A:
-                if (spaceCount == 0) {
+                if (gameNotStarted) {
                     east = false;
                     break;
                 }
@@ -193,7 +196,7 @@ public class Controller {
                 break;
             case RIGHT:
             case D:
-                if (spaceCount == 0) {
+                if (gameNotStarted) {
                     west = false;
                     break;
                 }
@@ -204,9 +207,10 @@ public class Controller {
                 System.out.println("y =  " + player.getTranslateY() + " x = " + player.getTranslateX());
                 break;
             case SPACE:
-                if (spaceCount == 0) {
+                if (gameNotStarted) {
                     StartGame();
-                    spaceCount++;
+                    inventory.setOpacity(0.4);
+                    gameNotStarted = false;
                 }
                 collectPlastic(Main.game.placePlastic());
         }
