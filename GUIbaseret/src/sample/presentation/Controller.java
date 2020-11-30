@@ -132,6 +132,11 @@ public class Controller {
         }
     };
 
+    // Need this method
+    public void updateInventory() {
+
+    }
+
     public void collectPlastic(List<Plastic> plasticList) {
         if (playerObject.getPlasticInv().size() <= 10) {
             ImageView[] plas = {plas1, plas2, plas3, plas4, plas5, plas6, plas7, plas8, plas9, plas10, plas11, plas12, plas13, plas14, plas15,
@@ -141,6 +146,7 @@ public class Controller {
                     if (plas[i].getTranslateY() - 15 <= player.getTranslateY() && plas[i].getTranslateY() + 15 >= player.getTranslateY()) {
                         playerObject.plasticCollect(plasticList.get(i), Main.game.getCurrentRoom());
                         plas[i].setTranslateX(3000);
+                        updateInventory();
                     }
                 }
             }
