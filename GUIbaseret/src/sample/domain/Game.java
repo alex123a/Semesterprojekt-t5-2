@@ -1,5 +1,6 @@
 package sample.domain;
 
+import javafx.scene.image.ImageView;
 import sample.domain.NPCer.*;
 import sample.domain.PlasticElements.Plastic;
 import sample.domain.Rooms.*;
@@ -105,6 +106,10 @@ public class Game {
             System.out.println("Cannot find the file");
             e.printStackTrace();
         }
+    }
+
+    public List<Plastic> placePlastic() {
+        return changedRoom != null ? currentRoom.getPlasticInRoom() : RoadBuild.getPlasticInRoom();
     }
 
     public void goRoom() {

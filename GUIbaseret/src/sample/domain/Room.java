@@ -9,7 +9,7 @@ import java.util.Set;
 import java.util.List;
 
 public abstract class Room {
-    private List<Plastic> plasticInRoom;
+    private ArrayList<Plastic> plasticInRoom;
     private HashMap<String, Room> exits;
     private int plasticCount;
     private String pictureRoom;
@@ -52,7 +52,7 @@ public abstract class Room {
         for (Plastic plastic: plasticInRoom) {
             if (plastic instanceof CleaningPlastic) {
                 numberOfPlastic[0]++;
-            } else if (plastic instanceof JuiceBottle) {
+            } else if (plastic instanceof SodaBottle) {
                 numberOfPlastic[1]++;
             } else if (plastic instanceof MilkBottle) {
                 numberOfPlastic[2]++;
@@ -76,6 +76,11 @@ public abstract class Room {
             return plasticInRoom;
     }
 
+    public void removePlastic(Plastic plastic) {
+        plasticInRoom.set(plasticInRoom.indexOf(plastic), null);
+    }
+
+    /*
     public Plastic getPlastic() {
         Plastic plastic = new Plastic();
         if (plasticInRoom.size() > 0) {
@@ -85,6 +90,8 @@ public abstract class Room {
         }
         return plastic;
     }
+
+    */
 
     public abstract Plastic[] generatePlasticArray();
 
