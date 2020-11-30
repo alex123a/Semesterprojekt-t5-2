@@ -6,13 +6,11 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class Professor extends NPC {
-    //Insert path into config file.
     private String file = new File("src/sample/data/textfiles/npcDescriptions/ProfessorText.txt").toString();
 
     public Professor(String name) {
-        super(name);
+        super(name, "src/sample/presentation/pictures/npc/Professor.png");
     }
-
     @Override
     public void description(String command) {
         if (!super.getTalking()){
@@ -47,6 +45,7 @@ public class Professor extends NPC {
             }
         }
     }
+
 
     @Override
     public String toString() {

@@ -3,9 +3,11 @@ package sample.domain.NPCer;
 public abstract class NPC {
     private String name;
     private boolean talking = false;
+    private String image;
 
-    public NPC(String name) {
+    public NPC(String name, String image) {
         this.name = name;
+        this.image = image;
     }
 
     public String getName() {
@@ -28,4 +30,7 @@ public abstract class NPC {
         return this.talking;
     }
 
+    public String getImage() {
+        return image;
+    }
 }

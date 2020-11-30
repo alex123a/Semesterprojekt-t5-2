@@ -17,10 +17,14 @@
             <ImageView fx:id="backgroundRoom" fitHeight="500.0" fitWidth="720.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@pictures/Backgrounds/RoadBuild.png" />
-               </image></ImageView>
+               </image>
+            </ImageView>
             <ImageView fx:id="roadView" fitHeight="77.0" fitWidth="707.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fx:id="roadBuilderView" translateY="-30" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true"/>
             <ImageView fx:id="player" fitHeight="45.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="professorNpc" fitHeight="45.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true"/>
+            <ImageView fx:id="mechanicNpc" fitHeight="45.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true"/>
+            <ImageView fx:id="farmerNpc" fitHeight="55.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true"/>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
                   <ListView layoutX="77.0" layoutY="453.0" opacity="0.2" prefHeight="45.0" prefWidth="539.0" />

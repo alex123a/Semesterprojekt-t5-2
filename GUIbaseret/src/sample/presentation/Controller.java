@@ -7,6 +7,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import sample.domain.Game;
+import sample.domain.NPCer.Farmer;
+import sample.domain.NPCer.Mechanic;
+import sample.domain.NPCer.NPC;
+import sample.domain.NPCer.Professor;
 import sample.domain.Player;
 import sample.domain.Road;
 import sample.domain.RoadBuilder;
@@ -21,6 +25,9 @@ public class Controller {
     public static Road road = new Road();
     public static Player playerObject = new Player();
     public static RoadBuilder roadBuilder = new RoadBuilder();
+    public static Professor professorObject = new Professor("Professor");
+    public static Mechanic mechanicObject = new Mechanic("Mechanic");
+    public static Farmer farmerObject = new Farmer("Farmer");
     private boolean north, south, east, west;
     private String[] direction = {"North", "South", "West", "East"};
     private SpriteAnimation playerAnimation = new SpriteAnimation(direction[0]);
@@ -39,11 +46,26 @@ public class Controller {
     @FXML
     public ImageView player = new ImageView("file:" + playerObject.getImage());
 
+    @FXML
+    public ImageView professorNpc = new ImageView("file:" + professorObject.getImage());
+
+    @FXML
+    public ImageView mechanicNpc = new ImageView("file:"+ mechanicObject.getImage());
+
+    @FXML
+    public ImageView farmerNpc = new ImageView("file:" + farmerObject.getImage());
+
     public void initialize() {
         player.setImage(new Image("file:" + playerObject.getImage()));
         player.setViewport(new Rectangle2D(0, 0, 32, 48));
         roadView.setImage(new Image("file:" + road.getImage()));
         roadBuilderView.setImage(new Image("file:" + roadBuilder.getImage()));
+        professorNpc.setImage(new Image("file:" + professorObject.getImage()));
+        professorNpc.setTranslateX(3000);
+        mechanicNpc.setImage(new Image("file:" + mechanicObject.getImage()));
+        mechanicNpc.setTranslateX(3000);
+        farmerNpc.setImage(new Image("file:" + farmerObject.getImage()));
+        farmerNpc.setTranslateX(3000);
         showRoadBuilderRoad();
     }
 
@@ -177,6 +199,9 @@ public class Controller {
         Main.game.goRoom();
         backgroundRoom.setImage(new Image("file:" + background));
         showRoadBuilderRoad();
+        showProfessor();
+        showMechanic();
+        showFarmer();
     }
 
     public void changeSouth() {
@@ -187,6 +212,9 @@ public class Controller {
         Main.game.goRoom();
         backgroundRoom.setImage(new Image("file:" + background));
         showRoadBuilderRoad();
+        showProfessor();
+        showMechanic();
+        showFarmer();
     }
 
     public void changeWest() {
@@ -197,6 +225,9 @@ public class Controller {
         Main.game.goRoom();
         backgroundRoom.setImage(new Image("file:" + background));
         showRoadBuilderRoad();
+        showProfessor();
+        showMechanic();
+        showFarmer();
     }
 
     public void changeEast() {
@@ -207,6 +238,9 @@ public class Controller {
         Main.game.goRoom();
         backgroundRoom.setImage(new Image("file:" + background));
         showRoadBuilderRoad();
+        showProfessor();
+        showMechanic();
+        showFarmer();
     }
 
     public void showRoadBuilderRoad() {
@@ -216,6 +250,9 @@ public class Controller {
             roadView.setViewport(new Rectangle2D(-681, 0, 681, 69));
         }
         showRoadBuilder();
+        showProfessor();
+        showMechanic();
+        showFarmer();
     }
 
     public void showRoadBuilder() {
@@ -224,6 +261,29 @@ public class Controller {
             roadBuilderView.setTranslateX(300 - (RoadBuilder.getInventoryCount() * 20));
         } else {
             roadBuilderView.setViewport(new Rectangle2D(-484, 0, 484, 323));
+        }
+    }
+
+    public void showProfessor(){
+        professorNpc.setTranslateX(3000);
+        if (Main.game.getCurrentRoom() instanceof Sdu){
+            professorNpc.setTranslateX(30);
+        }
+    }
+
+    public void showMechanic() {
+        mechanicNpc.setTranslateX(3000);
+        if (Main.game.getCurrentRoom() instanceof Town){
+            mechanicNpc.setTranslateX(169);
+            mechanicNpc.setTranslateY(20);
+        }
+    }
+
+    public void showFarmer(){
+        farmerNpc.setTranslateX(3000);
+        if (Main.game.getCurrentRoom() instanceof Farm){
+            farmerNpc.setTranslateX(190);
+            farmerNpc.setTranslateY(2);
         }
     }
 }

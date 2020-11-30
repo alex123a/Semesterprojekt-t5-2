@@ -18,7 +18,7 @@ public class Farmer extends NPC {
     private String file = Paths.get(new File("src/sample/data/textfiles/npcDescriptions/FarmerenText.txt").getAbsolutePath()).toString();
 
     public Farmer(String name) {
-        super(name);
+        super(name,"src/sample/presentation/pictures/npc/farmer.png");
         fillPlasticArray();
     }
 
