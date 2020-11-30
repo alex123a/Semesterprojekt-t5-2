@@ -12,6 +12,7 @@ import javafx.scene.input.KeyEvent;
 import sample.domain.*;
 import sample.domain.PlasticElements.Plastic;
 import sample.domain.Rooms.*;
+import javafx.geometry.Orientation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,19 +76,6 @@ public class Controller {
         }
     }
 
-    // Lad vær med at slette det under for nu
-    /*
-    public void generatePlasticInRoom(List<Plastic> plasticList) {
-        plasticRoom = new ArrayList<>();
-
-        for (int i = 0; i < plasticList.size(); i++) {
-            plasticRoom.add(new ImageView("file:" + plasticList.get(i).getImage()));
-            plasticRoom.get(i).setX(plasticList.get(i).getPosition()[0]);
-            plasticRoom.get(i).setY(plasticList.get(i).getPosition()[1]);
-        }
-    }
-    */
-
     AnimationTimer timer = new AnimationTimer() {
         @Override
         public void handle(long l) {
@@ -133,17 +121,22 @@ public class Controller {
 
     // Need this method
     public void updateInventory() {
+        inventory.getItems().clear();
         inventoryObservable.removeAll();
         ArrayList<Plastic> playersInv = new ArrayList<>(playerObject.getPlasticInv());
         for (int i = 0; i < playerObject.getPlasticInv().size(); i++) {
-            inventoryObservable.add((new ImageView("file:" + playersInv.get(i).getImage())));
+            ImageView imageView = new ImageView("file:" + playersInv.get(i).getImage());
+            imageView.setFitHeight(35);
+            imageView.setFitWidth(15);
+            inventoryObservable.add(imageView);
         }
         inventory.setItems(inventoryObservable);
+        inventory.setOrientation(Orientation.HORIZONTAL);
         // inventory.setOpacity(100);
     }
 
     public void collectPlastic(List<Plastic> plasticList) {
-        if (playerObject.getPlasticInv().size() <= 10) {
+        if (playerObject.getPlasticInv().size() < 10) {
             ImageView[] plas = {plas1, plas2, plas3, plas4, plas5, plas6, plas7, plas8, plas9, plas10, plas11, plas12, plas13, plas14, plas15,
                     plas16, plas17, plas18, plas19, plas20};
             for (int i = 0; i < plas.length; i++) {
