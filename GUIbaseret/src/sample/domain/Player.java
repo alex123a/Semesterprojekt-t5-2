@@ -38,11 +38,13 @@ public class Player {
         return name;
     }
 
+    // plasticCollect skal fjerne en den plastik fra rummet som den står oven på.
     public void plasticCollect(Plastic piece, Room room) {
         if (room.getPlasticInRoom().size() > 0) {
             plasticInv.add(piece);
+            room.removePlastic(piece);
         } else {
-            System.out.println("The room is empty");
+            System.out.println("This room is empty");
         }
     }
 

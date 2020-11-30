@@ -1,5 +1,6 @@
 package sample.domain;
 
+import javafx.scene.image.ImageView;
 import sample.domain.NPCer.*;
 import sample.domain.PlasticElements.Plastic;
 import sample.domain.Rooms.*;
@@ -107,6 +108,27 @@ public class Game {
         }
     }
 
+    public List<Plastic> placePlastic() {
+        /*
+        switch (room) {
+            case "RoadBuild":
+                return RoadBuild.getPlasticInRoom();
+            case "Beach":
+                return Beach.getPlasticInRoom();
+            case "Farm":
+                return Farm.getPlasticInRoom();
+            case "Park":
+                return Park.getPlasticInRoom();
+            case "Town":
+                return Town.getPlasticInRoom();
+            default:
+                return new ArrayList<>();
+        }
+
+         */
+        return changedRoom != null ? currentRoom.getPlasticInRoom() : RoadBuild.getPlasticInRoom();
+    }
+
     public void goRoom() {
         Room nextRoom = changedRoom != null ? currentRoom.getExit(changedRoom) : RoadBuild;
 
@@ -127,11 +149,11 @@ public class Game {
         }
     }
 
-    private boolean givePlastic() {
+    public boolean givePlastic() {
         List<Plastic> plasticInv = Controller.playerObject.getPlasticInv();
-        List<Plastic> road = RoadBuilder.inventory(plasticInv);
+        int road = RoadBuilder.inventory(plasticInv);
         Controller.playerObject.resetPlasticInv();
-        if (road.size() >= roadDone) {
+        if (road >= roadDone) {
             return true;
         }
         return false;
