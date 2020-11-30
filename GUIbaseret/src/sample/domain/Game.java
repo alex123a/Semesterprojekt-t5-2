@@ -109,23 +109,6 @@ public class Game {
     }
 
     public List<Plastic> placePlastic() {
-        /*
-        switch (room) {
-            case "RoadBuild":
-                return RoadBuild.getPlasticInRoom();
-            case "Beach":
-                return Beach.getPlasticInRoom();
-            case "Farm":
-                return Farm.getPlasticInRoom();
-            case "Park":
-                return Park.getPlasticInRoom();
-            case "Town":
-                return Town.getPlasticInRoom();
-            default:
-                return new ArrayList<>();
-        }
-
-         */
         return changedRoom != null ? currentRoom.getPlasticInRoom() : RoadBuild.getPlasticInRoom();
     }
 

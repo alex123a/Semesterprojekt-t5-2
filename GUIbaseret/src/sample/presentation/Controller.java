@@ -30,7 +30,6 @@ public class Controller {
     private SpriteAnimation playerAnimation = new SpriteAnimation(direction[0]);
     private int[] numbersPlayer;
     private long animationWalk = 0;
-    private ArrayList<ImageView> plasticRoom;
 
     @FXML
     private ImageView backgroundRoom;
@@ -57,11 +56,13 @@ public class Controller {
                 plas16, plas17, plas18, plas19, plas20};
 
         for (int i = 0; i < plasticList.size(); i++) {
-            plas[i].setImage(new Image("file:" + plasticList.get(i).getImage()));
-            plas[i].setTranslateX(plasticList.get(i).getPosition()[0]);
-            plas[i].setTranslateY(plasticList.get(i).getPosition()[1]);
-            plas[i].setFitHeight(30);
-            plas[i].setFitWidth(30);
+            if (plasticList.get(i) != null) {
+                plas[i].setImage(new Image("file:" + plasticList.get(i).getImage()));
+                plas[i].setTranslateX(plasticList.get(i).getPosition()[0]);
+                plas[i].setTranslateY(plasticList.get(i).getPosition()[1]);
+                plas[i].setFitHeight(30);
+                plas[i].setFitWidth(30);
+            }
         }
     }
 
@@ -137,12 +138,8 @@ public class Controller {
         for (int i = 0; i < plas.length; i++) {
             if (plas[i].getTranslateX() - 15 <= player.getTranslateX() && plas[i].getTranslateX() + 15 >= player.getTranslateX()) {
                 if (plas[i].getTranslateY() - 15 <= player.getTranslateY() && plas[i].getTranslateY() + 15 >= player.getTranslateY()) {
-                    try {
-                        playerObject.plasticCollect(plasticList.get(i), Main.game.getCurrentRoom());
-                        plas[i].setTranslateX(3000);
-                    } catch(IndexOutOfBoundsException e) {
-                        e.printStackTrace();
-                    }
+                    playerObject.plasticCollect(plasticList.get(i), Main.game.getCurrentRoom());
+                    plas[i].setTranslateX(3000);
                 }
             }
         }

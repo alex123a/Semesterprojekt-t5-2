@@ -77,8 +77,7 @@ public abstract class Room {
     }
 
     public void removePlastic(Plastic plastic) {
-        plasticInRoom.remove(plastic);
-        plasticInRoom.trimToSize();
+        plasticInRoom.set(plasticInRoom.indexOf(plastic), null);
     }
 
     /*
