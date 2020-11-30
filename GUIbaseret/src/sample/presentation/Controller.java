@@ -6,10 +6,7 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
-import sample.domain.Game;
-import sample.domain.Player;
-import sample.domain.Road;
-import sample.domain.RoadBuilder;
+import sample.domain.*;
 import sample.domain.Rooms.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -221,7 +218,11 @@ public class Controller {
     public void showRoadBuilder() {
         if (Main.game.getCurrentRoom() instanceof RoadBuild) {
             roadBuilderView.setViewport(new Rectangle2D(0, 0, 484, 323));
-            roadBuilderView.setTranslateX(300 - (RoadBuilder.getInventoryCount() * 20));
+            if (RoadBuilder.getInventoryCount() < 5) {
+                roadBuilderView.setTranslateX(300);
+            } else {
+                roadBuilderView.setTranslateX(300 - ((RoadBuilder.getInventoryCount() * 22.7)-90));
+            }
         } else {
             roadBuilderView.setViewport(new Rectangle2D(-484, 0, 484, 323));
         }
