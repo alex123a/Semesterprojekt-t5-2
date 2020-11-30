@@ -133,15 +133,19 @@ public class Controller {
     };
 
     public void collectPlastic(List<Plastic> plasticList) {
-        ImageView[] plas = {plas1, plas2, plas3, plas4, plas5, plas6, plas7, plas8, plas9, plas10, plas11, plas12, plas13, plas14, plas15,
-                plas16, plas17, plas18, plas19, plas20};
-        for (int i = 0; i < plas.length; i++) {
-            if (plas[i].getTranslateX() - 15 <= player.getTranslateX() && plas[i].getTranslateX() + 15 >= player.getTranslateX()) {
-                if (plas[i].getTranslateY() - 15 <= player.getTranslateY() && plas[i].getTranslateY() + 15 >= player.getTranslateY()) {
-                    playerObject.plasticCollect(plasticList.get(i), Main.game.getCurrentRoom());
-                    plas[i].setTranslateX(3000);
+        if (playerObject.getPlasticInv().size() <= 10) {
+            ImageView[] plas = {plas1, plas2, plas3, plas4, plas5, plas6, plas7, plas8, plas9, plas10, plas11, plas12, plas13, plas14, plas15,
+                    plas16, plas17, plas18, plas19, plas20};
+            for (int i = 0; i < plas.length; i++) {
+                if (plas[i].getTranslateX() - 15 <= player.getTranslateX() && plas[i].getTranslateX() + 15 >= player.getTranslateX()) {
+                    if (plas[i].getTranslateY() - 15 <= player.getTranslateY() && plas[i].getTranslateY() + 15 >= player.getTranslateY()) {
+                        playerObject.plasticCollect(plasticList.get(i), Main.game.getCurrentRoom());
+                        plas[i].setTranslateX(3000);
+                    }
                 }
             }
+        } else {
+            System.out.println("I can't lift more!!!!");
         }
     }
 
