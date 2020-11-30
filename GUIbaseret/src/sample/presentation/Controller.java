@@ -24,6 +24,7 @@ public class Controller {
     private SpriteAnimation playerAnimation = new SpriteAnimation(direction[0]);
     private int[] numbersPlayer;
     private long animationWalk = 0;
+    private int spaceCount = 0;
 
     @FXML
     private ImageView backgroundRoom;
@@ -39,10 +40,6 @@ public class Controller {
 
 
     public void initialize() {
-        player.setImage(new Image("file:" + playerObject.getImage()));
-        player.setViewport(new Rectangle2D(0, 0, 32, 48));
-        roadView.setImage(new Image("file:" + road.getImage()));
-        roadBuilderView.setImage(new Image("file:" + roadBuilder.getImage()));
         showRoadBuilderRoad();
     }
 
@@ -123,8 +120,21 @@ public class Controller {
                 south = false;
                 System.out.println("y =  " + player.getTranslateY() + " x = " + player.getTranslateX());
                 break;
+            case SPACE:
+                if (spaceCount == 0) {
+                    StartGame();
+                    spaceCount++;
+                }
         }
         NewRoom();
+    }
+
+    private void StartGame() {
+        backgroundRoom.setImage(new Image("file:C:src/sample/presentation/pictures/Backgrounds/RoadBuild.png"));
+        player.setImage(new Image("file:" + playerObject.getImage()));
+        player.setViewport(new Rectangle2D(0, 0, 32, 48));
+        roadView.setImage(new Image("file:" + road.getImage()));
+        roadBuilderView.setImage(new Image("file:" + roadBuilder.getImage()));
     }
 
     private void NewRoom() {
