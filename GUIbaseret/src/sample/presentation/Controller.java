@@ -10,6 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import sample.domain.*;
+import sample.domain.PlasticElements.Plastic;
 import sample.domain.Rooms.*;
 
 import java.util.ArrayList;
