@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
@@ -30,6 +31,7 @@ public class Controller {
     private SpriteAnimation playerAnimation = new SpriteAnimation(direction[0]);
     private int[] numbersPlayer;
     private long animationWalk = 0;
+    private ObservableList<ImageView> inventoryObservable = FXCollections.observableList(new ArrayList<ImageView>());
 
     @FXML
     private ImageView backgroundRoom;
@@ -39,6 +41,8 @@ public class Controller {
     public ImageView roadBuilderView = new ImageView("file:" + roadBuilder.getImage());
     @FXML
     public ImageView player = new ImageView("file:" + playerObject.getImage());
+    @FXML
+    public ListView inventory = new ListView();
 
     public void initialize() {
         player.setImage(new Image("file:" + playerObject.getImage()));
@@ -134,7 +138,13 @@ public class Controller {
 
     // Need this method
     public void updateInventory() {
-
+        inventoryObservable.removeAll();
+        ArrayList<Plastic> playersInv = new ArrayList<>(playerObject.getPlasticInv());
+        for (int i = 0; i < playerObject.getPlasticInv().size(); i++) {
+            inventoryObservable.add((new ImageView("file:" + playersInv.get(i).getImage())));
+        }
+        inventory.setItems(inventoryObservable);
+        // inventory.setOpacity(100);
     }
 
     public void collectPlastic(List<Plastic> plasticList) {
