@@ -194,6 +194,12 @@ public class Controller {
 
     public void changeSouth() {
         if (!(Main.game.getCurrentRoom() instanceof Beach || Main.game.getCurrentRoom() instanceof Farm || Main.game.getCurrentRoom() instanceof Town || Main.game.getCurrentRoom() instanceof Sdu)) {
+            player.setTranslateY(-200);
+        }
+        if (Main.game.getCurrentRoom() instanceof Park){
+            player.setTranslateX(-117.5);
+        }
+        if (Main.game.getCurrentRoom() instanceof RoadBuild){
             player.setTranslateY(-150);
         }
         Game.changedRoom = "south";
