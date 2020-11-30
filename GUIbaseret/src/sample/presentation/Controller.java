@@ -14,7 +14,6 @@ import sample.domain.PlasticElements.Plastic;
 import sample.domain.Rooms.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Controller {
@@ -29,10 +28,11 @@ public class Controller {
     private SpriteAnimation playerAnimation = new SpriteAnimation(direction[0]);
     private int[] numbersPlayer;
     private long animationWalk = 0;
+    private int spaceCount = 0;
     private ObservableList<ImageView> inventoryObservable = FXCollections.observableList(new ArrayList<ImageView>());
 
     @FXML
-    private ImageView backgroundRoom;
+    private ImageView backgroundRoom = new ImageView("file:");
     @FXML
     public ImageView roadView = new ImageView("file:" + road.getImage());
     @FXML
@@ -43,13 +43,9 @@ public class Controller {
     public ListView inventory = new ListView();
 
 
+
     public void initialize() {
-        player.setImage(new Image("file:" + playerObject.getImage()));
-        player.setViewport(new Rectangle2D(0, 0, 32, 48));
-        roadView.setImage(new Image("file:" + road.getImage()));
-        roadBuilderView.setImage(new Image("file:" + roadBuilder.getImage()));
-        //plas1.setImage(new Image("file:" + "src/sample/presentation/pictures/plastic/cleaningPlastic.png"));
-        generatePlasticInRoom(Main.game.placePlastic());
+        backgroundRoom.setImage(new Image("file:src/sample/presentation/pictures/Backgrounds/StartScreen.png"));
         showRoadBuilderRoad();
     }
 
@@ -168,6 +164,10 @@ public class Controller {
         switch (keyEvent.getCode()) {
             case UP:
             case W:
+                if (spaceCount == 0) {
+                    north = false;
+                    break;
+                }
                 timer.start();
                 north = true;
                 west = false;
@@ -176,6 +176,10 @@ public class Controller {
                 break;
             case DOWN:
             case S:
+                if (spaceCount == 0) {
+                    south = false;
+                    break;
+                }
                 timer.start();
                 south = true;
                 west = false;
@@ -184,6 +188,10 @@ public class Controller {
                 break;
             case LEFT:
             case A:
+                if (spaceCount == 0) {
+                    east = false;
+                    break;
+                }
                 timer.start();
                 east = true;
                 north = false;
@@ -192,6 +200,10 @@ public class Controller {
                 break;
             case RIGHT:
             case D:
+                if (spaceCount == 0) {
+                    west = false;
+                    break;
+                }
                 timer.start();
                 west = true;
                 north = false;
@@ -199,11 +211,26 @@ public class Controller {
                 System.out.println("y =  " + player.getTranslateY() + " x = " + player.getTranslateX());
                 break;
             case SPACE:
+                if (spaceCount == 0) {
+                    StartGame();
+                    spaceCount++;
+                }
                 collectPlastic(Main.game.placePlastic());
         }
         NewRoom();
+
     }
 
+    private void StartGame() {
+        backgroundRoom.setImage(new Image("file:src/sample/presentation/pictures/Backgrounds/RoadBuild.png"));
+        player.setImage(new Image("file:" + playerObject.getImage()));
+        player.setViewport(new Rectangle2D(0, 0, 32, 48));
+        roadView.setImage(new Image("file:" + road.getImage()));
+        roadBuilderView.setImage(new Image("file:" + roadBuilder.getImage()));
+        //plas1.setImage(new Image("file:" + "src/sample/presentation/pictures/plastic/cleaningPlastic.png"));
+        generatePlasticInRoom(Main.game.placePlastic());
+        Timer.setStartTime(); // tid starter til highscorelisten
+    }
 
     private void NewRoom() {
         //North
