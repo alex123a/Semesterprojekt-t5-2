@@ -131,9 +131,7 @@ public class Controller {
         //North
         if (Main.game.getCurrentRoom() instanceof RoadBuild && player.getTranslateY() < -202 && player.getTranslateX() > -142.5 && player.getTranslateX() < -82.5) {
             changeNorth();
-        } else if (Main.game.getCurrentRoom() instanceof Sdu && player.getTranslateY() < -199 && player.getTranslateX() > -80 && player.getTranslateX() < 14) {
-            changeNorth();
-        } else if (Main.game.getCurrentRoom() instanceof RoadBuild && player.getTranslateY() < -199 && player.getTranslateX() > 68 && player.getTranslateX() < 128) {
+        } else if (Main.game.getCurrentRoom() instanceof Sdu && player.getTranslateY() < -158 && player.getTranslateX() > -80 && player.getTranslateX() < 14) {
             changeNorth();
         //South
         } else if (Main.game.getCurrentRoom() instanceof RoadBuild && player.getTranslateY() > 208 && player.getTranslateX() > -80 && player.getTranslateX() < 14) {
@@ -196,7 +194,7 @@ public class Controller {
 
     public void changeSouth() {
         if (!(Main.game.getCurrentRoom() instanceof Beach || Main.game.getCurrentRoom() instanceof Farm || Main.game.getCurrentRoom() instanceof Town || Main.game.getCurrentRoom() instanceof Sdu)) {
-            player.setTranslateY(-195);
+            player.setTranslateY(-150);
         }
         Game.changedRoom = "south";
         Main.game.goRoom();
@@ -206,7 +204,7 @@ public class Controller {
 
     public void changeWest() {
         if (!(Main.game.getCurrentRoom() instanceof Beach || Main.game.getCurrentRoom() instanceof Sdu || Main.game.getCurrentRoom() instanceof Park)) {
-            player.setTranslateX(330);
+            player.setTranslateX(327);
         }
         Game.changedRoom = "west";
         Main.game.goRoom();
@@ -216,7 +214,7 @@ public class Controller {
 
     public void changeEast() {
         if (!(Main.game.getCurrentRoom() instanceof Sdu || Main.game.getCurrentRoom() instanceof Town || Main.game.getCurrentRoom() instanceof Farm)) {
-            player.setTranslateX(-330);
+            player.setTranslateX(-327);
         }
         Game.changedRoom = "east";
         Main.game.goRoom();
