@@ -6,6 +6,7 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.shape.Rectangle;
 import sample.domain.*;
 import sample.domain.Rooms.*;
 
@@ -89,6 +90,70 @@ public class Controller {
         }
     };
 
+    public boolean moveBlock(int x, int y) {
+        boolean cantMove = false;
+        if (Main.game.getCurrentRoom() instanceof RoadBuild) {
+            // tree in top left conor.
+            if (player.getTranslateX() + x < -150 && player.getTranslateY() + y < -90) {
+                cantMove = true;
+                //Wall 1
+            } else if (player.getTranslateX() + x > 10 && player.getTranslateY() + y > 205) {
+                cantMove = true;
+                // Wall 2
+            } else if (player.getTranslateX() + x < -25 && player.getTranslateY() + y > 205) {
+                cantMove = true;
+            }
+        }
+        if (Main.game.getCurrentRoom() instanceof Beach)
+            // Beach
+            if (player.getTranslateX() + x < -95 && player.getTranslateY() + y > -340) {
+                cantMove = true;
+            }
+
+        if (Main.game.getCurrentRoom() instanceof Farm) {
+            // Farmené
+            Rectangle field = new Rectangle(-176,-64,250,160);
+            if(field.contains(player.getTranslateX() + x,player.getTranslateY() + y)){
+                   cantMove = true;
+            }
+        }
+
+        if(Main.game.getCurrentRoom() instanceof Farm){
+            if(player.getTranslateX() + x > 115 && player.getTranslateY() + y < -36){
+                cantMove = true;
+            }
+        }
+        //Sdu's vægge
+        if(Main.game.getCurrentRoom() instanceof Sdu){
+            if(player.getTranslateX() + x < -50 && player.getTranslateY() + y <-190){
+                cantMove = true;
+            }
+            if(player.getTranslateX() + x > 20 && player.getTranslateY() + y <-190){
+                cantMove = true;
+            }
+        }
+
+        if(Main.game.getCurrentRoom() instanceof Park){
+            if(player.getTranslateX() + x < -150 && player.getTranslateY() + y < -85){
+                cantMove = true;
+            }
+            if(player.getTranslateX() + x < -150 && player.getTranslateY() + y > 0){
+                cantMove = true;
+            }
+
+            if(player.getTranslateX() + x > 135 && player.getTranslateY() + y < -85){
+                cantMove = true;
+            }
+            if(player.getTranslateX() + x > 135 && player.getTranslateY() + y > 0){
+                cantMove = true;
+            }
+
+        }
+
+        return cantMove;
+    }
+
+
     public void movePlayer(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {
             case UP:
@@ -125,6 +190,7 @@ public class Controller {
                 break;
         }
         NewRoom();
+        moveBlock(2,2);
     }
 
     private void NewRoom() {
