@@ -8,6 +8,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import sample.domain.*;
 import sample.domain.Rooms.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,6 +36,7 @@ public class Controller {
 
     @FXML
     public ImageView player = new ImageView("file:" + playerObject.getImage());
+
 
     public void initialize() {
         player.setImage(new Image("file:" + playerObject.getImage()));
@@ -95,7 +97,7 @@ public class Controller {
                 north = true;
                 west = false;
                 east = false;
-                System.out.println(player.getTranslateY());
+                System.out.println("y =  " + player.getTranslateY() + " x = " + player.getTranslateX());
                 break;
             case DOWN:
             case S:
@@ -103,7 +105,7 @@ public class Controller {
                 south = true;
                 west = false;
                 east = false;
-                System.out.println(player.getTranslateY());
+                System.out.println("y =  " + player.getTranslateY() + " x = " + player.getTranslateX());
                 break;
             case LEFT:
             case A:
@@ -111,7 +113,7 @@ public class Controller {
                 east = true;
                 north = false;
                 south = false;
-                System.out.println(player.getTranslateX());
+                System.out.println("y =  " + player.getTranslateY() + " x = " + player.getTranslateX());
                 break;
             case RIGHT:
             case D:
@@ -119,20 +121,34 @@ public class Controller {
                 west = true;
                 north = false;
                 south = false;
-                System.out.println(player.getTranslateX());
+                System.out.println("y =  " + player.getTranslateY() + " x = " + player.getTranslateX());
                 break;
         }
         NewRoom();
     }
 
     private void NewRoom() {
-        if (player.getTranslateY() < -208 && player.getTranslateX() > -150 && player.getTranslateX() < -10) {
+        //North
+        if (Main.game.getCurrentRoom() instanceof RoadBuild && player.getTranslateY() < -202 && player.getTranslateX() > -142.5 && player.getTranslateX() < -82.5) {
             changeNorth();
-        } else if (player.getTranslateY() > 208 && player.getTranslateX() > -140 && player.getTranslateX() < 20) {
+        } else if (Main.game.getCurrentRoom() instanceof Sdu && player.getTranslateY() < -158 && player.getTranslateX() > -80 && player.getTranslateX() < 14) {
+            changeNorth();
+        //South
+        } else if (Main.game.getCurrentRoom() instanceof RoadBuild && player.getTranslateY() > 208 && player.getTranslateX() > -80 && player.getTranslateX() < 14) {
             changeSouth();
-        } else if (player.getTranslateX() < -328 && player.getTranslateY() > -60 && player.getTranslateY() < 0) {
+        } else if (Main.game.getCurrentRoom() instanceof Park && player.getTranslateY() > 208 && player.getTranslateX() > -142.5 && player.getTranslateX() < -82.5) {
+            changeSouth();
+        } else if (Main.game.getCurrentRoom() instanceof Park && player.getTranslateY() > 208 && player.getTranslateX() > 68 && player.getTranslateX() < 126) {
+            changeSouth();
+        //West
+        } else if (player.getTranslateX() < -328 && player.getTranslateY() > -116.5 && player.getTranslateY() < -61.5) {
             changeWest();
-        } else if (player.getTranslateX() > 328 && player.getTranslateY() > -60 && player.getTranslateY() < 0) {
+        } else if (Main.game.getCurrentRoom() instanceof Town && player.getTranslateX() < -328 && player.getTranslateY() > -64 && player.getTranslateY() < -8) {
+            changeWest();
+        //East
+        } else if (player.getTranslateX() > 328 && player.getTranslateY() > -116.5 && player.getTranslateY() < -61.5) {
+            changeEast();
+        } else if (Main.game.getCurrentRoom() instanceof Park && player.getTranslateX() > 328 && player.getTranslateY() > -64 && player.getTranslateY() < -8) {
             changeEast();
         }
     }
@@ -178,7 +194,13 @@ public class Controller {
 
     public void changeSouth() {
         if (!(Main.game.getCurrentRoom() instanceof Beach || Main.game.getCurrentRoom() instanceof Farm || Main.game.getCurrentRoom() instanceof Town || Main.game.getCurrentRoom() instanceof Sdu)) {
-            player.setTranslateY(-204);
+            player.setTranslateY(-200);
+        }
+        if (Main.game.getCurrentRoom() instanceof Park){
+            player.setTranslateX(-117.5);
+        }
+        if (Main.game.getCurrentRoom() instanceof RoadBuild){
+            player.setTranslateY(-150);
         }
         Game.changedRoom = "south";
         Main.game.goRoom();
@@ -188,7 +210,7 @@ public class Controller {
 
     public void changeWest() {
         if (!(Main.game.getCurrentRoom() instanceof Beach || Main.game.getCurrentRoom() instanceof Sdu || Main.game.getCurrentRoom() instanceof Park)) {
-            player.setTranslateX(330);
+            player.setTranslateX(327);
         }
         Game.changedRoom = "west";
         Main.game.goRoom();
@@ -198,7 +220,7 @@ public class Controller {
 
     public void changeEast() {
         if (!(Main.game.getCurrentRoom() instanceof Sdu || Main.game.getCurrentRoom() instanceof Town || Main.game.getCurrentRoom() instanceof Farm)) {
-            player.setTranslateX(-330);
+            player.setTranslateX(-327);
         }
         Game.changedRoom = "east";
         Main.game.goRoom();
@@ -208,7 +230,7 @@ public class Controller {
 
     public void showRoadBuilderRoad() {
         if (Main.game.getCurrentRoom() instanceof RoadBuild) {
-            roadView.setViewport(new Rectangle2D(-681 + (RoadBuilder.getInventoryCount()*22.7), 0, 681, 69));
+            roadView.setViewport(new Rectangle2D(-681 + (RoadBuilder.getInventoryCount() * 22.7), 0, 681, 69));
         } else {
             roadView.setViewport(new Rectangle2D(-681, 0, 681, 69));
         }
