@@ -43,6 +43,7 @@ public class Player {
         if (room.getPlasticInRoom().size() > 0) {
             plasticInv.add(piece);
             room.removePlastic(piece);
+            System.out.println(plasticInv.size());
         } else {
             System.out.println("This room is empty");
         }

@@ -131,6 +131,23 @@ public class Controller {
         }
     };
 
+    public void collectPlastic(List<Plastic> plasticList) {
+        ImageView[] plas = {plas1, plas2, plas3, plas4, plas5, plas6, plas7, plas8, plas9, plas10, plas11, plas12, plas13, plas14, plas15,
+                plas16, plas17, plas18, plas19, plas20};
+        for (int i = 0; i < plas.length; i++) {
+            if (plas[i].getTranslateX() - 15 <= player.getTranslateX() && plas[i].getTranslateX() + 15 >= player.getTranslateX()) {
+                if (plas[i].getTranslateY() - 15 <= player.getTranslateY() && plas[i].getTranslateY() + 15 >= player.getTranslateY()) {
+                    try {
+                        playerObject.plasticCollect(plasticList.get(i), Main.game.getCurrentRoom());
+                        plas[i].setTranslateX(3000);
+                    } catch(IndexOutOfBoundsException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+    }
+
     public void movePlayer(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {
             case UP:
@@ -165,9 +182,12 @@ public class Controller {
                 south = false;
                 System.out.println(player.getTranslateX());
                 break;
+            case SPACE:
+                collectPlastic(Main.game.placePlastic());
         }
         NewRoom();
     }
+
 
     private void NewRoom() {
         if (player.getTranslateY() < -208 && player.getTranslateX() > -150 && player.getTranslateX() < -10) {
