@@ -462,6 +462,28 @@ public class Controller {
         }
     }
 
+    public void showProfessor(){
+        professorNpc.setTranslateX(3000);
+        if (Main.game.getCurrentRoom() instanceof Sdu){
+            professorNpc.setTranslateX(30);
+        }
+    }
+
+    public void showMechanic() {
+        mechanicNpc.setTranslateX(3000);
+        if (Main.game.getCurrentRoom() instanceof Town){
+            mechanicNpc.setTranslateX(169);
+            mechanicNpc.setTranslateY(20);
+        }
+    }
+
+    public void showFarmer(){
+        farmerNpc.setTranslateX(3000);
+        if (Main.game.getCurrentRoom() instanceof Farm){
+            farmerNpc.setTranslateX(190);
+            farmerNpc.setTranslateY(2);
+        }
+    }
     // Det under er alle plastik imageviews. Det er placeret her, da der er alt for mange, og der skal undersøges om det ikke kan gøres på en smart måde, så vi
     // ikke skal have 20 imageview
 
