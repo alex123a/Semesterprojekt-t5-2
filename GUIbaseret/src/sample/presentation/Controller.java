@@ -64,6 +64,12 @@ public class Controller {
             inventory.setOpacity(0);
         }
         backgroundRoom.setImage(new Image("file:src/sample/presentation/pictures/Backgrounds/StartScreen.png"));
+        professorNpc.setImage(new Image("file:" + professorObject.getImage()));
+        professorNpc.setTranslateX(3000);
+        mechanicNpc.setImage(new Image("file:" + mechanicObject.getImage()));
+        mechanicNpc.setTranslateX(3000);
+        farmerNpc.setImage(new Image("file:" + farmerObject.getImage()));
+        farmerNpc.setTranslateX(3000);
     }
 
     public void generatePlasticInRoom(List<Plastic> plasticList) {
@@ -411,6 +417,9 @@ public class Controller {
         backgroundRoom.setImage(new Image("file:" + background));
         showRoadBuilderRoad();
         generatePlasticInRoom(Main.game.placePlastic());
+        showFarmer();
+        showProfessor();
+        showMechanic();
     }
 
     public void changeSouth() {
@@ -428,6 +437,7 @@ public class Controller {
         backgroundRoom.setImage(new Image("file:" + background));
         showRoadBuilderRoad();
         generatePlasticInRoom(Main.game.placePlastic());
+
     }
 
     public void changeWest() {
@@ -453,6 +463,9 @@ public class Controller {
     }
 
     public void showRoadBuilderRoad() {
+        showFarmer();
+        showProfessor();
+        showMechanic();
         roadView.setViewport(new Rectangle2D(-681, 0, 681, 69));
         roadBuilderView.setViewport(new Rectangle2D(0,0,484,323));
         if (Main.game.getCurrentRoom() instanceof RoadBuild) {
