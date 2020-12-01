@@ -31,7 +31,6 @@ public class Controller {
     private long animationWalk = 0;
     private long animationRoadbuilder = 0;
     private boolean gameNotStarted = true;
-    private boolean stopAnimation = false;
     private ObservableList<ImageView> inventoryObservable = FXCollections.observableList(new ArrayList<ImageView>());
 
     @FXML
@@ -445,7 +444,7 @@ public class Controller {
         if (Main.game.getCurrentRoom() instanceof RoadBuild) {
             roadbuilderTimer.start();
             System.out.println("test 1");
-            if (stopAnimation) {
+            if (animationRoadbuilder == playerObject.getPlasticInv().size()*10) {
                 roadbuilderTimer.stop();
                 System.out.println("afslut");
             }
@@ -460,19 +459,16 @@ public class Controller {
         @Override
         public void handle(long l) {
             if (roadBuilder.getInventoryCount() < 30 && animationRoadbuilder < playerObject.getPlasticInv().size()*10) {
-                while (animationRoadbuilder == playerObject.getPlasticInv().size()*10) {
-                    if (animationRoadbuilder % 13 == 0) {
-                        System.out.println("handler");
-                        roadView.setViewport(new Rectangle2D(-681 + (roadBuilder.getInventoryCount() * 22.7), 0, 681, 69));
-                        if (RoadBuilder.getInventoryCount() < 5) {
-                            roadBuilderView.setTranslateX(300);
-                        } else {
-                            roadBuilderView.setTranslateX(300 - ((roadBuilder.getInventoryCount() * 22.7) - 90));
-                        }
+                if (animationRoadbuilder % 13 == 0) {
+                    System.out.println("handler");
+                    roadView.setViewport(new Rectangle2D(-681 + (roadBuilder.getInventoryCount() * 22.7), 0, 681, 69));
+                    if (RoadBuilder.getInventoryCount() < 5) {
+                        roadBuilderView.setTranslateX(300);
+                    } else {
+                        roadBuilderView.setTranslateX(300 - ((roadBuilder.getInventoryCount() * 22.7) - 90));
                     }
-                    animationRoadbuilder++;
                 }
-                stopAnimation = true;
+                animationRoadbuilder++;
             }
 
         }
