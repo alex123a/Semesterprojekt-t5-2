@@ -16,10 +16,8 @@ public class Plastic {
     public Plastic(String name, String image) {
         this.name = name;
         this.image = image;
-        Random random = new Random();
-        this.position[0] = random.nextInt( 320 + 320 + 1) - 320;
-        this.position[1] = random.nextInt(200 + 200 + 1) - 200;
         counter++;
+        this.newPosition();
     }
 
     @Override
@@ -57,5 +55,11 @@ public class Plastic {
 
     public static void setCounter(int counter) {
         Plastic.counter = counter;
+    }
+
+    public void newPosition() {
+        Random random = new Random();
+        this.position[0] = random.nextInt( 320 + 320 + 1) - 320;
+        this.position[1] = random.nextInt(200 + 200 + 1) - 200;
     }
 }
