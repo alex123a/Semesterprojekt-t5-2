@@ -1,6 +1,8 @@
 package sample.presentation;
 
 import javafx.animation.AnimationTimer;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -10,6 +12,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 import sample.domain.*;
 import sample.domain.PlasticElements.Plastic;
 import sample.domain.Rooms.*;
@@ -27,10 +30,13 @@ public class Controller {
     private boolean north, south, east, west;
     private String[] direction = {"North", "South", "West", "East"};
     private SpriteAnimation playerAnimation = new SpriteAnimation(direction[0]);
+    private FireAnimation fireAnimation = new FireAnimation();
     private int[] numbersPlayer;
+    private double[] numbersFire;
     private long animationWalk = 0;
     private boolean gameNotStarted = true;
     private ObservableList<ImageView> inventoryObservable = FXCollections.observableList(new ArrayList<ImageView>());
+    private long animationFireSmoke = 0;
 
     @FXML
     private ImageView backgroundRoom = new ImageView("file:");
@@ -42,6 +48,8 @@ public class Controller {
     public ImageView player = new ImageView("file:" + playerObject.getImage());
     @FXML
     public ListView inventory = new ListView();
+    @FXML
+    public ImageView smoke = new ImageView("file:src/sample/presentation/pictures/fireSmoke.png");
 
 
 
@@ -245,6 +253,23 @@ public class Controller {
         return cantMove;
     }
 
+    public void smokeMachine() {
+        Timeline timeline = new Timeline();
+        int FPS = 60;
+        KeyFrame frame = new KeyFrame(Duration.millis(1000 / FPS), event -> {
+            if (animationFireSmoke % 13 == 0) {
+                numbersFire = fireAnimation.changePic();
+                smoke.setViewport(new Rectangle2D(numbersFire[0], numbersFire[1], numbersFire[2], numbersFire[3]));
+            }
+            smoke.setTranslateX(roadBuilderView.getTranslateX() + 40);
+            smoke.setTranslateY(roadBuilderView.getTranslateY() - 45);
+            animationFireSmoke++;
+        });
+
+        timeline.setCycleCount(timeline.INDEFINITE);
+        timeline.getKeyFrames().add(frame); //This was the offending line.
+        timeline.play();
+    }
 
     public void movePlayer(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {
@@ -337,6 +362,8 @@ public class Controller {
         roadBuilderView.setImage(new Image("file:" + roadBuilder.getImage()));
         //plas1.setImage(new Image("file:" + "src/sample/presentation/pictures/plastic/cleaningPlastic.png"));
         generatePlasticInRoom(Main.game.placePlastic());
+        smoke.setImage(new Image("file:src/sample/presentation/pictures/fireSmoke.png"));
+        smokeMachine();
         Timer.setStartTime(); // tid starter til highscorelisten
     }
 

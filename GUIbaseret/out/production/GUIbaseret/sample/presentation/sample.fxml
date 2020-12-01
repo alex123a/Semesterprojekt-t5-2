@@ -17,6 +17,7 @@
             <ImageView fx:id="backgroundRoom" fitHeight="500.0" fitWidth="720.0" pickOnBounds="true" preserveRatio="true"></ImageView>
             <ImageView fx:id="roadView" fitHeight="77.0" fitWidth="707.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fx:id="roadBuilderView" translateY="-30" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true"/>
+            <ImageView fx:id="smoke" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
 
             <!--> Man kan 100% gøre det under smartere <-->
             <ImageView fx:id="plast1" pickOnBounds="true" preserveRatio="true"/>
