@@ -9,6 +9,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.shape.Rectangle;
 import sample.domain.*;
 import sample.domain.PlasticElements.Plastic;
 import sample.domain.Rooms.*;
@@ -64,6 +65,24 @@ public class Controller {
                 plas[i].setTranslateY(plasticList.get(i).getPosition()[1]);
                 plas[i].setFitHeight(30);
                 plas[i].setFitWidth(30);
+                // Kode til at give plastik ny position hvis de falder inden for no go zonerne.
+                if (moveBlock(plas[i].getTranslateX(), plas[i].getTranslateY(), 0 , -2)) {
+                    plasticList.get(i).newPosition();
+                    generatePlasticInRoom(plasticList);
+                    break;
+                } else if (moveBlock(plas[i].getTranslateX(), plas[i].getTranslateY(), 0 , 2)) {
+                    plasticList.get(i).newPosition();
+                    generatePlasticInRoom(plasticList);
+                    break;
+                } else if (moveBlock(plas[i].getTranslateX(), plas[i].getTranslateY(), -2 , 0)) {
+                    plasticList.get(i).newPosition();
+                    generatePlasticInRoom(plasticList);
+                    break;
+                } else if (moveBlock(plas[i].getTranslateX(), plas[i].getTranslateY(), 2 , 0)) {
+                    plasticList.get(i).newPosition();
+                    generatePlasticInRoom(plasticList);
+                    break;
+                }
             }
         }
     }
@@ -83,38 +102,46 @@ public class Controller {
         public void handle(long l) {
             if (north && player.getTranslateY() > -220) {
                 playerAnimation.setDirection(direction[0]);
-                if (animationWalk % 13 == 0) {
-                    numbersPlayer = playerAnimation.changePic();
-                    player.setViewport(new Rectangle2D(numbersPlayer[0], numbersPlayer[1], numbersPlayer[2], numbersPlayer[3]));
+                if (!moveBlock(player.getTranslateX(), player.getTranslateY(), 0, -2)) {
+                    if (animationWalk % 13 == 0) {
+                        numbersPlayer = playerAnimation.changePic();
+                        player.setViewport(new Rectangle2D(numbersPlayer[0], numbersPlayer[1], numbersPlayer[2], numbersPlayer[3]));
+                    }
+                    player.setTranslateY(player.getTranslateY() - 2.5);
                 }
-                player.setTranslateY(player.getTranslateY() - 2.5);
                 animationWalk++;
             }
             if (south && player.getTranslateY() < 220) {
                 playerAnimation.setDirection(direction[1]);
-                if (animationWalk % 13 == 0) {
-                    numbersPlayer = playerAnimation.changePic();
-                    player.setViewport(new Rectangle2D(numbersPlayer[0], numbersPlayer[1], numbersPlayer[2], numbersPlayer[3]));
+                if (!moveBlock(player.getTranslateX(), player.getTranslateY(), 0, 2)) {
+                    if (animationWalk % 13 == 0) {
+                        numbersPlayer = playerAnimation.changePic();
+                        player.setViewport(new Rectangle2D(numbersPlayer[0], numbersPlayer[1], numbersPlayer[2], numbersPlayer[3]));
+                    }
+                    player.setTranslateY(player.getTranslateY() + 2.5);
                 }
-                player.setTranslateY(player.getTranslateY() + 2.5);
                 animationWalk++;
             }
             if (east && player.getTranslateX() > -340) {
                 playerAnimation.setDirection(direction[2]);
-                if (animationWalk % 13 == 0) {
-                    numbersPlayer = playerAnimation.changePic();
-                    player.setViewport(new Rectangle2D(numbersPlayer[0], numbersPlayer[1], numbersPlayer[2], numbersPlayer[3]));
+                if (!moveBlock(player.getTranslateX(), player.getTranslateY(), -2, 0)) {
+                    if (animationWalk % 13 == 0) {
+                        numbersPlayer = playerAnimation.changePic();
+                        player.setViewport(new Rectangle2D(numbersPlayer[0], numbersPlayer[1], numbersPlayer[2], numbersPlayer[3]));
+                    }
+                    player.setTranslateX(player.getTranslateX() - 2.5);
                 }
-                player.setTranslateX(player.getTranslateX() - 2.5);
                 animationWalk++;
             }
             if (west && player.getTranslateX() < 340) {
                 playerAnimation.setDirection(direction[3]);
-                if (animationWalk % 13 == 0) {
-                    numbersPlayer = playerAnimation.changePic();
-                    player.setViewport(new Rectangle2D(numbersPlayer[0], numbersPlayer[1], numbersPlayer[2], numbersPlayer[3]));
+                if (!moveBlock(player.getTranslateX(), player.getTranslateY(), 2, 0)) {
+                    if (animationWalk % 13 == 0) {
+                        numbersPlayer = playerAnimation.changePic();
+                        player.setViewport(new Rectangle2D(numbersPlayer[0], numbersPlayer[1], numbersPlayer[2], numbersPlayer[3]));
+                    }
+                    player.setTranslateX(player.getTranslateX() + 2.5);
                 }
-                player.setTranslateX(player.getTranslateX() + 2.5);
                 animationWalk++;
             }
 
@@ -154,6 +181,70 @@ public class Controller {
             System.out.println("I can't lift more!!!!");
         }
     }
+
+    public boolean moveBlock(double objx, double objy, int x, int y) {
+        boolean cantMove = false;
+        if (Main.game.getCurrentRoom() instanceof RoadBuild) {
+            // tree in top left conor.
+            if (objx + x < -150 && objy + y < -90) {
+                cantMove = true;
+                //Wall 1
+            } else if (objx + x > 10 && objy + y > 205) {
+                cantMove = true;
+                // Wall 2
+            } else if (objx + x < -25 && objy + y > 205) {
+                cantMove = true;
+            }
+        }
+        if (Main.game.getCurrentRoom() instanceof Beach)
+            // Beach
+            if (objx + x < -95 && objy + y > -340) {
+                cantMove = true;
+            }
+
+        if (Main.game.getCurrentRoom() instanceof Farm) {
+            // Farmené
+            Rectangle field = new Rectangle(-176,-64,250,160);
+            if(field.contains(objx + x,objy + y)){
+                   cantMove = true;
+            }
+        }
+
+        if(Main.game.getCurrentRoom() instanceof Farm){
+            if(objx + x > 115 && objy + y < -36){
+                cantMove = true;
+            }
+        }
+        //Sdu's vægge
+        if(Main.game.getCurrentRoom() instanceof Sdu){
+            if(objx + x < -50 && objy + y <-190){
+                cantMove = true;
+            }
+            if(objx + x > 20 && objy + y <-190){
+                cantMove = true;
+            }
+        }
+
+        if(Main.game.getCurrentRoom() instanceof Park){
+            if(objx + x < -150 && objy + y < -85){
+                cantMove = true;
+            }
+            if(objx + x < -150 && objy + y > 0){
+                cantMove = true;
+            }
+
+            if(objx + x > 135 && objy + y < -85){
+                cantMove = true;
+            }
+            if(objx + x > 135 && objy + y > 0){
+                cantMove = true;
+            }
+
+        }
+
+        return cantMove;
+    }
+
 
     public void movePlayer(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {
