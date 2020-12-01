@@ -5,7 +5,7 @@ public class WaterBottle extends Plastic {
 
 
     public WaterBottle() {
-        super("Water bottle", "src/sample/presentation/pictures/plastic/waterBottle.png");
+        super("Water bottle");
         counterForWaterBottles++;
     }
 

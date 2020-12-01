@@ -12,14 +12,14 @@ public class Beach extends Room {
     }
 
     public Plastic[] generatePlasticArray() {
-        int sodaBottles = 2 + (int) (Math.random() * ((6 - 2) + 1));
+        int juiceBottles = 2 + (int) (Math.random() * ((6 - 2) + 1));
         int milkBottles = 2 + (int) (Math.random() * ((4 - 2) + 1));
         int waterBottles = 5 + (int) (Math.random() * ((10 - 5) + 1));
-        numberOfPlastic = new Plastic[sodaBottles + milkBottles + waterBottles];
+        numberOfPlastic = new Plastic[juiceBottles + milkBottles + waterBottles];
         for (int i = 0; i < numberOfPlastic.length; i++) {
-            if (i < sodaBottles) {
-                numberOfPlastic[i] = new SodaBottle();
-            } else if (i >= sodaBottles && i < milkBottles + sodaBottles) {
+            if (i < juiceBottles) {
+                numberOfPlastic[i] = new JuiceBottle();
+            } else if (i >= juiceBottles && i < milkBottles + juiceBottles) {
                 numberOfPlastic[i] = new MilkBottle();
             } else {
                 numberOfPlastic[i] = new WaterBottle();

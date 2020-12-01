@@ -2,6 +2,7 @@ package sample.domain.Rooms;
 
 import sample.domain.PlasticElements.*;
 import sample.domain.Room;
+import sample.presentation.Controller;
 
 public class RoadBuild extends Room {
     private Plastic[] numberOfPlastic;
@@ -12,12 +13,12 @@ public class RoadBuild extends Room {
     }
 
     public Plastic[] generatePlasticArray() {
-        int sodaBottles = 4 + (int) (Math.random() * ((5 - 4) + 1));
+        int juiceBottles = 4 + (int) (Math.random() * ((5 - 4) + 1));
         int waterBottles = 3 + (int) (Math.random() * ((5 - 3) + 1));
-        numberOfPlastic = new Plastic[waterBottles + sodaBottles];
+        numberOfPlastic = new Plastic[waterBottles + juiceBottles];
 
         for (int i = 0; i < numberOfPlastic.length; i++) {
-            numberOfPlastic[i] = i < numberOfPlastic.length/2 ? new WaterBottle() : new SodaBottle();
+            numberOfPlastic[i] = i < numberOfPlastic.length/2 ? new WaterBottle() : new JuiceBottle();
         }
 
         return numberOfPlastic;

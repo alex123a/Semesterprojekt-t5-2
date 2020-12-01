@@ -12,7 +12,7 @@ public class Professor extends NPC {
         super(name, "src/sample/presentation/pictures/npc/Professor.png");
     }
     @Override
-    public String description(String command) {
+    public void description(String command) {
         if (!super.getTalking()){
             try {
                 setTalking(true);
@@ -44,7 +44,6 @@ public class Professor extends NPC {
                 System.out.println("Could not find text file");
             }
         }
-        return command;
     }
 
 

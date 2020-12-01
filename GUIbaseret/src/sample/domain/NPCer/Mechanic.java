@@ -17,7 +17,7 @@ public class Mechanic extends NPC {
     }
 
     @Override
-    public String description(String command) {
+    public void description(String command) {
         if (!super.getTalking()) {
             try {
                 setTalking(true);
@@ -60,7 +60,6 @@ public class Mechanic extends NPC {
         } else {
             System.out.println("Unknown conversation");
         }
-        return command;
     }
 
     @Override

@@ -4,7 +4,7 @@ public class CleaningPlastic extends Plastic {
     private static int counterForCleaningPlastic = 0;
 
     public CleaningPlastic() {
-        super("Cleaning plastic", "src/sample/presentation/pictures/plastic/cleaningPlastic.png");
+        super("Cleaning plastic");
         counterForCleaningPlastic++;
     }
 

@@ -9,10 +9,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="lib" level="project" />
     <orderEntry type="library" name="javafx" level="project" />
-<<<<<<< HEAD
     <orderEntry type="library" name="lib2" level="project" />
-=======
-    <orderEntry type="library" name="javafx" level="project" />
->>>>>>> master
   </component>
 </module>
