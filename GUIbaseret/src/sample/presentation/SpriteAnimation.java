@@ -41,7 +41,7 @@ public class SpriteAnimation {
         }
 
         // System.out.println("Width " + whichPicWidth + " height " + whichPicHeight);
-
+        
         count++;
         int[] numbers = {whichPicWidth, whichPicHeight, picWidth, picHeight};
         return numbers;
