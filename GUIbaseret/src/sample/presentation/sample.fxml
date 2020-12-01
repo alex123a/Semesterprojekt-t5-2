@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -12,7 +11,7 @@
 
 <GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.presentation.Controller">
    <children>
-      <StackPane>
+      <StackPane onKeyPressed="#movePlayer" onKeyReleased="#stopPlayer">
          <children>
             <ImageView fx:id="backgroundRoom" fitHeight="500.0" fitWidth="720.0" pickOnBounds="true" preserveRatio="true"></ImageView>
             <ImageView fx:id="roadView" fitHeight="77.0" fitWidth="707.0" pickOnBounds="true" preserveRatio="true" />
@@ -48,7 +47,6 @@
             </AnchorPane>
          </children>
       </StackPane>
-      <TabPane layoutX="29.0" layoutY="-1.0" onKeyPressed="#movePlayer" onKeyReleased="#stopPlayer" /><!--TabPane only for movement with arrows, because the other Panes is not in focus to use arrow keys-->
    </children>
    <columnConstraints>
       <ColumnConstraints />

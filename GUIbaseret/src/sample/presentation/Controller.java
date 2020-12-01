@@ -1,13 +1,17 @@
-package sample.presentation;
++package sample.presentation;
 
 import javafx.animation.AnimationTimer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.geometry.Bounds;
+import javafx.geometry.Point2D;
+import javafx.geometry.Point3D;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import sample.domain.*;
 import sample.domain.PlasticElements.Plastic;
@@ -15,16 +19,15 @@ import sample.domain.Rooms.*;
 import javafx.geometry.Orientation;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Controller {
 
     public static List<String> roomExit = new ArrayList<>();
     public static String background;
-    public static Road road = new Road();
-    public static Player playerObject = new Player();
-    public static RoadBuilder roadBuilder = new RoadBuilder();
     private boolean north, south, east, west;
+    public static Player playerObject = new Player();
     private String[] direction = {"North", "South", "West", "East"};
     private SpriteAnimation playerAnimation = new SpriteAnimation(direction[0]);
     private int[] numbersPlayer;
@@ -42,7 +45,6 @@ public class Controller {
     public ImageView player = new ImageView("file:" + playerObject.getImage());
     @FXML
     public ListView inventory = new ListView();
-
 
 
     public void initialize() {
@@ -84,39 +86,35 @@ public class Controller {
         public void handle(long l) {
             if (north && player.getTranslateY() > -220) {
                 playerAnimation.setDirection(direction[0]);
-                if (animationWalk % 13 == 0) {
-                    numbersPlayer = playerAnimation.changePic();
+                numbersPlayer = playerAnimation.changePic();
+                if (!moveBlock(0, -2)) {
                     player.setViewport(new Rectangle2D(numbersPlayer[0], numbersPlayer[1], numbersPlayer[2], numbersPlayer[3]));
+                    player.setTranslateY(player.getTranslateY() - 2);
                 }
-                player.setTranslateY(player.getTranslateY() - 2.5);
-                animationWalk++;
             }
             if (south && player.getTranslateY() < 220) {
                 playerAnimation.setDirection(direction[1]);
-                if (animationWalk % 13 == 0) {
-                    numbersPlayer = playerAnimation.changePic();
+                numbersPlayer = playerAnimation.changePic();
+                if (!moveBlock(0, 2)) {
                     player.setViewport(new Rectangle2D(numbersPlayer[0], numbersPlayer[1], numbersPlayer[2], numbersPlayer[3]));
+                    player.setTranslateY(player.getTranslateY() + 2);
                 }
-                player.setTranslateY(player.getTranslateY() + 2.5);
-                animationWalk++;
             }
             if (east && player.getTranslateX() > -340) {
                 playerAnimation.setDirection(direction[2]);
-                if (animationWalk % 13 == 0) {
-                    numbersPlayer = playerAnimation.changePic();
+                numbersPlayer = playerAnimation.changePic();
+                if (!moveBlock(-2, 0)) {
                     player.setViewport(new Rectangle2D(numbersPlayer[0], numbersPlayer[1], numbersPlayer[2], numbersPlayer[3]));
+                    player.setTranslateX(player.getTranslateX() - 2);
                 }
-                player.setTranslateX(player.getTranslateX() - 2.5);
-                animationWalk++;
             }
             if (west && player.getTranslateX() < 340) {
                 playerAnimation.setDirection(direction[3]);
-                if (animationWalk % 13 == 0) {
-                    numbersPlayer = playerAnimation.changePic();
+                numbersPlayer = playerAnimation.changePic();
+                if (!moveBlock(2, 0)) {
                     player.setViewport(new Rectangle2D(numbersPlayer[0], numbersPlayer[1], numbersPlayer[2], numbersPlayer[3]));
+                    player.setTranslateX(player.getTranslateX() + 2);
                 }
-                player.setTranslateX(player.getTranslateX() + 2.5);
-                animationWalk++;
             }
 
         }
@@ -156,9 +154,78 @@ public class Controller {
         }
     }
 
+    public boolean moveBlock(int x, int y) {
+        boolean cantMove = false;
+        if (Main.game.getCurrentRoom() instanceof RoadBuild) {
+            // træ i højre hjørne
+            if (player.getTranslateX() + x < -150 && player.getTranslateY() + y < -90) {
+                cantMove = true;
+                //væg 1
+            } else if (player.getTranslateX() + x > 10 && player.getTranslateY() + y > 205) {
+                cantMove = true;
+                // væg 2
+            } else if (player.getTranslateX() + x < -25 && player.getTranslateY() + y > 205) {
+                cantMove = true;
+            }
+        }
+        if (Main.game.getCurrentRoom() instanceof Beach)
+            // Havet
+            if (player.getTranslateX() + x < -95 && player.getTranslateY() + y > -340) {
+                cantMove = true;
+            }
+
+        if (Main.game.getCurrentRoom() instanceof Farm) {
+            // Farmené
+            Rectangle field = new Rectangle(-176,-64,250,160);
+          //  field.setTranslateX(-160);
+          //  field.setTranslateY(-62);
+            if(field.contains(player.getTranslateX() + x,player.getTranslateY() + y)){
+                System.out.println("Hej");
+                   cantMove = true;
+            }
+
+
+        }
+
+
+        if(Main.game.getCurrentRoom() instanceof Farm){
+            if(player.getTranslateX() + x > 115 && player.getTranslateY() + y < -36){
+                cantMove = true;
+            }
+        }
+        //Sdu's vægge
+        if(Main.game.getCurrentRoom() instanceof Sdu){
+            if(player.getTranslateX() + x < -50 && player.getTranslateY() + y <-190){
+                cantMove = true;
+            }
+            if(player.getTranslateX() + x > 20 && player.getTranslateY() + y <-190){
+                cantMove = true;
+            }
+        }
+
+        if(Main.game.getCurrentRoom() instanceof Park){
+            if(player.getTranslateX() + x < -150 && player.getTranslateY() + y < -85){
+                cantMove = true;
+            }
+            if(player.getTranslateX() + x < -150 && player.getTranslateY() + y > 0){
+                cantMove = true;
+            }
+
+            if(player.getTranslateX() + x > 135 && player.getTranslateY() + y < -85){
+                cantMove = true;
+            }
+            if(player.getTranslateX() + x > 135 && player.getTranslateY() + y > 0){
+                cantMove = true;
+            }
+
+        }
+
+        return cantMove;
+    }
+
+
     public void movePlayer(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {
-            case UP:
             case W:
                 if (gameNotStarted) {
                     north = false;
@@ -166,11 +233,9 @@ public class Controller {
                 }
                 timer.start();
                 north = true;
-                west = false;
-                east = false;
-                System.out.println("y =  " + player.getTranslateY() + " x = " + player.getTranslateX());
+                System.out.println("x: " + player.getTranslateX());
+                System.out.println("y: " + player.getTranslateY());
                 break;
-            case DOWN:
             case S:
                 if (gameNotStarted) {
                     south = false;
@@ -178,11 +243,9 @@ public class Controller {
                 }
                 timer.start();
                 south = true;
-                west = false;
-                east = false;
-                System.out.println("y =  " + player.getTranslateY() + " x = " + player.getTranslateX());
+                System.out.println("y: " + player.getTranslateX());
+                System.out.println("x: " + player.getTranslateY());
                 break;
-            case LEFT:
             case A:
                 if (gameNotStarted) {
                     east = false;
@@ -190,11 +253,9 @@ public class Controller {
                 }
                 timer.start();
                 east = true;
-                north = false;
-                south = false;
-                System.out.println("y =  " + player.getTranslateY() + " x = " + player.getTranslateX());
+                System.out.println("y: " + player.getTranslateX());
+                System.out.println("x: " + player.getTranslateY());
                 break;
-            case RIGHT:
             case D:
                 if (gameNotStarted) {
                     west = false;
@@ -202,9 +263,8 @@ public class Controller {
                 }
                 timer.start();
                 west = true;
-                north = false;
-                south = false;
-                System.out.println("y =  " + player.getTranslateY() + " x = " + player.getTranslateX());
+                System.out.println("y: " + player.getTranslateX());
+                System.out.println("x: " + player.getTranslateY());
                 break;
             case SPACE:
                 if (gameNotStarted) {
@@ -233,52 +293,31 @@ public class Controller {
         //North
         if (Main.game.getCurrentRoom() instanceof RoadBuild && player.getTranslateY() < -202 && player.getTranslateX() > -142.5 && player.getTranslateX() < -82.5) {
             changeNorth();
-        } else if (Main.game.getCurrentRoom() instanceof Sdu && player.getTranslateY() < -158 && player.getTranslateX() > -80 && player.getTranslateX() < 14) {
-            changeNorth();
-        //South
-        } else if (Main.game.getCurrentRoom() instanceof RoadBuild && player.getTranslateY() > 208 && player.getTranslateX() > -80 && player.getTranslateX() < 14) {
+        } else if (player.getTranslateY() > 208 && player.getTranslateX() > -140 && player.getTranslateX() < 20) {
             changeSouth();
-        } else if (Main.game.getCurrentRoom() instanceof Park && player.getTranslateY() > 208 && player.getTranslateX() > -142.5 && player.getTranslateX() < -82.5) {
-            changeSouth();
-        } else if (Main.game.getCurrentRoom() instanceof Park && player.getTranslateY() > 208 && player.getTranslateX() > 68 && player.getTranslateX() < 126) {
-            changeSouth();
-        //West
-        } else if (player.getTranslateX() < -328 && player.getTranslateY() > -116.5 && player.getTranslateY() < -61.5) {
+        } else if (player.getTranslateX() < -328 && player.getTranslateY() > -60 && player.getTranslateY() < 0) {
             changeWest();
-        } else if (Main.game.getCurrentRoom() instanceof Town && player.getTranslateX() < -328 && player.getTranslateY() > -64 && player.getTranslateY() < -8) {
-            changeWest();
-        //East
-        } else if (player.getTranslateX() > 328 && player.getTranslateY() > -116.5 && player.getTranslateY() < -61.5) {
-            changeEast();
-        } else if (Main.game.getCurrentRoom() instanceof Park && player.getTranslateX() > 328 && player.getTranslateY() > -64 && player.getTranslateY() < -8) {
+        } else if (player.getTranslateX() > 328 && player.getTranslateY() > -60 && player.getTranslateY() < 0) {
             changeEast();
         }
     }
 
     public void stopPlayer(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {
-            case UP:
             case W:
                 timer.stop();
-                animationWalk = 0;
                 north = false;
                 break;
-            case DOWN:
             case S:
                 timer.stop();
-                animationWalk = 0;
                 south = false;
                 break;
-            case LEFT:
             case A:
                 timer.stop();
-                animationWalk = 0;
                 east = false;
                 break;
-            case RIGHT:
             case D:
                 timer.stop();
-                animationWalk = 0;
                 west = false;
                 break;
         }
@@ -297,13 +336,7 @@ public class Controller {
 
     public void changeSouth() {
         if (!(Main.game.getCurrentRoom() instanceof Beach || Main.game.getCurrentRoom() instanceof Farm || Main.game.getCurrentRoom() instanceof Town || Main.game.getCurrentRoom() instanceof Sdu)) {
-            player.setTranslateY(-200);
-        }
-        if (Main.game.getCurrentRoom() instanceof Park){
-            player.setTranslateX(-117.5);
-        }
-        if (Main.game.getCurrentRoom() instanceof RoadBuild){
-            player.setTranslateY(-150);
+            player.setTranslateY(-204);
         }
         Game.changedRoom = "south";
         Main.game.goRoom();
@@ -314,7 +347,7 @@ public class Controller {
 
     public void changeWest() {
         if (!(Main.game.getCurrentRoom() instanceof Beach || Main.game.getCurrentRoom() instanceof Sdu || Main.game.getCurrentRoom() instanceof Park)) {
-            player.setTranslateX(327);
+            player.setTranslateX(330);
         }
         Game.changedRoom = "west";
         Main.game.goRoom();
@@ -325,7 +358,7 @@ public class Controller {
 
     public void changeEast() {
         if (!(Main.game.getCurrentRoom() instanceof Sdu || Main.game.getCurrentRoom() instanceof Town || Main.game.getCurrentRoom() instanceof Farm)) {
-            player.setTranslateX(-327);
+            player.setTranslateX(-330);
         }
         Game.changedRoom = "east";
         Main.game.goRoom();
@@ -334,14 +367,6 @@ public class Controller {
         generatePlasticInRoom(Main.game.placePlastic());
     }
 
-    public void showRoadBuilderRoad() {
-        if (Main.game.getCurrentRoom() instanceof RoadBuild) {
-            roadView.setViewport(new Rectangle2D(-681 + (RoadBuilder.getInventoryCount() * 22.7), 0, 681, 69));
-        } else {
-            roadView.setViewport(new Rectangle2D(-681, 0, 681, 69));
-        }
-        showRoadBuilder();
-    }
 
     public void showRoadBuilder() {
         if (Main.game.getCurrentRoom() instanceof RoadBuild) {
