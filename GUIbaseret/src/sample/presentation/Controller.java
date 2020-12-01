@@ -63,6 +63,11 @@ public class Controller {
                 plas[i].setImage(new Image("file:" + plasticList.get(i).getImage()));
                 plas[i].setTranslateX(plasticList.get(i).getPosition()[0]);
                 plas[i].setTranslateY(plasticList.get(i).getPosition()[1]);
+
+                // Kode til at give plastik ny position hvis de falder inden for no go zonerne.
+
+
+
                 plas[i].setFitHeight(30);
                 plas[i].setFitWidth(30);
             }
