@@ -2,15 +2,16 @@ package sample.presentation;
 
 public class FireAnimation {
     private int count = 0;
-    private int widthNumPictures = 3;
-    private final double picWidth = 266.66;
-    private final double picHeight = 200.0;
+    private int widthNumPictures = 8;
+    private final double picWidth = 72.125;
+    private final double picHeight = 52.0;
 
     public double[] changePic() {
         double whichPicWidth = 0;
-        whichPicWidth = (count % 4) * picWidth;
+        double whichPicHeight = 0;
+        whichPicWidth = (count % 8) * picWidth;
         count++;
-        double[] numbers = {whichPicWidth, 0, picWidth, picHeight};
+        double[] numbers = {whichPicWidth, whichPicHeight, picWidth, picHeight};
         return numbers;
     }
 

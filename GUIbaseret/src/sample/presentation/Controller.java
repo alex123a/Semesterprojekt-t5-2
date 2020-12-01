@@ -49,7 +49,7 @@ public class Controller {
     @FXML
     public ListView inventory = new ListView();
     @FXML
-    public ImageView smoke = new ImageView("file:src/sample/presentation/pictures/fireSmoke.png");
+    public ImageView smoke = new ImageView("file:src/sample/presentation/pictures/buildSmoke.png");
 
 
 
@@ -260,9 +260,11 @@ public class Controller {
             if (animationFireSmoke % 13 == 0) {
                 numbersFire = fireAnimation.changePic();
                 smoke.setViewport(new Rectangle2D(numbersFire[0], numbersFire[1], numbersFire[2], numbersFire[3]));
+                double smokeHeight = roadBuilderView.getTranslateY() - numbersFire[0]/22 - 40;
+                double smokeWidth = roadBuilderView.getTranslateX() + numbersFire[0]/22 + 43;
+                smoke.setTranslateY(smokeHeight);
+                smoke.setTranslateX(smokeWidth);
             }
-            smoke.setTranslateX(roadBuilderView.getTranslateX() + 40);
-            smoke.setTranslateY(roadBuilderView.getTranslateY() - 45);
             animationFireSmoke++;
         });
 
@@ -362,7 +364,7 @@ public class Controller {
         roadBuilderView.setImage(new Image("file:" + roadBuilder.getImage()));
         //plas1.setImage(new Image("file:" + "src/sample/presentation/pictures/plastic/cleaningPlastic.png"));
         generatePlasticInRoom(Main.game.placePlastic());
-        smoke.setImage(new Image("file:src/sample/presentation/pictures/fireSmoke.png"));
+        smoke.setImage(new Image("file:src/sample/presentation/pictures/buildSmoke.png"));
         smokeMachine();
         Timer.setStartTime(); // tid starter til highscorelisten
     }
