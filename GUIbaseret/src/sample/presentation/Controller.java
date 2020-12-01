@@ -42,6 +42,14 @@ public class Controller {
     public ImageView player = new ImageView("file:" + playerObject.getImage());
     @FXML
     public ListView inventory = new ListView();
+    @FXML
+    public ImageView professorNpc = new ImageView("file:" + professorObject.getImage());
+
+    @FXML
+    public ImageView mechanicNpc = new ImageView("file:"+ mechanicObject.getImage());
+
+    @FXML
+    public ImageView farmerNpc = new ImageView("file:" + farmerObject.getImage());
 
 
 
