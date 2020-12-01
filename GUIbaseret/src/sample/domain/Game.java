@@ -1,5 +1,6 @@
 package sample.domain;
 
+import javafx.scene.image.ImageView;
 import sample.domain.NPCer.*;
 import sample.domain.PlasticElements.Plastic;
 import sample.domain.Rooms.*;
@@ -61,36 +62,6 @@ public class Game {
         currentRoom = RoadBuild;
     }
 
-    public void play() {
-        printWelcome();
-
-        boolean finished = false;
-        /*
-        while (!finished) {
-            RoadBuilder.damagedMachine();
-        }
-        */
-    }
-
-    private void printWelcome() {
-        Scanner reader;
-        try {
-            reader = new Scanner(welcomeMessage);
-            while (reader.hasNextLine()) {
-                System.out.println(reader.nextLine());
-            }
-            System.out.println();
-            reader.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("Cannot find the file");
-            e.printStackTrace();
-        }
-        // Controller.playerObject.setName();
-        Timer.setStartTime();
-    }
-
-
-
     private void printHelp() {
 
         Scanner reader;
@@ -105,6 +76,10 @@ public class Game {
             System.out.println("Cannot find the file");
             e.printStackTrace();
         }
+    }
+
+    public List<Plastic> placePlastic() {
+        return changedRoom != null ? currentRoom.getPlasticInRoom() : RoadBuild.getPlasticInRoom();
     }
 
     public void goRoom() {
@@ -127,14 +102,10 @@ public class Game {
         }
     }
 
-    public boolean givePlastic() {
+    public void givePlastic() {
         List<Plastic> plasticInv = Controller.playerObject.getPlasticInv();
-        int road = RoadBuilder.inventory(plasticInv);
+        RoadBuilder.inventory(plasticInv);
         Controller.playerObject.resetPlasticInv();
-        if (road >= roadDone) {
-            return true;
-        }
-        return false;
     }
 
     public static int getRoadDone() {
@@ -144,4 +115,6 @@ public class Game {
     public Room getCurrentRoom() {
         return currentRoom;
     }
+
+
 }

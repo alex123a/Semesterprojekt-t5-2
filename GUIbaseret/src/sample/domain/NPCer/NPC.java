@@ -18,7 +18,7 @@ public abstract class NPC {
         this.name = name;
     }
 
-    public abstract void description(String command);
+    public abstract String description(String command);
 
     public abstract String toString();
 

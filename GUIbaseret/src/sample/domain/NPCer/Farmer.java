@@ -23,7 +23,7 @@ public class Farmer extends NPC {
     }
 
     @Override
-    public void description(String command) {
+    public String description(String command) {
         if (!super.getTalking()) {
             try {
                 setTalking(true);
@@ -66,6 +66,7 @@ public class Farmer extends NPC {
         } else {
             System.out.println("Unknown conversation");
         }
+        return command;
     }
 
     @Override

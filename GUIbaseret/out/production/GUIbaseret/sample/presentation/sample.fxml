@@ -14,20 +14,47 @@
    <children>
       <StackPane>
          <children>
+<<<<<<< HEAD
             <ImageView fx:id="backgroundRoom" fitHeight="500.0" fitWidth="720.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@pictures/Backgrounds/RoadBuild.png" />
                </image>
             </ImageView>
+=======
+            <ImageView fx:id="backgroundRoom" fitHeight="500.0" fitWidth="720.0" pickOnBounds="true" preserveRatio="true"></ImageView>
+>>>>>>> master
             <ImageView fx:id="roadView" fitHeight="77.0" fitWidth="707.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fx:id="roadBuilderView" translateY="-30" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true"/>
+
+            <!--> Man kan 100% gøre det under smartere <-->
+            <ImageView fx:id="plast1" pickOnBounds="true" preserveRatio="true"/>
+            <ImageView fx:id="plast2" pickOnBounds="true" preserveRatio="true"/>
+            <ImageView fx:id="plast3" pickOnBounds="true" preserveRatio="true"/>
+            <ImageView fx:id="plast4" pickOnBounds="true" preserveRatio="true"/>
+            <ImageView fx:id="plast5" pickOnBounds="true" preserveRatio="true"/>
+            <ImageView fx:id="plast6" pickOnBounds="true" preserveRatio="true"/>
+            <ImageView fx:id="plast7" pickOnBounds="true" preserveRatio="true"/>
+            <ImageView fx:id="plast8" pickOnBounds="true" preserveRatio="true"/>
+            <ImageView fx:id="plast9" pickOnBounds="true" preserveRatio="true"/>
+            <ImageView fx:id="plast10" pickOnBounds="true" preserveRatio="true"/>
+            <ImageView fx:id="plast11" pickOnBounds="true" preserveRatio="true"/>
+            <ImageView fx:id="plast12" pickOnBounds="true" preserveRatio="true"/>
+            <ImageView fx:id="plast13" pickOnBounds="true" preserveRatio="true"/>
+            <ImageView fx:id="plast14" pickOnBounds="true" preserveRatio="true"/>
+            <ImageView fx:id="plast15" pickOnBounds="true" preserveRatio="true"/>
+            <ImageView fx:id="plast16" pickOnBounds="true" preserveRatio="true"/>
+            <ImageView fx:id="plast17" pickOnBounds="true" preserveRatio="true"/>
+            <ImageView fx:id="plast18" pickOnBounds="true" preserveRatio="true"/>
+            <ImageView fx:id="plast19" pickOnBounds="true" preserveRatio="true"/>
+            <ImageView fx:id="plast20" pickOnBounds="true" preserveRatio="true"/>
+
             <ImageView fx:id="player" fitHeight="45.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fx:id="professorNpc" fitHeight="45.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true"/>
             <ImageView fx:id="mechanicNpc" fitHeight="45.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true"/>
             <ImageView fx:id="farmerNpc" fitHeight="55.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true"/>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <ListView layoutX="77.0" layoutY="453.0" opacity="0.2" prefHeight="45.0" prefWidth="539.0" />
+                  <ListView fx:id="inventory" layoutX="210.0" layoutY="453.0" prefHeight="45.0" prefWidth="300.0" />
                </children>
             </AnchorPane>
          </children>
