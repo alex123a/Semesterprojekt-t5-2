@@ -14,7 +14,6 @@ import sample.domain.*;
 import sample.domain.PlasticElements.Plastic;
 import sample.domain.Rooms.*;
 import javafx.geometry.Orientation;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,13 +50,12 @@ public class Controller {
             inventory.setOpacity(0);
         }
         backgroundRoom.setImage(new Image("file:src/sample/presentation/pictures/Backgrounds/StartScreen.png"));
-        showRoadBuilderRoad();
     }
 
     public void generatePlasticInRoom(List<Plastic> plasticList) {
         clearPlasticInRoom();
-        ImageView[] plas = {plas1, plas2, plas3, plas4, plas5, plas6, plas7, plas8, plas9, plas10, plas11, plas12, plas13, plas14, plas15,
-                plas16, plas17, plas18, plas19, plas20};
+        ImageView[] plas = {plast1, plast2, plast3, plast4, plast5, plast6, plast7, plast8, plast9, plast10, plast11, plast12, plast13, plast14, plast15,
+                plast16, plast17, plast18, plast19, plast20};
 
         for (int i = 0; i < plasticList.size(); i++) {
             if (plasticList.get(i) != null) {
@@ -89,8 +87,8 @@ public class Controller {
     }
 
     public void clearPlasticInRoom() {
-        ImageView[] plas = {plas1, plas2, plas3, plas4, plas5, plas6, plas7, plas8, plas9, plas10, plas11, plas12, plas13, plas14, plas15,
-                plas16, plas17, plas18, plas19, plas20};
+        ImageView[] plas = {plast1, plast2, plast3, plast4, plast5, plast6, plast7, plast8, plast9, plast10, plast11, plast12, plast13, plast14, plast15,
+                plast16, plast17, plast18, plast19, plast20};
 
         for (ImageView image: plas) {
             image.setTranslateX(3000);
@@ -167,8 +165,8 @@ public class Controller {
 
     public void collectPlastic(List<Plastic> plasticList) {
         if (playerObject.getPlasticInv().size() < 10) {
-            ImageView[] plas = {plas1, plas2, plas3, plas4, plas5, plas6, plas7, plas8, plas9, plas10, plas11, plas12, plas13, plas14, plas15,
-                    plas16, plas17, plas18, plas19, plas20};
+            ImageView[] plas = {plast1, plast2, plast3, plast4, plast5, plast6, plast7, plast8, plast9, plast10, plast11, plast12, plast13, plast14, plast15,
+                    plast16, plast17, plast18, plast19, plast20};
             for (int i = 0; i < plas.length; i++) {
                 if (plas[i].getTranslateX() - 15 <= player.getTranslateX() && plas[i].getTranslateX() + 15 >= player.getTranslateX()) {
                     if (plas[i].getTranslateY() - 15 <= player.getTranslateY() && plas[i].getTranslateY() + 15 >= player.getTranslateY()) {
@@ -303,10 +301,23 @@ public class Controller {
                     inventory.setOpacity(0.4);
                     gameNotStarted = false;
                 }
+                if (player.getTranslateX() > roadBuilderView.getTranslateX()-50 && player.getTranslateX() < roadBuilderView.getTranslateX()+50 && player.getTranslateY() > roadBuilderView.getTranslateY()-50 && player.getTranslateY() < roadBuilderView.getTranslateY()+50) {
+                    Main.game.givePlastic();
+                    updateInventory();
+                    showRoadBuilderRoad();
+                    EndGame();
+                }
                 collectPlastic(Main.game.placePlastic());
+
         }
         NewRoom();
 
+    }
+
+    private void EndGame() {
+        if (RoadBuilder.getInventoryCount() == Game.getRoadDone()) {
+            System.out.println("Du er færdig");
+        }
     }
 
     private void StartGame() {
@@ -315,6 +326,8 @@ public class Controller {
         player.setViewport(new Rectangle2D(0, 0, 32, 48));
         roadView.setImage(new Image("file:" + road.getImage()));
         roadBuilderView.setImage(new Image("file:" + roadBuilder.getImage()));
+        roadView.setViewport(new Rectangle2D(-681, 0, 681, 69));
+        roadBuilderView.setTranslateX(300);
         //plas1.setImage(new Image("file:" + "src/sample/presentation/pictures/plastic/cleaningPlastic.png"));
         generatePlasticInRoom(Main.game.placePlastic());
         Timer.setStartTime(); // tid starter til highscorelisten
@@ -426,23 +439,17 @@ public class Controller {
     }
 
     public void showRoadBuilderRoad() {
+        roadView.setViewport(new Rectangle2D(-681, 0, 681, 69));
+        roadBuilderView.setViewport(new Rectangle2D(0,0,484,323));
         if (Main.game.getCurrentRoom() instanceof RoadBuild) {
             roadView.setViewport(new Rectangle2D(-681 + (RoadBuilder.getInventoryCount() * 22.7), 0, 681, 69));
-        } else {
-            roadView.setViewport(new Rectangle2D(-681, 0, 681, 69));
-        }
-        showRoadBuilder();
-    }
-
-    public void showRoadBuilder() {
-        if (Main.game.getCurrentRoom() instanceof RoadBuild) {
-            roadBuilderView.setViewport(new Rectangle2D(0, 0, 484, 323));
             if (RoadBuilder.getInventoryCount() < 5) {
                 roadBuilderView.setTranslateX(300);
             } else {
-                roadBuilderView.setTranslateX(300 - ((RoadBuilder.getInventoryCount() * 22.7)-90));
+                roadBuilderView.setTranslateX(300 - ((RoadBuilder.getInventoryCount() * 22.7) - 90));
             }
         } else {
+            roadView.setViewport(new Rectangle2D(-681, 0, 681, 69));
             roadBuilderView.setViewport(new Rectangle2D(-484, 0, 484, 323));
         }
     }
@@ -451,44 +458,44 @@ public class Controller {
     // ikke skal have 20 imageview
 
     @FXML
-    private ImageView plas1 = new ImageView();
+    private ImageView plast1 = new ImageView();
     @FXML
-    private ImageView plas2 = new ImageView();
+    private ImageView plast2 = new ImageView();
     @FXML
-    private ImageView plas3 = new ImageView();
+    private ImageView plast3 = new ImageView();
     @FXML
-    private ImageView plas4 = new ImageView();
+    private ImageView plast4 = new ImageView();
     @FXML
-    private ImageView plas5 = new ImageView();
+    private ImageView plast5 = new ImageView();
     @FXML
-    private ImageView plas6 = new ImageView();
+    private ImageView plast6 = new ImageView();
     @FXML
-    private ImageView plas7 = new ImageView();
+    private ImageView plast7 = new ImageView();
     @FXML
-    private ImageView plas8 = new ImageView();
+    private ImageView plast8 = new ImageView();
     @FXML
-    private ImageView plas9 = new ImageView();
+    private ImageView plast9 = new ImageView();
     @FXML
-    private ImageView plas10 = new ImageView();
+    private ImageView plast10 = new ImageView();
     @FXML
-    private ImageView plas11 = new ImageView();
+    private ImageView plast11 = new ImageView();
     @FXML
-    private ImageView plas12 = new ImageView();
+    private ImageView plast12 = new ImageView();
     @FXML
-    private ImageView plas13 = new ImageView();
+    private ImageView plast13 = new ImageView();
     @FXML
-    private ImageView plas14 = new ImageView();
+    private ImageView plast14 = new ImageView();
     @FXML
-    private ImageView plas15 = new ImageView();
+    private ImageView plast15 = new ImageView();
     @FXML
-    private ImageView plas16 = new ImageView();
+    private ImageView plast16 = new ImageView();
     @FXML
-    private ImageView plas17 = new ImageView();
+    private ImageView plast17 = new ImageView();
     @FXML
-    private ImageView plas18 = new ImageView();
+    private ImageView plast18 = new ImageView();
     @FXML
-    private ImageView plas19 = new ImageView();
+    private ImageView plast19 = new ImageView();
     @FXML
-    private ImageView plas20 = new ImageView();
+    private ImageView plast20 = new ImageView();
 
 }

@@ -62,16 +62,6 @@ public class Game {
         currentRoom = RoadBuild;
     }
 
-    public void play() {
-
-        boolean finished = false;
-        /*
-        while (!finished) {
-            RoadBuilder.damagedMachine();
-        }
-        */
-    }
-
     private void printHelp() {
 
         Scanner reader;
@@ -112,14 +102,10 @@ public class Game {
         }
     }
 
-    public boolean givePlastic() {
+    public void givePlastic() {
         List<Plastic> plasticInv = Controller.playerObject.getPlasticInv();
-        int road = RoadBuilder.inventory(plasticInv);
+        RoadBuilder.inventory(plasticInv);
         Controller.playerObject.resetPlasticInv();
-        if (road >= roadDone) {
-            return true;
-        }
-        return false;
     }
 
     public static int getRoadDone() {
@@ -129,4 +115,6 @@ public class Game {
     public Room getCurrentRoom() {
         return currentRoom;
     }
+
+
 }

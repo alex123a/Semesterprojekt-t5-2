@@ -19,26 +19,26 @@
             <ImageView fx:id="roadBuilderView" translateY="-30" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true"/>
 
             <!--> Man kan 100% gøre det under smartere <-->
-            <ImageView fx:id="plas1" pickOnBounds="true" preserveRatio="true"/>
-            <ImageView fx:id="plas2" pickOnBounds="true" preserveRatio="true"/>
-            <ImageView fx:id="plas3" pickOnBounds="true" preserveRatio="true"/>
-            <ImageView fx:id="plas4" pickOnBounds="true" preserveRatio="true"/>
-            <ImageView fx:id="plas5" pickOnBounds="true" preserveRatio="true"/>
-            <ImageView fx:id="plas6" pickOnBounds="true" preserveRatio="true"/>
-            <ImageView fx:id="plas7" pickOnBounds="true" preserveRatio="true"/>
-            <ImageView fx:id="plas8" pickOnBounds="true" preserveRatio="true"/>
-            <ImageView fx:id="plas9" pickOnBounds="true" preserveRatio="true"/>
-            <ImageView fx:id="plas10" pickOnBounds="true" preserveRatio="true"/>
-            <ImageView fx:id="plas11" pickOnBounds="true" preserveRatio="true"/>
-            <ImageView fx:id="plas12" pickOnBounds="true" preserveRatio="true"/>
-            <ImageView fx:id="plas13" pickOnBounds="true" preserveRatio="true"/>
-            <ImageView fx:id="plas14" pickOnBounds="true" preserveRatio="true"/>
-            <ImageView fx:id="plas15" pickOnBounds="true" preserveRatio="true"/>
-            <ImageView fx:id="plas16" pickOnBounds="true" preserveRatio="true"/>
-            <ImageView fx:id="plas17" pickOnBounds="true" preserveRatio="true"/>
-            <ImageView fx:id="plas18" pickOnBounds="true" preserveRatio="true"/>
-            <ImageView fx:id="plas19" pickOnBounds="true" preserveRatio="true"/>
-            <ImageView fx:id="plas20" pickOnBounds="true" preserveRatio="true"/>
+            <ImageView fx:id="plast1" pickOnBounds="true" preserveRatio="true"/>
+            <ImageView fx:id="plast2" pickOnBounds="true" preserveRatio="true"/>
+            <ImageView fx:id="plast3" pickOnBounds="true" preserveRatio="true"/>
+            <ImageView fx:id="plast4" pickOnBounds="true" preserveRatio="true"/>
+            <ImageView fx:id="plast5" pickOnBounds="true" preserveRatio="true"/>
+            <ImageView fx:id="plast6" pickOnBounds="true" preserveRatio="true"/>
+            <ImageView fx:id="plast7" pickOnBounds="true" preserveRatio="true"/>
+            <ImageView fx:id="plast8" pickOnBounds="true" preserveRatio="true"/>
+            <ImageView fx:id="plast9" pickOnBounds="true" preserveRatio="true"/>
+            <ImageView fx:id="plast10" pickOnBounds="true" preserveRatio="true"/>
+            <ImageView fx:id="plast11" pickOnBounds="true" preserveRatio="true"/>
+            <ImageView fx:id="plast12" pickOnBounds="true" preserveRatio="true"/>
+            <ImageView fx:id="plast13" pickOnBounds="true" preserveRatio="true"/>
+            <ImageView fx:id="plast14" pickOnBounds="true" preserveRatio="true"/>
+            <ImageView fx:id="plast15" pickOnBounds="true" preserveRatio="true"/>
+            <ImageView fx:id="plast16" pickOnBounds="true" preserveRatio="true"/>
+            <ImageView fx:id="plast17" pickOnBounds="true" preserveRatio="true"/>
+            <ImageView fx:id="plast18" pickOnBounds="true" preserveRatio="true"/>
+            <ImageView fx:id="plast19" pickOnBounds="true" preserveRatio="true"/>
+            <ImageView fx:id="plast20" pickOnBounds="true" preserveRatio="true"/>
 
             <ImageView fx:id="player" fitHeight="45.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true" />
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
