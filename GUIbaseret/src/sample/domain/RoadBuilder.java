@@ -1,6 +1,7 @@
 package sample.domain;
 
 import sample.domain.PlasticElements.Plastic;
+import sample.presentation.Controller;
 
 import java.util.List;
 
@@ -13,11 +14,6 @@ public class RoadBuilder {
 
     public static int inventory(List<Plastic> plastic) {
         inventoryCount += plastic.size();
-        if (inventoryCount < Game.getRoadDone()) {
-            int inv = ((inventoryCount *100)/Game.getRoadDone());
-            System.out.println("The road is " + inv + "% Complete");
-            System.out.println("You need to collect " + (Game.getRoadDone()- inventoryCount));
-        }
         return inventoryCount;
     }
 
