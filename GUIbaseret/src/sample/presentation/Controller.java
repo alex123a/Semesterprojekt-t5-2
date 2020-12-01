@@ -52,39 +52,48 @@ public class Controller {
         public void handle(long l) {
             if (north && player.getTranslateY() > -220) {
                 playerAnimation.setDirection(direction[0]);
-                if (animationWalk % 13 == 0) {
-                    numbersPlayer = playerAnimation.changePic();
-                    player.setViewport(new Rectangle2D(numbersPlayer[0], numbersPlayer[1], numbersPlayer[2], numbersPlayer[3]));
+                if(!moveBlock(0,-2)) {
+                    if (animationWalk % 13 == 0) {
+                        numbersPlayer = playerAnimation.changePic();
+                        player.setViewport(new Rectangle2D(numbersPlayer[0], numbersPlayer[1], numbersPlayer[2], numbersPlayer[3]));
+                    }
+                        player.setTranslateY(player.getTranslateY() -2.5);
+
+                    animationWalk++;
                 }
-                player.setTranslateY(player.getTranslateY() - 2.5);
-                animationWalk++;
             }
             if (south && player.getTranslateY() < 220) {
                 playerAnimation.setDirection(direction[1]);
-                if (animationWalk % 13 == 0) {
-                    numbersPlayer = playerAnimation.changePic();
-                    player.setViewport(new Rectangle2D(numbersPlayer[0], numbersPlayer[1], numbersPlayer[2], numbersPlayer[3]));
+                if(!moveBlock(0,2)) {
+                    if (animationWalk % 13 == 0) {
+                        numbersPlayer = playerAnimation.changePic();
+                        player.setViewport(new Rectangle2D(numbersPlayer[0], numbersPlayer[1], numbersPlayer[2], numbersPlayer[3]));
+                    }
+                        player.setTranslateY(player.getTranslateY() + 2.5);
+                    animationWalk++;
                 }
-                player.setTranslateY(player.getTranslateY() + 2.5);
-                animationWalk++;
             }
             if (east && player.getTranslateX() > -340) {
                 playerAnimation.setDirection(direction[2]);
-                if (animationWalk % 13 == 0) {
-                    numbersPlayer = playerAnimation.changePic();
-                    player.setViewport(new Rectangle2D(numbersPlayer[0], numbersPlayer[1], numbersPlayer[2], numbersPlayer[3]));
+                if(!moveBlock(-2,0)) {
+                    if (animationWalk % 13 == 0) {
+                        numbersPlayer = playerAnimation.changePic();
+                        player.setViewport(new Rectangle2D(numbersPlayer[0], numbersPlayer[1], numbersPlayer[2], numbersPlayer[3]));
+                    }
+                        player.setTranslateX(player.getTranslateX() -2.5);
+                    animationWalk++;
                 }
-                player.setTranslateX(player.getTranslateX() - 2.5);
-                animationWalk++;
             }
             if (west && player.getTranslateX() < 340) {
                 playerAnimation.setDirection(direction[3]);
-                if (animationWalk % 13 == 0) {
-                    numbersPlayer = playerAnimation.changePic();
-                    player.setViewport(new Rectangle2D(numbersPlayer[0], numbersPlayer[1], numbersPlayer[2], numbersPlayer[3]));
+                if(!moveBlock(2,0)) {
+                    if (animationWalk % 13 == 0) {
+                        numbersPlayer = playerAnimation.changePic();
+                        player.setViewport(new Rectangle2D(numbersPlayer[0], numbersPlayer[1], numbersPlayer[2], numbersPlayer[3]));
+                    }
+                        player.setTranslateX(player.getTranslateX() + 2.5);
+                    animationWalk++;
                 }
-                player.setTranslateX(player.getTranslateX() + 2.5);
-                animationWalk++;
             }
 
         }
@@ -97,7 +106,7 @@ public class Controller {
             if (player.getTranslateX() + x < -150 && player.getTranslateY() + y < -90) {
                 cantMove = true;
                 //Wall 1
-            } else if (player.getTranslateX() + x > 10 && player.getTranslateY() + y > 205) {
+            }else if (player.getTranslateX() + x > 10 && player.getTranslateY() + y > 205) {
                 cantMove = true;
                 // Wall 2
             } else if (player.getTranslateX() + x < -25 && player.getTranslateY() + y > 205) {
@@ -190,7 +199,6 @@ public class Controller {
                 break;
         }
         NewRoom();
-        moveBlock(2,2);
     }
 
     private void NewRoom() {
