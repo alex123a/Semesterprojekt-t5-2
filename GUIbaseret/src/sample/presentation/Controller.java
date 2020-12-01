@@ -439,6 +439,8 @@ public class Controller {
     }
 
     public void showRoadBuilderRoad() {
+        roadView.setViewport(new Rectangle2D(-681, 0, 681, 69));
+        roadBuilderView.setViewport(new Rectangle2D(0,0,484,323));
         if (Main.game.getCurrentRoom() instanceof RoadBuild) {
             roadView.setViewport(new Rectangle2D(-681 + (RoadBuilder.getInventoryCount() * 22.7), 0, 681, 69));
             if (RoadBuilder.getInventoryCount() < 5) {
