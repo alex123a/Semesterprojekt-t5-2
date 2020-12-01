@@ -29,7 +29,9 @@ public class Controller {
     private SpriteAnimation playerAnimation = new SpriteAnimation(direction[0]);
     private int[] numbersPlayer;
     private long animationWalk = 0;
+    private long animationRoadbuilder = 0;
     private boolean gameNotStarted = true;
+    private boolean stopAnimation = false;
     private ObservableList<ImageView> inventoryObservable = FXCollections.observableList(new ArrayList<ImageView>());
 
     @FXML
@@ -326,8 +328,7 @@ public class Controller {
         player.setViewport(new Rectangle2D(0, 0, 32, 48));
         roadView.setImage(new Image("file:" + road.getImage()));
         roadBuilderView.setImage(new Image("file:" + roadBuilder.getImage()));
-        roadView.setViewport(new Rectangle2D(-681, 0, 681, 69));
-        roadBuilderView.setTranslateX(300);
+        showRoadBuilderRoad();
         //plas1.setImage(new Image("file:" + "src/sample/presentation/pictures/plastic/cleaningPlastic.png"));
         generatePlasticInRoom(Main.game.placePlastic());
         Timer.setStartTime(); // tid starter til highscorelisten
@@ -439,18 +440,45 @@ public class Controller {
     }
 
     public void showRoadBuilderRoad() {
+        roadView.setViewport(new Rectangle2D(-681, 0, 681, 69));
+        roadBuilderView.setTranslateX(300);
         if (Main.game.getCurrentRoom() instanceof RoadBuild) {
-            roadView.setViewport(new Rectangle2D(-681 + (RoadBuilder.getInventoryCount() * 22.7), 0, 681, 69));
-            if (RoadBuilder.getInventoryCount() < 5) {
-                roadBuilderView.setTranslateX(300);
-            } else {
-                roadBuilderView.setTranslateX(300 - ((RoadBuilder.getInventoryCount() * 22.7) - 90));
+            roadbuilderTimer.start();
+            System.out.println("test 1");
+            if (stopAnimation) {
+                roadbuilderTimer.stop();
+                System.out.println("afslut");
             }
         } else {
             roadView.setViewport(new Rectangle2D(-681, 0, 681, 69));
             roadBuilderView.setViewport(new Rectangle2D(-484, 0, 484, 323));
         }
+
     }
+
+    AnimationTimer roadbuilderTimer = new AnimationTimer() {
+        @Override
+        public void handle(long l) {
+            if (roadBuilder.getInventoryCount() < 30 && animationRoadbuilder < playerObject.getPlasticInv().size()*10) {
+                while (animationRoadbuilder == playerObject.getPlasticInv().size()*10) {
+                    if (animationRoadbuilder % 13 == 0) {
+                        System.out.println("handler");
+                        roadView.setViewport(new Rectangle2D(-681 + (roadBuilder.getInventoryCount() * 22.7), 0, 681, 69));
+                        if (RoadBuilder.getInventoryCount() < 5) {
+                            roadBuilderView.setTranslateX(300);
+                        } else {
+                            roadBuilderView.setTranslateX(300 - ((roadBuilder.getInventoryCount() * 22.7) - 90));
+                        }
+                    }
+                    animationRoadbuilder++;
+                }
+                stopAnimation = true;
+            }
+
+        }
+    };
+
+
 
     // Det under er alle plastik imageviews. Det er placeret her, da der er alt for mange, og der skal undersøges om det ikke kan gøres på en smart måde, så vi
     // ikke skal have 20 imageview
