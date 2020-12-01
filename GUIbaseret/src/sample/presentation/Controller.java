@@ -303,10 +303,18 @@ public class Controller {
                     gameNotStarted = false;
                 }
                 if (player.getTranslateX() > roadBuilderView.getTranslateX()-50 && player.getTranslateX() < roadBuilderView.getTranslateX()+50 && player.getTranslateY() > roadBuilderView.getTranslateY()-50 && player.getTranslateY() < roadBuilderView.getTranslateY()+50) {
-                    Main.game.givePlastic();
-                    updateInventory();
-                    showRoadBuilderRoad();
-                    EndGame();
+                    if (roadBuilder.getInventoryCount() >= 19) {
+                        roadBuilder.damagedMachine();
+                    }
+
+                    if (roadBuilder.getDamaged() > 0) {
+                        System.out.println("Repair me :)");
+                    } else {
+                        Main.game.givePlastic();
+                        updateInventory();
+                        showRoadBuilderRoad();
+                        EndGame();
+                    }
                 }
                 collectPlastic(Main.game.placePlastic());
 
@@ -316,7 +324,7 @@ public class Controller {
     }
 
     private void EndGame() {
-        if (RoadBuilder.getInventoryCount() == Game.getRoadDone()) {
+        if (roadBuilder.getInventoryCount() == Game.getRoadDone()) {
             System.out.println("Du er færdig");
         }
     }
@@ -439,7 +447,7 @@ public class Controller {
 
     public void showRoadBuilderRoad() {
         if (Main.game.getCurrentRoom() instanceof RoadBuild) {
-            roadView.setViewport(new Rectangle2D(-681 + (RoadBuilder.getInventoryCount() * 22.7), 0, 681, 69));
+            roadView.setViewport(new Rectangle2D(-681 + (roadBuilder.getInventoryCount() * 22.7), 0, 681, 69));
         } else {
             roadView.setViewport(new Rectangle2D(-681, 0, 681, 69));
         }
@@ -449,10 +457,10 @@ public class Controller {
     public void showRoadBuilder() {
         if (Main.game.getCurrentRoom() instanceof RoadBuild) {
             roadBuilderView.setViewport(new Rectangle2D(0, 0, 484, 323));
-            if (RoadBuilder.getInventoryCount() < 5) {
+            if (roadBuilder.getInventoryCount() < 5) {
                 roadBuilderView.setTranslateX(300);
             } else {
-                roadBuilderView.setTranslateX(300 - ((RoadBuilder.getInventoryCount() * 22.7)-90));
+                roadBuilderView.setTranslateX(300 - ((roadBuilder.getInventoryCount() * 22.7)-90));
             }
         } else {
             roadBuilderView.setViewport(new Rectangle2D(-484, 0, 484, 323));
