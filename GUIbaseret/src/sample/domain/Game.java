@@ -112,11 +112,11 @@ public class Game {
         }
     }
 
-    private boolean givePlastic() {
+    public boolean givePlastic() {
         List<Plastic> plasticInv = Controller.playerObject.getPlasticInv();
-        List<Plastic> road = RoadBuilder.inventory(plasticInv);
+        int road = RoadBuilder.inventory(plasticInv);
         Controller.playerObject.resetPlasticInv();
-        if (road.size() >= roadDone) {
+        if (road >= roadDone) {
             return true;
         }
         return false;
