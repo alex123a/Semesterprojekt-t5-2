@@ -74,12 +74,6 @@ public class Controller {
         }
         backgroundRoom.setImage(new Image("file:src/sample/presentation/pictures/Backgrounds/StartScreen.png"));
         showRoadBuilderRoad();
-        professorNpc.setImage(new Image("file:" + professorObject.getImage()));
-        professorNpc.setTranslateX(3000);
-        mechanicNpc.setImage(new Image("file:" + mechanicObject.getImage()));
-        mechanicNpc.setTranslateX(3000);
-        farmerNpc.setImage(new Image("file:" + farmerObject.getImage()));
-        farmerNpc.setTranslateX(3000);
     }
 
     public void generatePlasticInRoom(List<Plastic> plasticList) {
@@ -507,6 +501,12 @@ public class Controller {
         player.setViewport(new Rectangle2D(0, 0, 32, 48));
         roadView.setImage(new Image("file:" + road.getImage()));
         roadBuilderView.setImage(new Image("file:" + roadBuilder.getImage()));
+        professorNpc.setImage(new Image("file:" + professorObject.getImage()));
+        professorNpc.setTranslateX(3000);
+        mechanicNpc.setImage(new Image("file:" + mechanicObject.getImage()));
+        mechanicNpc.setTranslateX(3000);
+        farmerNpc.setImage(new Image("file:" + farmerObject.getImage()));
+        farmerNpc.setTranslateX(3000);
         //plas1.setImage(new Image("file:" + "src/sample/presentation/pictures/plastic/cleaningPlastic.png"));
         generatePlasticInRoom(Main.game.placePlastic());
         smoke.setImage(new Image("file:src/sample/presentation/pictures/buildSmoke.png"));
