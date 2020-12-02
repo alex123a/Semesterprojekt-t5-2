@@ -39,7 +39,6 @@ public class Controller {
     private long animationFireSmoke = 0;
     private long animationDriving = 0;
     private int numberOfMovement = 0;
-    private int newPositionMachine = 0;
     private int turnsOfRoad = 0;
 
     @FXML
@@ -344,7 +343,6 @@ public class Controller {
                     if (roadBuilder.getDamaged() > 0) {
                         System.out.println("Repair me :)");
                     } else {
-                        newPositionMachine = playerObject.getPlasticInv().size() + roadBuilder.getInventoryCount();
                         numberOfMovement = playerObject.getPlasticInv().size() * 4;
                         Main.game.givePlastic();
                         updateInventory();
