@@ -297,11 +297,7 @@ public class Controller {
                         talkNPC(playerText, "Road builder", 3);
                         spaceCount++;
                     } else if (spaceCount == 2) {
-                        NPCTextLine.setText("");
-                        NPCTextLine1.setText("");
-                        NPCTextLine2.setText("");
-                        playerText.setText("");
-                        dialogBox.setTranslateY(3000);
+                        hideDialogBox();
                         spaceCount = 0;
                     }
                 }
@@ -647,12 +643,7 @@ public class Controller {
                 talkNPC(NPCTextLine,"farmer",6);
                 spaceCount++;
             } else if (spaceCount == 5) {
-                NPCTextLine.setText("");
-                NPCTextLine1.setText("");
-                NPCTextLine2.setText("");
-                playerText.setText("");
-                dialogBox.setTranslateY(3000);
-                spaceCount = 0;
+                hideDialogBox();
                 farmerTalk = true;
             }
         } else if (Main.game.getCurrentRoom() instanceof Sdu) {
@@ -670,12 +661,7 @@ public class Controller {
                 NPCTextLine2.setText("");
                 spaceCount++;
             } else if (spaceCount == 3) {
-                NPCTextLine.setText("");
-                NPCTextLine1.setText("");
-                NPCTextLine2.setText("");
-                playerText.setText("");
-                dialogBox.setTranslateY(3000);
-                spaceCount = 0;
+                hideDialogBox();
                 professorTalk = true;
             }
         } else if (Main.game.getCurrentRoom() instanceof Town) {
@@ -691,12 +677,7 @@ public class Controller {
                 NPCTextLine1.setText("");
                 spaceCount++;
             } else if (spaceCount == 3) {
-                NPCTextLine.setText("");
-                NPCTextLine1.setText("");
-                NPCTextLine2.setText("");
-                playerText.setText("");
-                dialogBox.setTranslateY(3000);
-                spaceCount = 0;
+                hideDialogBox();
                 mechanicTalk = true;
             }
         }
