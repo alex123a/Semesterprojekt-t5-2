@@ -10,7 +10,7 @@ public class Professor extends NPC {
     private String file = new File("src/sample/data/textfiles/npcDescriptions/ProfessorText.txt").toString();
 
     public Professor(String name) {
-        super(name);
+        super(name, "src/sample/presentation/pictures/npc/Professor.png");
     }
 
     @Override

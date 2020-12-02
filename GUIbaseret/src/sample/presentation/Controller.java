@@ -14,6 +14,9 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import sample.domain.*;
+import sample.domain.NPCer.Farmer;
+import sample.domain.NPCer.Mechanic;
+import sample.domain.NPCer.Professor;
 import sample.domain.PlasticElements.Plastic;
 import sample.domain.Rooms.*;
 import javafx.geometry.Orientation;
@@ -27,6 +30,9 @@ public class Controller {
     public static Road road = new Road();
     public static Player playerObject = new Player();
     public static RoadBuilder roadBuilder = new RoadBuilder();
+    public static Professor professorObject = new Professor("Professor");
+    public static Mechanic mechanicObject = new Mechanic("Mechanic");
+    public static Farmer farmerObject = new Farmer("Farmer");
     private boolean north, south, east, west;
     private String[] direction = {"North", "South", "West", "East"};
     private SpriteAnimation playerAnimation = new SpriteAnimation(direction[0]);
@@ -53,7 +59,13 @@ public class Controller {
     public ListView inventory = new ListView();
     @FXML
     public ImageView smoke = new ImageView("file:src/sample/presentation/pictures/buildSmoke.png");
+    public ImageView professorNpc = new ImageView("file:" + professorObject.getImage());
 
+    @FXML
+    public ImageView mechanicNpc = new ImageView("file:"+ mechanicObject.getImage());
+
+    @FXML
+    public ImageView farmerNpc = new ImageView("file:" + farmerObject.getImage());
 
 
     public void initialize() {
@@ -62,6 +74,12 @@ public class Controller {
         }
         backgroundRoom.setImage(new Image("file:src/sample/presentation/pictures/Backgrounds/StartScreen.png"));
         showRoadBuilderRoad();
+        professorNpc.setImage(new Image("file:" + professorObject.getImage()));
+        professorNpc.setTranslateX(3000);
+        mechanicNpc.setImage(new Image("file:" + mechanicObject.getImage()));
+        mechanicNpc.setTranslateX(3000);
+        farmerNpc.setImage(new Image("file:" + farmerObject.getImage()));
+        farmerNpc.setTranslateX(3000);
     }
 
     public void generatePlasticInRoom(List<Plastic> plasticList) {
@@ -77,19 +95,19 @@ public class Controller {
                 plas[i].setFitHeight(30);
                 plas[i].setFitWidth(30);
                 // Kode til at give plastik ny position hvis de falder inden for no go zonerne.
-                if (moveBlock(plas[i].getTranslateX(), plas[i].getTranslateY(), 0 , -2)) {
+                if (moveBlock(plas[i].getTranslateX(), plas[i].getTranslateY(), 0, -2)) {
                     plasticList.get(i).newPosition();
                     generatePlasticInRoom(plasticList);
                     break;
-                } else if (moveBlock(plas[i].getTranslateX(), plas[i].getTranslateY(), 0 , 2)) {
+                } else if (moveBlock(plas[i].getTranslateX(), plas[i].getTranslateY(), 0, 2)) {
                     plasticList.get(i).newPosition();
                     generatePlasticInRoom(plasticList);
                     break;
-                } else if (moveBlock(plas[i].getTranslateX(), plas[i].getTranslateY(), -2 , 0)) {
+                } else if (moveBlock(plas[i].getTranslateX(), plas[i].getTranslateY(), -2, 0)) {
                     plasticList.get(i).newPosition();
                     generatePlasticInRoom(plasticList);
                     break;
-                } else if (moveBlock(plas[i].getTranslateX(), plas[i].getTranslateY(), 2 , 0)) {
+                } else if (moveBlock(plas[i].getTranslateX(), plas[i].getTranslateY(), 2, 0)) {
                     plasticList.get(i).newPosition();
                     generatePlasticInRoom(plasticList);
                     break;
@@ -102,7 +120,7 @@ public class Controller {
         ImageView[] plas = {plast1, plast2, plast3, plast4, plast5, plast6, plast7, plast8, plast9, plast10, plast11, plast12, plast13, plast14, plast15,
                 plast16, plast17, plast18, plast19, plast20};
 
-        for (ImageView image: plas) {
+        for (ImageView image : plas) {
             image.setTranslateX(3000);
             image.setTranslateY(3000);
         }
@@ -130,6 +148,7 @@ public class Controller {
                         player.setViewport(new Rectangle2D(numbersPlayer[0], numbersPlayer[1], numbersPlayer[2], numbersPlayer[3]));
                     }
                     player.setTranslateY(player.getTranslateY() + 2.5);
+
                 }
                 animationWalk++;
             }
@@ -152,6 +171,7 @@ public class Controller {
                         player.setViewport(new Rectangle2D(numbersPlayer[0], numbersPlayer[1], numbersPlayer[2], numbersPlayer[3]));
                     }
                     player.setTranslateX(player.getTranslateX() + 2.5);
+
                 }
                 animationWalk++;
             }
@@ -197,61 +217,180 @@ public class Controller {
         boolean cantMove = false;
         if (Main.game.getCurrentRoom() instanceof RoadBuild) {
             // tree in top left conor.
-            if (objx + x < -150 && objy + y < -90) {
+            Rectangle topLeftTrees = new Rectangle(-340, -220, 180, 120);
+            if (topLeftTrees.contains(objx + x, objy + y)) {
                 cantMove = true;
-                //Wall 1
-            } else if (objx + x > 10 && objy + y > 205) {
+            }
+            Rectangle leftButtomWall = new Rectangle(-340, 205, 300, 30);
+            if (leftButtomWall.contains(objx + x, objy + y)) {
                 cantMove = true;
-                // Wall 2
-            } else if (objx + x < -25 && objy + y > 205) {
+            }
+            Rectangle rightButtomWall = new Rectangle(20, 205, 350, 30);
+            if (rightButtomWall.contains(objx + x, objy + y)) {
                 cantMove = true;
             }
         }
-        if (Main.game.getCurrentRoom() instanceof Beach)
-            // Beach
-            if (objx + x < -95 && objy + y > -340) {
+        if (Main.game.getCurrentRoom() instanceof Beach) {
+            Rectangle ocean = new Rectangle(-340.5, -220, 240, 500);
+            if (ocean.contains(objx + x, objy + y)) {
                 cantMove = true;
             }
+            Rectangle ladyNoOne = new Rectangle(32, 40, 80, 50);
+            if (ladyNoOne.contains(objx + x, objy + y)) {
+                cantMove = true;
+            }
+            Rectangle ladyNoTwo = new Rectangle(155, 170, 80, 40);
+            if (ladyNoTwo.contains(objx + x, objy + y)) {
+                cantMove = true;
+            }
+        }
 
         if (Main.game.getCurrentRoom() instanceof Farm) {
-            // Farmené
-            Rectangle field = new Rectangle(-176,-64,250,160);
-            if(field.contains(objx + x,objy + y)){
-                   cantMove = true;
-            }
-        }
-
-        if(Main.game.getCurrentRoom() instanceof Farm){
-            if(objx + x > 115 && objy + y < -36){
+            // Field
+            Rectangle field = new Rectangle(-176, -64, 250, 160);
+            if (field.contains(objx + x, objy + y)) {
                 cantMove = true;
             }
-        }
-        //Sdu's vægge
-        if(Main.game.getCurrentRoom() instanceof Sdu){
-            if(objx + x < -50 && objy + y <-190){
+            Rectangle barn = new Rectangle(115.5, -220, 300, 185);
+            if (barn.contains(objx + x, objy + y)) {
                 cantMove = true;
             }
-            if(objx + x > 20 && objy + y <-190){
+            Rectangle tractor = new Rectangle(55.5, -220, 60, 50);
+            if (tractor.contains(objx + x, objy + y)) {
                 cantMove = true;
             }
         }
 
-        if(Main.game.getCurrentRoom() instanceof Park){
-            if(objx + x < -150 && objy + y < -85){
+        if (Main.game.getCurrentRoom() instanceof Sdu) {
+            Rectangle topLeftWall = new Rectangle(-340, -220, 300, 30);
+            if (topLeftWall.contains(objx + x, objy + y)) {
                 cantMove = true;
             }
-            if(objx + x < -150 && objy + y > 0){
+            Rectangle topRightWall = new Rectangle(27.5, -220, 400, 30);
+            if (topRightWall.contains(objx + x, objy + y)) {
                 cantMove = true;
             }
-
-            if(objx + x > 135 && objy + y < -85){
+            Rectangle closetTopOne = new Rectangle(-300, -75, 80, 110);
+            if (closetTopOne.contains(objx + x, objy + y)) {
                 cantMove = true;
             }
-            if(objx + x > 135 && objy + y > 0){
+            Rectangle closetTopTwo = new Rectangle(-210, -75, 75, 110);
+            if (closetTopTwo.contains(objx + x, objy + y)) {
                 cantMove = true;
             }
-
+            Rectangle closetButtomOne = new Rectangle(-300, 75, 80, 110);
+            if (closetButtomOne.contains(objx + x, objy + y)) {
+                cantMove = true;
+            }
+            Rectangle closetButtomTwo = new Rectangle(-210, 75, 75, 110);
+            if (closetButtomTwo.contains(objx + x, objy + y)) {
+                cantMove = true;
+            }
         }
+
+        if (Main.game.getCurrentRoom() instanceof Park) {
+            Rectangle buttomLeftGarden = new Rectangle(-340, -1, 190, 210);
+            if (buttomLeftGarden.contains(objx + x, objy + y)) {
+                cantMove = true;
+            }
+            Rectangle topLeftGarden = new Rectangle(-340, -221, 185, 145);
+            if (topLeftGarden.contains(objx + x, objy + y)) {
+                cantMove = true;
+            }
+            // Labyrinten
+            Rectangle labyrinthOuterTop = new Rectangle(130, -221, 30, 145);
+            if (labyrinthOuterTop.contains(objx + x, objy + y)) {
+                cantMove = true;
+            }
+            Rectangle labyrinthOuterButtom = new Rectangle(187.5,-111,200,30);
+            if(labyrinthOuterButtom.contains(objx + x, objy + y)){
+                cantMove = true;
+            }
+            Rectangle labyrinthFirstWall = new Rectangle(160,-150,70,30);
+            if(labyrinthFirstWall.contains(objx + x, objy + y)){
+                cantMove = true;
+            }
+            Rectangle labyrinthSecondWall = new Rectangle(255,-150,30,55);
+            if(labyrinthSecondWall.contains(objx + x, objy + y)){
+                cantMove = true;
+            }
+            Rectangle labyrinthVertiWallOne = new Rectangle(180,-221,30,60);
+            if(labyrinthVertiWallOne.contains(objx + x, objy + y)){
+                cantMove = true;
+            }
+            Rectangle labyrinthVertiWallTwo = new Rectangle(233,-223,30,66);
+            if(labyrinthVertiWallTwo.contains(objx + x, objy + y)){
+                cantMove = true;
+            }
+            Rectangle labyrinthHoriWallOne = new Rectangle(265,-213,50,30);
+            if(labyrinthHoriWallOne.contains(objx + x, objy + y)){
+                cantMove = true;
+            }
+            Rectangle labyrinthVertiWallThree = new Rectangle(298,-212,30,70);
+            if(labyrinthVertiWallThree.contains(objx + x, objy + y)){
+                cantMove = true;
+            }
+
+            Rectangle leftButtomRightGarden = new Rectangle(130, 9, 210, 250);
+            if (leftButtomRightGarden.contains(objx + x, objy + y)) {
+                cantMove = true;
+            }
+            Rectangle topMiddelGarden = new Rectangle(-43, -221, 80, 110);
+            if (topMiddelGarden.contains(objx + x, objy + y)) {
+                cantMove = true;
+            }
+            Rectangle buttomMiddelGarden = new Rectangle(-40, 59, 80, 150);
+            if (buttomMiddelGarden.contains(objx + x, objy + y)) {
+                cantMove = true;
+            }
+            Rectangle buttomMiddelTrees = new Rectangle(-70, -6, 122, 80);
+            if (buttomMiddelTrees.contains(objx + x, objy + y)) {
+                cantMove = true;
+            }
+            Rectangle topMiddelTrees = new Rectangle(-75, -126, 122, 70);
+            if (topMiddelTrees.contains(objx + x, objy + y)) {
+                cantMove = true;
+            }
+        }
+        if (Main.game.getCurrentRoom() instanceof Town) {
+            Rectangle topOneHouse = new Rectangle(-277, -221, 100, 75);
+            if (topOneHouse.contains(objx + x, objy + y)) {
+                cantMove = true;
+            }
+            Rectangle topTwoHouse = new Rectangle(-62, -221, 100, 75);
+            if (topTwoHouse.contains(objx + x, objy + y)) {
+                cantMove = true;
+            }
+            Rectangle topThreeHouse = new Rectangle(58, -221, 100, 75);
+            if (topThreeHouse.contains(objx + x, objy + y)) {
+                cantMove = true;
+            }
+            Rectangle topFourHouse = new Rectangle(178, -221, 100, 75);
+            if (topFourHouse.contains(objx + x, objy + y)) {
+                cantMove = true;
+            }
+            Rectangle middelOneHouse = new Rectangle(-110, -101, 100, 100);
+            if (middelOneHouse.contains(objx + x, objy + y)) {
+                cantMove = true;
+            }
+            Rectangle middelTwoHouse = new Rectangle(60, -111, 100, 110);
+            if (middelTwoHouse.contains(objx + x, objy + y)) {
+                cantMove = true;
+            }
+            Rectangle buttomOneHouse = new Rectangle(-272, 56.5, 90, 100);
+            if (buttomOneHouse.contains(objx + x, objy + y)) {
+                cantMove = true;
+            }
+            Rectangle buttomTwoHouse = new Rectangle(-44, 54, 90, 100);
+            if (buttomTwoHouse.contains(objx + x, objy + y)) {
+                cantMove = true;
+            }
+            Rectangle threeTwoHouse = new Rectangle(83, 54, 85, 100);
+            if (threeTwoHouse.contains(objx + x, objy + y)) {
+                cantMove = true;
+            }
+        }
+
 
         return cantMove;
     }
@@ -354,7 +493,6 @@ public class Controller {
 
         }
         NewRoom();
-
     }
 
     private void EndGame() {
@@ -382,22 +520,26 @@ public class Controller {
             changeNorth();
         } else if (Main.game.getCurrentRoom() instanceof Sdu && player.getTranslateY() < -158 && player.getTranslateX() > -45.5 && player.getTranslateX() < 14) {
             changeNorth();
-        //South
+            //South
         } else if (Main.game.getCurrentRoom() instanceof RoadBuild && player.getTranslateY() > 208 && player.getTranslateX() > -80 && player.getTranslateX() < 14) {
             changeSouth();
         } else if (Main.game.getCurrentRoom() instanceof Park && player.getTranslateY() > 208 && player.getTranslateX() > -142.5 && player.getTranslateX() < -82.5) {
             changeSouth();
         } else if (Main.game.getCurrentRoom() instanceof Park && player.getTranslateY() > 208 && player.getTranslateX() > 68 && player.getTranslateX() < 126) {
             changeSouth();
-        //West
+            //West
         } else if (player.getTranslateX() < -328 && player.getTranslateY() > -116.5 && player.getTranslateY() < -61.5) {
             changeWest();
-        } else if (Main.game.getCurrentRoom() instanceof Town && player.getTranslateX() < -328 && player.getTranslateY() > -64 && player.getTranslateY() < -8) {
+        } else if (Main.game.getCurrentRoom() instanceof Farm && player.getTranslateX() < -328 && player.getTranslateY() > -96 && player.getTranslateY() < -66) {
             changeWest();
-        //East
-        } else if (player.getTranslateX() > 328 && player.getTranslateY() > -116.5 && player.getTranslateY() < -61.5) {
+        } else if (Main.game.getCurrentRoom() instanceof Town && player.getTranslateX() < -328 && player.getTranslateY() > -53 && player.getTranslateY() < -15) {
+            changeWest();
+            //East
+        } else if (Main.game.getCurrentRoom() instanceof Beach && player.getTranslateX() > 328 && player.getTranslateY() > -116.5 && player.getTranslateY() < -61.5) {
             changeEast();
-        } else if (Main.game.getCurrentRoom() instanceof Park && player.getTranslateX() > 328 && player.getTranslateY() > -64 && player.getTranslateY() < -8) {
+        } else if (Main.game.getCurrentRoom() instanceof RoadBuild && player.getTranslateX() > 328 && player.getTranslateY() > -116.5 && player.getTranslateY() < -61.5) {
+            changeEast();
+        } else if (Main.game.getCurrentRoom() instanceof Park && player.getTranslateX() > 330 && player.getTranslateY() > -56 && player.getTranslateY() < -15) {
             changeEast();
         }
     }
@@ -441,16 +583,19 @@ public class Controller {
         showRoadBuilderRoad();
         generatePlasticInRoom(Main.game.placePlastic());
         smokeMachine();
+        showFarmer();
+        showProfessor();
+        showMechanic();
     }
 
     public void changeSouth() {
         if (!(Main.game.getCurrentRoom() instanceof Beach || Main.game.getCurrentRoom() instanceof Farm || Main.game.getCurrentRoom() instanceof Town || Main.game.getCurrentRoom() instanceof Sdu)) {
             player.setTranslateY(-200);
         }
-        if (Main.game.getCurrentRoom() instanceof Park){
+        if (Main.game.getCurrentRoom() instanceof Park) {
             player.setTranslateX(-117.5);
         }
-        if (Main.game.getCurrentRoom() instanceof RoadBuild){
+        if (Main.game.getCurrentRoom() instanceof RoadBuild) {
             player.setTranslateY(-150);
         }
         Game.changedRoom = "south";
@@ -465,6 +610,12 @@ public class Controller {
         if (!(Main.game.getCurrentRoom() instanceof Beach || Main.game.getCurrentRoom() instanceof Sdu || Main.game.getCurrentRoom() instanceof Park)) {
             player.setTranslateX(327);
         }
+        if (Main.game.getCurrentRoom() instanceof Town){
+            player.setTranslateY(-77);
+        }
+        if (Main.game.getCurrentRoom() instanceof Farm){
+            player.setTranslateY(-33.5);
+        }
         Game.changedRoom = "west";
         Main.game.goRoom();
         backgroundRoom.setImage(new Image("file:" + background));
@@ -476,6 +627,12 @@ public class Controller {
     public void changeEast() {
         if (!(Main.game.getCurrentRoom() instanceof Sdu || Main.game.getCurrentRoom() instanceof Town || Main.game.getCurrentRoom() instanceof Farm)) {
             player.setTranslateX(-327);
+        }
+        if (Main.game.getCurrentRoom() instanceof RoadBuild){
+            player.setTranslateY(-30);
+        }
+        if (Main.game.getCurrentRoom() instanceof Park){
+            player.setTranslateY(-76);
         }
         Game.changedRoom = "east";
         Main.game.goRoom();
@@ -516,6 +673,11 @@ public class Controller {
     }
 
     public void showRoadBuilderRoad() {
+        showFarmer();
+        showProfessor();
+        showMechanic();
+        //roadView.setViewport(new Rectangle2D(-681, 0, 681, 69));
+        //roadBuilderView.setViewport(new Rectangle2D(0,0,484,323));
         if (Main.game.getCurrentRoom() instanceof RoadBuild) {
             if (numberOfMovement == 0) {
                 roadView.setViewport(new Rectangle2D(-681 + (roadBuilder.getInventoryCount() * 22.7), 0, 681, 69));
@@ -541,6 +703,28 @@ public class Controller {
         }
     }
 
+    public void showProfessor(){
+        professorNpc.setTranslateX(3000);
+        if (Main.game.getCurrentRoom() instanceof Sdu){
+            professorNpc.setTranslateX(30);
+        }
+    }
+
+    public void showMechanic() {
+        mechanicNpc.setTranslateX(3000);
+        if (Main.game.getCurrentRoom() instanceof Town){
+            mechanicNpc.setTranslateX(169);
+            mechanicNpc.setTranslateY(20);
+        }
+    }
+
+    public void showFarmer(){
+        farmerNpc.setTranslateX(3000);
+        if (Main.game.getCurrentRoom() instanceof Farm){
+            farmerNpc.setTranslateX(190);
+            farmerNpc.setTranslateY(2);
+        }
+    }
     // Det under er alle plastik imageviews. Det er placeret her, da der er alt for mange, og der skal undersøges om det ikke kan gøres på en smart måde, så vi
     // ikke skal have 20 imageview
 

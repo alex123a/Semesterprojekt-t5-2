@@ -43,21 +43,21 @@ public class Game {
         Park = new Park();
         Sdu = new Sdu();
 
-        RoadBuild.setExit("east", Farm);
+        RoadBuild.setExit("east", Town);
         RoadBuild.setExit("south", Sdu);
         RoadBuild.setExit("west", Beach);
         RoadBuild.setExit("north", Park);
 
         Sdu.setExit("north", RoadBuild);
 
-        Farm.setExit("west", RoadBuild);
+        Farm.setExit("west", Park);
 
         Beach.setExit("east", RoadBuild);
 
-        Park.setExit("east", Town);
+        Park.setExit("east", Farm);
         Park.setExit("south", RoadBuild);
 
-        Town.setExit("west", Park);
+        Town.setExit("west", RoadBuild);
 
         currentRoom = RoadBuild;
     }
