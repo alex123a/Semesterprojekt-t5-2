@@ -59,6 +59,7 @@ public class Controller {
     private long animationFireSmokeBrokenMachine = 0L;
     private long animationDriving = 0L;
     private int numberOfMovement = 0;
+    private boolean talkingRoadbuilder = false;
 
     @FXML
     private ImageView backgroundRoom = new ImageView("file:");
@@ -97,7 +98,10 @@ public class Controller {
             inventory.setOpacity(0);
         }
         backgroundRoom.setImage(new Image("file:src/sample/presentation/pictures/Backgrounds/StartScreen.png"));
-        showRoadBuilderRoad();
+        professorNpc.setImage(new Image("file:" + professorObject.getImage()));
+        mechanicNpc.setImage(new Image("file:" + mechanicObject.getImage()));
+        farmerNpc.setImage(new Image("file:" + farmerObject.getImage()));
+        dialogBox.setImage(new Image("file:" + dialog.getImage()));
     }
 
     public void generatePlasticInRoom(List<Plastic> plasticList) {
@@ -287,13 +291,42 @@ public class Controller {
                     inventory.setOpacity(0.4);
                     gameNotStarted = false;
                 }
+
+                if (talkingRoadbuilder) {
+                    if (spaceCount == 1) {
+                        talkNPC(playerText, "Road builder", 3);
+                        spaceCount++;
+                    } else if (spaceCount == 2) {
+                        NPCTextLine.setText("");
+                        NPCTextLine1.setText("");
+                        NPCTextLine2.setText("");
+                        playerText.setText("");
+                        dialogBox.setTranslateY(3000);
+                        spaceCount = 0;
+                    }
+                }
                 if (Main.game.getCurrentRoom() instanceof RoadBuild && player.getTranslateX() > roadBuilderView.getTranslateX()-50 && player.getTranslateX() < roadBuilderView.getTranslateX()+50 && player.getTranslateY() > roadBuilderView.getTranslateY()-50 && player.getTranslateY() < roadBuilderView.getTranslateY()+50) {
                     if (roadBuilder.getInventoryCount() >= 19) {
                         roadBuilder.damagedMachine();
                     }
 
                     if (roadBuilder.getDamaged() > 0) {
-                        System.out.println("Repair me :)");
+                        NPCTextLine.setTranslateY(-210);
+                        NPCTextLine.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
+                        NPCTextLine1.setTranslateY(-190);
+                        NPCTextLine1.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
+                        NPCTextLine2.setTranslateY(-170);
+                        NPCTextLine2.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
+                        playerText.setTranslateY(-130);
+                        playerText.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
+                        if (spaceCount == 0 && roadBuilder.getDamaged() > 0) {
+                            talkNPC(NPCTextLine, "Road builder", 0);
+                            talkNPC(NPCTextLine1, "Road builder", 1);
+                            talkNPC(NPCTextLine2, "Road builder", 2);
+                            spaceCount++;
+                            talkingRoadbuilder = true;
+                        }
+
                     } else {
                         numberOfMovement = playerObject.getPlasticInv().size() * 4;
                         Main.game.givePlastic();
@@ -314,7 +347,7 @@ public class Controller {
 
     private void EndGame() {
         if (roadBuilder.getInventoryCount() == Game.getRoadDone()) {
-            System.out.println("Du er færdig");
+            System.out.println("You are finished");
         }
     }
 
@@ -324,12 +357,6 @@ public class Controller {
         player.setViewport(new Rectangle2D(0, 0, 32, 48));
         roadView.setImage(new Image("file:" + road.getImage()));
         roadBuilderView.setImage(new Image("file:" + roadBuilder.getImage()));
-        professorNpc.setImage(new Image("file:" + professorObject.getImage()));
-        professorNpc.setTranslateX(3000);
-        mechanicNpc.setImage(new Image("file:" + mechanicObject.getImage()));
-        mechanicNpc.setTranslateX(3000);
-        farmerNpc.setImage(new Image("file:" + farmerObject.getImage()));
-        farmerNpc.setTranslateX(3000);
         //plas1.setImage(new Image("file:" + "src/sample/presentation/pictures/plastic/cleaningPlastic.png"));
         generatePlasticInRoom(Main.game.placePlastic());
         smoke.setImage(new Image("file:src/sample/presentation/pictures/buildSmoke.png"));
@@ -407,6 +434,7 @@ public class Controller {
         Game.changedRoom = "north";
         Main.game.goRoom();
         backgroundRoom.setImage(new Image("file:" + background));
+        hideDialogBox();
         showRoadBuilderRoad();
         generatePlasticInRoom(Main.game.placePlastic());
         showFarmer();
@@ -427,6 +455,7 @@ public class Controller {
         Game.changedRoom = "south";
         Main.game.goRoom();
         backgroundRoom.setImage(new Image("file:" + background));
+        hideDialogBox();
         showRoadBuilderRoad();
         generatePlasticInRoom(Main.game.placePlastic());
     }
@@ -444,6 +473,7 @@ public class Controller {
         Game.changedRoom = "west";
         Main.game.goRoom();
         backgroundRoom.setImage(new Image("file:" + background));
+        hideDialogBox();
         showRoadBuilderRoad();
         generatePlasticInRoom(Main.game.placePlastic());
     }
@@ -461,6 +491,7 @@ public class Controller {
         Game.changedRoom = "east";
         Main.game.goRoom();
         backgroundRoom.setImage(new Image("file:" + background));
+        hideDialogBox();
         showRoadBuilderRoad();
         generatePlasticInRoom(Main.game.placePlastic());
     }
@@ -528,7 +559,6 @@ public class Controller {
             }
 
         });
-
         timeline.setCycleCount(timeline.INDEFINITE);
         timeline.getKeyFrames().add(frame);
         timeline.play();
@@ -538,9 +568,6 @@ public class Controller {
         showFarmer();
         showProfessor();
         showMechanic();
-        //roadView.setViewport(new Rectangle2D(-681, 0, 681, 69));
-        //roadBuilderView.setViewport(new Rectangle2D(0,0,484,323));
-        hideDialogBox();
         if (Main.game.getCurrentRoom() instanceof RoadBuild) {
             roadView.setViewport(new Rectangle2D(-681 + (roadBuilder.getInventoryCount() * 18.9166 + 113.5), 0, 681, 69));
         } else {
@@ -582,6 +609,7 @@ public class Controller {
     }
 
     public void hideDialogBox() {
+        spaceCount = 0;
         NPCTextLine.setText("");
         NPCTextLine1.setText("");
         NPCTextLine2.setText("");

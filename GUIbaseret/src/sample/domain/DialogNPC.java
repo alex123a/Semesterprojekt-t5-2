@@ -7,6 +7,7 @@ public class DialogNPC {
     private String farmerText = "src/sample/data/textfiles/npcDescriptions/FarmerenText.txt";
     private String professorText = "src/sample/data/textfiles/npcDescriptions/ProfessorText.txt";
     private String mechanicText = "src/sample/data/textfiles/npcDescriptions/VillagerText.txt";
+    private String roadbuilderText = "src/sample/data/textfiles/npcDescriptions/DamagedMachine.txt";
 
 
 
@@ -24,6 +25,9 @@ public class DialogNPC {
         } else if (NPC.equals("mechanic")) {
             GetNPCText getNPCText = new GetNPCText();
             return getNPCText.ReadFile(mechanicText,num);
+        } else if (NPC.equals("Road builder")) {
+            GetNPCText getNPCText = new GetNPCText();
+            return getNPCText.ReadFile(roadbuilderText,num);
         }
         return "not possible";
     }
