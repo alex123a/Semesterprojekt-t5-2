@@ -45,7 +45,6 @@ public class Controller {
     public ListView inventory = new ListView();
 
 
-
     public void initialize() {
         if (gameNotStarted) {
             inventory.setOpacity(0);
@@ -67,19 +66,19 @@ public class Controller {
                 plas[i].setFitHeight(30);
                 plas[i].setFitWidth(30);
                 // Kode til at give plastik ny position hvis de falder inden for no go zonerne.
-                if (moveBlock(plas[i].getTranslateX(), plas[i].getTranslateY(), 0 , -2)) {
+                if (moveBlock(plas[i].getTranslateX(), plas[i].getTranslateY(), 0, -2)) {
                     plasticList.get(i).newPosition();
                     generatePlasticInRoom(plasticList);
                     break;
-                } else if (moveBlock(plas[i].getTranslateX(), plas[i].getTranslateY(), 0 , 2)) {
+                } else if (moveBlock(plas[i].getTranslateX(), plas[i].getTranslateY(), 0, 2)) {
                     plasticList.get(i).newPosition();
                     generatePlasticInRoom(plasticList);
                     break;
-                } else if (moveBlock(plas[i].getTranslateX(), plas[i].getTranslateY(), -2 , 0)) {
+                } else if (moveBlock(plas[i].getTranslateX(), plas[i].getTranslateY(), -2, 0)) {
                     plasticList.get(i).newPosition();
                     generatePlasticInRoom(plasticList);
                     break;
-                } else if (moveBlock(plas[i].getTranslateX(), plas[i].getTranslateY(), 2 , 0)) {
+                } else if (moveBlock(plas[i].getTranslateX(), plas[i].getTranslateY(), 2, 0)) {
                     plasticList.get(i).newPosition();
                     generatePlasticInRoom(plasticList);
                     break;
@@ -92,7 +91,7 @@ public class Controller {
         ImageView[] plas = {plas1, plas2, plas3, plas4, plas5, plas6, plas7, plas8, plas9, plas10, plas11, plas12, plas13, plas14, plas15,
                 plas16, plas17, plas18, plas19, plas20};
 
-        for (ImageView image: plas) {
+        for (ImageView image : plas) {
             image.setTranslateX(3000);
             image.setTranslateY(3000);
         }
@@ -208,11 +207,11 @@ public class Controller {
                 cantMove = true;
             }
             Rectangle ladyNoOne = new Rectangle(32, 40, 80, 50);
-            if (ladyNoOne.contains(player.getTranslateX() + x, player.getTranslateY() + y)){
+            if (ladyNoOne.contains(player.getTranslateX() + x, player.getTranslateY() + y)) {
                 cantMove = true;
             }
             Rectangle ladyNoTwo = new Rectangle(155, 170, 80, 40);
-            if (ladyNoTwo.contains(player.getTranslateX() + x, player.getTranslateY() + y)){
+            if (ladyNoTwo.contains(player.getTranslateX() + x, player.getTranslateY() + y)) {
                 cantMove = true;
             }
         }
@@ -234,28 +233,28 @@ public class Controller {
         }
 
         if (Main.game.getCurrentRoom() instanceof Sdu) {
-            Rectangle topLeftWall = new Rectangle(-340,-220,300,30);
-            if(topLeftWall.contains(player.getTranslateX() + x, player.getTranslateY() + y)){
+            Rectangle topLeftWall = new Rectangle(-340, -220, 300, 30);
+            if (topLeftWall.contains(player.getTranslateX() + x, player.getTranslateY() + y)) {
                 cantMove = true;
             }
-            Rectangle topRightWall = new Rectangle(27.5,-220,400,30);
-            if(topRightWall.contains(player.getTranslateX() + x, player.getTranslateY() + y)){
+            Rectangle topRightWall = new Rectangle(27.5, -220, 400, 30);
+            if (topRightWall.contains(player.getTranslateX() + x, player.getTranslateY() + y)) {
                 cantMove = true;
             }
-            Rectangle closetTopOne = new Rectangle(-300,-75,80,110);
-            if(closetTopOne.contains(player.getTranslateX() + x, player.getTranslateY() + y)){
+            Rectangle closetTopOne = new Rectangle(-300, -75, 80, 110);
+            if (closetTopOne.contains(player.getTranslateX() + x, player.getTranslateY() + y)) {
                 cantMove = true;
             }
-            Rectangle closetTopTwo = new Rectangle(-210,-75,75,110);
-            if(closetTopTwo.contains(player.getTranslateX() + x, player.getTranslateY() + y)){
+            Rectangle closetTopTwo = new Rectangle(-210, -75, 75, 110);
+            if (closetTopTwo.contains(player.getTranslateX() + x, player.getTranslateY() + y)) {
                 cantMove = true;
             }
-            Rectangle closetButtomOne = new Rectangle(-300,75,80,110);
-            if(closetButtomOne.contains(player.getTranslateX() + x, player.getTranslateY() + y)){
+            Rectangle closetButtomOne = new Rectangle(-300, 75, 80, 110);
+            if (closetButtomOne.contains(player.getTranslateX() + x, player.getTranslateY() + y)) {
                 cantMove = true;
             }
-            Rectangle closetButtomTwo = new Rectangle(-210,75,75,110);
-            if(closetButtomTwo.contains(player.getTranslateX() + x, player.getTranslateY() + y)){
+            Rectangle closetButtomTwo = new Rectangle(-210, 75, 75, 110);
+            if (closetButtomTwo.contains(player.getTranslateX() + x, player.getTranslateY() + y)) {
                 cantMove = true;
             }
         }
@@ -269,10 +268,40 @@ public class Controller {
             if (topLeftGarden.contains(player.getTranslateX() + x, player.getTranslateY() + y)) {
                 cantMove = true;
             }
-            Rectangle topRightGarden = new Rectangle(130, -221, 185, 145);
-            if (topRightGarden.contains(player.getTranslateX() + x, player.getTranslateY() + y)) {
+            // Labyrinten
+            Rectangle labyrinthOuterTop = new Rectangle(130, -221, 30, 145);
+            if (labyrinthOuterTop.contains(player.getTranslateX() + x, player.getTranslateY() + y)) {
                 cantMove = true;
             }
+            Rectangle labyrinthOuterButtom = new Rectangle(187.5,-111,200,30);
+            if(labyrinthOuterButtom.contains(player.getTranslateX() + x, player.getTranslateY() + y)){
+                cantMove = true;
+            }
+            Rectangle labyrinthFirstWall = new Rectangle(160,-150,70,30);
+            if(labyrinthFirstWall.contains(player.getTranslateX() + x, player.getTranslateY() + y)){
+                cantMove = true;
+            }
+            Rectangle labyrinthSecondWall = new Rectangle(255,-150,30,55);
+            if(labyrinthSecondWall.contains(player.getTranslateX() + x, player.getTranslateY() + y)){
+                cantMove = true;
+            }
+            Rectangle labyrinthVertiWallOne = new Rectangle(180,-221,30,60);
+            if(labyrinthVertiWallOne.contains(player.getTranslateX() + x, player.getTranslateY() + y)){
+                cantMove = true;
+            }
+            Rectangle labyrinthVertiWallTwo = new Rectangle(233,-223,30,66);
+            if(labyrinthVertiWallTwo.contains(player.getTranslateX() + x, player.getTranslateY() + y)){
+                cantMove = true;
+            }
+            Rectangle labyrinthHoriWallOne = new Rectangle(265,-213,50,30);
+            if(labyrinthHoriWallOne.contains(player.getTranslateX() + x, player.getTranslateY() + y)){
+                cantMove = true;
+            }
+            Rectangle labyrinthVertiWallThree = new Rectangle(298,-212,30,70);
+            if(labyrinthVertiWallThree.contains(player.getTranslateX() + x, player.getTranslateY() + y)){
+                cantMove = true;
+            }
+
             Rectangle leftButtomRightGarden = new Rectangle(130, 9, 210, 250);
             if (leftButtomRightGarden.contains(player.getTranslateX() + x, player.getTranslateY() + y)) {
                 cantMove = true;
