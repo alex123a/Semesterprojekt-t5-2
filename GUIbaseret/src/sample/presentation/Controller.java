@@ -11,6 +11,8 @@ import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import sample.domain.*;
@@ -20,6 +22,8 @@ import sample.domain.NPCer.Professor;
 import sample.domain.PlasticElements.Plastic;
 import sample.domain.Rooms.*;
 import javafx.geometry.Orientation;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,6 +49,7 @@ public class Controller {
     private long animationFireSmoke = 0;
     private long animationDriving = 0;
     private int numberOfMovement = 0;
+    private AudioMusicPlayer backgroundMusic = new AudioMusicPlayer("src/sample/presentation/audio/BackgroundMusic.wav");
 
     @FXML
     private ImageView backgroundRoom = new ImageView("file:");
@@ -73,7 +78,11 @@ public class Controller {
         }
         backgroundRoom.setImage(new Image("file:src/sample/presentation/pictures/Backgrounds/StartScreen.png"));
         showRoadBuilderRoad();
+
+        backgroundMusic.musicPlayerInfinity();
     }
+
+
 
     public void generatePlasticInRoom(List<Plastic> plasticList) {
         clearPlasticInRoom();
