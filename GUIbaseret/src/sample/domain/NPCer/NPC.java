@@ -18,9 +18,6 @@ public abstract class NPC {
         this.name = name;
     }
 
-    public abstract void description(String command);
-
-    public abstract String toString();
 
     public void setTalking(boolean talking) {
         this.talking = talking;
