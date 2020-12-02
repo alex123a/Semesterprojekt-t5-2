@@ -58,6 +58,10 @@ public class Controller {
     public ListView inventory = new ListView();
     @FXML
     public ImageView smoke = new ImageView("file:src/sample/presentation/pictures/buildSmoke.png");
+    @FXML
+    public ImageView smokeBrokenMachine = new ImageView("file:src/sample/presentation/pictures/fireSmoke-1.png");
+
+    @FXML
     public ImageView professorNpc = new ImageView("file:" + professorObject.getImage());
 
     @FXML
@@ -478,7 +482,6 @@ public class Controller {
                         numberOfMovement = playerObject.getPlasticInv().size() * 4;
                         Main.game.givePlastic();
                         updateInventory();
-                        movementMachine();
                         EndGame();
                     }
                 }
@@ -509,6 +512,7 @@ public class Controller {
         //plas1.setImage(new Image("file:" + "src/sample/presentation/pictures/plastic/cleaningPlastic.png"));
         generatePlasticInRoom(Main.game.placePlastic());
         smoke.setImage(new Image("file:src/sample/presentation/pictures/buildSmoke.png"));
+        smokeBrokenMachine.setImage(new Image("file:src/sample/presentation/pictures/fireSmoke-1.png"));
         movementMachine();
         smokeMachine();
         Timer.setStartTime(); // tid starter til highscorelisten
@@ -647,7 +651,7 @@ public class Controller {
         int FPS = 60;
         KeyFrame frame = new KeyFrame(Duration.millis(1000 / FPS), event -> {
             if (numberOfMovement != 0 && Main.game.getCurrentRoom() instanceof RoadBuild) {
-                if (animationDriving % 10 == 0) {
+                if (animationDriving % 5 == 0) {
                     roadView.setViewport(new Rectangle2D(-681 + (roadBuilder.getInventoryCount() - numberOfMovement / 4) * 18.9166 + 113.5, 0, 681, 69));
                     roadBuilderView.setViewport(new Rectangle2D(0, 0, 484, 323));
                     roadBuilderView.setTranslateX((300 - ((roadBuilder.getInventoryCount() - numberOfMovement / 4) * 18.9166 + 113.5) + 90));
