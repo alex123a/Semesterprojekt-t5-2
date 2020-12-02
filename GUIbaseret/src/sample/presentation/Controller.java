@@ -58,7 +58,6 @@ public class Controller {
     public ImageView farmerNpc = new ImageView("file:" + farmerObject.getImage());
 
 
-
     public void initialize() {
         if (gameNotStarted) {
             inventory.setOpacity(0);
@@ -85,19 +84,19 @@ public class Controller {
                 plas[i].setFitHeight(30);
                 plas[i].setFitWidth(30);
                 // Kode til at give plastik ny position hvis de falder inden for no go zonerne.
-                if (moveBlock(plas[i].getTranslateX(), plas[i].getTranslateY(), 0 , -2)) {
+                if (moveBlock(plas[i].getTranslateX(), plas[i].getTranslateY(), 0, -2)) {
                     plasticList.get(i).newPosition();
                     generatePlasticInRoom(plasticList);
                     break;
-                } else if (moveBlock(plas[i].getTranslateX(), plas[i].getTranslateY(), 0 , 2)) {
+                } else if (moveBlock(plas[i].getTranslateX(), plas[i].getTranslateY(), 0, 2)) {
                     plasticList.get(i).newPosition();
                     generatePlasticInRoom(plasticList);
                     break;
-                } else if (moveBlock(plas[i].getTranslateX(), plas[i].getTranslateY(), -2 , 0)) {
+                } else if (moveBlock(plas[i].getTranslateX(), plas[i].getTranslateY(), -2, 0)) {
                     plasticList.get(i).newPosition();
                     generatePlasticInRoom(plasticList);
                     break;
-                } else if (moveBlock(plas[i].getTranslateX(), plas[i].getTranslateY(), 2 , 0)) {
+                } else if (moveBlock(plas[i].getTranslateX(), plas[i].getTranslateY(), 2, 0)) {
                     plasticList.get(i).newPosition();
                     generatePlasticInRoom(plasticList);
                     break;
@@ -110,7 +109,7 @@ public class Controller {
         ImageView[] plas = {plast1, plast2, plast3, plast4, plast5, plast6, plast7, plast8, plast9, plast10, plast11, plast12, plast13, plast14, plast15,
                 plast16, plast17, plast18, plast19, plast20};
 
-        for (ImageView image: plas) {
+        for (ImageView image : plas) {
             image.setTranslateX(3000);
             image.setTranslateY(3000);
         }
@@ -138,6 +137,7 @@ public class Controller {
                         player.setViewport(new Rectangle2D(numbersPlayer[0], numbersPlayer[1], numbersPlayer[2], numbersPlayer[3]));
                     }
                     player.setTranslateY(player.getTranslateY() + 2.5);
+
                 }
                 animationWalk++;
             }
@@ -160,6 +160,7 @@ public class Controller {
                         player.setViewport(new Rectangle2D(numbersPlayer[0], numbersPlayer[1], numbersPlayer[2], numbersPlayer[3]));
                     }
                     player.setTranslateX(player.getTranslateX() + 2.5);
+
                 }
                 animationWalk++;
             }
@@ -205,61 +206,180 @@ public class Controller {
         boolean cantMove = false;
         if (Main.game.getCurrentRoom() instanceof RoadBuild) {
             // tree in top left conor.
-            if (objx + x < -150 && objy + y < -90) {
+            Rectangle topLeftTrees = new Rectangle(-340, -220, 180, 120);
+            if (topLeftTrees.contains(player.getTranslateX() + x, player.getTranslateY() + y)) {
                 cantMove = true;
-                //Wall 1
-            } else if (objx + x > 10 && objy + y > 205) {
+            }
+            Rectangle leftButtomWall = new Rectangle(-340, 205, 300, 30);
+            if (leftButtomWall.contains(player.getTranslateX() + x, player.getTranslateY() + y)) {
                 cantMove = true;
-                // Wall 2
-            } else if (objx + x < -25 && objy + y > 205) {
+            }
+            Rectangle rightButtomWall = new Rectangle(20, 205, 350, 30);
+            if (rightButtomWall.contains(player.getTranslateX() + x, player.getTranslateY() + y)) {
                 cantMove = true;
             }
         }
-        if (Main.game.getCurrentRoom() instanceof Beach)
-            // Beach
-            if (objx + x < -95 && objy + y > -340) {
+        if (Main.game.getCurrentRoom() instanceof Beach) {
+            Rectangle ocean = new Rectangle(-340.5, -220, 240, 500);
+            if (ocean.contains(player.getTranslateX() + x, player.getTranslateY() + y)) {
                 cantMove = true;
             }
+            Rectangle ladyNoOne = new Rectangle(32, 40, 80, 50);
+            if (ladyNoOne.contains(player.getTranslateX() + x, player.getTranslateY() + y)) {
+                cantMove = true;
+            }
+            Rectangle ladyNoTwo = new Rectangle(155, 170, 80, 40);
+            if (ladyNoTwo.contains(player.getTranslateX() + x, player.getTranslateY() + y)) {
+                cantMove = true;
+            }
+        }
 
         if (Main.game.getCurrentRoom() instanceof Farm) {
-            // Farmené
-            Rectangle field = new Rectangle(-176,-64,250,160);
-            if(field.contains(objx + x,objy + y)){
-                   cantMove = true;
-            }
-        }
-
-        if(Main.game.getCurrentRoom() instanceof Farm){
-            if(objx + x > 115 && objy + y < -36){
+            // Field
+            Rectangle field = new Rectangle(-176, -64, 250, 160);
+            if (field.contains(player.getTranslateX() + x, player.getTranslateY() + y)) {
                 cantMove = true;
             }
-        }
-        //Sdu's vægge
-        if(Main.game.getCurrentRoom() instanceof Sdu){
-            if(objx + x < -50 && objy + y <-190){
+            Rectangle barn = new Rectangle(115.5, -220, 300, 185);
+            if (barn.contains(player.getTranslateX() + x, player.getTranslateY() + y)) {
                 cantMove = true;
             }
-            if(objx + x > 20 && objy + y <-190){
+            Rectangle tractor = new Rectangle(55.5, -220, 60, 50);
+            if (tractor.contains(player.getTranslateX() + x, player.getTranslateY() + y)) {
                 cantMove = true;
             }
         }
 
-        if(Main.game.getCurrentRoom() instanceof Park){
-            if(objx + x < -150 && objy + y < -85){
+        if (Main.game.getCurrentRoom() instanceof Sdu) {
+            Rectangle topLeftWall = new Rectangle(-340, -220, 300, 30);
+            if (topLeftWall.contains(player.getTranslateX() + x, player.getTranslateY() + y)) {
                 cantMove = true;
             }
-            if(objx + x < -150 && objy + y > 0){
+            Rectangle topRightWall = new Rectangle(27.5, -220, 400, 30);
+            if (topRightWall.contains(player.getTranslateX() + x, player.getTranslateY() + y)) {
                 cantMove = true;
             }
-
-            if(objx + x > 135 && objy + y < -85){
+            Rectangle closetTopOne = new Rectangle(-300, -75, 80, 110);
+            if (closetTopOne.contains(player.getTranslateX() + x, player.getTranslateY() + y)) {
                 cantMove = true;
             }
-            if(objx + x > 135 && objy + y > 0){
+            Rectangle closetTopTwo = new Rectangle(-210, -75, 75, 110);
+            if (closetTopTwo.contains(player.getTranslateX() + x, player.getTranslateY() + y)) {
                 cantMove = true;
             }
-
+            Rectangle closetButtomOne = new Rectangle(-300, 75, 80, 110);
+            if (closetButtomOne.contains(player.getTranslateX() + x, player.getTranslateY() + y)) {
+                cantMove = true;
+            }
+            Rectangle closetButtomTwo = new Rectangle(-210, 75, 75, 110);
+            if (closetButtomTwo.contains(player.getTranslateX() + x, player.getTranslateY() + y)) {
+                cantMove = true;
+            }
         }
+
+        if (Main.game.getCurrentRoom() instanceof Park) {
+            Rectangle buttomLeftGarden = new Rectangle(-340, -1, 190, 210);
+            if (buttomLeftGarden.contains(player.getTranslateX() + x, player.getTranslateY() + y)) {
+                cantMove = true;
+            }
+            Rectangle topLeftGarden = new Rectangle(-340, -221, 185, 145);
+            if (topLeftGarden.contains(player.getTranslateX() + x, player.getTranslateY() + y)) {
+                cantMove = true;
+            }
+            // Labyrinten
+            Rectangle labyrinthOuterTop = new Rectangle(130, -221, 30, 145);
+            if (labyrinthOuterTop.contains(player.getTranslateX() + x, player.getTranslateY() + y)) {
+                cantMove = true;
+            }
+            Rectangle labyrinthOuterButtom = new Rectangle(187.5,-111,200,30);
+            if(labyrinthOuterButtom.contains(player.getTranslateX() + x, player.getTranslateY() + y)){
+                cantMove = true;
+            }
+            Rectangle labyrinthFirstWall = new Rectangle(160,-150,70,30);
+            if(labyrinthFirstWall.contains(player.getTranslateX() + x, player.getTranslateY() + y)){
+                cantMove = true;
+            }
+            Rectangle labyrinthSecondWall = new Rectangle(255,-150,30,55);
+            if(labyrinthSecondWall.contains(player.getTranslateX() + x, player.getTranslateY() + y)){
+                cantMove = true;
+            }
+            Rectangle labyrinthVertiWallOne = new Rectangle(180,-221,30,60);
+            if(labyrinthVertiWallOne.contains(player.getTranslateX() + x, player.getTranslateY() + y)){
+                cantMove = true;
+            }
+            Rectangle labyrinthVertiWallTwo = new Rectangle(233,-223,30,66);
+            if(labyrinthVertiWallTwo.contains(player.getTranslateX() + x, player.getTranslateY() + y)){
+                cantMove = true;
+            }
+            Rectangle labyrinthHoriWallOne = new Rectangle(265,-213,50,30);
+            if(labyrinthHoriWallOne.contains(player.getTranslateX() + x, player.getTranslateY() + y)){
+                cantMove = true;
+            }
+            Rectangle labyrinthVertiWallThree = new Rectangle(298,-212,30,70);
+            if(labyrinthVertiWallThree.contains(player.getTranslateX() + x, player.getTranslateY() + y)){
+                cantMove = true;
+            }
+
+            Rectangle leftButtomRightGarden = new Rectangle(130, 9, 210, 250);
+            if (leftButtomRightGarden.contains(player.getTranslateX() + x, player.getTranslateY() + y)) {
+                cantMove = true;
+            }
+            Rectangle topMiddelGarden = new Rectangle(-43, -221, 80, 110);
+            if (topMiddelGarden.contains(player.getTranslateX() + x, player.getTranslateY() + y)) {
+                cantMove = true;
+            }
+            Rectangle buttomMiddelGarden = new Rectangle(-40, 59, 80, 150);
+            if (buttomMiddelGarden.contains(player.getTranslateX() + x, player.getTranslateY() + y)) {
+                cantMove = true;
+            }
+            Rectangle buttomMiddelTrees = new Rectangle(-70, -6, 122, 80);
+            if (buttomMiddelTrees.contains(player.getTranslateX() + x, player.getTranslateY() + y)) {
+                cantMove = true;
+            }
+            Rectangle topMiddelTrees = new Rectangle(-75, -126, 122, 70);
+            if (topMiddelTrees.contains(player.getTranslateX() + x, player.getTranslateY() + y)) {
+                cantMove = true;
+            }
+        }
+        if (Main.game.getCurrentRoom() instanceof Town) {
+            Rectangle topOneHouse = new Rectangle(-277, -221, 100, 75);
+            if (topOneHouse.contains(player.getTranslateX() + x, player.getTranslateY() + y)) {
+                cantMove = true;
+            }
+            Rectangle topTwoHouse = new Rectangle(-62, -221, 100, 75);
+            if (topTwoHouse.contains(player.getTranslateX() + x, player.getTranslateY() + y)) {
+                cantMove = true;
+            }
+            Rectangle topThreeHouse = new Rectangle(58, -221, 100, 75);
+            if (topThreeHouse.contains(player.getTranslateX() + x, player.getTranslateY() + y)) {
+                cantMove = true;
+            }
+            Rectangle topFourHouse = new Rectangle(178, -221, 100, 75);
+            if (topFourHouse.contains(player.getTranslateX() + x, player.getTranslateY() + y)) {
+                cantMove = true;
+            }
+            Rectangle middelOneHouse = new Rectangle(-110, -101, 100, 100);
+            if (middelOneHouse.contains(player.getTranslateX() + x, player.getTranslateY() + y)) {
+                cantMove = true;
+            }
+            Rectangle middelTwoHouse = new Rectangle(60, -111, 100, 110);
+            if (middelTwoHouse.contains(player.getTranslateX() + x, player.getTranslateY() + y)) {
+                cantMove = true;
+            }
+            Rectangle buttomOneHouse = new Rectangle(-272, 56.5, 90, 100);
+            if (buttomOneHouse.contains(player.getTranslateX() + x, player.getTranslateY() + y)) {
+                cantMove = true;
+            }
+            Rectangle buttomTwoHouse = new Rectangle(-44, 54, 90, 100);
+            if (buttomTwoHouse.contains(player.getTranslateX() + x, player.getTranslateY() + y)) {
+                cantMove = true;
+            }
+            Rectangle threeTwoHouse = new Rectangle(83, 54, 85, 100);
+            if (threeTwoHouse.contains(player.getTranslateX() + x, player.getTranslateY() + y)) {
+                cantMove = true;
+            }
+        }
+
 
         return cantMove;
     }
@@ -358,24 +478,26 @@ public class Controller {
             changeNorth();
         } else if (Main.game.getCurrentRoom() instanceof Sdu && player.getTranslateY() < -158 && player.getTranslateX() > -45.5 && player.getTranslateX() < 14) {
             changeNorth();
-        //South
+            //South
         } else if (Main.game.getCurrentRoom() instanceof RoadBuild && player.getTranslateY() > 208 && player.getTranslateX() > -80 && player.getTranslateX() < 14) {
             changeSouth();
         } else if (Main.game.getCurrentRoom() instanceof Park && player.getTranslateY() > 208 && player.getTranslateX() > -142.5 && player.getTranslateX() < -82.5) {
             changeSouth();
         } else if (Main.game.getCurrentRoom() instanceof Park && player.getTranslateY() > 208 && player.getTranslateX() > 68 && player.getTranslateX() < 126) {
             changeSouth();
-        //West
+            //West
         } else if (player.getTranslateX() < -328 && player.getTranslateY() > -116.5 && player.getTranslateY() < -61.5) {
             changeWest();
         } else if (Main.game.getCurrentRoom() instanceof Farm && player.getTranslateX() < -328 && player.getTranslateY() > -96 && player.getTranslateY() < -66) {
             changeWest();
         } else if (Main.game.getCurrentRoom() instanceof Town && player.getTranslateX() < -328 && player.getTranslateY() > -53 && player.getTranslateY() < -15) {
             changeWest();
-        //East
-        } else if (player.getTranslateX() > 328 && player.getTranslateY() > -116.5 && player.getTranslateY() < -61.5) {
+            //East
+        } else if (Main.game.getCurrentRoom() instanceof Beach && player.getTranslateX() > 328 && player.getTranslateY() > -116.5 && player.getTranslateY() < -61.5) {
             changeEast();
-        } else if (Main.game.getCurrentRoom() instanceof Park && player.getTranslateX() > 328 && player.getTranslateY() > -64 && player.getTranslateY() < -8) {
+        } else if (Main.game.getCurrentRoom() instanceof RoadBuild && player.getTranslateX() > 328 && player.getTranslateY() > -116.5 && player.getTranslateY() < -61.5) {
+            changeEast();
+        } else if (Main.game.getCurrentRoom() instanceof Park && player.getTranslateX() > 330 && player.getTranslateY() > -56 && player.getTranslateY() < -15) {
             changeEast();
         }
     }
@@ -427,10 +549,10 @@ public class Controller {
         if (!(Main.game.getCurrentRoom() instanceof Beach || Main.game.getCurrentRoom() instanceof Farm || Main.game.getCurrentRoom() instanceof Town || Main.game.getCurrentRoom() instanceof Sdu)) {
             player.setTranslateY(-200);
         }
-        if (Main.game.getCurrentRoom() instanceof Park){
+        if (Main.game.getCurrentRoom() instanceof Park) {
             player.setTranslateX(-117.5);
         }
-        if (Main.game.getCurrentRoom() instanceof RoadBuild){
+        if (Main.game.getCurrentRoom() instanceof RoadBuild) {
             player.setTranslateY(-150);
         }
         Game.changedRoom = "south";
