@@ -10,6 +10,8 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 
+<?import javafx.scene.text.TextFlow?>
+<?import javafx.scene.text.Text?>
 <GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.presentation.Controller">
    <children>
       <StackPane>
@@ -41,9 +43,13 @@
             <ImageView fx:id="plast20" pickOnBounds="true" preserveRatio="true"/>
 
             <ImageView fx:id="player" fitHeight="45.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="farmerNpc" fitHeight="45.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="mechanicNpc" fitHeight="45.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="professorNpc" fitHeight="45.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="farmerNpc" fitHeight="45.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true" translateX="3000"/>
+            <ImageView fx:id="mechanicNpc" fitHeight="45.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true" translateX="3000"/>
+            <ImageView fx:id="professorNpc" fitHeight="45.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true" translateX="3000"/>
+            <ImageView fx:id="dialogBox" fitHeight="180.0" fitWidth="432.0" pickOnBounds="true" preserveRatio="true" translateY="3000"/>
+            <Text fx:id="NPCText"/>
+            <Text fx:id="playerText"/>
+            <Text fx:id="playerOptionsText"/>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
                   <ListView fx:id="inventory" layoutX="210.0" layoutY="453.0" prefHeight="45.0" prefWidth="300.0" />

@@ -9,7 +9,11 @@ import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import sample.domain.*;
 import sample.domain.NPCer.Farmer;
 import sample.domain.NPCer.Mechanic;
@@ -30,7 +34,12 @@ public class Controller {
     public static Professor professorObject = new Professor("Professor");
     public static Mechanic mechanicObject = new Mechanic("Mechanic");
     public static Farmer farmerObject = new Farmer("Farmer");
+    public static DialogNPC dialog = new DialogNPC();
     private boolean north, south, east, west;
+    private int spaceCount = 0;
+    private boolean farmerTalk = false;
+    private boolean professorTalk = false;
+    private boolean mechanicTalk = false;
     private String[] direction = {"North", "South", "West", "East"};
     private SpriteAnimation playerAnimation = new SpriteAnimation(direction[0]);
     private int[] numbersPlayer;
@@ -50,13 +59,18 @@ public class Controller {
     public ListView inventory = new ListView();
     @FXML
     public ImageView professorNpc = new ImageView("file:" + professorObject.getImage());
-
     @FXML
     public ImageView mechanicNpc = new ImageView("file:"+ mechanicObject.getImage());
-
     @FXML
     public ImageView farmerNpc = new ImageView("file:" + farmerObject.getImage());
-
+    @FXML
+    public ImageView dialogBox = new ImageView("file:" + dialog.getImage());
+    @FXML
+    private Text NPCText;
+    @FXML
+    private Text playerText;
+    @FXML
+    private Text playerOptionsText;
 
 
     public void initialize() {
@@ -65,11 +79,9 @@ public class Controller {
         }
         backgroundRoom.setImage(new Image("file:src/sample/presentation/pictures/Backgrounds/StartScreen.png"));
         professorNpc.setImage(new Image("file:" + professorObject.getImage()));
-        professorNpc.setTranslateX(3000);
         mechanicNpc.setImage(new Image("file:" + mechanicObject.getImage()));
-        mechanicNpc.setTranslateX(3000);
         farmerNpc.setImage(new Image("file:" + farmerObject.getImage()));
-        farmerNpc.setTranslateX(3000);
+        dialogBox.setImage(new Image("file:" + dialog.getImage()));
     }
 
     public void generatePlasticInRoom(List<Plastic> plasticList) {
@@ -326,9 +338,14 @@ public class Controller {
                     updateInventory();
                     showRoadBuilderRoad();
                     EndGame();
+                } else if (Main.game.getCurrentRoom() instanceof Farm && player.getTranslateX() > farmerNpc.getTranslateX()-30 && player.getTranslateX() < farmerNpc.getTranslateX()+30 && player.getTranslateY() > farmerNpc.getTranslateY()-30 && player.getTranslateY() < farmerNpc.getTranslateY()+30) {
+                    showDialogBox();
+                } else if (Main.game.getCurrentRoom() instanceof Sdu && player.getTranslateX() > professorNpc.getTranslateX()-30 && player.getTranslateX() < professorNpc.getTranslateX()+30 && player.getTranslateY() > professorNpc.getTranslateY()-30 && player.getTranslateY() < professorNpc.getTranslateY()+30) {
+                    showDialogBox();
+                } else if (Main.game.getCurrentRoom() instanceof Town && player.getTranslateX() > mechanicNpc.getTranslateX()-30 && player.getTranslateX() < mechanicNpc.getTranslateX()+30 && player.getTranslateY() > mechanicNpc.getTranslateY()-30 && player.getTranslateY() < mechanicNpc.getTranslateY()+30) {
+                    showDialogBox();
                 }
                 collectPlastic(Main.game.placePlastic());
-
         }
         NewRoom();
     }
@@ -353,6 +370,7 @@ public class Controller {
     }
 
     private void NewRoom() {
+
         //North
         if (Main.game.getCurrentRoom() instanceof RoadBuild && player.getTranslateY() < -202 && player.getTranslateX() > -142.5 && player.getTranslateX() < -82.5) {
             changeNorth();
@@ -465,6 +483,7 @@ public class Controller {
         showFarmer();
         showProfessor();
         showMechanic();
+        hideDialogBox();
         roadView.setViewport(new Rectangle2D(-681, 0, 681, 69));
         roadBuilderView.setViewport(new Rectangle2D(0,0,484,323));
         if (Main.game.getCurrentRoom() instanceof RoadBuild) {
@@ -501,6 +520,68 @@ public class Controller {
             farmerNpc.setTranslateX(190);
             farmerNpc.setTranslateY(2);
         }
+    }
+
+    public void hideDialogBox() {
+        NPCText.setText("");
+        playerText.setText("");
+        dialogBox.setTranslateY(3000);
+    }
+
+    public void showDialogBox() {
+        NPCText.setTranslateY(-220);
+        NPCText.setFont(Font.font("Dialog", FontWeight.BOLD, 12));
+        playerText.setTranslateY(-130);
+        playerText.setFont(Font.font("Dialog", FontWeight.BOLD, 12));
+        if (Main.game.getCurrentRoom() instanceof Farm) {
+            if (spaceCount == 0 && !farmerTalk) {
+                talkNPC(NPCText, "farmer", 0);
+            } else if (spaceCount == 1) {
+                talkNPC(playerText, "farmer", 1);
+            } else if (spaceCount == 2) {
+                talkNPC(NPCText, "farmer", 2);
+            } else if (spaceCount == 3) {
+                NPCText.setText("");
+                playerText.setText("");
+                dialogBox.setTranslateY(3000);
+                spaceCount = 0;
+                farmerTalk = true;
+            }
+        } else if (Main.game.getCurrentRoom() instanceof Sdu) {
+            if (spaceCount == 0 && !professorTalk) {
+                talkNPC(NPCText, "professor", 0);
+            } else if (spaceCount == 1) {
+                talkNPC(playerText, "professor", 1);
+            } else if (spaceCount == 2) {
+                talkNPC(NPCText, "professor", 2);
+            } else if (spaceCount == 3) {
+                NPCText.setText("");
+                playerText.setText("");
+                dialogBox.setTranslateY(3000);
+                spaceCount = 0;
+                professorTalk = true;
+            }
+        } else if (Main.game.getCurrentRoom() instanceof Town) {
+            if (spaceCount == 0 && !mechanicTalk) {
+                talkNPC(NPCText, "mechanic", 0);
+            } else if (spaceCount == 1) {
+                talkNPC(playerText, "mechanic", 1);
+            } else if (spaceCount == 2) {
+                talkNPC(NPCText, "mechanic", 2);
+            } else if (spaceCount == 3) {
+                NPCText.setText("");
+                playerText.setText("");
+                dialogBox.setTranslateY(3000);
+                spaceCount = 0;
+                mechanicTalk = true;
+            }
+        }
+    }
+
+    private void talkNPC(Text npcText, String npcType, int index) {
+        dialogBox.setTranslateY(-170);
+        npcText.setText(dialog.getNPCText(npcType, index));
+        spaceCount++;
     }
     // Det under er alle plastik imageviews. Det er placeret her, da der er alt for mange, og der skal undersøges om det ikke kan gøres på en smart måde, så vi
     // ikke skal have 20 imageview
