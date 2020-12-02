@@ -43,33 +43,23 @@ public class Game {
         Park = new Park();
         Sdu = new Sdu();
 
-        RoadBuild.setExit("east", Farm);
+        RoadBuild.setExit("east", Town);
         RoadBuild.setExit("south", Sdu);
         RoadBuild.setExit("west", Beach);
         RoadBuild.setExit("north", Park);
 
         Sdu.setExit("north", RoadBuild);
 
-        Farm.setExit("west", RoadBuild);
+        Farm.setExit("west", Park);
 
         Beach.setExit("east", RoadBuild);
 
-        Park.setExit("east", Town);
+        Park.setExit("east", Farm);
         Park.setExit("south", RoadBuild);
 
-        Town.setExit("west", Park);
+        Town.setExit("west", RoadBuild);
 
         currentRoom = RoadBuild;
-    }
-
-    public void play() {
-
-        boolean finished = false;
-        /*
-        while (!finished) {
-            RoadBuilder.damagedMachine();
-        }
-        */
     }
 
     private void printHelp() {
@@ -112,14 +102,10 @@ public class Game {
         }
     }
 
-    public boolean givePlastic() {
+    public void givePlastic() {
         List<Plastic> plasticInv = Controller.playerObject.getPlasticInv();
-        int road = RoadBuilder.inventory(plasticInv);
+        RoadBuilder.inventory(plasticInv);
         Controller.playerObject.resetPlasticInv();
-        if (road >= roadDone) {
-            return true;
-        }
-        return false;
     }
 
     public static int getRoadDone() {
@@ -129,4 +115,6 @@ public class Game {
     public Room getCurrentRoom() {
         return currentRoom;
     }
+
+
 }

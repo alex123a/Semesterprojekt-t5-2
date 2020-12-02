@@ -11,10 +11,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.shape.Rectangle;
 import sample.domain.*;
+import sample.domain.NPCer.Farmer;
+import sample.domain.NPCer.Mechanic;
+import sample.domain.NPCer.Professor;
 import sample.domain.PlasticElements.Plastic;
 import sample.domain.Rooms.*;
 import javafx.geometry.Orientation;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +27,9 @@ public class Controller {
     public static Road road = new Road();
     public static Player playerObject = new Player();
     public static RoadBuilder roadBuilder = new RoadBuilder();
+    public static Professor professorObject = new Professor("Professor");
+    public static Mechanic mechanicObject = new Mechanic("Mechanic");
+    public static Farmer farmerObject = new Farmer("Farmer");
     private boolean north, south, east, west;
     private String[] direction = {"North", "South", "West", "East"};
     private SpriteAnimation playerAnimation = new SpriteAnimation(direction[0]);
@@ -43,6 +48,14 @@ public class Controller {
     public ImageView player = new ImageView("file:" + playerObject.getImage());
     @FXML
     public ListView inventory = new ListView();
+    @FXML
+    public ImageView professorNpc = new ImageView("file:" + professorObject.getImage());
+
+    @FXML
+    public ImageView mechanicNpc = new ImageView("file:"+ mechanicObject.getImage());
+
+    @FXML
+    public ImageView farmerNpc = new ImageView("file:" + farmerObject.getImage());
 
 
     public void initialize() {
@@ -50,13 +63,18 @@ public class Controller {
             inventory.setOpacity(0);
         }
         backgroundRoom.setImage(new Image("file:src/sample/presentation/pictures/Backgrounds/StartScreen.png"));
-        showRoadBuilderRoad();
+        professorNpc.setImage(new Image("file:" + professorObject.getImage()));
+        professorNpc.setTranslateX(3000);
+        mechanicNpc.setImage(new Image("file:" + mechanicObject.getImage()));
+        mechanicNpc.setTranslateX(3000);
+        farmerNpc.setImage(new Image("file:" + farmerObject.getImage()));
+        farmerNpc.setTranslateX(3000);
     }
 
     public void generatePlasticInRoom(List<Plastic> plasticList) {
         clearPlasticInRoom();
-        ImageView[] plas = {plas1, plas2, plas3, plas4, plas5, plas6, plas7, plas8, plas9, plas10, plas11, plas12, plas13, plas14, plas15,
-                plas16, plas17, plas18, plas19, plas20};
+        ImageView[] plas = {plast1, plast2, plast3, plast4, plast5, plast6, plast7, plast8, plast9, plast10, plast11, plast12, plast13, plast14, plast15,
+                plast16, plast17, plast18, plast19, plast20};
 
         for (int i = 0; i < plasticList.size(); i++) {
             if (plasticList.get(i) != null) {
@@ -88,8 +106,8 @@ public class Controller {
     }
 
     public void clearPlasticInRoom() {
-        ImageView[] plas = {plas1, plas2, plas3, plas4, plas5, plas6, plas7, plas8, plas9, plas10, plas11, plas12, plas13, plas14, plas15,
-                plas16, plas17, plas18, plas19, plas20};
+        ImageView[] plas = {plast1, plast2, plast3, plast4, plast5, plast6, plast7, plast8, plast9, plast10, plast11, plast12, plast13, plast14, plast15,
+                plast16, plast17, plast18, plast19, plast20};
 
         for (ImageView image : plas) {
             image.setTranslateX(3000);
@@ -168,8 +186,8 @@ public class Controller {
 
     public void collectPlastic(List<Plastic> plasticList) {
         if (playerObject.getPlasticInv().size() < 10) {
-            ImageView[] plas = {plas1, plas2, plas3, plas4, plas5, plas6, plas7, plas8, plas9, plas10, plas11, plas12, plas13, plas14, plas15,
-                    plas16, plas17, plas18, plas19, plas20};
+            ImageView[] plas = {plast1, plast2, plast3, plast4, plast5, plast6, plast7, plast8, plast9, plast10, plast11, plast12, plast13, plast14, plast15,
+                    plast16, plast17, plast18, plast19, plast20};
             for (int i = 0; i < plas.length; i++) {
                 if (plas[i].getTranslateX() - 15 <= player.getTranslateX() && plas[i].getTranslateX() + 15 >= player.getTranslateX()) {
                     if (plas[i].getTranslateY() - 15 <= player.getTranslateY() && plas[i].getTranslateY() + 15 >= player.getTranslateY()) {
@@ -423,10 +441,22 @@ public class Controller {
                     inventory.setOpacity(0.4);
                     gameNotStarted = false;
                 }
+                if (Main.game.getCurrentRoom() instanceof RoadBuild && player.getTranslateX() > roadBuilderView.getTranslateX()-50 && player.getTranslateX() < roadBuilderView.getTranslateX()+50 && player.getTranslateY() > roadBuilderView.getTranslateY()-50 && player.getTranslateY() < roadBuilderView.getTranslateY()+50) {
+                    Main.game.givePlastic();
+                    updateInventory();
+                    showRoadBuilderRoad();
+                    EndGame();
+                }
                 collectPlastic(Main.game.placePlastic());
+
         }
         NewRoom();
+    }
 
+    private void EndGame() {
+        if (RoadBuilder.getInventoryCount() == Game.getRoadDone()) {
+            System.out.println("Du er færdig");
+        }
     }
 
     private void StartGame() {
@@ -435,6 +465,8 @@ public class Controller {
         player.setViewport(new Rectangle2D(0, 0, 32, 48));
         roadView.setImage(new Image("file:" + road.getImage()));
         roadBuilderView.setImage(new Image("file:" + roadBuilder.getImage()));
+        roadView.setViewport(new Rectangle2D(-681, 0, 681, 69));
+        roadBuilderView.setTranslateX(300);
         //plas1.setImage(new Image("file:" + "src/sample/presentation/pictures/plastic/cleaningPlastic.png"));
         generatePlasticInRoom(Main.game.placePlastic());
         Timer.setStartTime(); // tid starter til highscorelisten
@@ -456,7 +488,9 @@ public class Controller {
             //West
         } else if (player.getTranslateX() < -328 && player.getTranslateY() > -116.5 && player.getTranslateY() < -61.5) {
             changeWest();
-        } else if (Main.game.getCurrentRoom() instanceof Town && player.getTranslateX() < -328 && player.getTranslateY() > -64 && player.getTranslateY() < -8) {
+        } else if (Main.game.getCurrentRoom() instanceof Farm && player.getTranslateX() < -328 && player.getTranslateY() > -96 && player.getTranslateY() < -66) {
+            changeWest();
+        } else if (Main.game.getCurrentRoom() instanceof Town && player.getTranslateX() < -328 && player.getTranslateY() > -53 && player.getTranslateY() < -15) {
             changeWest();
             //East
         } else if (player.getTranslateX() > 328 && player.getTranslateY() > -116.5 && player.getTranslateY() < -61.5) {
@@ -504,6 +538,9 @@ public class Controller {
         backgroundRoom.setImage(new Image("file:" + background));
         showRoadBuilderRoad();
         generatePlasticInRoom(Main.game.placePlastic());
+        showFarmer();
+        showProfessor();
+        showMechanic();
     }
 
     public void changeSouth() {
@@ -521,11 +558,18 @@ public class Controller {
         backgroundRoom.setImage(new Image("file:" + background));
         showRoadBuilderRoad();
         generatePlasticInRoom(Main.game.placePlastic());
+
     }
 
     public void changeWest() {
         if (!(Main.game.getCurrentRoom() instanceof Beach || Main.game.getCurrentRoom() instanceof Sdu || Main.game.getCurrentRoom() instanceof Park)) {
             player.setTranslateX(327);
+        }
+        if (Main.game.getCurrentRoom() instanceof Town){
+            player.setTranslateY(-77);
+        }
+        if (Main.game.getCurrentRoom() instanceof Farm){
+            player.setTranslateY(-33.5);
         }
         Game.changedRoom = "west";
         Main.game.goRoom();
@@ -538,6 +582,12 @@ public class Controller {
         if (!(Main.game.getCurrentRoom() instanceof Sdu || Main.game.getCurrentRoom() instanceof Town || Main.game.getCurrentRoom() instanceof Farm)) {
             player.setTranslateX(-327);
         }
+        if (Main.game.getCurrentRoom() instanceof RoadBuild){
+            player.setTranslateY(-30);
+        }
+        if (Main.game.getCurrentRoom() instanceof Park){
+            player.setTranslateY(-76);
+        }
         Game.changedRoom = "east";
         Main.game.goRoom();
         backgroundRoom.setImage(new Image("file:" + background));
@@ -546,69 +596,88 @@ public class Controller {
     }
 
     public void showRoadBuilderRoad() {
+        showFarmer();
+        showProfessor();
+        showMechanic();
+        roadView.setViewport(new Rectangle2D(-681, 0, 681, 69));
+        roadBuilderView.setViewport(new Rectangle2D(0,0,484,323));
         if (Main.game.getCurrentRoom() instanceof RoadBuild) {
             roadView.setViewport(new Rectangle2D(-681 + (RoadBuilder.getInventoryCount() * 22.7), 0, 681, 69));
-        } else {
-            roadView.setViewport(new Rectangle2D(-681, 0, 681, 69));
-        }
-        showRoadBuilder();
-    }
-
-    public void showRoadBuilder() {
-        if (Main.game.getCurrentRoom() instanceof RoadBuild) {
-            roadBuilderView.setViewport(new Rectangle2D(0, 0, 484, 323));
             if (RoadBuilder.getInventoryCount() < 5) {
                 roadBuilderView.setTranslateX(300);
             } else {
                 roadBuilderView.setTranslateX(300 - ((RoadBuilder.getInventoryCount() * 22.7) - 90));
             }
         } else {
+            roadView.setViewport(new Rectangle2D(-681, 0, 681, 69));
             roadBuilderView.setViewport(new Rectangle2D(-484, 0, 484, 323));
         }
     }
 
+    public void showProfessor(){
+        professorNpc.setTranslateX(3000);
+        if (Main.game.getCurrentRoom() instanceof Sdu){
+            professorNpc.setTranslateX(30);
+        }
+    }
+
+    public void showMechanic() {
+        mechanicNpc.setTranslateX(3000);
+        if (Main.game.getCurrentRoom() instanceof Town){
+            mechanicNpc.setTranslateX(169);
+            mechanicNpc.setTranslateY(20);
+        }
+    }
+
+    public void showFarmer(){
+        farmerNpc.setTranslateX(3000);
+        if (Main.game.getCurrentRoom() instanceof Farm){
+            farmerNpc.setTranslateX(190);
+            farmerNpc.setTranslateY(2);
+        }
+    }
     // Det under er alle plastik imageviews. Det er placeret her, da der er alt for mange, og der skal undersøges om det ikke kan gøres på en smart måde, så vi
     // ikke skal have 20 imageview
 
     @FXML
-    private ImageView plas1 = new ImageView();
+    private ImageView plast1 = new ImageView();
     @FXML
-    private ImageView plas2 = new ImageView();
+    private ImageView plast2 = new ImageView();
     @FXML
-    private ImageView plas3 = new ImageView();
+    private ImageView plast3 = new ImageView();
     @FXML
-    private ImageView plas4 = new ImageView();
+    private ImageView plast4 = new ImageView();
     @FXML
-    private ImageView plas5 = new ImageView();
+    private ImageView plast5 = new ImageView();
     @FXML
-    private ImageView plas6 = new ImageView();
+    private ImageView plast6 = new ImageView();
     @FXML
-    private ImageView plas7 = new ImageView();
+    private ImageView plast7 = new ImageView();
     @FXML
-    private ImageView plas8 = new ImageView();
+    private ImageView plast8 = new ImageView();
     @FXML
-    private ImageView plas9 = new ImageView();
+    private ImageView plast9 = new ImageView();
     @FXML
-    private ImageView plas10 = new ImageView();
+    private ImageView plast10 = new ImageView();
     @FXML
-    private ImageView plas11 = new ImageView();
+    private ImageView plast11 = new ImageView();
     @FXML
-    private ImageView plas12 = new ImageView();
+    private ImageView plast12 = new ImageView();
     @FXML
-    private ImageView plas13 = new ImageView();
+    private ImageView plast13 = new ImageView();
     @FXML
-    private ImageView plas14 = new ImageView();
+    private ImageView plast14 = new ImageView();
     @FXML
-    private ImageView plas15 = new ImageView();
+    private ImageView plast15 = new ImageView();
     @FXML
-    private ImageView plas16 = new ImageView();
+    private ImageView plast16 = new ImageView();
     @FXML
-    private ImageView plas17 = new ImageView();
+    private ImageView plast17 = new ImageView();
     @FXML
-    private ImageView plas18 = new ImageView();
+    private ImageView plast18 = new ImageView();
     @FXML
-    private ImageView plas19 = new ImageView();
+    private ImageView plast19 = new ImageView();
     @FXML
-    private ImageView plas20 = new ImageView();
+    private ImageView plast20 = new ImageView();
 
 }
