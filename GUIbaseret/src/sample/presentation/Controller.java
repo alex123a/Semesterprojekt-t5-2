@@ -642,7 +642,7 @@ public class Controller {
             }
         });
         timeline.setCycleCount(timeline.INDEFINITE);
-        timeline.getKeyFrames().add(frame); //This was the offending line.
+        timeline.getKeyFrames().add(frame);
         timeline.play();
     }
 
@@ -665,7 +665,7 @@ public class Controller {
             }
         });
         timeline.setCycleCount(timeline.INDEFINITE);
-        timeline.getKeyFrames().add(frame); //This was the offending line.
+        timeline.getKeyFrames().add(frame);
         timeline.play();
     }
 
@@ -688,7 +688,7 @@ public class Controller {
         });
 
         timeline.setCycleCount(timeline.INDEFINITE);
-        timeline.getKeyFrames().add(frame); //This was the offending line.
+        timeline.getKeyFrames().add(frame);
         timeline.play();
     }
 
