@@ -492,16 +492,17 @@ public class Controller {
         int FPS = 60;
         KeyFrame frame = new KeyFrame(Duration.millis(1000 / FPS), event -> {
             if (numberOfMovement != 0 && Main.game.getCurrentRoom() instanceof RoadBuild) {
-                if (animationDriving % 3 == 0) {
+                if (animationDriving % 10 == 0) {
                     roadView.setViewport(new Rectangle2D(-681 + (roadBuilder.getInventoryCount() - numberOfMovement / 4) * 22.7, 0, 681, 69));
                     roadBuilderView.setViewport(new Rectangle2D(0, 0, 484, 323));
-                    if (roadBuilder.getInventoryCount() > 5 && turnsOfRoad > 5) {
+                    // Skal være større end 16, da vi ganger med 4 på numberOfMovement.
+                    if (turnsOfRoad > 16) {
                         if ((300 - ((roadBuilder.getInventoryCount() - numberOfMovement / 4) * 22.7) + 90) < (roadBuilderView.getTranslateX() + 22.7)) {
                             roadBuilderView.setTranslateX((300 - ((roadBuilder.getInventoryCount() - numberOfMovement / 4) * 22.7) + 90));
                         }
                     }
-                    numberOfMovement--;
                     ++turnsOfRoad;
+                    --numberOfMovement;
 
                 }
             } else {
