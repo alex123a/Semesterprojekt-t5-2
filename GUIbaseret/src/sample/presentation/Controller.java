@@ -45,7 +45,6 @@ public class Controller {
     private long animationFireSmoke = 0;
     private long animationDriving = 0;
     private int numberOfMovement = 0;
-    private int turnsOfRoad = 0;
 
     @FXML
     private ImageView backgroundRoom = new ImageView("file:");
@@ -394,7 +393,7 @@ public class Controller {
         int FPS = 60;
         KeyFrame frame = new KeyFrame(Duration.millis(1000 / FPS), event -> {
             if (Main.game.getCurrentRoom() instanceof RoadBuild) {
-                if (animationFireSmoke % 13 == 0) {
+                if (animationFireSmoke % 20 == 0) {
                     numbersFire = fireAnimation.changePic();
                     smoke.setViewport(new Rectangle2D(numbersFire[0], numbersFire[1], numbersFire[2], numbersFire[3]));
                     double smokeHeight = roadBuilderView.getTranslateY() - numbersFire[0] / 22 - 40;
@@ -510,6 +509,7 @@ public class Controller {
         //plas1.setImage(new Image("file:" + "src/sample/presentation/pictures/plastic/cleaningPlastic.png"));
         generatePlasticInRoom(Main.game.placePlastic());
         smoke.setImage(new Image("file:src/sample/presentation/pictures/buildSmoke.png"));
+        movementMachine();
         smokeMachine();
         Timer.setStartTime(); // tid starter til highscorelisten
     }
@@ -648,22 +648,15 @@ public class Controller {
         KeyFrame frame = new KeyFrame(Duration.millis(1000 / FPS), event -> {
             if (numberOfMovement != 0 && Main.game.getCurrentRoom() instanceof RoadBuild) {
                 if (animationDriving % 10 == 0) {
-                    roadView.setViewport(new Rectangle2D(-681 + (roadBuilder.getInventoryCount() - numberOfMovement / 4) * 22.7, 0, 681, 69));
+                    roadView.setViewport(new Rectangle2D(-681 + (roadBuilder.getInventoryCount() - numberOfMovement / 4) * 18.9166 + 113.5, 0, 681, 69));
                     roadBuilderView.setViewport(new Rectangle2D(0, 0, 484, 323));
-                    // Skal være større end 16, da vi ganger med 4 på numberOfMovement.
-                    if (turnsOfRoad > 16) {
-                        if ((300 - ((roadBuilder.getInventoryCount() - numberOfMovement / 4) * 22.7) + 90) < (roadBuilderView.getTranslateX() + 22.7)) {
-                            roadBuilderView.setTranslateX((300 - ((roadBuilder.getInventoryCount() - numberOfMovement / 4) * 22.7) + 90));
-                        }
-                    }
-                    ++turnsOfRoad;
+                    roadBuilderView.setTranslateX((300 - ((roadBuilder.getInventoryCount() - numberOfMovement / 4) * 18.9166 + 113.5) + 90));
                     --numberOfMovement;
-
                 }
+                animationDriving++;
             } else {
                 showRoadBuilderRoad();
             }
-            animationDriving++;
 
         });
 
@@ -679,9 +672,7 @@ public class Controller {
         //roadView.setViewport(new Rectangle2D(-681, 0, 681, 69));
         //roadBuilderView.setViewport(new Rectangle2D(0,0,484,323));
         if (Main.game.getCurrentRoom() instanceof RoadBuild) {
-            if (numberOfMovement == 0) {
-                roadView.setViewport(new Rectangle2D(-681 + (roadBuilder.getInventoryCount() * 22.7), 0, 681, 69));
-            }
+            roadView.setViewport(new Rectangle2D(-681 + (roadBuilder.getInventoryCount() * 18.9166 + 113.5), 0, 681, 69));
         } else {
             roadView.setViewport(new Rectangle2D(-681, 0, 681, 69));
         }
@@ -692,11 +683,7 @@ public class Controller {
         if (Main.game.getCurrentRoom() instanceof RoadBuild) {
             roadBuilderView.setViewport(new Rectangle2D(0, 0, 484, 323));
             if (numberOfMovement == 0) {
-                if (roadBuilder.getInventoryCount() < 5) {
-                    roadBuilderView.setTranslateX(300);
-                } else {
-                    roadBuilderView.setTranslateX(300 - ((roadBuilder.getInventoryCount() * 22.7) - 90));
-                }
+                roadBuilderView.setTranslateX(300 - ((roadBuilder.getInventoryCount() * 18.9166 + 113.5) - 90));
             }
         } else {
             roadBuilderView.setViewport(new Rectangle2D(-484, 0, 484, 323));
