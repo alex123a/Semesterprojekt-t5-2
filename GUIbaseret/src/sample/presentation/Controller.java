@@ -368,7 +368,9 @@ public class Controller {
         //West
         } else if (player.getTranslateX() < -328 && player.getTranslateY() > -116.5 && player.getTranslateY() < -61.5) {
             changeWest();
-        } else if (Main.game.getCurrentRoom() instanceof Farm && player.getTranslateX() < -328 && player.getTranslateY() > -64 && player.getTranslateY() < -8) {
+        } else if (Main.game.getCurrentRoom() instanceof Farm && player.getTranslateX() < -328 && player.getTranslateY() > -96 && player.getTranslateY() < -66) {
+            changeWest();
+        } else if (Main.game.getCurrentRoom() instanceof Town && player.getTranslateX() < -328 && player.getTranslateY() > -53 && player.getTranslateY() < -15) {
             changeWest();
         //East
         } else if (player.getTranslateX() > 328 && player.getTranslateY() > -116.5 && player.getTranslateY() < -61.5) {
@@ -443,6 +445,12 @@ public class Controller {
         if (!(Main.game.getCurrentRoom() instanceof Beach || Main.game.getCurrentRoom() instanceof Sdu || Main.game.getCurrentRoom() instanceof Park)) {
             player.setTranslateX(327);
         }
+        if (Main.game.getCurrentRoom() instanceof Town){
+            player.setTranslateY(-77);
+        }
+        if (Main.game.getCurrentRoom() instanceof Farm){
+            player.setTranslateY(-33.5);
+        }
         Game.changedRoom = "west";
         Main.game.goRoom();
         backgroundRoom.setImage(new Image("file:" + background));
@@ -453,6 +461,12 @@ public class Controller {
     public void changeEast() {
         if (!(Main.game.getCurrentRoom() instanceof Sdu || Main.game.getCurrentRoom() instanceof Town || Main.game.getCurrentRoom() instanceof Farm)) {
             player.setTranslateX(-327);
+        }
+        if (Main.game.getCurrentRoom() instanceof RoadBuild){
+            player.setTranslateY(-30);
+        }
+        if (Main.game.getCurrentRoom() instanceof Park){
+            player.setTranslateY(-76);
         }
         Game.changedRoom = "east";
         Main.game.goRoom();
