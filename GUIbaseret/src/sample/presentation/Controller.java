@@ -6,10 +6,10 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -66,11 +66,13 @@ public class Controller {
     @FXML
     public ImageView dialogBox = new ImageView("file:" + dialog.getImage());
     @FXML
-    private Text NPCText;
+    private Text NPCTextLine;
+    @FXML
+    private Text NPCTextLine1;
+    @FXML
+    private Text NPCTextLine2;
     @FXML
     private Text playerText;
-    @FXML
-    private Text playerOptionsText;
 
 
     public void initialize() {
@@ -523,25 +525,46 @@ public class Controller {
     }
 
     public void hideDialogBox() {
-        NPCText.setText("");
+        NPCTextLine.setText("");
+        NPCTextLine1.setText("");
+        NPCTextLine2.setText("");
         playerText.setText("");
         dialogBox.setTranslateY(3000);
     }
 
     public void showDialogBox() {
-        NPCText.setTranslateY(-220);
-        NPCText.setFont(Font.font("Dialog", FontWeight.BOLD, 12));
+        NPCTextLine.setTranslateY(-210);
+        NPCTextLine.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
+        NPCTextLine1.setTranslateY(-190);
+        NPCTextLine1.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
+        NPCTextLine2.setTranslateY(-170);
+        NPCTextLine2.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
         playerText.setTranslateY(-130);
-        playerText.setFont(Font.font("Dialog", FontWeight.BOLD, 12));
+        playerText.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
         if (Main.game.getCurrentRoom() instanceof Farm) {
             if (spaceCount == 0 && !farmerTalk) {
-                talkNPC(NPCText, "farmer", 0);
+                talkNPC(NPCTextLine, "farmer", 0);
+                talkNPC(NPCTextLine1, "farmer", 1);
+                talkNPC(NPCTextLine2, "farmer", 2);
+                spaceCount++;
             } else if (spaceCount == 1) {
-                talkNPC(playerText, "farmer", 1);
+                talkNPC(playerText, "farmer", 3);
+                spaceCount++;
             } else if (spaceCount == 2) {
-                talkNPC(NPCText, "farmer", 2);
-            } else if (spaceCount == 3) {
-                NPCText.setText("");
+                talkNPC(NPCTextLine, "farmer", 4);
+                NPCTextLine1.setText("");
+                NPCTextLine2.setText("");
+                spaceCount++;
+            } else if(spaceCount==3){
+                talkNPC(playerText,"farmer",5);
+                spaceCount++;
+            } else if (spaceCount==4){
+                talkNPC(NPCTextLine,"farmer",6);
+                spaceCount++;
+            } else if (spaceCount == 5) {
+                NPCTextLine.setText("");
+                NPCTextLine1.setText("");
+                NPCTextLine2.setText("");
                 playerText.setText("");
                 dialogBox.setTranslateY(3000);
                 spaceCount = 0;
@@ -549,13 +572,22 @@ public class Controller {
             }
         } else if (Main.game.getCurrentRoom() instanceof Sdu) {
             if (spaceCount == 0 && !professorTalk) {
-                talkNPC(NPCText, "professor", 0);
+                talkNPC(NPCTextLine, "professor", 0);
+                talkNPC(NPCTextLine1, "professor", 1);
+                talkNPC(NPCTextLine2, "professor", 2);
+                spaceCount++;
             } else if (spaceCount == 1) {
-                talkNPC(playerText, "professor", 1);
+                talkNPC(playerText, "professor", 3);
+                spaceCount++;
             } else if (spaceCount == 2) {
-                talkNPC(NPCText, "professor", 2);
+                talkNPC(NPCTextLine, "professor", 4);
+                NPCTextLine1.setText("");
+                NPCTextLine2.setText("");
+                spaceCount++;
             } else if (spaceCount == 3) {
-                NPCText.setText("");
+                NPCTextLine.setText("");
+                NPCTextLine1.setText("");
+                NPCTextLine2.setText("");
                 playerText.setText("");
                 dialogBox.setTranslateY(3000);
                 spaceCount = 0;
@@ -563,13 +595,20 @@ public class Controller {
             }
         } else if (Main.game.getCurrentRoom() instanceof Town) {
             if (spaceCount == 0 && !mechanicTalk) {
-                talkNPC(NPCText, "mechanic", 0);
+                talkNPC(NPCTextLine, "mechanic", 0);
+                talkNPC(NPCTextLine1, "mechanic", 1);
+                spaceCount++;
             } else if (spaceCount == 1) {
-                talkNPC(playerText, "mechanic", 1);
+                talkNPC(playerText, "mechanic", 2);
+                spaceCount++;
             } else if (spaceCount == 2) {
-                talkNPC(NPCText, "mechanic", 2);
+                talkNPC(NPCTextLine, "mechanic", 3);
+                NPCTextLine1.setText("");
+                spaceCount++;
             } else if (spaceCount == 3) {
-                NPCText.setText("");
+                NPCTextLine.setText("");
+                NPCTextLine1.setText("");
+                NPCTextLine2.setText("");
                 playerText.setText("");
                 dialogBox.setTranslateY(3000);
                 spaceCount = 0;
@@ -581,7 +620,6 @@ public class Controller {
     private void talkNPC(Text npcText, String npcType, int index) {
         dialogBox.setTranslateY(-170);
         npcText.setText(dialog.getNPCText(npcType, index));
-        spaceCount++;
     }
     // Det under er alle plastik imageviews. Det er placeret her, da der er alt for mange, og der skal undersøges om det ikke kan gøres på en smart måde, så vi
     // ikke skal have 20 imageview
