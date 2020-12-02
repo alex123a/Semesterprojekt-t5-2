@@ -682,9 +682,7 @@ public class Controller {
     public void showRoadBuilder() {
         if (Main.game.getCurrentRoom() instanceof RoadBuild) {
             roadBuilderView.setViewport(new Rectangle2D(0, 0, 484, 323));
-            if (numberOfMovement == 0) {
-                roadBuilderView.setTranslateX(300 - ((roadBuilder.getInventoryCount() * 18.9166 + 113.5) - 90));
-            }
+            roadBuilderView.setTranslateX(300 - ((roadBuilder.getInventoryCount() * 18.9166 + 113.5) - 90));
         } else {
             roadBuilderView.setViewport(new Rectangle2D(-484, 0, 484, 323));
         }
