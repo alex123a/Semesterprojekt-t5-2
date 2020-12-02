@@ -104,7 +104,7 @@ public class Game {
 
     public void givePlastic() {
         List<Plastic> plasticInv = Controller.playerObject.getPlasticInv();
-        RoadBuilder.inventory(plasticInv);
+        Controller.roadBuilder.inventory(plasticInv);
         Controller.playerObject.resetPlasticInv();
     }
 

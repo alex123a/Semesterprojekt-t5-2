@@ -1,6 +1,8 @@
 package sample.presentation;
 
 import javafx.animation.AnimationTimer;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -10,6 +12,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 import sample.domain.*;
 import sample.domain.NPCer.Farmer;
 import sample.domain.NPCer.Mechanic;
@@ -33,10 +36,16 @@ public class Controller {
     private boolean north, south, east, west;
     private String[] direction = {"North", "South", "West", "East"};
     private SpriteAnimation playerAnimation = new SpriteAnimation(direction[0]);
-    private int[] numbersPlayer;
+    private FireAnimation fireAnimation = new FireAnimation();
+    private double[] numbersPlayer;
+    private double[] numbersFire;
     private long animationWalk = 0;
     private boolean gameNotStarted = true;
     private ObservableList<ImageView> inventoryObservable = FXCollections.observableList(new ArrayList<ImageView>());
+    private long animationFireSmoke = 0;
+    private long animationDriving = 0;
+    private int numberOfMovement = 0;
+    private int turnsOfRoad = 0;
 
     @FXML
     private ImageView backgroundRoom = new ImageView("file:");
@@ -49,6 +58,7 @@ public class Controller {
     @FXML
     public ListView inventory = new ListView();
     @FXML
+    public ImageView smoke = new ImageView("file:src/sample/presentation/pictures/buildSmoke.png");
     public ImageView professorNpc = new ImageView("file:" + professorObject.getImage());
 
     @FXML
@@ -63,12 +73,7 @@ public class Controller {
             inventory.setOpacity(0);
         }
         backgroundRoom.setImage(new Image("file:src/sample/presentation/pictures/Backgrounds/StartScreen.png"));
-        professorNpc.setImage(new Image("file:" + professorObject.getImage()));
-        professorNpc.setTranslateX(3000);
-        mechanicNpc.setImage(new Image("file:" + mechanicObject.getImage()));
-        mechanicNpc.setTranslateX(3000);
-        farmerNpc.setImage(new Image("file:" + farmerObject.getImage()));
-        farmerNpc.setTranslateX(3000);
+        showRoadBuilderRoad();
     }
 
     public void generatePlasticInRoom(List<Plastic> plasticList) {
@@ -384,6 +389,28 @@ public class Controller {
         return cantMove;
     }
 
+    public void smokeMachine() {
+        Timeline timeline = new Timeline();
+        int FPS = 60;
+        KeyFrame frame = new KeyFrame(Duration.millis(1000 / FPS), event -> {
+            if (Main.game.getCurrentRoom() instanceof RoadBuild) {
+                if (animationFireSmoke % 13 == 0) {
+                    numbersFire = fireAnimation.changePic();
+                    smoke.setViewport(new Rectangle2D(numbersFire[0], numbersFire[1], numbersFire[2], numbersFire[3]));
+                    double smokeHeight = roadBuilderView.getTranslateY() - numbersFire[0] / 22 - 40;
+                    double smokeWidth = roadBuilderView.getTranslateX() + numbersFire[0] / 22 + 43;
+                    smoke.setTranslateY(smokeHeight);
+                    smoke.setTranslateX(smokeWidth);
+                }
+                animationFireSmoke++;
+            } else {
+                smoke.setTranslateX(3000);
+            }
+        });
+        timeline.setCycleCount(timeline.INDEFINITE);
+        timeline.getKeyFrames().add(frame); //This was the offending line.
+        timeline.play();
+    }
 
     public void movePlayer(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {
@@ -441,11 +468,20 @@ public class Controller {
                     inventory.setOpacity(0.4);
                     gameNotStarted = false;
                 }
-                if (Main.game.getCurrentRoom() instanceof RoadBuild && player.getTranslateX() > roadBuilderView.getTranslateX()-50 && player.getTranslateX() < roadBuilderView.getTranslateX()+50 && player.getTranslateY() > roadBuilderView.getTranslateY()-50 && player.getTranslateY() < roadBuilderView.getTranslateY()+50) {
-                    Main.game.givePlastic();
-                    updateInventory();
-                    showRoadBuilderRoad();
-                    EndGame();
+                if (player.getTranslateX() > roadBuilderView.getTranslateX()-50 && player.getTranslateX() < roadBuilderView.getTranslateX()+50 && player.getTranslateY() > roadBuilderView.getTranslateY()-50 && player.getTranslateY() < roadBuilderView.getTranslateY()+50) {
+                    if (roadBuilder.getInventoryCount() >= 19) {
+                        roadBuilder.damagedMachine();
+                    }
+
+                    if (roadBuilder.getDamaged() > 0) {
+                        System.out.println("Repair me :)");
+                    } else {
+                        numberOfMovement = playerObject.getPlasticInv().size() * 4;
+                        Main.game.givePlastic();
+                        updateInventory();
+                        movementMachine();
+                        EndGame();
+                    }
                 }
                 collectPlastic(Main.game.placePlastic());
 
@@ -454,7 +490,7 @@ public class Controller {
     }
 
     private void EndGame() {
-        if (RoadBuilder.getInventoryCount() == Game.getRoadDone()) {
+        if (roadBuilder.getInventoryCount() == Game.getRoadDone()) {
             System.out.println("Du er færdig");
         }
     }
@@ -465,10 +501,16 @@ public class Controller {
         player.setViewport(new Rectangle2D(0, 0, 32, 48));
         roadView.setImage(new Image("file:" + road.getImage()));
         roadBuilderView.setImage(new Image("file:" + roadBuilder.getImage()));
-        roadView.setViewport(new Rectangle2D(-681, 0, 681, 69));
-        roadBuilderView.setTranslateX(300);
+        professorNpc.setImage(new Image("file:" + professorObject.getImage()));
+        professorNpc.setTranslateX(3000);
+        mechanicNpc.setImage(new Image("file:" + mechanicObject.getImage()));
+        mechanicNpc.setTranslateX(3000);
+        farmerNpc.setImage(new Image("file:" + farmerObject.getImage()));
+        farmerNpc.setTranslateX(3000);
         //plas1.setImage(new Image("file:" + "src/sample/presentation/pictures/plastic/cleaningPlastic.png"));
         generatePlasticInRoom(Main.game.placePlastic());
+        smoke.setImage(new Image("file:src/sample/presentation/pictures/buildSmoke.png"));
+        smokeMachine();
         Timer.setStartTime(); // tid starter til highscorelisten
     }
 
@@ -540,6 +582,7 @@ public class Controller {
         backgroundRoom.setImage(new Image("file:" + background));
         showRoadBuilderRoad();
         generatePlasticInRoom(Main.game.placePlastic());
+        smokeMachine();
         showFarmer();
         showProfessor();
         showMechanic();
@@ -560,7 +603,7 @@ public class Controller {
         backgroundRoom.setImage(new Image("file:" + background));
         showRoadBuilderRoad();
         generatePlasticInRoom(Main.game.placePlastic());
-
+        smokeMachine();
     }
 
     public void changeWest() {
@@ -578,6 +621,7 @@ public class Controller {
         backgroundRoom.setImage(new Image("file:" + background));
         showRoadBuilderRoad();
         generatePlasticInRoom(Main.game.placePlastic());
+        smokeMachine();
     }
 
     public void changeEast() {
@@ -595,23 +639,66 @@ public class Controller {
         backgroundRoom.setImage(new Image("file:" + background));
         showRoadBuilderRoad();
         generatePlasticInRoom(Main.game.placePlastic());
+        smokeMachine();
+    }
+
+    public void movementMachine() {
+        Timeline timeline = new Timeline();
+        int FPS = 60;
+        KeyFrame frame = new KeyFrame(Duration.millis(1000 / FPS), event -> {
+            if (numberOfMovement != 0 && Main.game.getCurrentRoom() instanceof RoadBuild) {
+                if (animationDriving % 10 == 0) {
+                    roadView.setViewport(new Rectangle2D(-681 + (roadBuilder.getInventoryCount() - numberOfMovement / 4) * 22.7, 0, 681, 69));
+                    roadBuilderView.setViewport(new Rectangle2D(0, 0, 484, 323));
+                    // Skal være større end 16, da vi ganger med 4 på numberOfMovement.
+                    if (turnsOfRoad > 16) {
+                        if ((300 - ((roadBuilder.getInventoryCount() - numberOfMovement / 4) * 22.7) + 90) < (roadBuilderView.getTranslateX() + 22.7)) {
+                            roadBuilderView.setTranslateX((300 - ((roadBuilder.getInventoryCount() - numberOfMovement / 4) * 22.7) + 90));
+                        }
+                    }
+                    ++turnsOfRoad;
+                    --numberOfMovement;
+
+                }
+            } else {
+                showRoadBuilderRoad();
+            }
+            animationDriving++;
+
+        });
+
+        timeline.setCycleCount(timeline.INDEFINITE);
+        timeline.getKeyFrames().add(frame); //This was the offending line.
+        timeline.play();
     }
 
     public void showRoadBuilderRoad() {
         showFarmer();
         showProfessor();
         showMechanic();
-        roadView.setViewport(new Rectangle2D(-681, 0, 681, 69));
-        roadBuilderView.setViewport(new Rectangle2D(0,0,484,323));
+        //roadView.setViewport(new Rectangle2D(-681, 0, 681, 69));
+        //roadBuilderView.setViewport(new Rectangle2D(0,0,484,323));
         if (Main.game.getCurrentRoom() instanceof RoadBuild) {
-            roadView.setViewport(new Rectangle2D(-681 + (RoadBuilder.getInventoryCount() * 22.7), 0, 681, 69));
-            if (RoadBuilder.getInventoryCount() < 5) {
-                roadBuilderView.setTranslateX(300);
-            } else {
-                roadBuilderView.setTranslateX(300 - ((RoadBuilder.getInventoryCount() * 22.7) - 90));
+            if (numberOfMovement == 0) {
+                roadView.setViewport(new Rectangle2D(-681 + (roadBuilder.getInventoryCount() * 22.7), 0, 681, 69));
             }
         } else {
             roadView.setViewport(new Rectangle2D(-681, 0, 681, 69));
+        }
+        showRoadBuilder();
+    }
+
+    public void showRoadBuilder() {
+        if (Main.game.getCurrentRoom() instanceof RoadBuild) {
+            roadBuilderView.setViewport(new Rectangle2D(0, 0, 484, 323));
+            if (numberOfMovement == 0) {
+                if (roadBuilder.getInventoryCount() < 5) {
+                    roadBuilderView.setTranslateX(300);
+                } else {
+                    roadBuilderView.setTranslateX(300 - ((roadBuilder.getInventoryCount() * 22.7) - 90));
+                }
+            }
+        } else {
             roadBuilderView.setViewport(new Rectangle2D(-484, 0, 484, 323));
         }
     }
