@@ -18,7 +18,7 @@
             <ImageView fx:id="roadView" fitHeight="77.0" fitWidth="707.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fx:id="roadBuilderView" translateY="-30" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true"/>
             <ImageView fx:id="smoke" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="smokeBrokenMachine" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="smokeBrokenMachine" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
 
             <!--> Man kan 100% gøre det under smartere <-->
             <ImageView fx:id="plast1" pickOnBounds="true" preserveRatio="true"/>

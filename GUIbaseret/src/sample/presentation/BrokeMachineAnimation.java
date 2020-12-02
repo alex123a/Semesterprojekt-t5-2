@@ -9,10 +9,10 @@ public class BrokeMachineAnimation implements Animation {
 
     @Override
     public double[] changePic() {
-        double whichPicWidth = 0;
+        double whichPicWidth = (count % 3) * picWidth;;
         double whichPicHeight = 0;
-        whichPicWidth = (count % 6) * picWidth;
-        if (count > 3) {
+        double whichPic = count % 6;
+        if (whichPic >= 3) {
             whichPicHeight = picHeight;
         }
         count++;

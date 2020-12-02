@@ -37,13 +37,16 @@ public class Controller {
     private String[] direction = {"North", "South", "West", "East"};
     private SpriteAnimation playerAnimation = new SpriteAnimation(direction[0]);
     private FireAnimation fireAnimation = new FireAnimation();
+    private BrokeMachineAnimation brokeMachineAnimation = new BrokeMachineAnimation();
     private double[] numbersPlayer;
     private double[] numbersFire;
-    private long animationWalk = 0;
+    private double[] numbersBrokenFire;
+    private long animationWalk = 0L;
     private boolean gameNotStarted = true;
     private ObservableList<ImageView> inventoryObservable = FXCollections.observableList(new ArrayList<ImageView>());
-    private long animationFireSmoke = 0;
-    private long animationDriving = 0;
+    private long animationFireSmoke = 0L;
+    private long animationFireSmokeBrokenMachine = 0L;
+    private long animationDriving = 0L;
     private int numberOfMovement = 0;
 
     @FXML
@@ -644,7 +647,26 @@ public class Controller {
     }
 
     public void smokeBrokenMachine() {
-
+        Timeline timeline = new Timeline();
+        int FPS = 60;
+        KeyFrame frame = new KeyFrame(Duration.millis(1000 / FPS), event -> {
+            if (Main.game.getCurrentRoom() instanceof RoadBuild && roadBuilder.getDamaged() > 0) {
+                if (animationFireSmokeBrokenMachine % 20 == 0) {
+                    numbersBrokenFire = brokeMachineAnimation.changePic();
+                    smokeBrokenMachine.setViewport(new Rectangle2D(numbersBrokenFire[0], numbersBrokenFire[1], numbersBrokenFire[2], numbersBrokenFire[3]));
+                    double smokeHeight = roadBuilderView.getTranslateY() - 11;
+                    double smokeWidth = roadBuilderView.getTranslateX() - 36;
+                    smokeBrokenMachine.setTranslateY(smokeHeight);
+                    smokeBrokenMachine.setTranslateX(smokeWidth);
+                }
+                animationFireSmokeBrokenMachine++;
+            } else {
+                smokeBrokenMachine.setTranslateX(3000);
+            }
+        });
+        timeline.setCycleCount(timeline.INDEFINITE);
+        timeline.getKeyFrames().add(frame); //This was the offending line.
+        timeline.play();
     }
 
     public void movementMachine() {
