@@ -1,6 +1,6 @@
 package sample.presentation;
 
-public class FireAnimation {
+public class FireAnimation implements Animation {
     private int count = 0;
     private int widthNumPictures = 8;
     private final double picWidth = 72.125;

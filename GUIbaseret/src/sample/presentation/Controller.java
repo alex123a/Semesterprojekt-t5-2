@@ -31,12 +31,16 @@ public class Controller {
     private String[] direction = {"North", "South", "West", "East"};
     private SpriteAnimation playerAnimation = new SpriteAnimation(direction[0]);
     private FireAnimation fireAnimation = new FireAnimation();
-    private int[] numbersPlayer;
+    private double[] numbersPlayer;
     private double[] numbersFire;
     private long animationWalk = 0;
     private boolean gameNotStarted = true;
     private ObservableList<ImageView> inventoryObservable = FXCollections.observableList(new ArrayList<ImageView>());
     private long animationFireSmoke = 0;
+    private long animationDriving = 0;
+    private int numberOfMovement = 0;
+    private int newPositionMachine = 0;
+    private int turnsOfRoad = 0;
 
     @FXML
     private ImageView backgroundRoom = new ImageView("file:");
@@ -257,17 +261,20 @@ public class Controller {
         Timeline timeline = new Timeline();
         int FPS = 60;
         KeyFrame frame = new KeyFrame(Duration.millis(1000 / FPS), event -> {
-            if (animationFireSmoke % 13 == 0) {
-                numbersFire = fireAnimation.changePic();
-                smoke.setViewport(new Rectangle2D(numbersFire[0], numbersFire[1], numbersFire[2], numbersFire[3]));
-                double smokeHeight = roadBuilderView.getTranslateY() - numbersFire[0]/22 - 40;
-                double smokeWidth = roadBuilderView.getTranslateX() + numbersFire[0]/22 + 43;
-                smoke.setTranslateY(smokeHeight);
-                smoke.setTranslateX(smokeWidth);
+            if (Main.game.getCurrentRoom() instanceof RoadBuild) {
+                if (animationFireSmoke % 13 == 0) {
+                    numbersFire = fireAnimation.changePic();
+                    smoke.setViewport(new Rectangle2D(numbersFire[0], numbersFire[1], numbersFire[2], numbersFire[3]));
+                    double smokeHeight = roadBuilderView.getTranslateY() - numbersFire[0] / 22 - 40;
+                    double smokeWidth = roadBuilderView.getTranslateX() + numbersFire[0] / 22 + 43;
+                    smoke.setTranslateY(smokeHeight);
+                    smoke.setTranslateX(smokeWidth);
+                }
+                animationFireSmoke++;
+            } else {
+                smoke.setTranslateX(3000);
             }
-            animationFireSmoke++;
         });
-
         timeline.setCycleCount(timeline.INDEFINITE);
         timeline.getKeyFrames().add(frame); //This was the offending line.
         timeline.play();
@@ -337,9 +344,11 @@ public class Controller {
                     if (roadBuilder.getDamaged() > 0) {
                         System.out.println("Repair me :)");
                     } else {
+                        newPositionMachine = playerObject.getPlasticInv().size() + roadBuilder.getInventoryCount();
+                        numberOfMovement = playerObject.getPlasticInv().size() * 4;
                         Main.game.givePlastic();
                         updateInventory();
-                        showRoadBuilderRoad();
+                        movementMachine();
                         EndGame();
                     }
                 }
@@ -433,6 +442,7 @@ public class Controller {
         backgroundRoom.setImage(new Image("file:" + background));
         showRoadBuilderRoad();
         generatePlasticInRoom(Main.game.placePlastic());
+        smokeMachine();
     }
 
     public void changeSouth() {
@@ -450,6 +460,7 @@ public class Controller {
         backgroundRoom.setImage(new Image("file:" + background));
         showRoadBuilderRoad();
         generatePlasticInRoom(Main.game.placePlastic());
+        smokeMachine();
     }
 
     public void changeWest() {
@@ -461,6 +472,7 @@ public class Controller {
         backgroundRoom.setImage(new Image("file:" + background));
         showRoadBuilderRoad();
         generatePlasticInRoom(Main.game.placePlastic());
+        smokeMachine();
     }
 
     public void changeEast() {
@@ -472,11 +484,43 @@ public class Controller {
         backgroundRoom.setImage(new Image("file:" + background));
         showRoadBuilderRoad();
         generatePlasticInRoom(Main.game.placePlastic());
+        smokeMachine();
+    }
+
+    public void movementMachine() {
+        Timeline timeline = new Timeline();
+        int FPS = 60;
+        KeyFrame frame = new KeyFrame(Duration.millis(1000 / FPS), event -> {
+            if (numberOfMovement != 0 && Main.game.getCurrentRoom() instanceof RoadBuild) {
+                if (animationDriving % 3 == 0) {
+                    roadView.setViewport(new Rectangle2D(-681 + (roadBuilder.getInventoryCount() - numberOfMovement / 4) * 22.7, 0, 681, 69));
+                    roadBuilderView.setViewport(new Rectangle2D(0, 0, 484, 323));
+                    if (roadBuilder.getInventoryCount() > 5 && turnsOfRoad > 5) {
+                        if ((300 - ((roadBuilder.getInventoryCount() - numberOfMovement / 4) * 22.7) + 90) < (roadBuilderView.getTranslateX() + 22.7)) {
+                            roadBuilderView.setTranslateX((300 - ((roadBuilder.getInventoryCount() - numberOfMovement / 4) * 22.7) + 90));
+                        }
+                    }
+                    numberOfMovement--;
+                    ++turnsOfRoad;
+
+                }
+            } else {
+                showRoadBuilderRoad();
+            }
+            animationDriving++;
+
+        });
+
+        timeline.setCycleCount(timeline.INDEFINITE);
+        timeline.getKeyFrames().add(frame); //This was the offending line.
+        timeline.play();
     }
 
     public void showRoadBuilderRoad() {
         if (Main.game.getCurrentRoom() instanceof RoadBuild) {
-            roadView.setViewport(new Rectangle2D(-681 + (roadBuilder.getInventoryCount() * 22.7), 0, 681, 69));
+            if (numberOfMovement == 0) {
+                roadView.setViewport(new Rectangle2D(-681 + (roadBuilder.getInventoryCount() * 22.7), 0, 681, 69));
+            }
         } else {
             roadView.setViewport(new Rectangle2D(-681, 0, 681, 69));
         }
@@ -486,10 +530,12 @@ public class Controller {
     public void showRoadBuilder() {
         if (Main.game.getCurrentRoom() instanceof RoadBuild) {
             roadBuilderView.setViewport(new Rectangle2D(0, 0, 484, 323));
-            if (roadBuilder.getInventoryCount() < 5) {
-                roadBuilderView.setTranslateX(300);
-            } else {
-                roadBuilderView.setTranslateX(300 - ((roadBuilder.getInventoryCount() * 22.7)-90));
+            if (numberOfMovement == 0) {
+                if (roadBuilder.getInventoryCount() < 5) {
+                    roadBuilderView.setTranslateX(300);
+                } else {
+                    roadBuilderView.setTranslateX(300 - ((roadBuilder.getInventoryCount() * 22.7) - 90));
+                }
             }
         } else {
             roadBuilderView.setViewport(new Rectangle2D(-484, 0, 484, 323));

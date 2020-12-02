@@ -1,6 +1,6 @@
 package sample.presentation;
 
-public class SpriteAnimation {
+public class SpriteAnimation implements Animation {
     private int count = 0;
     private int widthNumPictures = 4;
     private int heightNumPictures = 4;
@@ -17,7 +17,7 @@ public class SpriteAnimation {
         this.direction = direction;
     }
 
-    public int[] changePic() {
+    public double[] changePic() {
         if (!direction.equals(lastDirection)) {
             count = 0;
             lastDirection = direction;
@@ -43,7 +43,7 @@ public class SpriteAnimation {
         // System.out.println("Width " + whichPicWidth + " height " + whichPicHeight);
         
         count++;
-        int[] numbers = {whichPicWidth, whichPicHeight, picWidth, picHeight};
+        double[] numbers = {whichPicWidth, whichPicHeight, picWidth, picHeight};
         return numbers;
     }
 
