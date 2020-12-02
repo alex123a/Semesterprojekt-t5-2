@@ -392,29 +392,6 @@ public class Controller {
         return cantMove;
     }
 
-    public void smokeMachine() {
-        Timeline timeline = new Timeline();
-        int FPS = 60;
-        KeyFrame frame = new KeyFrame(Duration.millis(1000 / FPS), event -> {
-            if (Main.game.getCurrentRoom() instanceof RoadBuild) {
-                if (animationFireSmoke % 20 == 0) {
-                    numbersFire = fireAnimation.changePic();
-                    smoke.setViewport(new Rectangle2D(numbersFire[0], numbersFire[1], numbersFire[2], numbersFire[3]));
-                    double smokeHeight = roadBuilderView.getTranslateY() - numbersFire[0] / 22 - 40;
-                    double smokeWidth = roadBuilderView.getTranslateX() + numbersFire[0] / 22 + 43;
-                    smoke.setTranslateY(smokeHeight);
-                    smoke.setTranslateX(smokeWidth);
-                }
-                animationFireSmoke++;
-            } else {
-                smoke.setTranslateX(3000);
-            }
-        });
-        timeline.setCycleCount(timeline.INDEFINITE);
-        timeline.getKeyFrames().add(frame); //This was the offending line.
-        timeline.play();
-    }
-
     public void movePlayer(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {
             case UP:
@@ -515,6 +492,7 @@ public class Controller {
         smokeBrokenMachine.setImage(new Image("file:src/sample/presentation/pictures/fireSmoke-1.png"));
         movementMachine();
         smokeMachine();
+        smokeBrokenMachine();
         Timer.setStartTime(); // tid starter til highscorelisten
     }
 
@@ -586,7 +564,6 @@ public class Controller {
         backgroundRoom.setImage(new Image("file:" + background));
         showRoadBuilderRoad();
         generatePlasticInRoom(Main.game.placePlastic());
-        smokeMachine();
         showFarmer();
         showProfessor();
         showMechanic();
@@ -607,7 +584,6 @@ public class Controller {
         backgroundRoom.setImage(new Image("file:" + background));
         showRoadBuilderRoad();
         generatePlasticInRoom(Main.game.placePlastic());
-        smokeMachine();
     }
 
     public void changeWest() {
@@ -625,7 +601,6 @@ public class Controller {
         backgroundRoom.setImage(new Image("file:" + background));
         showRoadBuilderRoad();
         generatePlasticInRoom(Main.game.placePlastic());
-        smokeMachine();
     }
 
     public void changeEast() {
@@ -643,7 +618,33 @@ public class Controller {
         backgroundRoom.setImage(new Image("file:" + background));
         showRoadBuilderRoad();
         generatePlasticInRoom(Main.game.placePlastic());
-        smokeMachine();
+    }
+
+    public void smokeMachine() {
+        Timeline timeline = new Timeline();
+        int FPS = 60;
+        KeyFrame frame = new KeyFrame(Duration.millis(1000 / FPS), event -> {
+            if (Main.game.getCurrentRoom() instanceof RoadBuild) {
+                if (animationFireSmoke % 20 == 0) {
+                    numbersFire = fireAnimation.changePic();
+                    smoke.setViewport(new Rectangle2D(numbersFire[0], numbersFire[1], numbersFire[2], numbersFire[3]));
+                    double smokeHeight = roadBuilderView.getTranslateY() - numbersFire[0] / 22 - 40;
+                    double smokeWidth = roadBuilderView.getTranslateX() + numbersFire[0] / 22 + 43;
+                    smoke.setTranslateY(smokeHeight);
+                    smoke.setTranslateX(smokeWidth);
+                }
+                animationFireSmoke++;
+            } else {
+                smoke.setTranslateX(3000);
+            }
+        });
+        timeline.setCycleCount(timeline.INDEFINITE);
+        timeline.getKeyFrames().add(frame); //This was the offending line.
+        timeline.play();
+    }
+
+    public void smokeBrokenMachine() {
+
     }
 
     public void movementMachine() {
