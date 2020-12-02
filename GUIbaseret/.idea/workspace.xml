@@ -85,8 +85,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="package-info" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -320,19 +320,19 @@
     </state>
     <state x="96" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.680@0.0.1280.680" timestamp="1606904175273" />
     <state x="108" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.900@0.0.1440.900" timestamp="1605698325120" />
-    <state x="452" y="177" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1605612720371">
+    <state x="452" y="177" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1606913986533">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="452" y="177" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1280.680@0.0.1280.680" timestamp="1605612720371" />
+    <state x="452" y="177" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1280.680@0.0.1280.680" timestamp="1606913986533" />
     <state x="542" y="214" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824@0.0.1536.824" timestamp="1605608183693" />
     <state x="421" y="45" key="#com.intellij.ide.macro.MacrosDialog" timestamp="1606755616765">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="421" y="45" key="#com.intellij.ide.macro.MacrosDialog/0.0.1280.680@0.0.1280.680" timestamp="1606755616765" />
-    <state x="474" y="49" key="#com.intellij.ide.util.MemberChooser" timestamp="1606831477891">
+    <state x="474" y="49" key="#com.intellij.ide.util.MemberChooser" timestamp="1606908638414">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="474" y="49" key="#com.intellij.ide.util.MemberChooser/0.0.1280.680@0.0.1280.680" timestamp="1606831477891" />
+    <state x="474" y="49" key="#com.intellij.ide.util.MemberChooser/0.0.1280.680@0.0.1280.680" timestamp="1606908638414" />
     <state x="533" y="158" key="#com.intellij.ide.util.MemberChooser/0.0.1440.900@0.0.1440.900" timestamp="1605699699702" />
     <state x="371" y="117" key="#com.intellij.ide.util.PackageChooserDialog" timestamp="1605605651576">
       <screen x="0" y="0" width="1280" height="680" />
@@ -347,28 +347,28 @@
     </state>
     <state x="421" y="95" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1606904188807" />
     <state x="505" y="115" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1605608641570" />
-    <state width="1237" height="205" key="GridCell.Tab.0.bottom" timestamp="1606905869029">
+    <state width="1237" height="205" key="GridCell.Tab.0.bottom" timestamp="1606916404694">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="205" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1606905869029" />
+    <state width="1237" height="205" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1606916404694" />
     <state width="1398" height="245" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1605701828382" />
     <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1605608829196" />
-    <state width="1237" height="205" key="GridCell.Tab.0.center" timestamp="1606905869029">
+    <state width="1237" height="205" key="GridCell.Tab.0.center" timestamp="1606916404694">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="205" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1606905869029" />
+    <state width="1237" height="205" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1606916404694" />
     <state width="1398" height="245" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1605701828381" />
     <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1605608829196" />
-    <state width="1237" height="205" key="GridCell.Tab.0.left" timestamp="1606905869029">
+    <state width="1237" height="205" key="GridCell.Tab.0.left" timestamp="1606916404694">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="205" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1606905869029" />
+    <state width="1237" height="205" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1606916404694" />
     <state width="1398" height="245" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1605701828381" />
     <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1605608829196" />
-    <state width="1237" height="205" key="GridCell.Tab.0.right" timestamp="1606905869029">
+    <state width="1237" height="205" key="GridCell.Tab.0.right" timestamp="1606916404694">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="205" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1606905869029" />
+    <state width="1237" height="205" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1606916404694" />
     <state width="1398" height="245" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1605701828382" />
     <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1605608829196" />
     <state width="1237" height="204" key="GridCell.Tab.1.bottom" timestamp="1605615238393">
@@ -405,5 +405,9 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="297" y="151" key="run.anything.popup/0.0.1280.680@0.0.1280.680" timestamp="1606815247175" />
+    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup" timestamp="1606915175015">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup/0.0.1280.680@0.0.1280.680" timestamp="1606915175015" />
   </component>
 </project>
