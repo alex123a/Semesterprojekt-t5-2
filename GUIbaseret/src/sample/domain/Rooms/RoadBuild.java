@@ -12,8 +12,8 @@ public class RoadBuild extends Room {
     }
 
     public Plastic[] generatePlasticArray() {
-        int sodaBottles = 4 + (int) (Math.random() * ((5 - 4) + 1));
-        int waterBottles = 3 + (int) (Math.random() * ((5 - 3) + 1));
+        int sodaBottles = 2;
+        int waterBottles = 3;
         numberOfPlastic = new Plastic[waterBottles + sodaBottles];
 
         for (int i = 0; i < numberOfPlastic.length; i++) {
