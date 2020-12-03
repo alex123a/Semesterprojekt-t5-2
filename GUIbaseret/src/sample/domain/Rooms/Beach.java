@@ -3,8 +3,6 @@ package sample.domain.Rooms;
 import sample.domain.PlasticElements.*;
 import sample.domain.Room;
 
-import java.util.Random;
-
 public class Beach extends Room {
     private Plastic[] numberOfPlastic;
 
@@ -14,10 +12,9 @@ public class Beach extends Room {
     }
 
     public Plastic[] generatePlasticArray() {
-        Random random = new Random();
-        int sodaBottles = random.nextInt(3 - 2 + 1) + 2;
-        int milkBottles = random.nextInt(3 - 2 + 1) + 1;
-        int waterBottles = random.nextInt(8 - 7 + 1) + 7;
+        int sodaBottles = 2 + (int) (Math.random() * ((3 - 2) + 1));
+        int milkBottles = 2 + (int) (Math.random() * ((3 - 2) + 1));
+        int waterBottles = 5 + (int) (Math.random() * ((8 - 7) + 1));
         numberOfPlastic = new Plastic[sodaBottles + milkBottles + waterBottles];
         for (int i = 0; i < numberOfPlastic.length; i++) {
             if (i < sodaBottles) {
