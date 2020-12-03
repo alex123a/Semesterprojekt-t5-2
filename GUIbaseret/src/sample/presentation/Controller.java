@@ -660,6 +660,10 @@ public class Controller {
                 NPCTextLine2.setText("");
                 spaceCount++;
             } else if (spaceCount == 3) {
+                talkNPC(playerText, "professor", 6);
+                playerText.setText("");
+                spaceCount++;
+            } else if (spaceCount == 4) {
                 hideDialogBox();
                 professorTalk = true;
             }
