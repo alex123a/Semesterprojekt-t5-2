@@ -8,17 +8,14 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import sample.domain.*;
-import sample.presentation.*;
 import sample.domain.NPCer.Farmer;
 import sample.domain.NPCer.Mechanic;
 import sample.domain.NPCer.Professor;
@@ -44,6 +41,7 @@ public class Controller {
     private boolean farmerTalk = false;
     private boolean professorTalk = false;
     private boolean mechanicTalk = false;
+    private boolean talking = false;
     private String[] direction = {"North", "South", "West", "East"};
     private SpriteAnimation playerAnimation = new SpriteAnimation(direction[0]);
     private FireAnimation fireAnimation = new FireAnimation();
@@ -75,7 +73,6 @@ public class Controller {
     public ImageView smoke = new ImageView("file:src/sample/presentation/pictures/buildSmoke.png");
     @FXML
     public ImageView smokeBrokenMachine = new ImageView("file:src/sample/presentation/pictures/fireSmoke-1.png");
-
     @FXML
     public ImageView professorNpc = new ImageView("file:" + professorObject.getImage());
     @FXML
@@ -294,6 +291,7 @@ public class Controller {
 
                 if (talkingRoadbuilder) {
                     if (spaceCount == 1) {
+                        talking = true;
                         talkNPC(playerText, "Road builder", 3);
                         spaceCount++;
                     } else if (spaceCount == 2) {
@@ -315,6 +313,7 @@ public class Controller {
                         playerText.setTranslateY(-130);
                         playerText.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
                         if (spaceCount == 0 && roadBuilder.getDamaged() > 0) {
+                            talking = true;
                             talkNPC(NPCTextLine, "Road builder", 0);
                             talkNPC(NPCTextLine1, "Road builder", 1);
                             talkNPC(NPCTextLine2, "Road builder", 2);
@@ -610,6 +609,7 @@ public class Controller {
         NPCTextLine2.setText("");
         playerText.setText("");
         dialogBox.setTranslateY(3000);
+        talking = false;
     }
 
     public void showDialogBox() {
@@ -623,6 +623,7 @@ public class Controller {
         playerText.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
         if (Main.game.getCurrentRoom() instanceof Farm) {
             if (spaceCount == 0 && !farmerTalk) {
+                talking = true;
                 talkNPC(NPCTextLine, "farmer", 0);
                 talkNPC(NPCTextLine1, "farmer", 1);
                 talkNPC(NPCTextLine2, "farmer", 2);
@@ -640,13 +641,25 @@ public class Controller {
                 spaceCount++;
             } else if (spaceCount==4){
                 talkNPC(NPCTextLine,"farmer",6);
+                farmerTalk = playerObject.addPlasticInv();
+                if (!farmerTalk) {
+                    talkNPC(NPCTextLine,"farmer",7);
+                    playerText.setText("");
+                }
+                updateInventory();
                 spaceCount++;
             } else if (spaceCount == 5) {
-                hideDialogBox();
-                farmerTalk = true;
+                if (!farmerTalk) {
+                    hideDialogBox();
+                    spaceCount = 0;
+                } else if (farmerTalk) {
+                    hideDialogBox();
+                    farmerTalk = true;
+                }
             }
         } else if (Main.game.getCurrentRoom() instanceof Sdu) {
             if (spaceCount == 0 && !professorTalk) {
+                talking = true;
                 talkNPC(NPCTextLine, "professor", 0);
                 talkNPC(NPCTextLine1, "professor", 1);
                 talkNPC(NPCTextLine2, "professor", 2);
@@ -665,6 +678,7 @@ public class Controller {
             }
         } else if (Main.game.getCurrentRoom() instanceof Town) {
             if (spaceCount == 0 && !mechanicTalk) {
+                talking = true;
                 talkNPC(NPCTextLine, "mechanic", 0);
                 talkNPC(NPCTextLine1, "mechanic", 1);
                 spaceCount++;
