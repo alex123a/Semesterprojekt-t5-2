@@ -2,7 +2,6 @@
 
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -10,6 +9,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 
+<?import javafx.scene.text.TextFlow?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.TextField?>
 <GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.presentation.Controller">
    <children>
       <StackPane>
@@ -18,6 +20,7 @@
             <ImageView fx:id="roadView" fitHeight="77.0" fitWidth="707.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fx:id="roadBuilderView" translateY="-30" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true"/>
             <ImageView fx:id="smoke" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="smokeBrokenMachine" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
 
             <!--> Man kan 100% gøre det under smartere <-->
             <ImageView fx:id="plast1" pickOnBounds="true" preserveRatio="true"/>
@@ -42,9 +45,14 @@
             <ImageView fx:id="plast20" pickOnBounds="true" preserveRatio="true"/>
 
             <ImageView fx:id="player" fitHeight="45.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="farmerNpc" fitHeight="45.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="mechanicNpc" fitHeight="45.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="professorNpc" fitHeight="45.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="farmerNpc" fitHeight="45.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true" translateX="3000"/>
+            <ImageView fx:id="mechanicNpc" fitHeight="45.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true" translateX="3000"/>
+            <ImageView fx:id="professorNpc" fitHeight="45.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true" translateX="3000"/>
+            <ImageView fx:id="dialogBox" fitHeight="266.0" fitWidth="635.0" pickOnBounds="true" preserveRatio="true" translateY="3000"/>
+            <Text fx:id="NPCTextLine"/>
+            <Text fx:id="NPCTextLine1"/>
+            <Text fx:id="NPCTextLine2"/>
+            <Text fx:id="playerText"/>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
                   <ListView fx:id="inventory" layoutX="210.0" layoutY="453.0" prefHeight="45.0" prefWidth="300.0" />
