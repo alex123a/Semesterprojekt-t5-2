@@ -61,6 +61,10 @@ public class Controller {
     private boolean talkingRoadbuilder = false;
     private int counterRepair = 0;
     private boolean doneRepairing = true;
+    private AudioMusicPlayer backgroundMusic = new AudioMusicPlayer("src/sample/presentation/audio/BackgroundMusic.wav");
+    private AudioMusicPlayer roadbuilderCrashSound = new AudioMusicPlayer("src/sample/presentation/audio/RoadbuildCrash.wav");
+    private AudioMusicPlayer roadbuilderMovingSound = new AudioMusicPlayer("src/sample/presentation/audio/RoadbuilderMovingSound.wav");
+
 
     @FXML
     private ImageView backgroundRoom = new ImageView("file:");
@@ -102,6 +106,7 @@ public class Controller {
         mechanicNpc.setImage(new Image("file:" + mechanicObject.getImage()));
         farmerNpc.setImage(new Image("file:" + farmerObject.getImage()));
         dialogBox.setImage(new Image("file:" + dialog.getImage()));
+        backgroundMusic.musicPlayerInfinity();
     }
 
     public void generatePlasticInRoom(List<Plastic> plasticList) {
@@ -301,11 +306,11 @@ public class Controller {
                         hideDialogBox();
                         spaceCount = 0;
                     }
-
-                } else if (Main.game.getCurrentRoom() instanceof RoadBuild && player.getTranslateX() > roadBuilderView.getTranslateX()-50 && player.getTranslateX() < roadBuilderView.getTranslateX()+50 && player.getTranslateY() > roadBuilderView.getTranslateY()-50 && player.getTranslateY() < roadBuilderView.getTranslateY()+50) {
+                } else if (Main.game.getCurrentRoom() instanceof RoadBuild && player.getTranslateX() > roadBuilderView.getTranslateX() - 50 && player.getTranslateX() < roadBuilderView.getTranslateX() + 50 && player.getTranslateY() > roadBuilderView.getTranslateY() - 50 && player.getTranslateY() < roadBuilderView.getTranslateY() + 50) {
                     if (roadBuilder.getInventoryCount() >= 19 && roadBuilder.isNotDamagedBefore()) {
                         roadBuilder.damagedMachine();
                         roadBuilder.setNotDamagedBefore(false);
+                        roadbuilderCrashSound.AudioPlayer();
                     } else if (playerObject.getHaveToolset() && roadBuilder.getDamaged() > 0) {
                         repairTheMachine();
                     }
@@ -328,9 +333,12 @@ public class Controller {
                             talkingRoadbuilder = true;
                         }
 
-                    } else {
+                    } else if (roadBuilder.getDamaged() == 0) {
                         numberOfMovement = playerObject.getPlasticInv().size() * 4;
-                        Main.game.givePlastic();
+                        if (playerObject.getPlasticInv().size() > 0) {
+                            Main.game.givePlastic();
+                            roadbuilderMovingSound.AudioPlayer();
+                        }
                         updateInventory();
                         EndGame();
                     }
@@ -576,6 +584,7 @@ public class Controller {
                 animationDriving++;
             } else {
                 showRoadBuilderRoad();
+                roadbuilderMovingSound.AudioStop();
             }
 
         });
@@ -666,11 +675,11 @@ public class Controller {
             } else if (spaceCount == 3) {
                 talkNPC(playerText, "farmer", 5);
                 spaceCount++;
-            } else if (spaceCount==4){
-                talkNPC(NPCTextLine,"farmer",6);
+            } else if (spaceCount == 4) {
+                talkNPC(NPCTextLine, "farmer", 6);
                 farmerTalk = playerObject.addPlasticInv();
                 if (!farmerTalk) {
-                    talkNPC(NPCTextLine,"farmer",7);
+                    talkNPC(NPCTextLine, "farmer", 7);
                     playerText.setText("");
                 }
                 updateInventory();
