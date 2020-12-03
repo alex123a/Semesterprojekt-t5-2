@@ -65,7 +65,7 @@ public class Controller {
     private AudioMusicPlayer roadbuilderCrashSound = new AudioMusicPlayer("src/sample/presentation/audio/RoadbuildCrash.wav");
     private AudioMusicPlayer roadbuilderMovingSound = new AudioMusicPlayer("src/sample/presentation/audio/RoadbuilderMovingSound.wav");
     private AudioMusicPlayer npcTalk = new AudioMusicPlayer("src/sample/presentation/audio/npcTalking.wav");
-
+    private AudioMusicPlayer repairSound = new AudioMusicPlayer("src/sample/presentation/audio/repairSound.wav");
 
 
     @FXML
@@ -314,6 +314,7 @@ public class Controller {
                         roadBuilder.setNotDamagedBefore(false);
                         roadbuilderCrashSound.AudioPlayer();
                     } else if (playerObject.getHaveToolset() && roadBuilder.getDamaged() > 0) {
+                        repairSound.musicPlayerInfinity();
                         repairTheMachine();
                     }
 
@@ -367,6 +368,7 @@ public class Controller {
             } else if (doneRepairing && roadBuilder.getDamaged() == 0) {
                 hideDialogBox();
                 doneRepairing = false;
+                repairSound.AudioStop();
             }
             counterRepair++;
         });
