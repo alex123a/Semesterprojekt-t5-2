@@ -56,6 +56,8 @@ public class Controller {
     private long animationFireSmoke = 0L;
     private long animationFireSmokeBrokenMachine = 0L;
     private long animationDriving = 0L;
+    private long dialogueAnimation = 0L;
+    private boolean playerTalk = false;
     private int numberOfMovement = 0;
     private boolean talkingRoadbuilder = false;
     private int counterRepair = 0;
@@ -230,7 +232,20 @@ public class Controller {
                 }
             }
         } else {
-            System.out.println("I can't lift more!!!!");
+            playerText.setTranslateY(-130);
+            playerText.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
+            talkNPC(playerText,"Player",0);
+            Timeline timeline = new Timeline();
+            int FPS = 60;
+            KeyFrame frame = new KeyFrame(Duration.millis(1000/FPS),event ->{
+                if (dialogueAnimation % 500==0){
+                    hideDialogBox();
+                }
+                dialogueAnimation++;
+            });
+            timeline.setCycleCount(timeline.INDEFINITE);
+            timeline.getKeyFrames().add(frame);
+            timeline.play();
         }
     }
 
