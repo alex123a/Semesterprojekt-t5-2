@@ -719,6 +719,7 @@ public class Controller {
                 } else if (spaceCount == 2) {
                     talkNPC(NPCTextLine, "mechanic", 3);
                     NPCTextLine1.setText("");
+                    playerText.setText("");
                     spaceCount++;
                     playerObject.setToolset(mechanicObject.giveToolset());
                 } else if (spaceCount == 3) {
