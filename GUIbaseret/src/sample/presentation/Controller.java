@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
@@ -89,6 +90,8 @@ public class Controller {
     private Text NPCTextLine2;
     @FXML
     private Text playerText;
+    @FXML
+    private TextField nameField;
 
     public void initialize() {
         if (gameNotStarted) {
@@ -271,6 +274,7 @@ public class Controller {
                 System.out.println("y =  " + player.getTranslateY() + " x = " + player.getTranslateX());
                 break;
             case RIGHT:
+                gameNotStarted = true;
             case D:
                 if (gameNotStarted) {
                     west = false;
@@ -284,9 +288,16 @@ public class Controller {
                 break;
             case SPACE:
                 if (gameNotStarted) {
-                    StartGame();
-                    inventory.setOpacity(0.4);
-                    gameNotStarted = false;
+                    String name = nameField.getText();
+                    if (name.matches(".*[0-9].*") || name.matches(".*[A-Z]*.")) {
+                        playerObject.setName(name);
+                        nameField.setOpacity(0);
+                        StartGame();
+                        inventory.setOpacity(0.4);
+                        gameNotStarted = false;
+                    }
+                } else {
+                    collectPlastic(Main.game.placePlastic());
                 }
 
                 if (talkingRoadbuilder) {
@@ -334,7 +345,7 @@ public class Controller {
                 } else if (Main.game.getCurrentRoom() instanceof Town && player.getTranslateX() > mechanicNpc.getTranslateX()-30 && player.getTranslateX() < mechanicNpc.getTranslateX()+30 && player.getTranslateY() > mechanicNpc.getTranslateY()-30 && player.getTranslateY() < mechanicNpc.getTranslateY()+30) {
                     showDialogBox();
                 }
-                collectPlastic(Main.game.placePlastic());
+
         }
         NewRoom();
     }

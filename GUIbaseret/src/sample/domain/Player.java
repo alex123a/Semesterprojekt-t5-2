@@ -19,22 +19,9 @@ public class Player {
     // private List<Tool> toolInv = new ArrayList();
     // Her er der taget udgangspunkt i et "Tool" objekt og et "Plastic" objekt.
 
-    /*
-    public static void setName() {
-        System.out.print("What is your name?\n> ");
-        boolean nameChosen = false;
-        while (!nameChosen) { // In this while loop we check for a name that is valid (No only space names) etc...
-            Scanner playerName = new Scanner(System.in);
-            name = playerName.nextLine();
-            if (name.matches(".*[0-9].*") || name.matches(".*[A-Z]*.")) {
-                nameChosen = true;
-            } else {
-                System.out.print("Name not vaild enter new name\n> ");
-            }
-        }
-        System.out.println("You have chosen " + name + " as your player name");
+    public void setName(String name) {
+        this.name = name;
     }
-    */
 
     public String getName() {
         return name;

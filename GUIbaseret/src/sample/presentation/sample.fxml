@@ -12,6 +12,7 @@
 <?import javafx.scene.text.TextFlow?>
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.media.MediaView?>
 <GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.presentation.Controller">
    <children>
       <StackPane>
@@ -53,6 +54,7 @@
             <Text fx:id="NPCTextLine1"/>
             <Text fx:id="NPCTextLine2"/>
             <Text fx:id="playerText"/>
+            <TextField fx:id="nameField" translateY="-96" maxWidth="120"/>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
                   <ListView fx:id="inventory" layoutX="210.0" layoutY="453.0" prefHeight="45.0" prefWidth="300.0" />
