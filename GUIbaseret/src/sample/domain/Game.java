@@ -116,5 +116,7 @@ public class Game {
         return currentRoom;
     }
 
-
+    public Farmer getFarmer() {
+        return farmer;
+    }
 }
