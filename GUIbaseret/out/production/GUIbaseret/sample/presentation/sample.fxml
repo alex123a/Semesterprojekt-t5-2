@@ -55,7 +55,10 @@
             <Text fx:id="playerText"/>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
+                  <!-- Slet listview under når det nye inventory er implementeret -->
                   <ListView fx:id="inventory" layoutX="210.0" layoutY="453.0" prefHeight="45.0" prefWidth="300.0" />
+                  <!-- toolset skal blive vist under-->
+                  <ImageView fx:id="toolsetImg" pickOnBounds="true" preserveRatio="true"/>
                </children>
             </AnchorPane>
          </children>

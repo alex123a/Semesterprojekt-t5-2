@@ -89,6 +89,8 @@ public class Controller {
     @FXML
     public ImageView dialogBox = new ImageView("file:" + dialog.getImage());
     @FXML
+    private ImageView toolsetImg = new ImageView("file:" + "src/sample/presentation/pictures/npc/Tool.png");
+    @FXML
     private Text NPCTextLine;
     @FXML
     private Text NPCTextLine1;
@@ -364,6 +366,7 @@ public class Controller {
                 NPCTextLine1.setText(100 - roadBuilder.getDamaged() + "% repaired");
             } else if (doneRepairing && roadBuilder.getDamaged() == 0) {
                 hideDialogBox();
+                toolsetImg.setTranslateX(3000);
                 doneRepairing = false;
             }
             counterRepair++;
@@ -725,6 +728,9 @@ public class Controller {
                     NPCTextLine1.setText("");
                     spaceCount++;
                     playerObject.setToolset(mechanicObject.giveToolset());
+                    toolsetImg.setImage(new Image("file:" + playerObject.getToolset().getImage()));
+                    toolsetImg.setTranslateX(100);
+                    toolsetImg.setTranslateY(100);
                 } else if (spaceCount == 3) {
                     hideDialogBox();
                     mechanicTalk = true;
