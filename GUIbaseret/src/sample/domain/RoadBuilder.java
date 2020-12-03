@@ -9,6 +9,7 @@ public class RoadBuilder {
     private int inventoryCount = 0;
     private int damaged = 0;
     private boolean haveSpoken = false;
+    private boolean notDamagedBefore = true;
     private String image = "src/sample/presentation/pictures/RoadBuilder.png";
 
 
@@ -39,5 +40,21 @@ public class RoadBuilder {
 
     public String getImage() {
         return image;
+    }
+
+    public boolean isNotDamagedBefore() {
+        return notDamagedBefore;
+    }
+
+    public void setNotDamagedBefore(boolean notDamagedBefore) {
+        this.notDamagedBefore = notDamagedBefore;
+    }
+
+    public boolean isHaveSpoken() {
+        return haveSpoken;
+    }
+
+    public void setHaveSpoken(boolean haveSpoken) {
+        this.haveSpoken = haveSpoken;
     }
 }

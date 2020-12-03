@@ -10,7 +10,7 @@ import java.nio.file.Paths;
 
 public class Mechanic extends NPC {
     private boolean gaveToolset = false;
-    private String file = new File("src/sample/data/textfiles/npcDescriptions/VillagerText.txt").toString();
+    private String file = "src/sample/data/textfiles/npcDescriptions/VillagerText.txt";
 
 
     public Mechanic(String name) {
