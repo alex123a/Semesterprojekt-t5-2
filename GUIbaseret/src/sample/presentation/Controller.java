@@ -38,6 +38,7 @@ public class Controller {
     public static Mechanic mechanicObject = new Mechanic("Mechanic");
     public static Farmer farmerObject = new Farmer("Farmer");
     public static DialogNPC dialog = new DialogNPC();
+    public static Timer highScoreTimer = new Timer();
     private boolean north, south, east, west;
     private int spaceCount = 0;
     private boolean farmerTalk = false;
@@ -104,6 +105,10 @@ public class Controller {
         if (gameNotStarted) {
             inventory.setOpacity(0);
         }
+        playerText.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
+        NPCTextLine.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
+        NPCTextLine1.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
+        NPCTextLine2.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
         backgroundRoom.setImage(new Image("file:src/sample/presentation/pictures/Backgrounds/StartScreen.png"));
         professorNpc.setImage(new Image("file:" + professorObject.getImage()));
         mechanicNpc.setImage(new Image("file:" + mechanicObject.getImage()));
@@ -385,8 +390,22 @@ public class Controller {
     }
 
     private void EndGame() {
-        if (roadBuilder.getInventoryCount() == Game.getRoadDone()) {
-            
+        if (roadBuilder.getInventoryCount() >= Game.getRoadDone()) {
+            highScoreTimer.setEndTime();
+            backgroundRoom.setImage(new Image("file:src/sample/presentation/pictures/Backgrounds/EndScreen.png"));
+            String[] scoreList = highScoreTimer.setHighScore();
+            NPCTextLine.setTranslateY(-100);
+            NPCTextLine1.setTranslateY(-20);
+            NPCTextLine2.setTranslateY(60);
+            NPCTextLine.setText(scoreList[0]);
+            NPCTextLine1.setText(scoreList[1]);
+            NPCTextLine2.setText(scoreList[2]);
+            roadBuilder.setInventoryCount(0);
+            roadBuilderView.setViewport(new Rectangle2D(-484, 0, 484, 323));
+            player.setViewport(new Rectangle2D(-32, 0, 32, 48));
+            smoke.setViewport(new Rectangle2D(-577,0,577,52));
+            clearPlasticInRoom();
+            gameNotStarted = true;
         }
     }
 
@@ -394,8 +413,10 @@ public class Controller {
         backgroundRoom.setImage(new Image("file:src/sample/presentation/pictures/Backgrounds/RoadBuild.png"));
         player.setImage(new Image("file:" + playerObject.getImage()));
         player.setViewport(new Rectangle2D(0, 0, 32, 48));
+        smoke.setViewport(new Rectangle2D(0,0,577,52));
         roadView.setImage(new Image("file:" + road.getImage()));
         roadBuilderView.setImage(new Image("file:" + roadBuilder.getImage()));
+        roadBuilderView.setViewport(new Rectangle2D(0, 0, 484, 323));
         //plas1.setImage(new Image("file:" + "src/sample/presentation/pictures/plastic/cleaningPlastic.png"));
         generatePlasticInRoom(Main.game.placePlastic());
         smoke.setImage(new Image("file:src/sample/presentation/pictures/buildSmoke.png"));
@@ -403,7 +424,7 @@ public class Controller {
         movementMachine();
         smokeMachine();
         smokeBrokenMachine();
-        Timer.setStartTime(); // tid starter til highscorelisten
+        highScoreTimer.setStartTime(); // tid starter til highscorelisten
     }
 
     private void NewRoom() {
@@ -660,13 +681,9 @@ public class Controller {
 
     public void showDialogBox() {
         NPCTextLine.setTranslateY(-210);
-        NPCTextLine.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
         NPCTextLine1.setTranslateY(-190);
-        NPCTextLine1.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
         NPCTextLine2.setTranslateY(-170);
-        NPCTextLine2.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
         playerText.setTranslateY(-130);
-        playerText.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
         if (Main.game.getCurrentRoom() instanceof Farm) {
             if (spaceCount == 0 && !farmerTalk) {
                 talking = true;
