@@ -25,6 +25,7 @@ import sample.domain.NPCer.Professor;
 import sample.domain.PlasticElements.Plastic;
 import sample.domain.Rooms.*;
 import javafx.geometry.Orientation;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -79,7 +80,7 @@ public class Controller {
     @FXML
     public ImageView professorNpc = new ImageView("file:" + professorObject.getImage());
     @FXML
-    public ImageView mechanicNpc = new ImageView("file:"+ mechanicObject.getImage());
+    public ImageView mechanicNpc = new ImageView("file:" + mechanicObject.getImage());
     @FXML
     public ImageView farmerNpc = new ImageView("file:" + farmerObject.getImage());
     @FXML
@@ -300,7 +301,7 @@ public class Controller {
                         hideDialogBox();
                         spaceCount = 0;
                     }
-                } else if (Main.game.getCurrentRoom() instanceof RoadBuild && player.getTranslateX() > roadBuilderView.getTranslateX()-50 && player.getTranslateX() < roadBuilderView.getTranslateX()+50 && player.getTranslateY() > roadBuilderView.getTranslateY()-50 && player.getTranslateY() < roadBuilderView.getTranslateY()+50) {
+                } else if (Main.game.getCurrentRoom() instanceof RoadBuild && player.getTranslateX() > roadBuilderView.getTranslateX() - 50 && player.getTranslateX() < roadBuilderView.getTranslateX() + 50 && player.getTranslateY() > roadBuilderView.getTranslateY() - 50 && player.getTranslateY() < roadBuilderView.getTranslateY() + 50) {
                     if (roadBuilder.getInventoryCount() >= 19) {
                         roadBuilder.damagedMachine();
                     }
@@ -328,11 +329,11 @@ public class Controller {
                         updateInventory();
                         EndGame();
                     }
-                } else if (Main.game.getCurrentRoom() instanceof Farm && player.getTranslateX() > farmerNpc.getTranslateX()-30 && player.getTranslateX() < farmerNpc.getTranslateX()+30 && player.getTranslateY() > farmerNpc.getTranslateY()-30 && player.getTranslateY() < farmerNpc.getTranslateY()+30) {
+                } else if (Main.game.getCurrentRoom() instanceof Farm && player.getTranslateX() > farmerNpc.getTranslateX() - 30 && player.getTranslateX() < farmerNpc.getTranslateX() + 30 && player.getTranslateY() > farmerNpc.getTranslateY() - 30 && player.getTranslateY() < farmerNpc.getTranslateY() + 30) {
                     showDialogBox();
-                } else if (Main.game.getCurrentRoom() instanceof Sdu && player.getTranslateX() > professorNpc.getTranslateX()-30 && player.getTranslateX() < professorNpc.getTranslateX()+30 && player.getTranslateY() > professorNpc.getTranslateY()-30 && player.getTranslateY() < professorNpc.getTranslateY()+30) {
+                } else if (Main.game.getCurrentRoom() instanceof Sdu && player.getTranslateX() > professorNpc.getTranslateX() - 30 && player.getTranslateX() < professorNpc.getTranslateX() + 30 && player.getTranslateY() > professorNpc.getTranslateY() - 30 && player.getTranslateY() < professorNpc.getTranslateY() + 30) {
                     showDialogBox();
-                } else if (Main.game.getCurrentRoom() instanceof Town && player.getTranslateX() > mechanicNpc.getTranslateX()-30 && player.getTranslateX() < mechanicNpc.getTranslateX()+30 && player.getTranslateY() > mechanicNpc.getTranslateY()-30 && player.getTranslateY() < mechanicNpc.getTranslateY()+30) {
+                } else if (Main.game.getCurrentRoom() instanceof Town && player.getTranslateX() > mechanicNpc.getTranslateX() - 30 && player.getTranslateX() < mechanicNpc.getTranslateX() + 30 && player.getTranslateY() > mechanicNpc.getTranslateY() - 30 && player.getTranslateY() < mechanicNpc.getTranslateY() + 30) {
                     showDialogBox();
                 }
                 collectPlastic(Main.game.placePlastic());
@@ -459,10 +460,10 @@ public class Controller {
         if (!(Main.game.getCurrentRoom() instanceof Beach || Main.game.getCurrentRoom() instanceof Sdu || Main.game.getCurrentRoom() instanceof Park)) {
             player.setTranslateX(327);
         }
-        if (Main.game.getCurrentRoom() instanceof Town){
+        if (Main.game.getCurrentRoom() instanceof Town) {
             player.setTranslateY(-77);
         }
-        if (Main.game.getCurrentRoom() instanceof Farm){
+        if (Main.game.getCurrentRoom() instanceof Farm) {
             player.setTranslateY(-33.5);
         }
         Game.changedRoom = "west";
@@ -477,10 +478,10 @@ public class Controller {
         if (!(Main.game.getCurrentRoom() instanceof Sdu || Main.game.getCurrentRoom() instanceof Town || Main.game.getCurrentRoom() instanceof Farm)) {
             player.setTranslateX(-327);
         }
-        if (Main.game.getCurrentRoom() instanceof RoadBuild){
+        if (Main.game.getCurrentRoom() instanceof RoadBuild) {
             player.setTranslateY(-30);
         }
-        if (Main.game.getCurrentRoom() instanceof Park){
+        if (Main.game.getCurrentRoom() instanceof Park) {
             player.setTranslateY(-76);
         }
         Game.changedRoom = "east";
@@ -580,24 +581,24 @@ public class Controller {
         }
     }
 
-    public void showProfessor(){
+    public void showProfessor() {
         professorNpc.setTranslateX(3000);
-        if (Main.game.getCurrentRoom() instanceof Sdu){
+        if (Main.game.getCurrentRoom() instanceof Sdu) {
             professorNpc.setTranslateX(30);
         }
     }
 
     public void showMechanic() {
         mechanicNpc.setTranslateX(3000);
-        if (Main.game.getCurrentRoom() instanceof Town){
-            mechanicNpc.setTranslateX(169);
-            mechanicNpc.setTranslateY(20);
+        if (Main.game.getCurrentRoom() instanceof Town) {
+            mechanicNpc.setTranslateX(178);
+            mechanicNpc.setTranslateY(50);
         }
     }
 
-    public void showFarmer(){
+    public void showFarmer() {
         farmerNpc.setTranslateX(3000);
-        if (Main.game.getCurrentRoom() instanceof Farm){
+        if (Main.game.getCurrentRoom() instanceof Farm) {
             farmerNpc.setTranslateX(190);
             farmerNpc.setTranslateY(2);
         }
@@ -634,12 +635,14 @@ public class Controller {
                 talkNPC(NPCTextLine, "farmer", 4);
                 NPCTextLine1.setText("");
                 NPCTextLine2.setText("");
+                playerText.setText("");
                 spaceCount++;
-            } else if(spaceCount==3){
-                talkNPC(playerText,"farmer",5);
+            } else if (spaceCount == 3) {
+                talkNPC(playerText, "farmer", 5);
                 spaceCount++;
-            } else if (spaceCount==4){
-                talkNPC(NPCTextLine,"farmer",6);
+            } else if (spaceCount == 4) {
+                talkNPC(NPCTextLine, "farmer", 6);
+                playerText.setText("");
                 spaceCount++;
             } else if (spaceCount == 5) {
                 hideDialogBox();
@@ -658,8 +661,12 @@ public class Controller {
                 talkNPC(NPCTextLine, "professor", 4);
                 NPCTextLine1.setText("");
                 NPCTextLine2.setText("");
+                playerText.setText("");
                 spaceCount++;
             } else if (spaceCount == 3) {
+                talkNPC(playerText, "professor", 5);
+                spaceCount++;
+            } else if (spaceCount == 4) {
                 hideDialogBox();
                 professorTalk = true;
             }
@@ -674,12 +681,14 @@ public class Controller {
             } else if (spaceCount == 2) {
                 talkNPC(NPCTextLine, "mechanic", 3);
                 NPCTextLine1.setText("");
+                playerText.setText("");
                 spaceCount++;
             } else if (spaceCount == 3) {
                 hideDialogBox();
                 mechanicTalk = true;
             }
         }
+
     }
 
     private void talkNPC(Text npcText, String npcType, int index) {
