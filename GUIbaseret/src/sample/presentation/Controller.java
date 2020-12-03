@@ -64,6 +64,8 @@ public class Controller {
     private AudioMusicPlayer backgroundMusic = new AudioMusicPlayer("src/sample/presentation/audio/BackgroundMusic.wav");
     private AudioMusicPlayer roadbuilderCrashSound = new AudioMusicPlayer("src/sample/presentation/audio/RoadbuildCrash.wav");
     private AudioMusicPlayer roadbuilderMovingSound = new AudioMusicPlayer("src/sample/presentation/audio/RoadbuilderMovingSound.wav");
+    private AudioMusicPlayer npcTalk = new AudioMusicPlayer("src/sample/presentation/audio/npcTalking.wav");
+    private AudioMusicPlayer repairSound = new AudioMusicPlayer("src/sample/presentation/audio/repairSound.wav");
 
 
     @FXML
@@ -312,6 +314,7 @@ public class Controller {
                         roadBuilder.setNotDamagedBefore(false);
                         roadbuilderCrashSound.AudioPlayer();
                     } else if (playerObject.getHaveToolset() && roadBuilder.getDamaged() > 0) {
+                        repairSound.musicPlayerInfinity();
                         repairTheMachine();
                     }
 
@@ -365,6 +368,7 @@ public class Controller {
             } else if (doneRepairing && roadBuilder.getDamaged() == 0) {
                 hideDialogBox();
                 doneRepairing = false;
+                repairSound.AudioStop();
             }
             counterRepair++;
         });
@@ -645,6 +649,7 @@ public class Controller {
         playerText.setText("");
         dialogBox.setTranslateY(3000);
         talking = false;
+        npcTalk.AudioStop();
     }
 
     public void showDialogBox() {
@@ -658,6 +663,7 @@ public class Controller {
         playerText.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
         if (Main.game.getCurrentRoom() instanceof Farm) {
             if (spaceCount == 0 && !farmerTalk) {
+                npcTalk.musicPlayerInfinity();
                 talking = true;
                 talkNPC(NPCTextLine, "farmer", 0);
                 talkNPC(NPCTextLine1, "farmer", 1);
@@ -695,6 +701,7 @@ public class Controller {
             }
         } else if (Main.game.getCurrentRoom() instanceof Sdu) {
             if (spaceCount == 0 && !professorTalk) {
+                npcTalk.musicPlayerInfinity();
                 talking = true;
                 talkNPC(NPCTextLine, "professor", 0);
                 talkNPC(NPCTextLine1, "professor", 1);
@@ -719,6 +726,7 @@ public class Controller {
         } else if (Main.game.getCurrentRoom() instanceof Town) {
             if (roadBuilder.getDamaged() > 0) {
                 if (spaceCount == 0 && !mechanicTalk) {
+                    npcTalk.musicPlayerInfinity();
                     talkNPC(NPCTextLine, "mechanic", 0);
                     talkNPC(NPCTextLine1, "mechanic", 1);
                     spaceCount++;
