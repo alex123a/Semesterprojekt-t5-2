@@ -9,7 +9,6 @@ public class Toolset {
 
     public void repairMachine() {
         Controller.roadBuilder.setDamaged(Controller.roadBuilder.getDamaged() - repair);
-        System.out.println(100-Controller.roadBuilder.getDamaged() + "% repaired");
     }
 
     public int getRepair() {

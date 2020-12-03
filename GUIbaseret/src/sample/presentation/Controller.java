@@ -349,9 +349,13 @@ public class Controller {
         Timeline timeline = new Timeline();
         int FPS = 60;
         KeyFrame frame = new KeyFrame(Duration.millis(1000 / FPS), event -> {
-            if (counterRepair % 30 == 0 && roadBuilder.getDamaged() > 0) {
+            if (counterRepair % 60 == 0 && roadBuilder.getDamaged() > 0) {
                 playerObject.getToolset().repairMachine();
                 System.out.println("repairing 2");
+                dialogBox.setTranslateY(-170);
+                NPCTextLine1.setText(100-Controller.roadBuilder.getDamaged() + "% repaired");
+            } else if (roadBuilder.getDamaged() == 0) {
+                hideDialogBox();
             }
             counterRepair++;
 
