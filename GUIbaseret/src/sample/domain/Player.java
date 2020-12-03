@@ -4,11 +4,14 @@ import javafx.animation.AnimationTimer;
 import javafx.scene.input.KeyEvent;
 import sample.domain.NPCer.Toolset;
 import sample.domain.PlasticElements.Plastic;
-import sample.presentation.Controller;
+import sample.domain.PlasticElements.WaterBottle;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
+
+import sample.domain.Game;
+import sample.presentation.Main;
 
 public class Player {
     private String name;
@@ -16,6 +19,7 @@ public class Player {
     private boolean haveToolset = false;
     private Toolset toolset;
     private String image = "src/sample/presentation/pictures/Playergame.png";
+    private WaterBottle plastic = new WaterBottle();
     // private List<Tool> toolInv = new ArrayList();
     // Her er der taget udgangspunkt i et "Tool" objekt og et "Plastic" objekt.
 
@@ -57,6 +61,14 @@ public class Player {
 
     public List<Plastic> getPlasticInv() {
         return plasticInv;
+    }
+
+    public boolean addPlasticInv() {
+        if (plasticInv.size() <= 10 - Main.game.getFarmer().getPlasticForPlayer().length) {
+            plasticInv.addAll(Arrays.asList(Main.game.getFarmer().getPlasticForPlayer()));
+            return true;
+        }
+        return false;
     }
 
     public void setHaveToolset(boolean haveToolsetPara) {
