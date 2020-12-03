@@ -313,6 +313,7 @@ public class Controller {
                 } else if (Main.game.getCurrentRoom() instanceof RoadBuild && player.getTranslateX() > roadBuilderView.getTranslateX() - 50 && player.getTranslateX() < roadBuilderView.getTranslateX() + 50 && player.getTranslateY() > roadBuilderView.getTranslateY() - 50 && player.getTranslateY() < roadBuilderView.getTranslateY() + 50) {
                     if (roadBuilder.getInventoryCount() >= 19) {
                         roadBuilder.damagedMachine();
+                        roadbuilderCrashSound.AudioPlayer();
                     }
 
                     if (roadBuilder.getDamaged() > 0) {
@@ -540,11 +541,8 @@ public class Controller {
                     double smokeWidth = roadBuilderView.getTranslateX() - 36;
                     smokeBrokenMachine.setTranslateY(smokeHeight);
                     smokeBrokenMachine.setTranslateX(smokeWidth);
-                    backgroundMusic.AudioStop();
-                    roadbuilderCrashSound.AudioPlayer();
-                    animationFireSmokeBrokenMachine++;
-                    backgroundMusic.musicPlayerInfinity();
                 }
+                animationFireSmokeBrokenMachine++;
             } else {
                 smokeBrokenMachine.setTranslateX(3000);
             }
