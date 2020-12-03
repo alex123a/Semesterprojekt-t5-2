@@ -12,7 +12,7 @@ public class Park extends Room {
     }
 
     public Plastic[] generatePlasticArray() {
-        int waterBottles = 3 + (int) (Math.random() * ((6 - 3) + 1));
+        int waterBottles = 3;
         numberOfPlastic = new Plastic[waterBottles];
 
         for (int i = 0; i < numberOfPlastic.length; i++) {
