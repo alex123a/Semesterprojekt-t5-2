@@ -83,10 +83,6 @@ public class Player {
         this.name = name;
     }
 
-    public boolean isHaveToolset() {
-        return haveToolset;
-    }
-
     public Toolset getToolset() {
         return toolset;
     }
