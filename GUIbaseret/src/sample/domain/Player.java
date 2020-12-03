@@ -1,5 +1,8 @@
 package sample.domain;
 
+import javafx.animation.AnimationTimer;
+import javafx.scene.input.KeyEvent;
+import sample.domain.NPCer.Toolset;
 import sample.domain.PlasticElements.Plastic;
 import sample.domain.PlasticElements.WaterBottle;
 
@@ -14,6 +17,7 @@ public class Player {
     private String name;
     private List<Plastic> plasticInv = new ArrayList();
     private boolean haveToolset = false;
+    private Toolset toolset;
     private String image = "src/sample/presentation/pictures/Playergame.png";
     private WaterBottle plastic = new WaterBottle();
     // private List<Tool> toolInv = new ArrayList();
@@ -85,6 +89,18 @@ public class Player {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Toolset getToolset() {
+        return toolset;
+    }
+
+    public void setToolset(Toolset toolset) {
+        this.toolset = toolset;
     }
 }
 
