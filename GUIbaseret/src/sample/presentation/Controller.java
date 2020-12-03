@@ -333,7 +333,7 @@ public class Controller {
                             talkingRoadbuilder = true;
                         }
 
-                    } else {
+                    } else if (roadBuilder.getDamaged() == 0) {
                         numberOfMovement = playerObject.getPlasticInv().size() * 4;
                         if (playerObject.getPlasticInv().size() > 0) {
                             Main.game.givePlastic();
