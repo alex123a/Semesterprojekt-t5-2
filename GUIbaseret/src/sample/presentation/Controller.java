@@ -60,6 +60,10 @@ public class Controller {
     private boolean talkingRoadbuilder = false;
     private int counterRepair = 0;
     private boolean doneRepairing = true;
+    private AudioMusicPlayer backgroundMusic = new AudioMusicPlayer("src/sample/presentation/audio/BackgroundMusic.wav");
+    private AudioMusicPlayer roadbuilderCrashSound = new AudioMusicPlayer("src/sample/presentation/audio/RoadbuildCrash.wav");
+    private AudioMusicPlayer roadbuilderMovingSound = new AudioMusicPlayer("src/sample/presentation/audio/RoadbuilderMovingSound.wav");
+
 
     @FXML
     private ImageView backgroundRoom = new ImageView("file:");
@@ -101,6 +105,7 @@ public class Controller {
         mechanicNpc.setImage(new Image("file:" + mechanicObject.getImage()));
         farmerNpc.setImage(new Image("file:" + farmerObject.getImage()));
         dialogBox.setImage(new Image("file:" + dialog.getImage()));
+        backgroundMusic.musicPlayerInfinity();
     }
 
     public void generatePlasticInRoom(List<Plastic> plasticList) {
@@ -304,6 +309,7 @@ public class Controller {
                     if (roadBuilder.getInventoryCount() >= 19 && roadBuilder.isNotDamagedBefore()) {
                         roadBuilder.damagedMachine();
                         roadBuilder.setNotDamagedBefore(false);
+                        roadbuilderCrashSound.AudioPlayer();
                     } else if (playerObject.getHaveToolset() && roadBuilder.getDamaged() > 0) {
                         repairTheMachine();
                     }
@@ -570,10 +576,12 @@ public class Controller {
                     roadBuilderView.setViewport(new Rectangle2D(0, 0, 484, 323));
                     roadBuilderView.setTranslateX((300 - ((roadBuilder.getInventoryCount() - numberOfMovement / 4) * 18.9166 + 113.5) + 90));
                     --numberOfMovement;
+                    roadbuilderMovingSound.AudioPlayer();
                 }
                 animationDriving++;
             } else {
                 showRoadBuilderRoad();
+                roadbuilderMovingSound.AudioStop();
             }
 
         });
