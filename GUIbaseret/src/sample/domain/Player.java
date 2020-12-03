@@ -19,11 +19,10 @@ public class Player {
     private boolean haveToolset = false;
     private Toolset toolset;
     private String image = "src/sample/presentation/pictures/Playergame.png";
-    private WaterBottle plastic = new WaterBottle();
     // private List<Tool> toolInv = new ArrayList();
     // Her er der taget udgangspunkt i et "Tool" objekt og et "Plastic" objekt.
 
-    public void setName(String name) {
+    public void setNames (String name) {
         this.name = name;
     }
 

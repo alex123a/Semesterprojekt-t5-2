@@ -298,7 +298,7 @@ public class Controller {
                 if (gameNotStarted) {
                     String name = nameField.getText();
                     if (name.matches(".*[0-9].*") || name.matches(".*[A-Z]*.")) {
-                        playerObject.setName(name);
+                        playerObject.setNames(name);
                         nameField.setOpacity(0);
                         StartGame();
                         inventory.setOpacity(0.4);
@@ -386,7 +386,7 @@ public class Controller {
 
     private void EndGame() {
         if (roadBuilder.getInventoryCount() == Game.getRoadDone()) {
-            System.out.println("You are finished");
+            
         }
     }
 
