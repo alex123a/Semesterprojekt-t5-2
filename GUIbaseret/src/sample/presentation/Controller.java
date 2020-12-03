@@ -624,8 +624,8 @@ public class Controller {
     public void showMechanic() {
         mechanicNpc.setTranslateX(3000);
         if (Main.game.getCurrentRoom() instanceof Town) {
-            mechanicNpc.setTranslateX(169);
-            mechanicNpc.setTranslateY(20);
+            mechanicNpc.setTranslateX(178);
+            mechanicNpc.setTranslateY(50);
         }
     }
 
@@ -670,6 +670,7 @@ public class Controller {
                 talkNPC(NPCTextLine, "farmer", 4);
                 NPCTextLine1.setText("");
                 NPCTextLine2.setText("");
+                playerText.setText("");
                 spaceCount++;
             } else if (spaceCount == 3) {
                 talkNPC(playerText, "farmer", 5);
@@ -706,8 +707,12 @@ public class Controller {
                 talkNPC(NPCTextLine, "professor", 4);
                 NPCTextLine1.setText("");
                 NPCTextLine2.setText("");
+                playerText.setText("");
                 spaceCount++;
             } else if (spaceCount == 3) {
+                talkNPC(playerText, "professor", 5);
+                spaceCount++;
+            } else if (spaceCount == 4) {
                 hideDialogBox();
                 professorTalk = true;
             }
@@ -723,14 +728,17 @@ public class Controller {
                 } else if (spaceCount == 2) {
                     talkNPC(NPCTextLine, "mechanic", 3);
                     NPCTextLine1.setText("");
+                    playerText.setText("");
                     spaceCount++;
                     playerObject.setToolset(mechanicObject.giveToolset());
                 } else if (spaceCount == 3) {
                     hideDialogBox();
                     mechanicTalk = true;
                 }
+
             }
         }
+
     }
 
     private void talkNPC(Text npcText, String npcType, int index) {
