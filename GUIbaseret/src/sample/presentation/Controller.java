@@ -61,6 +61,7 @@ public class Controller {
     private int numberOfMovement = 0;
     private boolean talkingRoadbuilder = false;
     private int counterRepair = 0;
+    private boolean doneRepairing = true;
 
     @FXML
     private ImageView backgroundRoom = new ImageView("file:");
@@ -307,7 +308,6 @@ public class Controller {
                         roadBuilder.setNotDamagedBefore(false);
                     } else if (playerObject.getHaveToolset() && roadBuilder.getDamaged() > 0) {
                         repairTheMachine();
-                        System.out.println("repairing");
                     }
 
                     if (roadBuilder.getDamaged() > 0 && !playerObject.getHaveToolset()) {
@@ -351,21 +351,17 @@ public class Controller {
         KeyFrame frame = new KeyFrame(Duration.millis(1000 / FPS), event -> {
             if (counterRepair % 60 == 0 && roadBuilder.getDamaged() > 0) {
                 playerObject.getToolset().repairMachine();
-                System.out.println("repairing 2");
                 dialogBox.setTranslateY(-170);
-                NPCTextLine1.setText(100-Controller.roadBuilder.getDamaged() + "% repaired");
-            } else if (roadBuilder.getDamaged() == 0) {
+                NPCTextLine1.setText(100 - roadBuilder.getDamaged() + "% repaired");
+            } else if (doneRepairing && roadBuilder.getDamaged() == 0) {
                 hideDialogBox();
+                doneRepairing = false;
             }
             counterRepair++;
-
         });
         timeline.setCycleCount(timeline.INDEFINITE);
         timeline.getKeyFrames().add(frame);
         timeline.play();
-        if (roadBuilder.getDamaged() == 0) {
-            timeline.stop();
-        }
     }
 
     private void EndGame() {
