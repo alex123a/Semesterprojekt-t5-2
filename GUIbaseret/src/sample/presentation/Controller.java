@@ -663,7 +663,7 @@ public class Controller {
         playerText.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
         if (Main.game.getCurrentRoom() instanceof Farm) {
             if (spaceCount == 0 && !farmerTalk) {
-                npcTalk.AudioPlayer();
+                npcTalk.musicPlayerInfinity();
                 talking = true;
                 talkNPC(NPCTextLine, "farmer", 0);
                 talkNPC(NPCTextLine1, "farmer", 1);
@@ -701,7 +701,7 @@ public class Controller {
             }
         } else if (Main.game.getCurrentRoom() instanceof Sdu) {
             if (spaceCount == 0 && !professorTalk) {
-                npcTalk.AudioPlayer();
+                npcTalk.musicPlayerInfinity();
                 talking = true;
                 talkNPC(NPCTextLine, "professor", 0);
                 talkNPC(NPCTextLine1, "professor", 1);
@@ -726,7 +726,7 @@ public class Controller {
         } else if (Main.game.getCurrentRoom() instanceof Town) {
             if (roadBuilder.getDamaged() > 0) {
                 if (spaceCount == 0 && !mechanicTalk) {
-                    npcTalk.AudioPlayer();
+                    npcTalk.musicPlayerInfinity();
                     talkNPC(NPCTextLine, "mechanic", 0);
                     talkNPC(NPCTextLine1, "mechanic", 1);
                     spaceCount++;
