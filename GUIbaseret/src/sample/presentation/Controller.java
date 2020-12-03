@@ -65,6 +65,7 @@ public class Controller {
     private int numberOfMovement = 0;
     private AudioMusicPlayer backgroundMusic = new AudioMusicPlayer("src/sample/presentation/audio/BackgroundMusic.wav");
     private AudioMusicPlayer roadbuilderCrashSound = new AudioMusicPlayer("src/sample/presentation/audio/RoadbuildCrash.wav");
+    private AudioMusicPlayer roadbuilderMovingSound = new AudioMusicPlayer("src/sample/presentation/audio/RoadbuilderMovingSound.wav");
     private boolean talkingRoadbuilder = false;
 
     @FXML
@@ -334,7 +335,10 @@ public class Controller {
 
                     } else {
                         numberOfMovement = playerObject.getPlasticInv().size() * 4;
-                        Main.game.givePlastic();
+                        if(playerObject.getPlasticInv().size() > 0) {
+                            Main.game.givePlastic();
+                            roadbuilderMovingSound.AudioPlayer();
+                        }
                         updateInventory();
                         EndGame();
                     }
@@ -563,6 +567,7 @@ public class Controller {
                 }
                 animationDriving++;
             } else {
+                roadbuilderMovingSound.AudioStop();
                 showRoadBuilderRoad();
             }
 
