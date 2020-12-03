@@ -173,7 +173,7 @@
     <configuration name="Main" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="sample.presentation.Main" />
       <module name="GUIbaseret" />
-      <option name="VM_PARAMETERS" value="--module-path &quot;$USER_HOME$/Desktop/javafx-sdk-15.0.1/lib&quot; --add-modules javafx.controls,javafx.fxml" />
+      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\alexv\Downloads\openjfx-11.0.2_windows-x64_bin-sdk\javafx-sdk-11.0.2\lib&quot; --add-modules javafx.controls,javafx.fxml" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -304,10 +304,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="249" y="0" key="#Project_Structure/0.0.1536.824@0.0.1536.824" timestamp="1605607650746" />
-    <state x="108" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1606997183626">
-      <screen x="0" y="0" width="1440" height="900" />
+    <state x="96" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1606998339022">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="96" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.680@0.0.1280.680" timestamp="1606994175935" />
+    <state x="96" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.680@0.0.1280.680" timestamp="1606998339022" />
     <state x="108" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.900@0.0.1440.900" timestamp="1606997183626" />
     <state x="452" y="177" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1606913986533">
       <screen x="0" y="0" width="1280" height="680" />
@@ -331,10 +331,10 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="438" y="248" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.packages/0.0.1280.680@0.0.1280.680" timestamp="1605606150892" />
-    <state x="421" y="95" key="FileChooserDialogImpl" timestamp="1606994188461">
+    <state x="421" y="95" key="FileChooserDialogImpl" timestamp="1606998325592">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="421" y="95" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1606994188461" />
+    <state x="421" y="95" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1606998325592" />
     <state x="505" y="115" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1605608641570" />
     <state width="1398" height="253" key="GridCell.Tab.0.bottom" timestamp="1606997824636">
       <screen x="0" y="0" width="1440" height="900" />
@@ -376,10 +376,10 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1237" height="204" key="GridCell.Tab.1.right/0.0.1280.680@0.0.1280.680" timestamp="1605615238393" />
-    <state x="136" y="0" key="SettingsEditor" timestamp="1606997151180">
-      <screen x="0" y="0" width="1440" height="900" />
+    <state x="121" y="0" key="SettingsEditor" timestamp="1606998328087">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="121" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1606994191116" />
+    <state x="121" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1606998328087" />
     <state x="136" y="0" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1606997151180" />
     <state x="145" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1605608649418" />
     <state x="371" y="102" key="extract.method.dialog" timestamp="1606772406678">
