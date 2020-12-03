@@ -20,20 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/javafx.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/javafx.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/lib.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GUIbaseret.iml" beforeDir="false" afterPath="$PROJECT_DIR$/GUIbaseret.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GUIbaseret/sample/domain/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GUIbaseret/sample/domain/Game.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GUIbaseret/sample/presentation/Controller$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GUIbaseret/sample/presentation/Controller$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GUIbaseret/sample/presentation/Controller$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GUIbaseret/sample/presentation/Controller$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/GUIbaseret/sample/presentation/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GUIbaseret/sample/presentation/Controller.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GUIbaseret/sample/presentation/sample.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GUIbaseret/sample/presentation/sample.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/domain/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/domain/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/domain/RoadBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/domain/RoadBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/presentation/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/presentation/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/presentation/pictures/Backgrounds/StartScreen.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/presentation/pictures/Backgrounds/StartScreen.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/presentation/sample.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/presentation/sample.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/domain/Rooms/RoadBuild.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/domain/Rooms/RoadBuild.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -185,7 +173,7 @@
     <configuration name="Main" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="sample.presentation.Main" />
       <module name="GUIbaseret" />
-      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\alexv\Downloads\openjfx-11.0.2_windows-x64_bin-sdk\javafx-sdk-11.0.2\lib&quot; --add-modules javafx.controls,javafx.fxml" />
+      <option name="VM_PARAMETERS" value="--module-path &quot;$USER_HOME$/Desktop/javafx-sdk-15.0.1/lib&quot; --add-modules javafx.controls,javafx.fxml" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -316,11 +304,11 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="249" y="0" key="#Project_Structure/0.0.1536.824@0.0.1536.824" timestamp="1605607650746" />
-    <state x="96" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1606994175935">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state x="108" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1606997183626">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="96" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.680@0.0.1280.680" timestamp="1606994175935" />
-    <state x="108" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.900@0.0.1440.900" timestamp="1605698325120" />
+    <state x="108" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.900@0.0.1440.900" timestamp="1606997183626" />
     <state x="452" y="177" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1606913986533">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -348,29 +336,29 @@
     </state>
     <state x="421" y="95" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1606994188461" />
     <state x="505" y="115" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1605608641570" />
-    <state width="1237" height="205" key="GridCell.Tab.0.bottom" timestamp="1606997067364">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state width="1398" height="253" key="GridCell.Tab.0.bottom" timestamp="1606997824636">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1237" height="205" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1606997067364" />
-    <state width="1398" height="245" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1605701828382" />
+    <state width="1237" height="205" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1606993674895" />
+    <state width="1398" height="253" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1606997824636" />
     <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1605608829196" />
-    <state width="1237" height="205" key="GridCell.Tab.0.center" timestamp="1606997067364">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state width="1398" height="253" key="GridCell.Tab.0.center" timestamp="1606997824635">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1237" height="205" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1606997067364" />
-    <state width="1398" height="245" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1605701828381" />
+    <state width="1237" height="205" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1606993674895" />
+    <state width="1398" height="253" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1606997824635" />
     <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1605608829196" />
-    <state width="1237" height="205" key="GridCell.Tab.0.left" timestamp="1606997067364">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state width="1398" height="253" key="GridCell.Tab.0.left" timestamp="1606997824634">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1237" height="205" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1606997067364" />
-    <state width="1398" height="245" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1605701828381" />
+    <state width="1237" height="205" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1606993674895" />
+    <state width="1398" height="253" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1606997824634" />
     <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1605608829196" />
-    <state width="1237" height="205" key="GridCell.Tab.0.right" timestamp="1606997067364">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state width="1398" height="253" key="GridCell.Tab.0.right" timestamp="1606997824636">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1237" height="205" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1606997067364" />
-    <state width="1398" height="245" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1605701828382" />
+    <state width="1237" height="205" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1606993674895" />
+    <state width="1398" height="253" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1606997824636" />
     <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1605608829196" />
     <state width="1237" height="204" key="GridCell.Tab.1.bottom" timestamp="1605615238393">
       <screen x="0" y="0" width="1280" height="680" />
@@ -388,11 +376,11 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1237" height="204" key="GridCell.Tab.1.right/0.0.1280.680@0.0.1280.680" timestamp="1605615238393" />
-    <state x="121" y="0" key="SettingsEditor" timestamp="1606994191116">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state x="136" y="0" key="SettingsEditor" timestamp="1606997151180">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="121" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1606994191116" />
-    <state x="136" y="0" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1605698306598" />
+    <state x="136" y="0" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1606997151180" />
     <state x="145" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1605608649418" />
     <state x="371" y="102" key="extract.method.dialog" timestamp="1606772406678">
       <screen x="0" y="0" width="1280" height="680" />
