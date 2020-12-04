@@ -248,6 +248,7 @@ public class Controller {
                 }
             }
         } else {
+            // Lige nu bliver tekst vist, hvergang der trykkes space. Dette skal kun ske, når man vil samle plast
             Timeline timeline = new Timeline();
             dialogueAnimation=0;
             int FPS = 60;
@@ -270,7 +271,6 @@ public class Controller {
                 dialogueAnimation = 0;
                 messageOver = false;
             }
-
         }
     }
 
