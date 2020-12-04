@@ -71,7 +71,6 @@ public class Controller {
     private AudioMusicPlayer repairSound = new AudioMusicPlayer("src/sample/presentation/audio/repairSound.wav");
     private AudioMusicPlayer pickUpSound = new AudioMusicPlayer("src/sample/presentation/audio/pickUpSound.wav");
     private long dialogueAnimation = 0L;
-    private boolean playerTalk = false;
     private boolean messageOver=false;
     private boolean gameOver = false;
 
