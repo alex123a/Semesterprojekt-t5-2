@@ -5,9 +5,13 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Slider;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
@@ -16,13 +20,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import sample.domain.*;
-import sample.domain.NPCer.Farmer;
-import sample.domain.NPCer.Mechanic;
-import sample.domain.NPCer.Professor;
-import sample.domain.PlasticElements.Plastic;
-import sample.domain.Rooms.*;
 import javafx.geometry.Orientation;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -111,6 +111,8 @@ public class Controller {
         backgroundMusic.musicPlayerInfinity();
     }
 
+
+
     public void generatePlasticInRoom(List<Plastic> plasticList) {
         clearPlasticInRoom();
         ImageView[] plas = {plast1, plast2, plast3, plast4, plast5, plast6, plast7, plast8, plast9, plast10, plast11, plast12, plast13, plast14, plast15,
@@ -154,6 +156,7 @@ public class Controller {
             image.setTranslateY(3000);
         }
     }
+
 
     AnimationTimer timer = new AnimationTimer() {
         @Override

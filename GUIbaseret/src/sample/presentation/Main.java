@@ -21,6 +21,10 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.getIcons().add(new Image("file:src/sample/presentation/pictures/TrafficCone.png"));
         primaryStage.show();
+        Parent askRoot = FXMLLoader.load(getClass().getResource("askSample.fxml"));
+        Scene askScene = new Scene(askRoot);
+        primaryStage.setScene(askScene);
+        primaryStage.show();
     }
 
     public static void main(String[] args) {
