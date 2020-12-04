@@ -378,7 +378,7 @@ public class Controller {
                 playerObject.getToolset().repairMachine();
                 dialogBox.setTranslateY(-170);
                 NPCTextLine1.setText(100 - roadBuilder.getDamaged() + "% repaired");
-            } else if (doneRepairing && roadBuilder.getDamaged() == 0 && gameOver == false) {
+            } else if (doneRepairing && roadBuilder.getDamaged() == 0 && !gameOver) {
                 hideDialogBox();
                 toolsetImg.setTranslateX(3000);
                 doneRepairing = false;
@@ -640,7 +640,7 @@ public class Controller {
         Timeline timeline = new Timeline();
         int FPS = 60;
         KeyFrame frame = new KeyFrame(Duration.millis(1000 / FPS), event -> {
-            if (numberOfMovement != 0 && Main.game.getCurrentRoom() instanceof RoadBuild && roadBuilderView.getTranslateX() > -312 && !gameOver) {
+            if (numberOfMovement != 0 && Main.game.getCurrentRoom() instanceof RoadBuild && roadBuilderView.getTranslateX() > -290) {
                 if (animationDriving % 5 == 0) {
                     roadView.setViewport(new Rectangle2D(-681 + (roadBuilder.getInventoryCount() - numberOfMovement / 4) * 18.9166 + 113.5, 0, 681, 69));
                     roadBuilderView.setViewport(new Rectangle2D(0, 0, 484, 323));
@@ -660,7 +660,7 @@ public class Controller {
     }
 
     public void showRoadBuilderRoad() {
-        if (gameOver) {
+        if (roadBuilder.getInventoryCount() >= 30) {
             endGame();
         } else {
             showFarmer();
