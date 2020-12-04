@@ -39,6 +39,7 @@ public class Controller {
     public static DialogNPC dialog = new DialogNPC();
     private boolean north, south, east, west;
     private int spaceCount = 0;
+    private int farmerTalked = 0;
     private boolean farmerTalk = false;
     private boolean professorTalk = false;
     private boolean mechanicTalk = false;
@@ -421,7 +422,7 @@ public class Controller {
         } else if (Main.game.getCurrentRoom() instanceof Town && player.getTranslateX() < -328 && player.getTranslateY() > -53 && player.getTranslateY() < -15) {
             changeWest();
             //East
-        } else if (Main.game.getCurrentRoom() instanceof Beach && player.getTranslateX() > 328 && player.getTranslateY() > -116.5 && player.getTranslateY() < -61.5) {
+        } else if (Main.game.getCurrentRoom() instanceof Beach && player.getTranslateX() > 328 && player.getTranslateY() > -100 && player.getTranslateY() < -61.5) {
             changeEast();
         } else if (Main.game.getCurrentRoom() instanceof RoadBuild && player.getTranslateX() > 328 && player.getTranslateY() > -116.5 && player.getTranslateY() < -61.5) {
             changeEast();
@@ -661,6 +662,7 @@ public class Controller {
         NPCTextLine2.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
         playerText.setTranslateY(-130);
         playerText.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
+        //Farmer
         if (Main.game.getCurrentRoom() instanceof Farm) {
             if (spaceCount == 0 && !farmerTalk) {
                 npcTalk.musicPlayerInfinity();
@@ -693,12 +695,21 @@ public class Controller {
             } else if (spaceCount == 5) {
                 if (!farmerTalk) {
                     hideDialogBox();
-                    spaceCount = 0;
-                } else if (farmerTalk) {
-                    hideDialogBox();
+                    farmerTalked++;
                     farmerTalk = true;
                 }
             }
+        }
+        if (farmerTalked > 0) {
+            talkNPC(NPCTextLine, "farmer", 8);
+            playerText.setText("");
+            updateInventory();
+            spaceCount++;
+            if (spaceCount == 1) {
+                farmerTalk = true;
+                hideDialogBox();
+            }
+            // Professor
         } else if (Main.game.getCurrentRoom() instanceof Sdu) {
             if (spaceCount == 0 && !professorTalk) {
                 npcTalk.musicPlayerInfinity();
@@ -723,31 +734,43 @@ public class Controller {
                 hideDialogBox();
                 professorTalk = true;
             }
+            // Mechanic
         } else if (Main.game.getCurrentRoom() instanceof Town) {
-            if (roadBuilder.getDamaged() > 0) {
-                if (spaceCount == 0 && !mechanicTalk) {
-                    npcTalk.musicPlayerInfinity();
-                    talkNPC(NPCTextLine, "mechanic", 0);
-                    talkNPC(NPCTextLine1, "mechanic", 1);
-                    spaceCount++;
-                } else if (spaceCount == 1) {
-                    talkNPC(playerText, "mechanic", 2);
-                    spaceCount++;
-                } else if (spaceCount == 2) {
-                    talkNPC(NPCTextLine, "mechanic", 3);
-                    NPCTextLine1.setText("");
-                    playerText.setText("");
-                    spaceCount++;
-                    playerObject.setToolset(mechanicObject.giveToolset());
-                } else if (spaceCount == 3) {
-                    hideDialogBox();
-                    mechanicTalk = true;
-                }
-
+            if (spaceCount == 0 && !mechanicTalk) {
+                talking = true;
+                npcTalk.musicPlayerInfinity();
+                talkNPC(NPCTextLine, "mechanic", 4);
+                spaceCount++;
+            } else if (spaceCount == 1) {
+                hideDialogBox();
+                talking = false;
+                spaceCount = 0;
             }
+        }
+        if (roadBuilder.getDamaged() > 0) {
+            if (spaceCount == 0 && !mechanicTalk) {
+                npcTalk.musicPlayerInfinity();
+                talkNPC(NPCTextLine, "mechanic", 0);
+                talkNPC(NPCTextLine1, "mechanic", 1);
+                spaceCount++;
+            } else if (spaceCount == 1) {
+                talkNPC(playerText, "mechanic", 2);
+                spaceCount++;
+            } else if (spaceCount == 2) {
+                talkNPC(NPCTextLine, "mechanic", 3);
+                NPCTextLine1.setText("");
+                playerText.setText("");
+                spaceCount++;
+                playerObject.setToolset(mechanicObject.giveToolset());
+            } else if (spaceCount == 3) {
+                hideDialogBox();
+                mechanicTalk = true;
+            }
+
         }
 
     }
+
 
     private void talkNPC(Text npcText, String npcType, int index) {
         dialogBox.setTranslateY(-170);
