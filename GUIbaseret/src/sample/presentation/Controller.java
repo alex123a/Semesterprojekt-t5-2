@@ -63,6 +63,7 @@ public class Controller {
     private boolean talkingRoadbuilder = false;
     private int counterRepair = 0;
     private boolean doneRepairing = true;
+    boolean messageOver=false;
 
     @FXML
     private ImageView backgroundRoom = new ImageView("file:");
@@ -233,20 +234,29 @@ public class Controller {
                 }
             }
         } else {
-            playerText.setTranslateY(-130);
-            playerText.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
-            talkNPC(playerText,"Player",0);
             Timeline timeline = new Timeline();
+            dialogueAnimation=0;
             int FPS = 60;
             KeyFrame frame = new KeyFrame(Duration.millis(1000/FPS),event ->{
-                if (dialogueAnimation % 500==0){
+                playerText.setTranslateY(-130);
+                talkNPC(playerText,"Player",0);
+                if (dialogueAnimation / 120==1){
+                    messageOver=true;
                     hideDialogBox();
                 }
-                dialogueAnimation++;
+                if (dialogueAnimation<=120) {
+                    dialogueAnimation++;
+                }
             });
             timeline.setCycleCount(timeline.INDEFINITE);
             timeline.getKeyFrames().add(frame);
             timeline.play();
+             if (messageOver){
+                timeline.stop();
+                dialogueAnimation=0;
+                messageOver=false;
+                hideDialogBox();
+            }
         }
     }
 
