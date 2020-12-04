@@ -66,7 +66,7 @@ public class Controller {
     private AudioMusicPlayer roadbuilderMovingSound = new AudioMusicPlayer("src/sample/presentation/audio/RoadbuilderMovingSound.wav");
     private AudioMusicPlayer npcTalk = new AudioMusicPlayer("src/sample/presentation/audio/npcTalking.wav");
     private AudioMusicPlayer repairSound = new AudioMusicPlayer("src/sample/presentation/audio/repairSound.wav");
-
+    private AudioMusicPlayer pickUpSound = new AudioMusicPlayer("src/sample/presentation/audio/pickUpSound.wav");
 
     @FXML
     private ImageView backgroundRoom = new ImageView("file:");
@@ -231,6 +231,7 @@ public class Controller {
             for (int i = 0; i < plas.length; i++) {
                 if (plas[i].getTranslateX() - 15 <= player.getTranslateX() && plas[i].getTranslateX() + 15 >= player.getTranslateX()) {
                     if (plas[i].getTranslateY() - 15 <= player.getTranslateY() && plas[i].getTranslateY() + 15 >= player.getTranslateY()) {
+                        pickUpSound.AudioPlayer();
                         playerObject.plasticCollect(plasticList.get(i), Main.game.getCurrentRoom());
                         plas[i].setTranslateX(3000);
                         updateInventory();
