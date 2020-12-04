@@ -6,10 +6,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextArea;
+import sample.data.SaveAsk;
 
 
 public class ControllerAsk {
     String askTxt;
+    double[] sliderArray;
+    private SaveAsk saveAsk = new SaveAsk();
 
     @FXML
     private Slider qOneSlider;
@@ -27,13 +30,18 @@ public class ControllerAsk {
     private Button submitBut;
 
     @FXML
-    public double[] SaveInfo(ActionEvent event) {
+    public void SaveInfo() {
         this.askTxt = qFourText.getText();
-        double sliderArray[] = {qOneSlider.getValue(),qTwoSlider.getValue(),qThreeSlider.getValue()};
-        return sliderArray;
+        System.out.println(qFourText.getText());
+        sliderArray = new double[] {qOneSlider.getValue(), qTwoSlider.getValue(), qThreeSlider.getValue()};
+        saveAsk.writeToFile();
     }
 
     public String getAskTxt(){
         return askTxt;
+    }
+
+    public double[] getSliderArray() {
+        return sliderArray;
     }
 }
