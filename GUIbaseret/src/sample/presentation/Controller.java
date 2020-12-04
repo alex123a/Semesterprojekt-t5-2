@@ -23,7 +23,6 @@ import sample.domain.NPCer.Professor;
 import sample.domain.PlasticElements.Plastic;
 import sample.domain.Rooms.*;
 import javafx.geometry.Orientation;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,27 +70,27 @@ public class Controller {
 
 
     @FXML
-    private ImageView backgroundRoom = new ImageView("file:");
+    private ImageView backgroundRoom;
     @FXML
-    public ImageView roadView = new ImageView("file:" + road.getImage());
+    public ImageView roadView;
     @FXML
-    public ImageView roadBuilderView = new ImageView("file:" + roadBuilder.getImage());
+    public ImageView roadBuilderView;
     @FXML
-    public ImageView player = new ImageView("file:" + playerObject.getImage());
+    public ImageView player;
     @FXML
     public ListView inventory = new ListView();
     @FXML
-    public ImageView smoke = new ImageView("file:src/sample/presentation/pictures/buildSmoke.png");
+    public ImageView smoke;
     @FXML
-    public ImageView smokeBrokenMachine = new ImageView("file:src/sample/presentation/pictures/fireSmoke-1.png");
+    public ImageView smokeBrokenMachine;
     @FXML
-    public ImageView professorNpc = new ImageView("file:" + professorObject.getImage());
+    public ImageView professorNpc;
     @FXML
-    public ImageView mechanicNpc = new ImageView("file:" + mechanicObject.getImage());
+    public ImageView mechanicNpc;
     @FXML
-    public ImageView farmerNpc = new ImageView("file:" + farmerObject.getImage());
+    public ImageView farmerNpc;
     @FXML
-    public ImageView dialogBox = new ImageView("file:" + dialog.getImage());
+    public ImageView dialogBox;
     @FXML
     private Text NPCTextLine;
     @FXML
@@ -112,39 +111,35 @@ public class Controller {
         NPCTextLine1.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
         NPCTextLine2.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
         backgroundRoom.setImage(new Image("file:src/sample/presentation/pictures/Backgrounds/StartScreen.png"));
-        professorNpc.setImage(new Image("file:" + professorObject.getImage()));
-        mechanicNpc.setImage(new Image("file:" + mechanicObject.getImage()));
-        farmerNpc.setImage(new Image("file:" + farmerObject.getImage()));
-        dialogBox.setImage(new Image("file:" + dialog.getImage()));
         backgroundMusic.musicPlayerInfinity();
     }
 
     public void generatePlasticInRoom(List<Plastic> plasticList) {
         clearPlasticInRoom();
-        ImageView[] plas = {plast1, plast2, plast3, plast4, plast5, plast6, plast7, plast8, plast9, plast10, plast11, plast12, plast13, plast14, plast15,
+        ImageView[] plast = {plast1, plast2, plast3, plast4, plast5, plast6, plast7, plast8, plast9, plast10, plast11, plast12, plast13, plast14, plast15,
                 plast16, plast17, plast18, plast19, plast20};
 
         for (int i = 0; i < plasticList.size(); i++) {
             if (plasticList.get(i) != null) {
-                plas[i].setImage(new Image("file:" + plasticList.get(i).getImage()));
-                plas[i].setTranslateX(plasticList.get(i).getPosition()[0]);
-                plas[i].setTranslateY(plasticList.get(i).getPosition()[1]);
-                plas[i].setFitHeight(30);
-                plas[i].setFitWidth(30);
+                plast[i].setImage(new Image("file:" + plasticList.get(i).getImage()));
+                plast[i].setTranslateX(plasticList.get(i).getPosition()[0]);
+                plast[i].setTranslateY(plasticList.get(i).getPosition()[1]);
+                plast[i].setFitHeight(30);
+                plast[i].setFitWidth(30);
                 // Kode til at give plastik ny position hvis de falder inden for no go zonerne.
-                if (noAccess.moveBlock(plas[i].getTranslateX(), plas[i].getTranslateY(), 0, -2)) {
+                if (noAccess.moveBlock(plast[i].getTranslateX(), plast[i].getTranslateY(), 0, -2)) {
                     plasticList.get(i).newPosition();
                     generatePlasticInRoom(plasticList);
                     break;
-                } else if (noAccess.moveBlock(plas[i].getTranslateX(), plas[i].getTranslateY(), 0, 2)) {
+                } else if (noAccess.moveBlock(plast[i].getTranslateX(), plast[i].getTranslateY(), 0, 2)) {
                     plasticList.get(i).newPosition();
                     generatePlasticInRoom(plasticList);
                     break;
-                } else if (noAccess.moveBlock(plas[i].getTranslateX(), plas[i].getTranslateY(), -2, 0)) {
+                } else if (noAccess.moveBlock(plast[i].getTranslateX(), plast[i].getTranslateY(), -2, 0)) {
                     plasticList.get(i).newPosition();
                     generatePlasticInRoom(plasticList);
                     break;
-                } else if (noAccess.moveBlock(plas[i].getTranslateX(), plas[i].getTranslateY(), 2, 0)) {
+                } else if (noAccess.moveBlock(plast[i].getTranslateX(), plast[i].getTranslateY(), 2, 0)) {
                     plasticList.get(i).newPosition();
                     generatePlasticInRoom(plasticList);
                     break;
@@ -154,10 +149,10 @@ public class Controller {
     }
 
     public void clearPlasticInRoom() {
-        ImageView[] plas = {plast1, plast2, plast3, plast4, plast5, plast6, plast7, plast8, plast9, plast10, plast11, plast12, plast13, plast14, plast15,
+        ImageView[] plast = {plast1, plast2, plast3, plast4, plast5, plast6, plast7, plast8, plast9, plast10, plast11, plast12, plast13, plast14, plast15,
                 plast16, plast17, plast18, plast19, plast20};
 
-        for (ImageView image : plas) {
+        for (ImageView image : plast) {
             image.setTranslateX(3000);
             image.setTranslateY(3000);
         }
@@ -234,13 +229,13 @@ public class Controller {
 
     public void collectPlastic(List<Plastic> plasticList) {
         if (playerObject.getPlasticInv().size() < 10) {
-            ImageView[] plas = {plast1, plast2, plast3, plast4, plast5, plast6, plast7, plast8, plast9, plast10, plast11, plast12, plast13, plast14, plast15,
+            ImageView[] plast = {plast1, plast2, plast3, plast4, plast5, plast6, plast7, plast8, plast9, plast10, plast11, plast12, plast13, plast14, plast15,
                     plast16, plast17, plast18, plast19, plast20};
-            for (int i = 0; i < plas.length; i++) {
-                if (plas[i].getTranslateX() - 15 <= player.getTranslateX() && plas[i].getTranslateX() + 15 >= player.getTranslateX()) {
-                    if (plas[i].getTranslateY() - 15 <= player.getTranslateY() && plas[i].getTranslateY() + 15 >= player.getTranslateY()) {
+            for (int i = 0; i < plast.length; i++) {
+                if (plast[i].getTranslateX() - 15 <= player.getTranslateX() && plast[i].getTranslateX() + 15 >= player.getTranslateX()) {
+                    if (plast[i].getTranslateY() - 15 <= player.getTranslateY() && plast[i].getTranslateY() + 15 >= player.getTranslateY()) {
                         playerObject.plasticCollect(plasticList.get(i), Main.game.getCurrentRoom());
-                        plas[i].setTranslateX(3000);
+                        plast[i].setTranslateX(3000);
                         updateInventory();
                     }
                 }
@@ -393,8 +388,7 @@ public class Controller {
     }
 
     private void EndGame() {
-        //mangler at fylde plastic i rummene igen
-        if (roadBuilder.getInventoryCount() >= Main.game.getRoadDone()) {
+        if (roadBuilder.getInventoryCount() >= 2) {
             //Sets the highscorebackground
             backgroundRoom.setImage(new Image("file:src/sample/presentation/pictures/Backgrounds/EndScreen.png"));
             //Presents the score
@@ -409,7 +403,6 @@ public class Controller {
             //resets the road and game
             roadBuilder.setInventoryCount(0);
             gameNotStarted = true;
-            roadBuilder.setDamaged(0); //Virker det? hvad bliver damaged sat til under spillet?
             //Hide images
             roadBuilderView.setOpacity(0);
             roadView.setOpacity(0);
@@ -427,14 +420,17 @@ public class Controller {
     }
 
     private void StartGame() {
+        Main.game.createRooms();
         //Create the images
         backgroundRoom.setImage(new Image("file:src/sample/presentation/pictures/Backgrounds/RoadBuild.png"));
         player.setImage(new Image("file:" + playerObject.getImage()));
         player.setViewport(new Rectangle2D(0, 0, 32, 48));
-        smoke.setViewport(new Rectangle2D(0,0,577,52));
         roadView.setImage(new Image(   "file:" + road.getImage()));
         roadBuilderView.setImage(new Image("file:" + roadBuilder.getImage()));
-        roadBuilderView.setViewport(new Rectangle2D(0, 0, 484, 323));
+        professorNpc.setImage(new Image("file:" + professorObject.getImage()));
+        mechanicNpc.setImage(new Image("file:" + mechanicObject.getImage()));
+        farmerNpc.setImage(new Image("file:" + farmerObject.getImage()));
+        dialogBox.setImage(new Image("file:" + dialog.getImage()));
         smoke.setImage(new Image("file:src/sample/presentation/pictures/buildSmoke.png"));
         smokeBrokenMachine.setImage(new Image("file:src/sample/presentation/pictures/fireSmoke-1.png"));
         //Show images (& hides highscore)

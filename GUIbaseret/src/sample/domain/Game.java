@@ -35,7 +35,7 @@ public class Game {
     }
 
 
-    private void createRooms() {
+    public void createRooms() {
         RoadBuild = new RoadBuild();
         Town = new Town();
         Beach = new Beach();
