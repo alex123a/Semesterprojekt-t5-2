@@ -40,7 +40,7 @@
       </Slider>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Noget generel feedback til spillet som helhed?" />
       <TextArea fx:id="qFourText" prefHeight="108.0" prefWidth="600.0" />
-      <Button fx:id="submitBut" mnemonicParsing="false" onAction="#SaveInfo" text="Udfør">
+      <Button fx:id="submitBut" mnemonicParsing="false" onMouseClicked="#SaveInfo" text="Udfør">
          <VBox.margin>
             <Insets left="272.5" top="20.0" />
          </VBox.margin>

@@ -7,12 +7,17 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextArea;
 import sample.data.SaveAsk;
+import sample.domain.DataTransferAsk;
 
 
 public class ControllerAsk {
     String askTxt;
-    double[] sliderArray;
-    private SaveAsk saveAsk = new SaveAsk();
+    private static SaveAsk saveAsk = new SaveAsk();
+    private static int sliderValue1;
+    private int sliderValue2;
+    private int sliderValue3;
+    private static String Textfield;
+    DataTransferAsk dataTransferAsk = new DataTransferAsk();
 
     @FXML
     private Slider qOneSlider;
@@ -31,17 +36,8 @@ public class ControllerAsk {
 
     @FXML
     public void SaveInfo() {
-        this.askTxt = qFourText.getText();
-        System.out.println(qFourText.getText());
-        sliderArray = new double[] {qOneSlider.getValue(), qTwoSlider.getValue(), qThreeSlider.getValue()};
+        dataTransferAsk.setSlider(qOneSlider.getValue(),qTwoSlider.getValue(),qThreeSlider.getValue());
         saveAsk.writeToFile();
-    }
-
-    public String getAskTxt(){
-        return askTxt;
-    }
-
-    public double[] getSliderArray() {
-        return sliderArray;
+        System.out.println(sliderValue1);
     }
 }
