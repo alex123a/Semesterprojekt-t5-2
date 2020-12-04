@@ -12,7 +12,6 @@ import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import sample.domain.Game;
-
 import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
@@ -38,7 +37,5 @@ public class Main extends Application {
         Controller.roomExit = new ArrayList<>(Arrays.asList(Game.startDirections));
         launch(args);
     }
-
-
 
 }

@@ -1,1 +1,1 @@
-0,03 Alex 0,03 ja 0,07 ja 
+2,0 Alex 40,0 null 40,0 null 
