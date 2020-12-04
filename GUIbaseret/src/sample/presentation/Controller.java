@@ -12,7 +12,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
@@ -84,11 +83,11 @@ public class Controller {
     @FXML
     public ImageView player;
     @FXML
+    public ListView inventory = new ListView();
+    @FXML
     public ImageView smoke;
     @FXML
     public ImageView smokeBrokenMachine;
-    @FXML
-    public Rectangle inventory;
     @FXML
     public ImageView professorNpc;
     @FXML
@@ -118,7 +117,7 @@ public class Controller {
         NPCTextLine1.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
         NPCTextLine2.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
         backgroundRoom.setImage(new Image("file:src/sample/presentation/pictures/Backgrounds/StartScreen.png"));
-        //backgroundMusic.musicPlayerInfinity();
+        backgroundMusic.musicPlayerInfinity();
     }
 
     public void generatePlasticInRoom(List<Plastic> plasticList) {
@@ -214,23 +213,24 @@ public class Controller {
                 }
                 animationWalk++;
             }
+
         }
     };
 
     // Need this method
     public void updateInventory() {
-        ImageView[] inventoryItems = {item1, item2, item3, item4, item5, item6, item7, item8, item9, item10};
+        inventory.getItems().clear();
         inventoryObservable.removeAll();
         ArrayList<Plastic> playersInv = new ArrayList<>(playerObject.getPlasticInv());
-        for (int i = 0; i < inventoryItems.length; i++) {
-            if (i < playerObject.getPlasticInv().size()) {
-                inventoryItems[i].setImage(new Image("file:" + playersInv.get(i).getImage()));
-                //inventoryItems[i].setFitHeight(45);
-                //inventoryItems[i].setFitWidth(45);
-            } else {
-                inventoryItems[i].setImage(null);
-            }
+        for (int i = 0; i < playerObject.getPlasticInv().size(); i++) {
+            ImageView imageView = new ImageView("file:" + playersInv.get(i).getImage());
+            imageView.setFitHeight(35);
+            imageView.setFitWidth(15);
+            inventoryObservable.add(imageView);
         }
+        inventory.setItems(inventoryObservable);
+        inventory.setOrientation(Orientation.HORIZONTAL);
+        // inventory.setOpacity(100);
     }
 
     public void collectPlastic(List<Plastic> plasticList) {
@@ -309,6 +309,7 @@ public class Controller {
                         playerObject.setNames(name);
                         nameField.setOpacity(0);
                         StartGame();
+                        inventory.setOpacity(0.4);
                         gameNotStarted = false;
                     }
                 } else {
@@ -380,7 +381,7 @@ public class Controller {
                 playerObject.getToolset().repairMachine();
                 dialogBox.setTranslateY(-170);
                 NPCTextLine1.setText(100 - roadBuilder.getDamaged() + "% repaired");
-            } else if (doneRepairing && roadBuilder.getDamaged() == 0 && !gameOver) {
+            } else if (doneRepairing && roadBuilder.getDamaged() == 0 && gameOver == false) {
                 hideDialogBox();
                 toolsetImg.setTranslateX(3000);
                 doneRepairing = false;
@@ -393,7 +394,7 @@ public class Controller {
         timeline.play();
     }
 
-    private void endGame() {
+    private void EndGame() {
         if (roadBuilder.getInventoryCount() >= Main.game.getRoadDone()) {
             gameOver = true;
             //Sets the highscorebackground
@@ -413,7 +414,6 @@ public class Controller {
             roadBuilder.setInventoryCount(0);
             gameNotStarted = true;
             //Hide images
-            hideSlotLines();
             roadBuilderView.setOpacity(0);
             roadView.setOpacity(0);
             player.setOpacity(0);
@@ -432,7 +432,6 @@ public class Controller {
     }
 
     private void StartGame() {
-        gameOver = false;
         Main.game.createRooms();
         //Create the images
         backgroundRoom.setImage(new Image("file:src/sample/presentation/pictures/Backgrounds/RoadBuild.png"));
@@ -447,8 +446,6 @@ public class Controller {
         smoke.setImage(new Image("file:src/sample/presentation/pictures/buildSmoke.png"));
         smokeBrokenMachine.setImage(new Image("file:src/sample/presentation/pictures/fireSmoke-1.png"));
         //Show images (& hides highscore)
-        showSlotLines();
-        inventory.setOpacity(0.5);
         toolRect.setOpacity(0.5);
         roadBuilderView.setOpacity(1);
         roadView.setOpacity(1);
@@ -642,7 +639,7 @@ public class Controller {
         Timeline timeline = new Timeline();
         int FPS = 60;
         KeyFrame frame = new KeyFrame(Duration.millis(1000 / FPS), event -> {
-            if (numberOfMovement != 0 && Main.game.getCurrentRoom() instanceof RoadBuild && roadBuilderView.getTranslateX() > -290) {
+            if (numberOfMovement != 0 && Main.game.getCurrentRoom() instanceof RoadBuild && roadBuilderView.getTranslateX() > -312) {
                 if (animationDriving % 5 == 0) {
                     roadView.setViewport(new Rectangle2D(-681 + (roadBuilder.getInventoryCount() - numberOfMovement / 4) * 18.9166 + 113.5, 0, 681, 69));
                     roadBuilderView.setViewport(new Rectangle2D(0, 0, 484, 323));
@@ -663,7 +660,7 @@ public class Controller {
 
     public void showRoadBuilderRoad() {
         if (roadBuilder.getInventoryCount() >= 30) {
-            endGame();
+            EndGame();
         } else {
             showFarmer();
             showProfessor();
@@ -675,7 +672,6 @@ public class Controller {
             }
             showRoadBuilder();
         }
-
     }
 
     public void showRoadBuilder() {
@@ -852,22 +848,8 @@ public class Controller {
         dialogBox.setTranslateY(-170);
         npcText.setText(dialog.getNPCText(npcType, index));
     }
-
-    public void hideSlotLines() {
-        Line[] lines = {slot1, slot2, slot3, slot4, slot5, slot6, slot7, slot8, slot9};
-
-        for (Line line: lines) {
-            line.setOpacity(0);
-        }
-    }
-
-    public void showSlotLines() {
-        Line[] lines = {slot1, slot2, slot3, slot4, slot5, slot6, slot7, slot8, slot9};
-
-        for (Line line: lines) {
-            line.setOpacity(0.5);
-        }
-    }
+    // Det under er alle plastik imageviews. Det er placeret her, da der er alt for mange, og der skal undersøges om det ikke kan gøres på en smart måde, så vi
+    // ikke skal have 20 imageview
 
     @FXML
     private ImageView plast1 = new ImageView();
@@ -909,63 +891,4 @@ public class Controller {
     private ImageView plast19 = new ImageView();
     @FXML
     private ImageView plast20 = new ImageView();
-
-    @FXML
-    private ImageView item1;
-
-    @FXML
-    private ImageView item2;
-
-    @FXML
-    private ImageView item3;
-
-    @FXML
-    private ImageView item4;
-
-    @FXML
-    private ImageView item5;
-
-    @FXML
-    private ImageView item6;
-
-    @FXML
-    private ImageView item7;
-
-    @FXML
-    private ImageView item8;
-
-    @FXML
-    private ImageView item9;
-
-    @FXML
-    private ImageView item10;
-
-    // De 9 slot linjer under inkaplser de 10 inventory pladser
-
-    @FXML
-    private Line slot1;
-
-    @FXML
-    private Line slot2;
-
-    @FXML
-    private Line slot3;
-
-    @FXML
-    private Line slot4;
-
-    @FXML
-    private Line slot5;
-
-    @FXML
-    private Line slot6;
-
-    @FXML
-    private Line slot7;
-
-    @FXML
-    private Line slot8;
-
-    @FXML
-    private Line slot9;
 }
