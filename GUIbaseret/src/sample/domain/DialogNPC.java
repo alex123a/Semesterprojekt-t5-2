@@ -10,8 +10,6 @@ public class DialogNPC {
     private String roadbuilderText = "src/sample/data/textfiles/npcDescriptions/DamagedMachine.txt";
     private String playerText ="src/sample/data/textfiles/playerDescriptions/PlayerText.txt";
 
-
-
     public String getImage() {
         return image;
     }
