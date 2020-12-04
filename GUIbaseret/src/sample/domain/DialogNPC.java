@@ -8,7 +8,7 @@ public class DialogNPC {
     private String professorText = "src/sample/data/textfiles/npcDescriptions/ProfessorText.txt";
     private String mechanicText = "src/sample/data/textfiles/npcDescriptions/VillagerText.txt";
     private String roadbuilderText = "src/sample/data/textfiles/npcDescriptions/DamagedMachine.txt";
-    private String playerText = "";
+    private String playerText = "src/sample/data/textfiles/playerDescriptions/PlayerText.txt";
 
     public String getImage() {
         return image;
