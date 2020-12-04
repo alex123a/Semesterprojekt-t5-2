@@ -259,7 +259,7 @@ public class Controller {
                     messageOver=true;
                     hideDialogBox();
                 }
-                if (dialogueAnimation<=120) {
+                if (dialogueAnimation<121) {
                     dialogueAnimation++;
                 }
             });
