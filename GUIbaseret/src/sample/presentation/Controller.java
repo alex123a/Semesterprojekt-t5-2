@@ -289,7 +289,6 @@ public class Controller {
                 System.out.println("y =  " + player.getTranslateY() + " x = " + player.getTranslateX());
                 break;
             case RIGHT:
-                gameNotStarted = true;
             case D:
                 if (gameNotStarted) {
                     west = false;
@@ -394,45 +393,66 @@ public class Controller {
     }
 
     private void EndGame() {
-        if (roadBuilder.getInventoryCount() >= Game.getRoadDone()) {
-            highScoreTimer.setEndTime();
+        //mangler at fylde plastic i rummene igen
+        if (roadBuilder.getInventoryCount() >= Main.game.getRoadDone()) {
+            //Sets the highscorebackground
             backgroundRoom.setImage(new Image("file:src/sample/presentation/pictures/Backgrounds/EndScreen.png"));
+            //Presents the score
+            highScoreTimer.setEndTime();
             String[] scoreList = highScoreTimer.setHighScore();
-            NPCTextLine.setTranslateY(-100);
-            NPCTextLine1.setTranslateY(-20);
-            NPCTextLine2.setTranslateY(60);
+            NPCTextLine.setTranslateY(-80);
+            NPCTextLine1.setTranslateY(0);
+            NPCTextLine2.setTranslateY(85);
             NPCTextLine.setText(scoreList[0]);
             NPCTextLine1.setText(scoreList[1]);
             NPCTextLine2.setText(scoreList[2]);
+            //resets the road and game
             roadBuilder.setInventoryCount(0);
-            roadBuilderView.setViewport(new Rectangle2D(-484, 0, 484, 323));
-            player.setViewport(new Rectangle2D(-32, 0, 32, 48));
-            smoke.setViewport(new Rectangle2D(-577,0,577,52));
-            clearPlasticInRoom();
             gameNotStarted = true;
+            roadBuilder.setDamaged(0); //Virker det? hvad bliver damaged sat til under spillet?
+            //Hide images
+            roadBuilderView.setOpacity(0);
+            roadView.setOpacity(0);
+            player.setOpacity(0);
+            smoke.setOpacity(0);
+            //Lay out new plastic
+            clearPlasticInRoom();
+            //Resets NPCs
+            farmerTalk = false;
+            professorTalk = false;
+            mechanicTalk = false;
+            talkingRoadbuilder = false;
+            doneRepairing = true;
         }
     }
 
     private void StartGame() {
+        //Create the images
         backgroundRoom.setImage(new Image("file:src/sample/presentation/pictures/Backgrounds/RoadBuild.png"));
         player.setImage(new Image("file:" + playerObject.getImage()));
         player.setViewport(new Rectangle2D(0, 0, 32, 48));
         smoke.setViewport(new Rectangle2D(0,0,577,52));
-        roadView.setImage(new Image("file:" + road.getImage()));
+        roadView.setImage(new Image(   "file:" + road.getImage()));
         roadBuilderView.setImage(new Image("file:" + roadBuilder.getImage()));
         roadBuilderView.setViewport(new Rectangle2D(0, 0, 484, 323));
-        //plas1.setImage(new Image("file:" + "src/sample/presentation/pictures/plastic/cleaningPlastic.png"));
-        generatePlasticInRoom(Main.game.placePlastic());
         smoke.setImage(new Image("file:src/sample/presentation/pictures/buildSmoke.png"));
         smokeBrokenMachine.setImage(new Image("file:src/sample/presentation/pictures/fireSmoke-1.png"));
+        //Show images (& hides highscore)
+        roadBuilderView.setOpacity(1);
+        roadView.setOpacity(1);
+        player.setOpacity(1);
+        smoke.setOpacity(1);
+        hideDialogBox();
+        //Generates plastic and runs the animations
+        generatePlasticInRoom(Main.game.placePlastic());
         movementMachine();
         smokeMachine();
         smokeBrokenMachine();
-        highScoreTimer.setStartTime(); // tid starter til highscorelisten
+        //Starts the time for highscorelist
+        highScoreTimer.setStartTime();
     }
 
     private void NewRoom() {
-
         //North
         if (Main.game.getCurrentRoom() instanceof RoadBuild && player.getTranslateY() < -202 && player.getTranslateX() > -142.5 && player.getTranslateX() < -82.5) {
             changeNorth();

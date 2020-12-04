@@ -62,8 +62,8 @@
             </AnchorPane>
          </children>
       </StackPane>
-      <TabPane layoutX="29.0" layoutY="-1.0" onKeyPressed="#movePlayer" onKeyReleased="#stopPlayer" /><!--TabPane only for movement with arrows, because the other Panes is not in focus to use arrow keys-->
    </children>
+   <TabPane layoutX="29.0" layoutY="-1.0" onKeyPressed="#movePlayer" onKeyReleased="#stopPlayer" /><!--TabPane only for movement with arrows, because the other Panes is not in focus to use arrow keys-->
    <columnConstraints>
       <ColumnConstraints />
    </columnConstraints>

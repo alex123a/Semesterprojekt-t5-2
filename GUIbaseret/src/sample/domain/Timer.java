@@ -59,8 +59,9 @@ public class Timer {
         String printTime1 = String.valueOf(highScores[0]);
         String printTime2 = String.valueOf(highScores[1]);
         String printTime3 = String.valueOf(highScores[2]);
+        PrintWriter writer;
         try {
-            PrintWriter writer = new PrintWriter(highScore);
+            writer = new PrintWriter(highScore);
             //ændrer '.' til ',' da reader ikke kan læse '.'
             writer.print(printTime1.replace(".", ",") + " ");
             writer.print(printTime2.replace(".", ",") + " ");
@@ -71,5 +72,4 @@ public class Timer {
         }
         return highScores;
     }
-
 }

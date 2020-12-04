@@ -3,11 +3,13 @@ package sample.domain;
 import sample.domain.NPCer.*;
 import sample.domain.PlasticElements.Plastic;
 import sample.domain.Rooms.*;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
 import sample.presentation.Controller;
 
 
@@ -83,21 +85,17 @@ public class Game {
     public void goRoom() {
         Room nextRoom = changedRoom != null ? currentRoom.getExit(changedRoom) : RoadBuild;
 
-        if (nextRoom == null) {
-            System.out.println("That is not possible!");
-        } else {
-            currentRoom = nextRoom;
+        currentRoom = nextRoom;
 
-            Controller.roomExit.removeAll(currentDirections);
-            for (String directions : currentRoom.getExits().keySet()){
-                currentDirections.add(directions);
-            }
-
-            Controller.roomExit.addAll(currentDirections);
-            currentDirections.removeAll(currentDirections);
-            currentRoom.getPlasticTypes();
-            Controller.background = currentRoom.getPictureRoom();
+        Controller.roomExit.removeAll(currentDirections);
+        for (String directions : currentRoom.getExits().keySet()) {
+            currentDirections.add(directions);
         }
+
+        Controller.roomExit.addAll(currentDirections);
+        currentDirections.removeAll(currentDirections);
+        currentRoom.getPlasticTypes();
+        Controller.background = currentRoom.getPictureRoom();
     }
 
     public void givePlastic() {
@@ -106,7 +104,7 @@ public class Game {
         Controller.playerObject.resetPlasticInv();
     }
 
-    public static int getRoadDone() {
+    public int getRoadDone() {
         return roadDone;
     }
 

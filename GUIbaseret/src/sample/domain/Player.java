@@ -1,16 +1,10 @@
 package sample.domain;
 
-import javafx.animation.AnimationTimer;
-import javafx.scene.input.KeyEvent;
 import sample.domain.NPCer.Toolset;
 import sample.domain.PlasticElements.Plastic;
-import sample.domain.PlasticElements.WaterBottle;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import sample.domain.Game;
 import sample.presentation.Main;
 
 public class Player {
