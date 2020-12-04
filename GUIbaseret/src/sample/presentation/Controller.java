@@ -115,7 +115,7 @@ public class Controller {
         NPCTextLine1.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
         NPCTextLine2.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
         backgroundRoom.setImage(new Image("file:src/sample/presentation/pictures/Backgrounds/StartScreen.png"));
-        backgroundMusic.musicPlayerInfinity();
+        //backgroundMusic.musicPlayerInfinity();
     }
 
     public void generatePlasticInRoom(List<Plastic> plasticList) {
