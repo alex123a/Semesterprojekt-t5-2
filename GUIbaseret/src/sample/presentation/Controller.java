@@ -44,6 +44,7 @@ public class Controller {
     private boolean north, south, east, west;
     private int spaceCount = 0;
     private boolean farmerTalk = false;
+    private int farmerTalked = 0;
     private boolean professorTalk = false;
     private boolean mechanicTalk = false;
     private boolean talking = false;
@@ -723,44 +724,63 @@ public class Controller {
         playerText.setTranslateY(-130);
         //Farmer
         if (Main.game.getCurrentRoom() instanceof Farm) {
-            if (spaceCount == 0 && !farmerTalk) {
-                npcTalk.musicPlayerInfinity();
-                talking = true;
-                talkNPC(NPCTextLine, "farmer", 0);
-                talkNPC(NPCTextLine1, "farmer", 1);
-                talkNPC(NPCTextLine2, "farmer", 2);
-                spaceCount++;
-            } else if (spaceCount == 1) {
-                talkNPC(playerText, "farmer", 3);
-                spaceCount++;
-            } else if (spaceCount == 2) {
-                talkNPC(NPCTextLine, "farmer", 4);
-                NPCTextLine1.setText("");
-                NPCTextLine2.setText("");
-                playerText.setText("");
-                spaceCount++;
-            } else if (spaceCount == 3) {
-                talkNPC(playerText, "farmer", 5);
-                spaceCount++;
-            } else if (spaceCount == 4) {
-                talkNPC(NPCTextLine, "farmer", 6);
-                farmerTalk = playerObject.addPlasticInv();
-                if (!farmerTalk) {
-                    talkNPC(NPCTextLine, "farmer", 7);
+            if (farmerTalked == 0) {
+                if (spaceCount == 0 && !farmerTalk) {
+                    npcTalk.musicPlayerInfinity();
+                    talking = true;
+                    talkNPC(NPCTextLine, "farmer", 0);
+                    talkNPC(NPCTextLine1, "farmer", 1);
+                    talkNPC(NPCTextLine2, "farmer", 2);
+                    spaceCount++;
+                } else if (spaceCount == 1) {
+                    talkNPC(playerText, "farmer", 3);
+                    spaceCount++;
+                } else if (spaceCount == 2) {
+                    talkNPC(NPCTextLine, "farmer", 4);
+                    NPCTextLine1.setText("");
+                    NPCTextLine2.setText("");
                     playerText.setText("");
+                    spaceCount++;
+                } else if (spaceCount == 3) {
+                    talkNPC(playerText, "farmer", 5);
+                    spaceCount++;
+                } else if (spaceCount == 4) {
+                    talkNPC(NPCTextLine, "farmer", 6);
+                    farmerTalk = playerObject.addPlasticInv();
+                    if (!farmerTalk) {
+                        talkNPC(NPCTextLine, "farmer", 7);
+                        playerText.setText("");
+                    }
+                    updateInventory();
+                    spaceCount++;
+                } else if (spaceCount == 5) {
+                    if (!farmerTalk) {
+                        hideDialogBox();
+                        farmerTalked++;
+                    } else if (farmerTalk) {
+                        hideDialogBox();
+                        farmerTalk = true;
+                    }
                 }
-                updateInventory();
-                spaceCount++;
-            } else if (spaceCount == 5) {
-                if (!farmerTalk) {
-                    hideDialogBox();
-                    spaceCount = 0;
-                } else if (farmerTalk) {
-                    hideDialogBox();
-                    farmerTalk = true;
+            } else if (farmerTalked > 0) {
+                if (spaceCount == 0 && !farmerTalk) {
+                    npcTalk.musicPlayerInfinity();
+                    talking = true;
+                    talkNPC(NPCTextLine, "farmer", 8);
+                    farmerTalk = playerObject.addPlasticInv();
+                    updateInventory();
+                    spaceCount++;
+                } else if (spaceCount == 1) {
+                    if (!farmerTalk) {
+                        hideDialogBox();
+                        spaceCount = 0;
+                    } else if (farmerTalk) {
+                        hideDialogBox();
+                        farmerTalk = true;
+                    }
                 }
             }
-        //Professor
+            //Professor
         } else if (Main.game.getCurrentRoom() instanceof Sdu) {
             if (spaceCount == 0 && !professorTalk) {
                 npcTalk.musicPlayerInfinity();
@@ -785,7 +805,7 @@ public class Controller {
                 hideDialogBox();
                 professorTalk = true;
             }
-        //Mechanic
+            //Mechanic
         } else if (Main.game.getCurrentRoom() instanceof Town) {
             if (roadBuilder.getDamaged() == 0) {
                 if (spaceCount == 0 && !mechanicTalk) {
