@@ -720,6 +720,7 @@ public class Controller {
         NPCTextLine1.setTranslateY(-190);
         NPCTextLine2.setTranslateY(-170);
         playerText.setTranslateY(-130);
+        //Farmer
         if (Main.game.getCurrentRoom() instanceof Farm) {
             if (spaceCount == 0 && !farmerTalk) {
                 npcTalk.musicPlayerInfinity();
@@ -758,6 +759,7 @@ public class Controller {
                     farmerTalk = true;
                 }
             }
+        //Professor
         } else if (Main.game.getCurrentRoom() instanceof Sdu) {
             if (spaceCount == 0 && !professorTalk) {
                 npcTalk.musicPlayerInfinity();
@@ -782,33 +784,39 @@ public class Controller {
                 hideDialogBox();
                 professorTalk = true;
             }
+        //Mechanic
         } else if (Main.game.getCurrentRoom() instanceof Town) {
-            if (roadBuilder.getDamaged() > 0) {
-                if (spaceCount == 0 && !mechanicTalk) {
-                    npcTalk.musicPlayerInfinity();
-                    talkNPC(NPCTextLine, "mechanic", 0);
-                    talkNPC(NPCTextLine1, "mechanic", 1);
-                    spaceCount++;
-                } else if (spaceCount == 1) {
-                    talkNPC(playerText, "mechanic", 2);
-                    spaceCount++;
-                } else if (spaceCount == 2) {
-                    talkNPC(NPCTextLine, "mechanic", 3);
-                    NPCTextLine1.setText("");
-                    playerText.setText("");
-                    spaceCount++;
-                    playerObject.setToolset(mechanicObject.giveToolset());
-                    toolsetImg.setImage(new Image("file:" + playerObject.getToolset().getImage()));
-                    toolsetImg.setTranslateX(650);
-                    toolsetImg.setTranslateY(458);
-                    toolsetImg.setFitHeight(60);
-                    toolsetImg.setFitWidth(60);
-                } else if (spaceCount == 3) {
-                    hideDialogBox();
-                    mechanicTalk = true;
-                }
-
+            if (spaceCount == 0 && !mechanicTalk) {
+                talking = true;
+                npcTalk.musicPlayerInfinity();
+                talkNPC(NPCTextLine, "mechanic", 4);
+                spaceCount++;
+            } else if (spaceCount == 1) {
+                hideDialogBox();
+                talking = false;
+                spaceCount = 0;
             }
+        }
+        if (roadBuilder.getDamaged() > 0) {
+            if (spaceCount == 0 && !mechanicTalk) {
+                npcTalk.musicPlayerInfinity();
+                talkNPC(NPCTextLine, "mechanic", 0);
+                talkNPC(NPCTextLine1, "mechanic", 1);
+                spaceCount++;
+            } else if (spaceCount == 1) {
+                talkNPC(playerText, "mechanic", 2);
+                spaceCount++;
+            } else if (spaceCount == 2) {
+                talkNPC(NPCTextLine, "mechanic", 3);
+                NPCTextLine1.setText("");
+                playerText.setText("");
+                spaceCount++;
+                playerObject.setToolset(mechanicObject.giveToolset());
+            } else if (spaceCount == 3) {
+                hideDialogBox();
+                mechanicTalk = true;
+            }
+
         }
 
     }
