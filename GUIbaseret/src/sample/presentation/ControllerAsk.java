@@ -9,14 +9,11 @@ import javafx.scene.control.TextArea;
 import sample.data.SaveAsk;
 import sample.domain.DataTransferAsk;
 
+import java.awt.event.KeyEvent;
+
 
 public class ControllerAsk {
-    String askTxt;
     private static SaveAsk saveAsk = new SaveAsk();
-    private static int sliderValue1;
-    private int sliderValue2;
-    private int sliderValue3;
-    private static String Textfield;
     DataTransferAsk dataTransferAsk = new DataTransferAsk();
 
     @FXML
@@ -36,8 +33,6 @@ public class ControllerAsk {
 
     @FXML
     public void SaveInfo() {
-        dataTransferAsk.setSlider(qOneSlider.getValue(),qTwoSlider.getValue(),qThreeSlider.getValue());
-        saveAsk.writeToFile();
-        System.out.println(sliderValue1);
+        dataTransferAsk.setSlider(qOneSlider.getValue(), qTwoSlider.getValue(), qThreeSlider.getValue(),qFourText.getText());
     }
 }
