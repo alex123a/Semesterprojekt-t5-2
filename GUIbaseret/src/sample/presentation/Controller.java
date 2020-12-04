@@ -70,6 +70,7 @@ public class Controller {
     private AudioMusicPlayer npcTalk = new AudioMusicPlayer("src/sample/presentation/audio/npcTalking.wav");
     private AudioMusicPlayer repairSound = new AudioMusicPlayer("src/sample/presentation/audio/repairSound.wav");
     private AudioMusicPlayer pickUpSound = new AudioMusicPlayer("src/sample/presentation/audio/pickUpSound.wav");
+    private boolean gameOver = false;
 
     @FXML
     private ImageView backgroundRoom;
@@ -378,7 +379,7 @@ public class Controller {
                 playerObject.getToolset().repairMachine();
                 dialogBox.setTranslateY(-170);
                 NPCTextLine1.setText(100 - roadBuilder.getDamaged() + "% repaired");
-            } else if (doneRepairing && roadBuilder.getDamaged() == 0) {
+            } else if (doneRepairing && roadBuilder.getDamaged() == 0 && gameOver == false) {
                 hideDialogBox();
                 toolsetImg.setTranslateX(3000);
                 doneRepairing = false;
@@ -393,6 +394,7 @@ public class Controller {
 
     private void EndGame() {
         if (roadBuilder.getInventoryCount() >= Main.game.getRoadDone()) {
+            gameOver = true;
             //Sets the highscorebackground
             backgroundRoom.setImage(new Image("file:src/sample/presentation/pictures/Backgrounds/EndScreen.png"));
             //Presents the score
