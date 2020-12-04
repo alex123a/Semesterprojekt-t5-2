@@ -254,6 +254,24 @@ public class Controller {
 
     public void movePlayer(KeyEvent keyEvent) throws InterruptedException {
         switch (keyEvent.getCode()) {
+
+            case P:
+                if (gameOver) {
+                    Main main = new Main();
+                    Stage primaryStage = new Stage();
+                    ControllerAsk.theStage = primaryStage;
+                    try {
+                        main.start(primaryStage);
+                        Parent askRoot = FXMLLoader.load(getClass().getResource("askSample.fxml"));
+                        Scene scene2 = new Scene(askRoot);
+                        primaryStage.setScene(scene2);
+                        primaryStage.show();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+                break;
+                
             case UP:
             case W:
                 if (gameNotStarted) {
