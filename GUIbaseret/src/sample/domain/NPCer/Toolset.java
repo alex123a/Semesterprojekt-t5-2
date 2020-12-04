@@ -5,7 +5,7 @@ import sample.presentation.Controller;
 
 public class Toolset {
     final private int repair = 25;
-    final private String image = "src/sample/data/textfiles/npcDescriptions/Tool.txt";
+    final private String image = "src/sample/presentation/pictures/npc/Tool.png";
 
     public void repairMachine() {
         Controller.roadBuilder.setDamaged(Controller.roadBuilder.getDamaged() - repair);
@@ -13,5 +13,9 @@ public class Toolset {
 
     public int getRepair() {
         return this.repair;
+    }
+
+    public String getImage() {
+        return this.image;
     }
 }

@@ -30,6 +30,10 @@ public class RoadBuilder {
         return inventoryCount;
     }
 
+    public void setInventoryCount(int inventoryCount) {
+        this.inventoryCount = inventoryCount;
+    }
+
     public int getDamaged() {
         return damaged;
     }
