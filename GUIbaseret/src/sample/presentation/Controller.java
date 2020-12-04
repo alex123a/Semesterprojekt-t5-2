@@ -390,7 +390,7 @@ public class Controller {
     }
 
     private void EndGame() {
-        if (roadBuilder.getInventoryCount() >= 2) {
+        if (roadBuilder.getInventoryCount() >= Main.game.getRoadDone()) {
             //Sets the highscorebackground
             backgroundRoom.setImage(new Image("file:src/sample/presentation/pictures/Backgrounds/EndScreen.png"));
             //Presents the score
