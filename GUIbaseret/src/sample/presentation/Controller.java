@@ -399,6 +399,8 @@ public class Controller {
             backgroundRoom.setImage(new Image("file:src/sample/presentation/pictures/Backgrounds/EndScreen.png"));
             //Presents the score
             highScoreTimer.setEndTime();
+            playerText.setText("Your " + highScoreTimer.timeScore());
+            playerText.setTranslateY(130);
             String[] scoreList = highScoreTimer.setHighScore();
             NPCTextLine.setTranslateY(-80);
             NPCTextLine1.setTranslateY(0);
