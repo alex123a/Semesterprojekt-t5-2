@@ -25,6 +25,7 @@ import sample.domain.NPCer.Professor;
 import sample.domain.PlasticElements.Plastic;
 import sample.domain.Rooms.*;
 import javafx.geometry.Orientation;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -435,7 +436,7 @@ public class Controller {
         backgroundRoom.setImage(new Image("file:src/sample/presentation/pictures/Backgrounds/RoadBuild.png"));
         player.setImage(new Image("file:" + playerObject.getImage()));
         player.setViewport(new Rectangle2D(0, 0, 32, 48));
-        roadView.setImage(new Image(   "file:" + road.getImage()));
+        roadView.setImage(new Image("file:" + road.getImage()));
         roadBuilderView.setImage(new Image("file:" + roadBuilder.getImage()));
         professorNpc.setImage(new Image("file:" + professorObject.getImage()));
         mechanicNpc.setImage(new Image("file:" + mechanicObject.getImage()));
@@ -786,15 +787,17 @@ public class Controller {
             }
         //Mechanic
         } else if (Main.game.getCurrentRoom() instanceof Town) {
-            if (spaceCount == 0 && !mechanicTalk) {
-                talking = true;
-                npcTalk.musicPlayerInfinity();
-                talkNPC(NPCTextLine, "mechanic", 4);
-                spaceCount++;
-            } else if (spaceCount == 1) {
-                hideDialogBox();
-                talking = false;
-                spaceCount = 0;
+            if (roadBuilder.getDamaged() == 0) {
+                if (spaceCount == 0 && !mechanicTalk) {
+                    talking = true;
+                    npcTalk.musicPlayerInfinity();
+                    talkNPC(NPCTextLine, "mechanic", 4);
+                    spaceCount++;
+                } else if (spaceCount == 1) {
+                    hideDialogBox();
+                    talking = false;
+                    spaceCount = 0;
+                }
             }
         }
         if (roadBuilder.getDamaged() > 0) {
