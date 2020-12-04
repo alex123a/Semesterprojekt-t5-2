@@ -56,9 +56,9 @@
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
                   <!-- Slet listview under når det nye inventory er implementeret -->
-                  <ListView fx:id="inventory" layoutX="210.0" layoutY="453.0" prefHeight="45.0" prefWidth="300.0" />
+                  <ListView fx:id="inventory" layoutX="210.0" layoutY="453.0" prefHeight="45.0" prefWidth="300.0" opacity="0" />
                   <!-- toolset skal blive vist under-->
-                  <Rectangle fx:id="toolRect" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="45.0" layoutX="657.0" layoutY="453.0" stroke="BLACK" strokeType="INSIDE" width="45.0" />
+                  <Rectangle fx:id="toolRect" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="45.0" stroke="BLACK" strokeType="INSIDE" width="45.0" layoutX="657.0" layoutY="453.0" opacity="0"/>
                   <ImageView fx:id="toolsetImg" pickOnBounds="true" preserveRatio="true" />
                </children>
             </AnchorPane>

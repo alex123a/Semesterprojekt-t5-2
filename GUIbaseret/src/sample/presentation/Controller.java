@@ -105,12 +105,10 @@ public class Controller {
     private Text playerText;
     @FXML
     private Rectangle toolRect;
+    @FXML
     private TextField nameField;
 
     public void initialize() {
-        if (gameNotStarted) {
-            inventory.setOpacity(0);
-        }
         playerText.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
         NPCTextLine.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
         NPCTextLine1.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
@@ -440,8 +438,8 @@ public class Controller {
         dialogBox.setImage(new Image("file:" + dialog.getImage()));
         smoke.setImage(new Image("file:src/sample/presentation/pictures/buildSmoke.png"));
         smokeBrokenMachine.setImage(new Image("file:src/sample/presentation/pictures/fireSmoke-1.png"));
-        toolRect.setTranslateX(3000);
         //Show images (& hides highscore)
+        toolRect.setOpacity(0.5);
         roadBuilderView.setOpacity(1);
         roadView.setOpacity(1);
         player.setOpacity(1);
@@ -791,10 +789,8 @@ public class Controller {
                     playerText.setText("");
                     spaceCount++;
                     playerObject.setToolset(mechanicObject.giveToolset());
-                    toolRect.setTranslateX(657.0);
-                    toolRect.setTranslateY(453.0);
                     toolsetImg.setImage(new Image("file:" + playerObject.getToolset().getImage()));
-                    toolsetImg.setTranslateX(662);
+                    toolsetImg.setTranslateX(650);
                     toolsetImg.setTranslateY(458);
                     toolsetImg.setFitHeight(60);
                     toolsetImg.setFitWidth(60);
