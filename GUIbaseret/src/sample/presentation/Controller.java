@@ -5,19 +5,13 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
-import javafx.stage.Stage;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.input.MouseEvent;
@@ -26,15 +20,11 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import sample.domain.*;
-import javafx.geometry.Orientation;
 import sample.domain.NPCer.Farmer;
 import sample.domain.NPCer.Mechanic;
 import sample.domain.NPCer.Professor;
 import sample.domain.PlasticElements.Plastic;
 import sample.domain.Rooms.*;
-
-import java.lang.reflect.Array;
-
 import javafx.geometry.Orientation;
 
 import java.util.ArrayList;
@@ -122,7 +112,6 @@ public class Controller {
     @FXML
     private TextField nameField;
 
-
     public void initialize() {
         playerText.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
         NPCTextLine.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
@@ -131,7 +120,6 @@ public class Controller {
         backgroundRoom.setImage(new Image("file:src/sample/presentation/pictures/Backgrounds/StartScreen.png"));
         //backgroundMusic.musicPlayerInfinity();
     }
-
 
     public void generatePlasticInRoom(List<Plastic> plasticList) {
         clearPlasticInRoom();
@@ -176,7 +164,6 @@ public class Controller {
             image.setTranslateY(3000);
         }
     }
-
 
     AnimationTimer timer = new AnimationTimer() {
         @Override
@@ -267,21 +254,6 @@ public class Controller {
 
     public void movePlayer(KeyEvent keyEvent) throws InterruptedException {
         switch (keyEvent.getCode()) {
-            case P:
-                if (gameOver) {
-                    Main main = new Main();
-                    Stage primaryStage = new Stage();
-                    try {
-                        main.start(primaryStage);
-                        Parent askRoot = FXMLLoader.load(getClass().getResource("askSample.fxml"));
-                        Scene scene2 = new Scene(askRoot);
-                        primaryStage.setScene(scene2);
-                        primaryStage.show();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-                break;
             case UP:
             case W:
                 if (gameNotStarted) {
