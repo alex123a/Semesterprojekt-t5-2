@@ -13,7 +13,7 @@ public class RoadBuild extends Room {
 
     public Plastic[] generatePlasticArray() {
         int sodaBottles = 2;
-        int waterBottles = 3;
+        int waterBottles = 18; // 3
         numberOfPlastic = new Plastic[waterBottles + sodaBottles];
 
         for (int i = 0; i < numberOfPlastic.length; i++) {
