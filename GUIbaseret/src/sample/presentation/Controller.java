@@ -68,7 +68,7 @@ public class Controller {
     private AudioMusicPlayer roadbuilderMovingSound = new AudioMusicPlayer("src/sample/presentation/audio/RoadbuilderMovingSound.wav");
     private AudioMusicPlayer npcTalk = new AudioMusicPlayer("src/sample/presentation/audio/npcTalking.wav");
     private AudioMusicPlayer repairSound = new AudioMusicPlayer("src/sample/presentation/audio/repairSound.wav");
-
+    private AudioMusicPlayer pickUpSound = new AudioMusicPlayer("src/sample/presentation/audio/pickUpSound.wav");
 
     @FXML
     private ImageView backgroundRoom;
@@ -232,9 +232,10 @@ public class Controller {
         if (playerObject.getPlasticInv().size() < 10) {
             ImageView[] plast = {plast1, plast2, plast3, plast4, plast5, plast6, plast7, plast8, plast9, plast10, plast11, plast12, plast13, plast14, plast15,
                     plast16, plast17, plast18, plast19, plast20};
-            for (int i = 0; i < plast.length; i++) {
-                if (plast[i].getTranslateX() - 15 <= player.getTranslateX() && plast[i].getTranslateX() + 15 >= player.getTranslateX()) {
-                    if (plast[i].getTranslateY() - 15 <= player.getTranslateY() && plast[i].getTranslateY() + 15 >= player.getTranslateY()) {
+            for (int i = 0; i < plas.length; i++) {
+                if (plas[i].getTranslateX() - 15 <= player.getTranslateX() && plas[i].getTranslateX() + 15 >= player.getTranslateX()) {
+                    if (plas[i].getTranslateY() - 15 <= player.getTranslateY() && plas[i].getTranslateY() + 15 >= player.getTranslateY()) {
+                        pickUpSound.AudioPlayer();
                         playerObject.plasticCollect(plasticList.get(i), Main.game.getCurrentRoom());
                         plast[i].setTranslateX(3000);
                         updateInventory();
