@@ -1,19 +1,15 @@
 package sample.presentation;
 
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextArea;
-import sample.data.SaveAsk;
+import sample.data.WriteToFile;
 import sample.domain.DataTransferAsk;
-
-import java.awt.event.KeyEvent;
 
 
 public class ControllerAsk {
-    private static SaveAsk saveAsk = new SaveAsk();
+    private static WriteToFile saveAsk = new WriteToFile();
     DataTransferAsk dataTransferAsk = new DataTransferAsk();
 
     @FXML

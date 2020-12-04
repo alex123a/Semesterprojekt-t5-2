@@ -1,6 +1,6 @@
 package sample.domain;
 
-import sample.data.GetNPCText;
+import sample.data.ReadFromFile;
 
 public class DialogNPC {
     private String image = "src/sample/presentation/pictures/DialogBox.png";
@@ -17,16 +17,16 @@ public class DialogNPC {
 
     public String getNPCText (String NPC, int num) {
         if (NPC.equals("farmer")) {
-            GetNPCText getNPCText = new GetNPCText();
+            ReadFromFile getNPCText = new ReadFromFile();
             return getNPCText.ReadFile(farmerText,num);
         } else if (NPC.equals("professor")) {
-            GetNPCText getNPCText = new GetNPCText();
+            ReadFromFile getNPCText = new ReadFromFile();
             return getNPCText.ReadFile(professorText,num);
         } else if (NPC.equals("mechanic")) {
-            GetNPCText getNPCText = new GetNPCText();
+            ReadFromFile getNPCText = new ReadFromFile();
             return getNPCText.ReadFile(mechanicText,num);
         } else if (NPC.equals("Road builder")) {
-            GetNPCText getNPCText = new GetNPCText();
+            ReadFromFile getNPCText = new ReadFromFile();
             return getNPCText.ReadFile(roadbuilderText,num);
         }
         return "not possible";

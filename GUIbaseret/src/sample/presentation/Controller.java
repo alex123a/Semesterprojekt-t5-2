@@ -31,8 +31,11 @@ import sample.domain.NPCer.Mechanic;
 import sample.domain.NPCer.Professor;
 import sample.domain.PlasticElements.Plastic;
 import sample.domain.Rooms.*;
+
 import java.lang.reflect.Array;
+
 import javafx.geometry.Orientation;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -117,6 +120,7 @@ public class Controller {
     @FXML
     private TextField nameField;
 
+
     public void initialize() {
         playerText.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
         NPCTextLine.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
@@ -125,7 +129,6 @@ public class Controller {
         backgroundRoom.setImage(new Image("file:src/sample/presentation/pictures/Backgrounds/StartScreen.png"));
         backgroundMusic.musicPlayerInfinity();
     }
-
 
 
     public void generatePlasticInRoom(List<Plastic> plasticList) {
@@ -263,17 +266,19 @@ public class Controller {
 
     public void movePlayer(KeyEvent keyEvent) throws InterruptedException {
         switch (keyEvent.getCode()) {
-            case B:
-                Main main = new Main();
-                Stage primaryStage = new Stage();
-                try {
-                    main.start(primaryStage);
-                    Parent askRoot = FXMLLoader.load(getClass().getResource("askSample.fxml"));
-                    Scene scene2 = new Scene(askRoot);
-                    primaryStage.setScene(scene2);
-                    primaryStage.show();
-                } catch (Exception e) {
-                    e.printStackTrace();
+            case P:
+                if (gameOver) {
+                    Main main = new Main();
+                    Stage primaryStage = new Stage();
+                    try {
+                        main.start(primaryStage);
+                        Parent askRoot = FXMLLoader.load(getClass().getResource("askSample.fxml"));
+                        Scene scene2 = new Scene(askRoot);
+                        primaryStage.setScene(scene2);
+                        primaryStage.show();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
                 break;
             case UP:
@@ -454,12 +459,13 @@ public class Controller {
     }
 
     private void StartGame() {
+        gameOver = false;
         Main.game.createRooms();
         //Create the images
         backgroundRoom.setImage(new Image("file:src/sample/presentation/pictures/Backgrounds/RoadBuild.png"));
         player.setImage(new Image("file:" + playerObject.getImage()));
         player.setViewport(new Rectangle2D(0, 0, 32, 48));
-        roadView.setImage(new Image(   "file:" + road.getImage()));
+        roadView.setImage(new Image("file:" + road.getImage()));
         roadBuilderView.setImage(new Image("file:" + roadBuilder.getImage()));
         professorNpc.setImage(new Image("file:" + professorObject.getImage()));
         mechanicNpc.setImage(new Image("file:" + mechanicObject.getImage()));
