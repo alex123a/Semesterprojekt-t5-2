@@ -8,10 +8,12 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -23,7 +25,6 @@ import sample.domain.NPCer.Professor;
 import sample.domain.PlasticElements.Plastic;
 import sample.domain.Rooms.*;
 import javafx.geometry.Orientation;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,6 +39,7 @@ public class Controller {
     public static Mechanic mechanicObject = new Mechanic("Mechanic");
     public static Farmer farmerObject = new Farmer("Farmer");
     public static DialogNPC dialog = new DialogNPC();
+    public static Timer highScoreTimer = new Timer();
     private boolean north, south, east, west;
     private int spaceCount = 0;
     private boolean farmerTalk = false;
@@ -65,30 +67,32 @@ public class Controller {
     private AudioMusicPlayer backgroundMusic = new AudioMusicPlayer("src/sample/presentation/audio/BackgroundMusic.wav");
     private AudioMusicPlayer roadbuilderCrashSound = new AudioMusicPlayer("src/sample/presentation/audio/RoadbuildCrash.wav");
     private AudioMusicPlayer roadbuilderMovingSound = new AudioMusicPlayer("src/sample/presentation/audio/RoadbuilderMovingSound.wav");
+    private AudioMusicPlayer npcTalk = new AudioMusicPlayer("src/sample/presentation/audio/npcTalking.wav");
+    private AudioMusicPlayer repairSound = new AudioMusicPlayer("src/sample/presentation/audio/repairSound.wav");
+    private AudioMusicPlayer pickUpSound = new AudioMusicPlayer("src/sample/presentation/audio/pickUpSound.wav");
 
-
     @FXML
-    private ImageView backgroundRoom = new ImageView("file:");
+    private ImageView backgroundRoom;
     @FXML
-    public ImageView roadView = new ImageView("file:" + road.getImage());
+    public ImageView roadView;
     @FXML
-    public ImageView roadBuilderView = new ImageView("file:" + roadBuilder.getImage());
+    public ImageView roadBuilderView;
     @FXML
-    public ImageView player = new ImageView("file:" + playerObject.getImage());
+    public ImageView player;
     @FXML
     public ListView inventory = new ListView();
     @FXML
-    public ImageView smoke = new ImageView("file:src/sample/presentation/pictures/buildSmoke.png");
+    public ImageView smoke;
     @FXML
-    public ImageView smokeBrokenMachine = new ImageView("file:src/sample/presentation/pictures/fireSmoke-1.png");
+    public ImageView smokeBrokenMachine;
     @FXML
-    public ImageView professorNpc = new ImageView("file:" + professorObject.getImage());
+    public ImageView professorNpc;
     @FXML
-    public ImageView mechanicNpc = new ImageView("file:" + mechanicObject.getImage());
+    public ImageView mechanicNpc;
     @FXML
-    public ImageView farmerNpc = new ImageView("file:" + farmerObject.getImage());
+    public ImageView farmerNpc;
     @FXML
-    public ImageView dialogBox = new ImageView("file:" + dialog.getImage());
+    public ImageView dialogBox;
     @FXML
     private ImageView toolsetImg;
     @FXML
@@ -101,45 +105,46 @@ public class Controller {
     private Text playerText;
     @FXML
     private Rectangle toolRect;
+    private TextField nameField;
 
     public void initialize() {
         if (gameNotStarted) {
             inventory.setOpacity(0);
         }
+        playerText.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
+        NPCTextLine.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
+        NPCTextLine1.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
+        NPCTextLine2.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
         backgroundRoom.setImage(new Image("file:src/sample/presentation/pictures/Backgrounds/StartScreen.png"));
-        professorNpc.setImage(new Image("file:" + professorObject.getImage()));
-        mechanicNpc.setImage(new Image("file:" + mechanicObject.getImage()));
-        farmerNpc.setImage(new Image("file:" + farmerObject.getImage()));
-        dialogBox.setImage(new Image("file:" + dialog.getImage()));
-        //backgroundMusic.musicPlayerInfinity();
+        backgroundMusic.musicPlayerInfinity();
     }
 
     public void generatePlasticInRoom(List<Plastic> plasticList) {
         clearPlasticInRoom();
-        ImageView[] plas = {plast1, plast2, plast3, plast4, plast5, plast6, plast7, plast8, plast9, plast10, plast11, plast12, plast13, plast14, plast15,
+        ImageView[] plast = {plast1, plast2, plast3, plast4, plast5, plast6, plast7, plast8, plast9, plast10, plast11, plast12, plast13, plast14, plast15,
                 plast16, plast17, plast18, plast19, plast20};
 
         for (int i = 0; i < plasticList.size(); i++) {
             if (plasticList.get(i) != null) {
-                plas[i].setImage(new Image("file:" + plasticList.get(i).getImage()));
-                plas[i].setTranslateX(plasticList.get(i).getPosition()[0]);
-                plas[i].setTranslateY(plasticList.get(i).getPosition()[1]);
-                plas[i].setFitHeight(30);
-                plas[i].setFitWidth(30);
+                plast[i].setImage(new Image("file:" + plasticList.get(i).getImage()));
+                plast[i].setTranslateX(plasticList.get(i).getPosition()[0]);
+                plast[i].setTranslateY(plasticList.get(i).getPosition()[1]);
+                plast[i].setFitHeight(30);
+                plast[i].setFitWidth(30);
                 // Kode til at give plastik ny position hvis de falder inden for no go zonerne.
-                if (noAccess.moveBlock(plas[i].getTranslateX(), plas[i].getTranslateY(), 0, -2)) {
+                if (noAccess.moveBlock(plast[i].getTranslateX(), plast[i].getTranslateY(), 0, -2)) {
                     plasticList.get(i).newPosition();
                     generatePlasticInRoom(plasticList);
                     break;
-                } else if (noAccess.moveBlock(plas[i].getTranslateX(), plas[i].getTranslateY(), 0, 2)) {
+                } else if (noAccess.moveBlock(plast[i].getTranslateX(), plast[i].getTranslateY(), 0, 2)) {
                     plasticList.get(i).newPosition();
                     generatePlasticInRoom(plasticList);
                     break;
-                } else if (noAccess.moveBlock(plas[i].getTranslateX(), plas[i].getTranslateY(), -2, 0)) {
+                } else if (noAccess.moveBlock(plast[i].getTranslateX(), plast[i].getTranslateY(), -2, 0)) {
                     plasticList.get(i).newPosition();
                     generatePlasticInRoom(plasticList);
                     break;
-                } else if (noAccess.moveBlock(plas[i].getTranslateX(), plas[i].getTranslateY(), 2, 0)) {
+                } else if (noAccess.moveBlock(plast[i].getTranslateX(), plast[i].getTranslateY(), 2, 0)) {
                     plasticList.get(i).newPosition();
                     generatePlasticInRoom(plasticList);
                     break;
@@ -149,10 +154,10 @@ public class Controller {
     }
 
     public void clearPlasticInRoom() {
-        ImageView[] plas = {plast1, plast2, plast3, plast4, plast5, plast6, plast7, plast8, plast9, plast10, plast11, plast12, plast13, plast14, plast15,
+        ImageView[] plast = {plast1, plast2, plast3, plast4, plast5, plast6, plast7, plast8, plast9, plast10, plast11, plast12, plast13, plast14, plast15,
                 plast16, plast17, plast18, plast19, plast20};
 
-        for (ImageView image : plas) {
+        for (ImageView image : plast) {
             image.setTranslateX(3000);
             image.setTranslateY(3000);
         }
@@ -229,13 +234,14 @@ public class Controller {
 
     public void collectPlastic(List<Plastic> plasticList) {
         if (playerObject.getPlasticInv().size() < 10) {
-            ImageView[] plas = {plast1, plast2, plast3, plast4, plast5, plast6, plast7, plast8, plast9, plast10, plast11, plast12, plast13, plast14, plast15,
+            ImageView[] plast = {plast1, plast2, plast3, plast4, plast5, plast6, plast7, plast8, plast9, plast10, plast11, plast12, plast13, plast14, plast15,
                     plast16, plast17, plast18, plast19, plast20};
-            for (int i = 0; i < plas.length; i++) {
-                if (plas[i].getTranslateX() - 15 <= player.getTranslateX() && plas[i].getTranslateX() + 15 >= player.getTranslateX()) {
-                    if (plas[i].getTranslateY() - 15 <= player.getTranslateY() && plas[i].getTranslateY() + 15 >= player.getTranslateY()) {
+            for (int i = 0; i < plast.length; i++) {
+                if (plast[i].getTranslateX() - 15 <= player.getTranslateX() && plast[i].getTranslateX() + 15 >= player.getTranslateX()) {
+                    if (plast[i].getTranslateY() - 15 <= player.getTranslateY() && plast[i].getTranslateY() + 15 >= player.getTranslateY()) {
+                        pickUpSound.AudioPlayer();
                         playerObject.plasticCollect(plasticList.get(i), Main.game.getCurrentRoom());
-                        plas[i].setTranslateX(3000);
+                        plast[i].setTranslateX(3000);
                         updateInventory();
                     }
                 }
@@ -297,9 +303,16 @@ public class Controller {
                 break;
             case SPACE:
                 if (gameNotStarted) {
-                    StartGame();
-                    inventory.setOpacity(0.4);
-                    gameNotStarted = false;
+                    String name = nameField.getText();
+                    if (name.matches(".*[0-9].*") || name.matches(".*[A-Z]*.")) {
+                        playerObject.setNames(name);
+                        nameField.setOpacity(0);
+                        StartGame();
+                        inventory.setOpacity(0.4);
+                        gameNotStarted = false;
+                    }
+                } else {
+                    collectPlastic(Main.game.placePlastic());
                 }
 
                 if (Main.game.getCurrentRoom() instanceof RoadBuild && talkingRoadbuilder && spaceCount != 0) {
@@ -317,6 +330,7 @@ public class Controller {
                         roadBuilder.setNotDamagedBefore(false);
                         roadbuilderCrashSound.AudioPlayer();
                     } else if (playerObject.getHaveToolset() && roadBuilder.getDamaged() > 0) {
+                        repairSound.musicPlayerInfinity();
                         repairTheMachine();
                     }
 
@@ -354,7 +368,7 @@ public class Controller {
                 } else if (Main.game.getCurrentRoom() instanceof Town && player.getTranslateX() > mechanicNpc.getTranslateX() - 30 && player.getTranslateX() < mechanicNpc.getTranslateX() + 30 && player.getTranslateY() > mechanicNpc.getTranslateY() - 30 && player.getTranslateY() < mechanicNpc.getTranslateY() + 30) {
                     showDialogBox();
                 }
-                collectPlastic(Main.game.placePlastic());
+
         }
         NewRoom();
     }
@@ -371,6 +385,7 @@ public class Controller {
                 hideDialogBox();
                 toolsetImg.setTranslateX(3000);
                 doneRepairing = false;
+                repairSound.AudioStop();
             }
             counterRepair++;
         });
@@ -380,30 +395,68 @@ public class Controller {
     }
 
     private void EndGame() {
-        if (roadBuilder.getInventoryCount() == Game.getRoadDone()) {
-            System.out.println("You are finished");
+        if (roadBuilder.getInventoryCount() >= Main.game.getRoadDone()) {
+            //Sets the highscorebackground
+            backgroundRoom.setImage(new Image("file:src/sample/presentation/pictures/Backgrounds/EndScreen.png"));
+            //Presents the score
+            highScoreTimer.setEndTime();
+            String[] scoreList = highScoreTimer.setHighScore();
+            NPCTextLine.setTranslateY(-80);
+            NPCTextLine1.setTranslateY(0);
+            NPCTextLine2.setTranslateY(85);
+            NPCTextLine.setText(scoreList[0]);
+            NPCTextLine1.setText(scoreList[1]);
+            NPCTextLine2.setText(scoreList[2]);
+            //resets the road and game
+            roadBuilder.setInventoryCount(0);
+            gameNotStarted = true;
+            //Hide images
+            roadBuilderView.setOpacity(0);
+            roadView.setOpacity(0);
+            player.setOpacity(0);
+            smoke.setOpacity(0);
+            //Lay out new plastic
+            clearPlasticInRoom();
+            //Resets NPCs
+            farmerTalk = false;
+            professorTalk = false;
+            mechanicTalk = false;
+            talkingRoadbuilder = false;
+            doneRepairing = true;
         }
     }
 
     private void StartGame() {
+        Main.game.createRooms();
+        //Create the images
         backgroundRoom.setImage(new Image("file:src/sample/presentation/pictures/Backgrounds/RoadBuild.png"));
         player.setImage(new Image("file:" + playerObject.getImage()));
         player.setViewport(new Rectangle2D(0, 0, 32, 48));
-        roadView.setImage(new Image("file:" + road.getImage()));
+        roadView.setImage(new Image(   "file:" + road.getImage()));
         roadBuilderView.setImage(new Image("file:" + roadBuilder.getImage()));
-        //plas1.setImage(new Image("file:" + "src/sample/presentation/pictures/plastic/cleaningPlastic.png"));
-        generatePlasticInRoom(Main.game.placePlastic());
+        professorNpc.setImage(new Image("file:" + professorObject.getImage()));
+        mechanicNpc.setImage(new Image("file:" + mechanicObject.getImage()));
+        farmerNpc.setImage(new Image("file:" + farmerObject.getImage()));
+        dialogBox.setImage(new Image("file:" + dialog.getImage()));
         smoke.setImage(new Image("file:src/sample/presentation/pictures/buildSmoke.png"));
         smokeBrokenMachine.setImage(new Image("file:src/sample/presentation/pictures/fireSmoke-1.png"));
         toolRect.setTranslateX(3000);
+        //Show images (& hides highscore)
+        roadBuilderView.setOpacity(1);
+        roadView.setOpacity(1);
+        player.setOpacity(1);
+        smoke.setOpacity(1);
+        hideDialogBox();
+        //Generates plastic and runs the animations
+        generatePlasticInRoom(Main.game.placePlastic());
         movementMachine();
         smokeMachine();
         smokeBrokenMachine();
-        Timer.setStartTime(); // tid starter til highscorelisten
+        //Starts the time for highscorelist
+        highScoreTimer.setStartTime();
     }
 
     private void NewRoom() {
-
         //North
         if (Main.game.getCurrentRoom() instanceof RoadBuild && player.getTranslateY() < -202 && player.getTranslateX() > -142.5 && player.getTranslateX() < -82.5) {
             changeNorth();
@@ -631,8 +684,8 @@ public class Controller {
     public void showMechanic() {
         mechanicNpc.setTranslateX(3000);
         if (Main.game.getCurrentRoom() instanceof Town) {
-            mechanicNpc.setTranslateX(169);
-            mechanicNpc.setTranslateY(20);
+            mechanicNpc.setTranslateX(178);
+            mechanicNpc.setTranslateY(50);
         }
     }
 
@@ -652,19 +705,17 @@ public class Controller {
         playerText.setText("");
         dialogBox.setTranslateY(3000);
         talking = false;
+        npcTalk.AudioStop();
     }
 
     public void showDialogBox() {
         NPCTextLine.setTranslateY(-210);
-        NPCTextLine.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
         NPCTextLine1.setTranslateY(-190);
-        NPCTextLine1.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
         NPCTextLine2.setTranslateY(-170);
-        NPCTextLine2.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
         playerText.setTranslateY(-130);
-        playerText.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
         if (Main.game.getCurrentRoom() instanceof Farm) {
             if (spaceCount == 0 && !farmerTalk) {
+                npcTalk.musicPlayerInfinity();
                 talking = true;
                 talkNPC(NPCTextLine, "farmer", 0);
                 talkNPC(NPCTextLine1, "farmer", 1);
@@ -677,6 +728,7 @@ public class Controller {
                 talkNPC(NPCTextLine, "farmer", 4);
                 NPCTextLine1.setText("");
                 NPCTextLine2.setText("");
+                playerText.setText("");
                 spaceCount++;
             } else if (spaceCount == 3) {
                 talkNPC(playerText, "farmer", 5);
@@ -701,6 +753,7 @@ public class Controller {
             }
         } else if (Main.game.getCurrentRoom() instanceof Sdu) {
             if (spaceCount == 0 && !professorTalk) {
+                npcTalk.musicPlayerInfinity();
                 talking = true;
                 talkNPC(NPCTextLine, "professor", 0);
                 talkNPC(NPCTextLine1, "professor", 1);
@@ -713,14 +766,19 @@ public class Controller {
                 talkNPC(NPCTextLine, "professor", 4);
                 NPCTextLine1.setText("");
                 NPCTextLine2.setText("");
+                playerText.setText("");
                 spaceCount++;
             } else if (spaceCount == 3) {
+                talkNPC(playerText, "professor", 5);
+                spaceCount++;
+            } else if (spaceCount == 4) {
                 hideDialogBox();
                 professorTalk = true;
             }
         } else if (Main.game.getCurrentRoom() instanceof Town) {
             if (roadBuilder.getDamaged() > 0) {
                 if (spaceCount == 0 && !mechanicTalk) {
+                    npcTalk.musicPlayerInfinity();
                     talkNPC(NPCTextLine, "mechanic", 0);
                     talkNPC(NPCTextLine1, "mechanic", 1);
                     spaceCount++;
@@ -730,6 +788,7 @@ public class Controller {
                 } else if (spaceCount == 2) {
                     talkNPC(NPCTextLine, "mechanic", 3);
                     NPCTextLine1.setText("");
+                    playerText.setText("");
                     spaceCount++;
                     playerObject.setToolset(mechanicObject.giveToolset());
                     toolRect.setTranslateX(657.0);
@@ -743,8 +802,10 @@ public class Controller {
                     hideDialogBox();
                     mechanicTalk = true;
                 }
+
             }
         }
+
     }
 
     private void talkNPC(Text npcText, String npcType, int index) {
@@ -794,5 +855,4 @@ public class Controller {
     private ImageView plast19 = new ImageView();
     @FXML
     private ImageView plast20 = new ImageView();
-
 }

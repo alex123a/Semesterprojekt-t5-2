@@ -6,6 +6,7 @@ import sample.domain.Rooms.*;
 public class NoAccess {
     public boolean moveBlock(double objx, double objy, int x, int y) {
         boolean cantMove = false;
+        //RoadBuild
         if (Main.game.getCurrentRoom() instanceof RoadBuild) {
             // tree in top left conor.
             Rectangle topLeftTrees = new Rectangle(-340, -220, 180, 120);
@@ -21,6 +22,7 @@ public class NoAccess {
                 cantMove = true;
             }
         }
+        //Beach
         if (Main.game.getCurrentRoom() instanceof Beach) {
             Rectangle ocean = new Rectangle(-340.5, -220, 240, 500);
             if (ocean.contains(objx + x, objy + y)) {
@@ -35,7 +37,7 @@ public class NoAccess {
                 cantMove = true;
             }
         }
-
+        //Farm
         if (Main.game.getCurrentRoom() instanceof Farm) {
             // Field
             Rectangle field = new Rectangle(-176, -64, 250, 160);
@@ -50,8 +52,12 @@ public class NoAccess {
             if (tractor.contains(objx + x, objy + y)) {
                 cantMove = true;
             }
+            Rectangle farmer = new Rectangle(170, -6, 43, 50);
+            if (farmer.contains(objx + x, objy + y)) {
+                cantMove = true;
+            }
         }
-
+        //SDU
         if (Main.game.getCurrentRoom() instanceof Sdu) {
             Rectangle topLeftWall = new Rectangle(-340, -220, 300, 30);
             if (topLeftWall.contains(objx + x, objy + y)) {
@@ -69,16 +75,20 @@ public class NoAccess {
             if (closetTopTwo.contains(objx + x, objy + y)) {
                 cantMove = true;
             }
-            Rectangle closetButtomOne = new Rectangle(-300, 75, 80, 110);
-            if (closetButtomOne.contains(objx + x, objy + y)) {
+            Rectangle closetBottomOne = new Rectangle(-300, 75, 80, 110);
+            if (closetBottomOne.contains(objx + x, objy + y)) {
                 cantMove = true;
             }
-            Rectangle closetButtomTwo = new Rectangle(-210, 75, 75, 110);
-            if (closetButtomTwo.contains(objx + x, objy + y)) {
+            Rectangle closetBottomTwo = new Rectangle(-210, 75, 75, 110);
+            if (closetBottomTwo.contains(objx + x, objy + y)) {
+                cantMove = true;
+            }
+            Rectangle professor = new Rectangle(2.5, -27, 50, 67);
+            if (professor.contains(objx + x, objy + y)) {
                 cantMove = true;
             }
         }
-
+        //Park
         if (Main.game.getCurrentRoom() instanceof Park) {
             Rectangle buttomLeftGarden = new Rectangle(-340, -1, 190, 210);
             if (buttomLeftGarden.contains(objx + x, objy + y)) {
@@ -122,20 +132,20 @@ public class NoAccess {
                 cantMove = true;
             }
 
-            Rectangle leftButtomRightGarden = new Rectangle(130, 9, 210, 250);
-            if (leftButtomRightGarden.contains(objx + x, objy + y)) {
+            Rectangle leftBottomRightGarden = new Rectangle(130, 9, 210, 250);
+            if (leftBottomRightGarden.contains(objx + x, objy + y)) {
                 cantMove = true;
             }
             Rectangle topMiddelGarden = new Rectangle(-43, -221, 80, 110);
             if (topMiddelGarden.contains(objx + x, objy + y)) {
                 cantMove = true;
             }
-            Rectangle buttomMiddelGarden = new Rectangle(-40, 59, 80, 150);
-            if (buttomMiddelGarden.contains(objx + x, objy + y)) {
+            Rectangle bottomMiddelGarden = new Rectangle(-40, 59, 80, 150);
+            if (bottomMiddelGarden.contains(objx + x, objy + y)) {
                 cantMove = true;
             }
-            Rectangle buttomMiddelTrees = new Rectangle(-70, -6, 122, 80);
-            if (buttomMiddelTrees.contains(objx + x, objy + y)) {
+            Rectangle bottomMiddelTrees = new Rectangle(-70, -6, 122, 80);
+            if (bottomMiddelTrees.contains(objx + x, objy + y)) {
                 cantMove = true;
             }
             Rectangle topMiddelTrees = new Rectangle(-75, -126, 122, 70);
@@ -143,6 +153,7 @@ public class NoAccess {
                 cantMove = true;
             }
         }
+        //Town
         if (Main.game.getCurrentRoom() instanceof Town) {
             Rectangle topOneHouse = new Rectangle(-277, -221, 100, 75);
             if (topOneHouse.contains(objx + x, objy + y)) {
@@ -168,21 +179,23 @@ public class NoAccess {
             if (middelTwoHouse.contains(objx + x, objy + y)) {
                 cantMove = true;
             }
-            Rectangle buttomOneHouse = new Rectangle(-272, 56.5, 90, 100);
-            if (buttomOneHouse.contains(objx + x, objy + y)) {
+            Rectangle bottomOneHouse = new Rectangle(-272, 56.5, 90, 100);
+            if (bottomOneHouse.contains(objx + x, objy + y)) {
                 cantMove = true;
             }
-            Rectangle buttomTwoHouse = new Rectangle(-44, 54, 90, 100);
-            if (buttomTwoHouse.contains(objx + x, objy + y)) {
+            Rectangle bottomTwoHouse = new Rectangle(-44, 54, 90, 100);
+            if (bottomTwoHouse.contains(objx + x, objy + y)) {
                 cantMove = true;
             }
             Rectangle threeTwoHouse = new Rectangle(83, 54, 85, 100);
             if (threeTwoHouse.contains(objx + x, objy + y)) {
                 cantMove = true;
             }
+            Rectangle mechanic = new Rectangle(158, 45, 40, 47.5);
+            if (mechanic.contains(objx + x, objy + y)) {
+                cantMove = true;
+            }
         }
-
-
         return cantMove;
     }
 }

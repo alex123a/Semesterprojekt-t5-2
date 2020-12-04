@@ -10,7 +10,8 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Text?>
-
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.media.MediaView?>
 <GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.presentation.Controller">
    <children>
       <StackPane>
@@ -61,9 +62,10 @@
                   <ImageView fx:id="toolsetImg" pickOnBounds="true" preserveRatio="true" />
                </children>
             </AnchorPane>
+            <TabPane layoutX="29.0" layoutY="-1.0" onKeyPressed="#movePlayer" onKeyReleased="#stopPlayer" /><!--TabPane only for movement with arrows, because the other Panes is not in focus to use arrow keys-->
          </children>
+         <TextField fx:id="nameField" translateY="-96" maxWidth="120"/>
       </StackPane>
-      <TabPane layoutX="29.0" layoutY="-1.0" onKeyPressed="#movePlayer" onKeyReleased="#stopPlayer" /><!--TabPane only for movement with arrows, because the other Panes is not in focus to use arrow keys-->
    </children>
    <columnConstraints>
       <ColumnConstraints />

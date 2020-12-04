@@ -1,16 +1,10 @@
 package sample.domain;
 
-import javafx.animation.AnimationTimer;
-import javafx.scene.input.KeyEvent;
 import sample.domain.NPCer.Toolset;
 import sample.domain.PlasticElements.Plastic;
-import sample.domain.PlasticElements.WaterBottle;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import sample.domain.Game;
 import sample.presentation.Main;
 
 public class Player {
@@ -19,26 +13,12 @@ public class Player {
     private boolean haveToolset = false;
     private Toolset toolset;
     private String image = "src/sample/presentation/pictures/Playergame.png";
-    private WaterBottle plastic = new WaterBottle();
     // private List<Tool> toolInv = new ArrayList();
     // Her er der taget udgangspunkt i et "Tool" objekt og et "Plastic" objekt.
 
-    /*
-    public static void setName() {
-        System.out.print("What is your name?\n> ");
-        boolean nameChosen = false;
-        while (!nameChosen) { // In this while loop we check for a name that is valid (No only space names) etc...
-            Scanner playerName = new Scanner(System.in);
-            name = playerName.nextLine();
-            if (name.matches(".*[0-9].*") || name.matches(".*[A-Z]*.")) {
-                nameChosen = true;
-            } else {
-                System.out.print("Name not vaild enter new name\n> ");
-            }
-        }
-        System.out.println("You have chosen " + name + " as your player name");
+    public void setNames (String name) {
+        this.name = name;
     }
-    */
 
     public String getName() {
         return name;
