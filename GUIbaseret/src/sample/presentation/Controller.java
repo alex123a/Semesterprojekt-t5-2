@@ -357,7 +357,6 @@ public class Controller {
                             roadbuilderMovingSound.AudioPlayer();
                         }
                         updateInventory();
-                        EndGame();
                     }
                 } else if (Main.game.getCurrentRoom() instanceof Farm && player.getTranslateX() > farmerNpc.getTranslateX() - 30 && player.getTranslateX() < farmerNpc.getTranslateX() + 30 && player.getTranslateY() > farmerNpc.getTranslateY() - 30 && player.getTranslateY() < farmerNpc.getTranslateY() + 30) {
                     showDialogBox();
@@ -413,6 +412,8 @@ public class Controller {
             roadView.setOpacity(0);
             player.setOpacity(0);
             smoke.setOpacity(0);
+            inventory.setOpacity(0);
+            toolRect.setOpacity(0);
             //Lay out new plastic
             clearPlasticInRoom();
             //Resets NPCs
@@ -632,7 +633,7 @@ public class Controller {
         Timeline timeline = new Timeline();
         int FPS = 60;
         KeyFrame frame = new KeyFrame(Duration.millis(1000 / FPS), event -> {
-            if (numberOfMovement != 0 && Main.game.getCurrentRoom() instanceof RoadBuild) {
+            if (numberOfMovement != 0 && Main.game.getCurrentRoom() instanceof RoadBuild && roadBuilderView.getTranslateX() > -312) {
                 if (animationDriving % 5 == 0) {
                     roadView.setViewport(new Rectangle2D(-681 + (roadBuilder.getInventoryCount() - numberOfMovement / 4) * 18.9166 + 113.5, 0, 681, 69));
                     roadBuilderView.setViewport(new Rectangle2D(0, 0, 484, 323));
@@ -652,15 +653,19 @@ public class Controller {
     }
 
     public void showRoadBuilderRoad() {
-        showFarmer();
-        showProfessor();
-        showMechanic();
-        if (Main.game.getCurrentRoom() instanceof RoadBuild) {
-            roadView.setViewport(new Rectangle2D(-681 + (roadBuilder.getInventoryCount() * 18.9166 + 113.5), 0, 681, 69));
+        if (roadBuilder.getInventoryCount() >= 30) {
+            EndGame();
         } else {
-            roadView.setViewport(new Rectangle2D(-681, 0, 681, 69));
+            showFarmer();
+            showProfessor();
+            showMechanic();
+            if (Main.game.getCurrentRoom() instanceof RoadBuild) {
+                roadView.setViewport(new Rectangle2D(-681 + (roadBuilder.getInventoryCount() * 18.9166 + 113.5), 0, 681, 69));
+            } else {
+                roadView.setViewport(new Rectangle2D(-681, 0, 681, 69));
+            }
+            showRoadBuilder();
         }
-        showRoadBuilder();
     }
 
     public void showRoadBuilder() {
