@@ -270,6 +270,7 @@ public class Controller {
                 if (gameOver) {
                     Main main = new Main();
                     Stage primaryStage = new Stage();
+                    ControllerAsk.theStage = primaryStage;
                     try {
                         main.start(primaryStage);
                         Parent askRoot = FXMLLoader.load(getClass().getResource("askSample.fxml"));

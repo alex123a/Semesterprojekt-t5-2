@@ -1,2 +1,12 @@
 
 
+null
+Hvad var din viden omkring brugen af plastik i veje, før du prøvet spillet? (0 er ingen viden,  10 er ekspert viden)
+9.0
+Hvor større er dit kendskab til brugen af plastik til udlægges af ny vej?(0 er ingen forskel, 10 er stor forskel)
+9.0
+Hvor stort et investeringspotentiale mener du, at plastikveje har? (0 er ingen, 10 er stort)
+7.0
+Noget generel feedback til spillet som helhed?
+d
+
