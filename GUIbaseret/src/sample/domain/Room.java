@@ -102,5 +102,9 @@ public abstract class Room {
     public HashMap<String, Room> getExits() {
         return exits;
     }
+
+    public void emptyPlasticArray() {
+        plasticInRoom.removeAll(plasticInRoom);
+    }
 }
 
