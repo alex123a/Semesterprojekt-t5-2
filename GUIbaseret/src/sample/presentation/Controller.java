@@ -7,12 +7,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -251,6 +255,19 @@ public class Controller {
 
     public void movePlayer(KeyEvent keyEvent) throws InterruptedException {
         switch (keyEvent.getCode()) {
+            case B:
+                Main main = new Main();
+                Stage primaryStage = new Stage();
+                try {
+                    main.start(primaryStage);
+                    Parent askRoot = FXMLLoader.load(getClass().getResource("askSample.fxml"));
+                    Scene scene2 = new Scene(askRoot);
+                    primaryStage.setScene(scene2);
+                    primaryStage.show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
             case UP:
             case W:
                 if (gameNotStarted) {

@@ -4,17 +4,17 @@ import sample.domain.DataTransferAsk;
 import sample.domain.Player;
 import sample.presentation.ControllerAsk;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+import java.io.*;
+import java.util.Scanner;
 
 public class SaveAsk {
     private Player player = new Player();
     private PrintWriter printWriter;
+    private Scanner scanner;
 
     public void writeToFile(double slider1, double slider2, double slider3, String text) {
         try {
-            printWriter = new PrintWriter(new File("src/sample/answers.txt"));
+            printWriter = new PrintWriter(new FileWriter(new File("src/sample/answers.txt"),true));
             printWriter.println(player.getName());
             printWriter.println("Hvad var din viden omkring brugen af plastik i veje, før du prøvet spillet? (0 er ingen viden,  10 er ekspert viden)");
             printWriter.println(slider1);
@@ -27,6 +27,8 @@ public class SaveAsk {
             printWriter.println("");
             printWriter.close();
         } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

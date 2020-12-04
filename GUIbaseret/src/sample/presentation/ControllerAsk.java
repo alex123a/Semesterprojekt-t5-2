@@ -34,5 +34,6 @@ public class ControllerAsk {
     @FXML
     public void SaveInfo() {
         dataTransferAsk.setSlider(qOneSlider.getValue(), qTwoSlider.getValue(), qThreeSlider.getValue(),qFourText.getText());
+
     }
 }

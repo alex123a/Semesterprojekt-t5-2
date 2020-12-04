@@ -1,10 +1,30 @@
 null
 Hvad var din viden omkring brugen af plastik i veje, før du prøvet spillet? (0 er ingen viden,  10 er ekspert viden)
+4.0
+Hvor større er dit kendskab til brugen af plastik til udlægges af ny vej?(0 er ingen forskel, 10 er stor forskel)
 6.0
+Hvor stort et investeringspotentiale mener du, at plastikveje har? (0 er ingen, 10 er stort)
+5.0
+Noget generel feedback til spillet som helhed?
+
+
+null
+Hvad var din viden omkring brugen af plastik i veje, før du prøvet spillet? (0 er ingen viden,  10 er ekspert viden)
+3.0
 Hvor større er dit kendskab til brugen af plastik til udlægges af ny vej?(0 er ingen forskel, 10 er stor forskel)
 3.0
 Hvor stort et investeringspotentiale mener du, at plastikveje har? (0 er ingen, 10 er stort)
-6.0
+4.0
 Noget generel feedback til spillet som helhed?
-Godt spil
+
+
+null
+Hvad var din viden omkring brugen af plastik i veje, før du prøvet spillet? (0 er ingen viden,  10 er ekspert viden)
+0.0
+Hvor større er dit kendskab til brugen af plastik til udlægges af ny vej?(0 er ingen forskel, 10 er stor forskel)
+0.0
+Hvor stort et investeringspotentiale mener du, at plastikveje har? (0 er ingen, 10 er stort)
+0.0
+Noget generel feedback til spillet som helhed?
+
 
