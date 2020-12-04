@@ -1,1 +1,1 @@
-1,29 null 2,3 null 40,0 null 
+0,03 Ja 0,03 null 40,0 null 
