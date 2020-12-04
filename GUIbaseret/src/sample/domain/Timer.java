@@ -25,13 +25,13 @@ public class Timer {
         endTime = new Date();
     }
 
-    public void timeScore() {
+    public String timeScore() {
         long timeScore = endTime.getTime() - startTime.getTime();
         long seconds = timeScore / 1000;
         double secondsDisplay = seconds % 60;
         double minutesDisplay = seconds / 60;
         time = minutesDisplay + secondsDisplay / 100;
-        System.out.println("Time: " + (int) minutesDisplay + " minutes and " + (int) secondsDisplay + " seconds");
+        return "Time: " + (int) minutesDisplay + " minutes and " + (int) secondsDisplay + " seconds";
     }
 
     public void readHighScore() {
@@ -54,7 +54,6 @@ public class Timer {
     public String[] setHighScore() {
         //Printer de tre højeste score ind på vores dokument
         readHighScore();
-        timeScore();
         String[] highScores = {time + " " + Controller.playerObject.getName(), time1 + " " + name1, time2 + " " + name2, time3 + " " + name3};
         Arrays.sort(highScores);
         String printTime1 = String.valueOf(highScores[0]);

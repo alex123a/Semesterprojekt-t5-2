@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
 import javafx.scene.text.Font;
@@ -69,6 +70,7 @@ public class Controller {
     private AudioMusicPlayer npcTalk = new AudioMusicPlayer("src/sample/presentation/audio/npcTalking.wav");
     private AudioMusicPlayer repairSound = new AudioMusicPlayer("src/sample/presentation/audio/repairSound.wav");
     private AudioMusicPlayer pickUpSound = new AudioMusicPlayer("src/sample/presentation/audio/pickUpSound.wav");
+    private boolean gameOver = false;
 
     @FXML
     private ImageView backgroundRoom;
@@ -93,6 +95,8 @@ public class Controller {
     @FXML
     public ImageView dialogBox;
     @FXML
+    private ImageView toolsetImg;
+    @FXML
     private Text NPCTextLine;
     @FXML
     private Text NPCTextLine1;
@@ -101,12 +105,11 @@ public class Controller {
     @FXML
     private Text playerText;
     @FXML
+    private Rectangle toolRect;
+    @FXML
     private TextField nameField;
 
     public void initialize() {
-        if (gameNotStarted) {
-            inventory.setOpacity(0);
-        }
         playerText.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
         NPCTextLine.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
         NPCTextLine1.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
@@ -355,7 +358,6 @@ public class Controller {
                             roadbuilderMovingSound.AudioPlayer();
                         }
                         updateInventory();
-                        EndGame();
                     }
                 } else if (Main.game.getCurrentRoom() instanceof Farm && player.getTranslateX() > farmerNpc.getTranslateX() - 30 && player.getTranslateX() < farmerNpc.getTranslateX() + 30 && player.getTranslateY() > farmerNpc.getTranslateY() - 30 && player.getTranslateY() < farmerNpc.getTranslateY() + 30) {
                     showDialogBox();
@@ -377,8 +379,9 @@ public class Controller {
                 playerObject.getToolset().repairMachine();
                 dialogBox.setTranslateY(-170);
                 NPCTextLine1.setText(100 - roadBuilder.getDamaged() + "% repaired");
-            } else if (doneRepairing && roadBuilder.getDamaged() == 0) {
+            } else if (doneRepairing && roadBuilder.getDamaged() == 0 && gameOver == false) {
                 hideDialogBox();
+                toolsetImg.setTranslateX(3000);
                 doneRepairing = false;
                 repairSound.AudioStop();
             }
@@ -391,10 +394,13 @@ public class Controller {
 
     private void EndGame() {
         if (roadBuilder.getInventoryCount() >= Main.game.getRoadDone()) {
+            gameOver = true;
             //Sets the highscorebackground
             backgroundRoom.setImage(new Image("file:src/sample/presentation/pictures/Backgrounds/EndScreen.png"));
             //Presents the score
             highScoreTimer.setEndTime();
+            playerText.setText("Your " + highScoreTimer.timeScore());
+            playerText.setTranslateY(130);
             String[] scoreList = highScoreTimer.setHighScore();
             NPCTextLine.setTranslateY(-80);
             NPCTextLine1.setTranslateY(0);
@@ -410,6 +416,8 @@ public class Controller {
             roadView.setOpacity(0);
             player.setOpacity(0);
             smoke.setOpacity(0);
+            inventory.setOpacity(0);
+            toolRect.setOpacity(0);
             //Lay out new plastic
             clearPlasticInRoom();
             //Resets NPCs
@@ -436,6 +444,7 @@ public class Controller {
         smoke.setImage(new Image("file:src/sample/presentation/pictures/buildSmoke.png"));
         smokeBrokenMachine.setImage(new Image("file:src/sample/presentation/pictures/fireSmoke-1.png"));
         //Show images (& hides highscore)
+        toolRect.setOpacity(0.5);
         roadBuilderView.setOpacity(1);
         roadView.setOpacity(1);
         player.setOpacity(1);
@@ -628,7 +637,7 @@ public class Controller {
         Timeline timeline = new Timeline();
         int FPS = 60;
         KeyFrame frame = new KeyFrame(Duration.millis(1000 / FPS), event -> {
-            if (numberOfMovement != 0 && Main.game.getCurrentRoom() instanceof RoadBuild) {
+            if (numberOfMovement != 0 && Main.game.getCurrentRoom() instanceof RoadBuild && roadBuilderView.getTranslateX() > -312) {
                 if (animationDriving % 5 == 0) {
                     roadView.setViewport(new Rectangle2D(-681 + (roadBuilder.getInventoryCount() - numberOfMovement / 4) * 18.9166 + 113.5, 0, 681, 69));
                     roadBuilderView.setViewport(new Rectangle2D(0, 0, 484, 323));
@@ -648,15 +657,19 @@ public class Controller {
     }
 
     public void showRoadBuilderRoad() {
-        showFarmer();
-        showProfessor();
-        showMechanic();
-        if (Main.game.getCurrentRoom() instanceof RoadBuild) {
-            roadView.setViewport(new Rectangle2D(-681 + (roadBuilder.getInventoryCount() * 18.9166 + 113.5), 0, 681, 69));
+        if (roadBuilder.getInventoryCount() >= 30) {
+            EndGame();
         } else {
-            roadView.setViewport(new Rectangle2D(-681, 0, 681, 69));
+            showFarmer();
+            showProfessor();
+            showMechanic();
+            if (Main.game.getCurrentRoom() instanceof RoadBuild) {
+                roadView.setViewport(new Rectangle2D(-681 + (roadBuilder.getInventoryCount() * 18.9166 + 113.5), 0, 681, 69));
+            } else {
+                roadView.setViewport(new Rectangle2D(-681, 0, 681, 69));
+            }
+            showRoadBuilder();
         }
-        showRoadBuilder();
     }
 
     public void showRoadBuilder() {
@@ -785,6 +798,11 @@ public class Controller {
                     playerText.setText("");
                     spaceCount++;
                     playerObject.setToolset(mechanicObject.giveToolset());
+                    toolsetImg.setImage(new Image("file:" + playerObject.getToolset().getImage()));
+                    toolsetImg.setTranslateX(650);
+                    toolsetImg.setTranslateY(458);
+                    toolsetImg.setFitHeight(60);
+                    toolsetImg.setFitWidth(60);
                 } else if (spaceCount == 3) {
                     hideDialogBox();
                     mechanicTalk = true;

@@ -8,8 +8,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
-
-<?import javafx.scene.text.TextFlow?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.media.MediaView?>
@@ -17,46 +16,50 @@
    <children>
       <StackPane>
          <children>
-            <ImageView fx:id="backgroundRoom" fitHeight="500.0" fitWidth="720.0" pickOnBounds="true" preserveRatio="true"></ImageView>
+            <ImageView fx:id="backgroundRoom" fitHeight="500.0" fitWidth="720.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fx:id="roadView" fitHeight="77.0" fitWidth="707.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="roadBuilderView" translateY="-30" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true"/>
+            <ImageView fx:id="roadBuilderView" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" translateY="-30" />
             <ImageView fx:id="smoke" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fx:id="smokeBrokenMachine" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
 
             <!--> Man kan 100% gøre det under smartere <-->
-            <ImageView fx:id="plast1" pickOnBounds="true" preserveRatio="true"/>
-            <ImageView fx:id="plast2" pickOnBounds="true" preserveRatio="true"/>
-            <ImageView fx:id="plast3" pickOnBounds="true" preserveRatio="true"/>
-            <ImageView fx:id="plast4" pickOnBounds="true" preserveRatio="true"/>
-            <ImageView fx:id="plast5" pickOnBounds="true" preserveRatio="true"/>
-            <ImageView fx:id="plast6" pickOnBounds="true" preserveRatio="true"/>
-            <ImageView fx:id="plast7" pickOnBounds="true" preserveRatio="true"/>
-            <ImageView fx:id="plast8" pickOnBounds="true" preserveRatio="true"/>
-            <ImageView fx:id="plast9" pickOnBounds="true" preserveRatio="true"/>
-            <ImageView fx:id="plast10" pickOnBounds="true" preserveRatio="true"/>
-            <ImageView fx:id="plast11" pickOnBounds="true" preserveRatio="true"/>
-            <ImageView fx:id="plast12" pickOnBounds="true" preserveRatio="true"/>
-            <ImageView fx:id="plast13" pickOnBounds="true" preserveRatio="true"/>
-            <ImageView fx:id="plast14" pickOnBounds="true" preserveRatio="true"/>
-            <ImageView fx:id="plast15" pickOnBounds="true" preserveRatio="true"/>
-            <ImageView fx:id="plast16" pickOnBounds="true" preserveRatio="true"/>
-            <ImageView fx:id="plast17" pickOnBounds="true" preserveRatio="true"/>
-            <ImageView fx:id="plast18" pickOnBounds="true" preserveRatio="true"/>
-            <ImageView fx:id="plast19" pickOnBounds="true" preserveRatio="true"/>
-            <ImageView fx:id="plast20" pickOnBounds="true" preserveRatio="true"/>
+            <ImageView fx:id="plast1" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="plast2" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="plast3" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="plast4" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="plast5" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="plast6" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="plast7" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="plast8" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="plast9" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="plast10" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="plast11" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="plast12" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="plast13" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="plast14" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="plast15" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="plast16" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="plast17" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="plast18" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="plast19" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="plast20" pickOnBounds="true" preserveRatio="true" />
 
             <ImageView fx:id="player" fitHeight="45.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="farmerNpc" fitHeight="52.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true" translateX="3000"/>
-            <ImageView fx:id="mechanicNpc" fitHeight="48.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true" translateX="3000"/>
-            <ImageView fx:id="professorNpc" fitHeight="45.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true" translateX="3000"/>
-            <ImageView fx:id="dialogBox" fitHeight="266.0" fitWidth="635.0" pickOnBounds="true" preserveRatio="true" translateY="3000"/>
-            <Text fx:id="NPCTextLine"/>
-            <Text fx:id="NPCTextLine1"/>
-            <Text fx:id="NPCTextLine2"/>
-            <Text fx:id="playerText"/>
+            <ImageView fx:id="farmerNpc" fitHeight="45.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true" translateX="3000" />
+            <ImageView fx:id="mechanicNpc" fitHeight="45.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true" translateX="3000" />
+            <ImageView fx:id="professorNpc" fitHeight="45.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true" translateX="3000" />
+            <ImageView fx:id="dialogBox" fitHeight="266.0" fitWidth="635.0" pickOnBounds="true" preserveRatio="true" translateY="3000" />
+            <Text fx:id="NPCTextLine" />
+            <Text fx:id="NPCTextLine1" />
+            <Text fx:id="NPCTextLine2" />
+            <Text fx:id="playerText" />
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <ListView fx:id="inventory" layoutX="210.0" layoutY="453.0" prefHeight="45.0" prefWidth="300.0" />
+                  <!-- Slet listview under når det nye inventory er implementeret -->
+                  <ListView fx:id="inventory" layoutX="210.0" layoutY="453.0" prefHeight="45.0" prefWidth="300.0" opacity="0" />
+                  <!-- toolset skal blive vist under-->
+                  <Rectangle fx:id="toolRect" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="45.0" stroke="BLACK" strokeType="INSIDE" width="45.0" layoutX="657.0" layoutY="453.0" opacity="0"/>
+                  <ImageView fx:id="toolsetImg" pickOnBounds="true" preserveRatio="true" />
                </children>
             </AnchorPane>
             <TabPane layoutX="29.0" layoutY="-1.0" onKeyPressed="#movePlayer" onKeyReleased="#stopPlayer" /><!--TabPane only for movement with arrows, because the other Panes is not in focus to use arrow keys-->
