@@ -11,6 +11,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -89,7 +90,7 @@ public class Controller {
     @FXML
     public ImageView dialogBox = new ImageView("file:" + dialog.getImage());
     @FXML
-    private ImageView toolsetImg = new ImageView("file:" + "src/sample/presentation/pictures/npc/Tool.png");
+    private ImageView toolsetImg;
     @FXML
     private Text NPCTextLine;
     @FXML
@@ -98,6 +99,8 @@ public class Controller {
     private Text NPCTextLine2;
     @FXML
     private Text playerText;
+    @FXML
+    private Rectangle toolRect;
 
     public void initialize() {
         if (gameNotStarted) {
@@ -108,7 +111,7 @@ public class Controller {
         mechanicNpc.setImage(new Image("file:" + mechanicObject.getImage()));
         farmerNpc.setImage(new Image("file:" + farmerObject.getImage()));
         dialogBox.setImage(new Image("file:" + dialog.getImage()));
-        backgroundMusic.musicPlayerInfinity();
+        //backgroundMusic.musicPlayerInfinity();
     }
 
     public void generatePlasticInRoom(List<Plastic> plasticList) {
@@ -392,6 +395,7 @@ public class Controller {
         generatePlasticInRoom(Main.game.placePlastic());
         smoke.setImage(new Image("file:src/sample/presentation/pictures/buildSmoke.png"));
         smokeBrokenMachine.setImage(new Image("file:src/sample/presentation/pictures/fireSmoke-1.png"));
+        toolRect.setTranslateX(3000);
         movementMachine();
         smokeMachine();
         smokeBrokenMachine();
@@ -728,9 +732,13 @@ public class Controller {
                     NPCTextLine1.setText("");
                     spaceCount++;
                     playerObject.setToolset(mechanicObject.giveToolset());
+                    toolRect.setTranslateX(657.0);
+                    toolRect.setTranslateY(453.0);
                     toolsetImg.setImage(new Image("file:" + playerObject.getToolset().getImage()));
-                    toolsetImg.setTranslateX(100);
-                    toolsetImg.setTranslateY(100);
+                    toolsetImg.setTranslateX(662);
+                    toolsetImg.setTranslateY(458);
+                    toolsetImg.setFitHeight(60);
+                    toolsetImg.setFitWidth(60);
                 } else if (spaceCount == 3) {
                     hideDialogBox();
                     mechanicTalk = true;
