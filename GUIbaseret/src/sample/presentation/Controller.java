@@ -70,6 +70,9 @@ public class Controller {
     private AudioMusicPlayer npcTalk = new AudioMusicPlayer("src/sample/presentation/audio/npcTalking.wav");
     private AudioMusicPlayer repairSound = new AudioMusicPlayer("src/sample/presentation/audio/repairSound.wav");
     private AudioMusicPlayer pickUpSound = new AudioMusicPlayer("src/sample/presentation/audio/pickUpSound.wav");
+    private long dialogueAnimation = 0L;
+    private boolean playerTalk = false;
+    private boolean messageOver=false;
     private boolean gameOver = false;
 
     @FXML
@@ -246,7 +249,29 @@ public class Controller {
                 }
             }
         } else {
-            System.out.println("I can't lift more!!!!");
+            Timeline timeline = new Timeline();
+            dialogueAnimation=0;
+            int FPS = 60;
+            KeyFrame frame = new KeyFrame(Duration.millis(1000/FPS),event ->{
+                playerText.setTranslateY(-130);
+                talkNPC(playerText,"Player",0);
+                if (dialogueAnimation / 120==1){
+                    messageOver=true;
+                    hideDialogBox();
+                }
+                if (dialogueAnimation<=120) {
+                    dialogueAnimation++;
+                }
+            });
+            timeline.setCycleCount(timeline.INDEFINITE);
+            timeline.getKeyFrames().add(frame);
+            timeline.play();
+            if (messageOver) {
+                timeline.stop();
+                dialogueAnimation = 0;
+                messageOver = false;
+            }
+
         }
     }
 
