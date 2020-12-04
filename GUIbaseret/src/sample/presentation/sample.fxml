@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Text?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.media.MediaView?>
+
 <GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.presentation.Controller">
    <children>
       <StackPane>
@@ -55,15 +55,33 @@
             <Text fx:id="playerText" />
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <!-- Slet listview under når det nye inventory er implementeret -->
-                  <ListView fx:id="inventory" layoutX="210.0" layoutY="453.0" prefHeight="45.0" prefWidth="300.0" opacity="0" />
                   <!-- toolset skal blive vist under-->
-                  <Rectangle fx:id="toolRect" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="45.0" stroke="BLACK" strokeType="INSIDE" width="45.0" layoutX="657.0" layoutY="453.0" opacity="0"/>
+                  <Rectangle fx:id="toolRect" arcHeight="5.0" arcWidth="5.0" fill="#d6d6d6" height="45.0" layoutX="657.0" layoutY="453.0" stroke="BLACK" strokeType="INSIDE" width="45.0" opacity="0"/>
+                  <Rectangle fx:id="inventory" arcHeight="5.0" arcWidth="5.0" fill="#d6d6d6" height="45.0" layoutX="135.0" layoutY="453.0" opacity="0" stroke="BLACK" strokeType="INSIDE" width="450.0" />
+                  <Line fx:id="slot1" endX="180.0" endY="498.0" startX="180.0" startY="453.0" opacity="0" />
+                  <Line fx:id="slot2" endX="225.0" endY="498.0" startX="225.0" startY="453.0" opacity="0"/>
+                  <Line fx:id="slot3" endX="270.0" endY="498.0" startX="270.0" startY="453.0" opacity="0"/>
+                  <Line fx:id="slot4" endX="315.0" endY="498.0" startX="315.0" startY="453.0" opacity="0"/>
+                  <Line fx:id="slot5" endX="360.0" endY="498.0" startX="360.0" startY="453.0" opacity="0"/>
+                  <Line fx:id="slot6" endX="405.0" endY="498.0" startX="405.0" startY="453.0" opacity="0"/>
+                  <Line fx:id="slot7" endX="450.0" endY="498.0" startX="450.0" startY="453.0" opacity="0"/>
+                  <Line fx:id="slot8" endX="495.0" endY="498.0" startX="495.0" startY="453.0" opacity="0"/>
+                  <Line fx:id="slot9" endX="540.0" endY="498.0" startX="540.0" startY="453.0" opacity="0"/>
                   <ImageView fx:id="toolsetImg" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="item1" fitHeight="45.0" fitWidth="45.0" layoutX="147.0" layoutY="453.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="item2" fitHeight="45.0" fitWidth="45.0" layoutX="192.0" layoutY="453.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="item3" fitHeight="45.0" fitWidth="45.0" layoutX="237.0" layoutY="453.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="item4" fitHeight="45.0" fitWidth="45.0" layoutX="282.0" layoutY="453.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="item5" fitHeight="45.0" fitWidth="45.0" layoutX="327.0" layoutY="453.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="item6" fitHeight="45.0" fitWidth="45.0" layoutX="372.0" layoutY="453.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="item7" fitHeight="45.0" fitWidth="45.0" layoutX="417.0" layoutY="453.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="item8" fitHeight="45.0" fitWidth="45.0" layoutX="462.0" layoutY="453.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="item9" fitHeight="45.0" fitWidth="45.0" layoutX="507.0" layoutY="453.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="item10" fitHeight="45.0" fitWidth="45.0" layoutX="552.0" layoutY="453.0" pickOnBounds="true" preserveRatio="true" />
                </children>
-            </AnchorPane>
-            <TabPane layoutX="29.0" layoutY="-1.0" onKeyPressed="#movePlayer" onKeyReleased="#stopPlayer" /><!--TabPane only for movement with arrows, because the other Panes is not in focus to use arrow keys-->
-            <TextField fx:id="nameField" translateY="-96" maxWidth="120"/>
+            </AnchorPane><!--TabPane only for movement with arrows, because the other Panes is not in focus to use arrow keys-->
+            <TabPane onKeyPressed="#movePlayer" onKeyReleased="#stopPlayer" />
+            <TextField fx:id="nameField" maxWidth="120" translateY="-96" />
          </children>
       </StackPane>
    </children>
