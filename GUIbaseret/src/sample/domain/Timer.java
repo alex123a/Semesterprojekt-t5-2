@@ -11,8 +11,8 @@ import java.util.Scanner;
 public class Timer {
     private Date startTime;
     private Date endTime;
-    private double time = 30, time1, time2, time3;
-    private String name = "janik";
+    private double time, time1, time2, time3;
+    private String name;
     private String name1, name2, name3;
     final private File highScore = new File("src/sample/highScore.txt");
 
