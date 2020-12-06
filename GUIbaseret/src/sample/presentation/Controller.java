@@ -30,7 +30,7 @@ import javafx.geometry.Orientation;
 import sample.domain.NPCer.Farmer;
 import sample.domain.NPCer.Mechanic;
 import sample.domain.NPCer.Professor;
-import sample.domain.PlasticElements.Plastic;
+import sample.domain.PlasticElements.*;
 import sample.domain.Rooms.*;
 
 import java.lang.reflect.Array;
@@ -238,8 +238,8 @@ public class Controller {
         for (int i = 0; i < inventoryItems.length; i++) {
             if (i < playerObject.getPlasticInv().size()) {
                 inventoryItems[i].setImage(new Image("file:" + playersInv.get(i).getImage()));
-                //inventoryItems[i].setFitHeight(45);
-                //inventoryItems[i].setFitWidth(45);
+                // Da plastik imageviews har en standard layout i FXML dokumentet, så skal der bruges LayoutX i stedet for TranslateX
+                inventoryItems[i].setLayoutX((147 + i * 45) + playerObject.getPlasticInv().get(i).getAdjustXForInventory());
             } else {
                 inventoryItems[i].setImage(null);
             }
@@ -264,6 +264,20 @@ public class Controller {
             System.out.println("I can't lift more!!!!");
         }
     }
+
+    /*
+    public int adjustInventoryItem(Plastic plastic) {
+        if (plastic instanceof CleaningPlastic) {
+            return -3;
+        } else if (plastic instanceof MilkBottle) {
+            return -7;
+        } else if (plastic instanceof SodaBottle) {
+            return
+        }
+        return 0;
+    }
+
+     */
 
     public void movePlayer(KeyEvent keyEvent) throws InterruptedException {
         switch (keyEvent.getCode()) {
