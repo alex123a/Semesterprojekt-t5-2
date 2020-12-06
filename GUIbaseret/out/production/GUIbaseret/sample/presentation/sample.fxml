@@ -52,7 +52,8 @@
             <Text fx:id="NPCTextLine" />
             <Text fx:id="NPCTextLine1" />
             <Text fx:id="NPCTextLine2" />
-            <Text fx:id="playerText" />
+            <Text fx:id="playerText"/>
+            <Text fx:id="helpText" text="Press 'H' for help video"/>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
                   <!-- toolset skal blive vist under-->
