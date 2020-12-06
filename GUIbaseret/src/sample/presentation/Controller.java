@@ -33,6 +33,9 @@ import sample.domain.NPCer.Professor;
 import sample.domain.PlasticElements.*;
 import sample.domain.Rooms.*;
 
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Array;
 
 import javafx.geometry.Orientation;
@@ -118,12 +121,16 @@ public class Controller {
     @FXML
     private Text playerText;
     @FXML
+    private Text helpText;
+    @FXML
     private Rectangle toolRect;
     @FXML
     private TextField nameField;
 
 
     public void initialize() {
+        helpText.setTranslateY(240);
+        helpText.setTranslateX(-296);
         playerText.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
         NPCTextLine.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
         NPCTextLine1.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
@@ -295,6 +302,13 @@ public class Controller {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+                }
+                break;
+            case H:
+                try {
+                    Desktop.getDesktop().open(new File("src/sample/presentation/pictures/video/Introduction.mp4"));
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
                 break;
             case UP:
