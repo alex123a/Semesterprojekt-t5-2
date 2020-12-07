@@ -588,18 +588,20 @@ public class Controller {
     }
 
     public void changeNorth() {
-        if (!(Main.game.getCurrentRoom() instanceof Beach || Main.game.getCurrentRoom() instanceof Farm || Main.game.getCurrentRoom() instanceof Town || Main.game.getCurrentRoom() instanceof Park)) {
-            player.setTranslateY(204);
+        if (professorTalk) {
+            if (!(Main.game.getCurrentRoom() instanceof Beach || Main.game.getCurrentRoom() instanceof Farm || Main.game.getCurrentRoom() instanceof Town || Main.game.getCurrentRoom() instanceof Park)) {
+                player.setTranslateY(204);
+            }
+            Game.changedRoom = "north";
+            Main.game.goRoom();
+            backgroundRoom.setImage(new Image("file:" + background));
+            hideDialogBox();
+            showRoadBuilderRoad();
+            generatePlasticInRoom(Main.game.placePlastic());
+            showFarmer();
+            showProfessor();
+            showMechanic();
         }
-        Game.changedRoom = "north";
-        Main.game.goRoom();
-        backgroundRoom.setImage(new Image("file:" + background));
-        hideDialogBox();
-        showRoadBuilderRoad();
-        generatePlasticInRoom(Main.game.placePlastic());
-        showFarmer();
-        showProfessor();
-        showMechanic();
     }
 
     public void changeSouth() {
