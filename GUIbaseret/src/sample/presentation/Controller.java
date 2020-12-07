@@ -294,40 +294,24 @@ public class Controller {
                 break;
             case UP:
             case W:
-                if (gameNotStarted) {
-                    north = false;
-                    break;
-                }
                 timer.start();
                 north = true;
                 System.out.println("y =  " + player.getTranslateY() + " x = " + player.getTranslateX());
                 break;
             case DOWN:
             case S:
-                if (gameNotStarted) {
-                    south = false;
-                    break;
-                }
                 timer.start();
                 south = true;
                 System.out.println("y =  " + player.getTranslateY() + " x = " + player.getTranslateX());
                 break;
             case LEFT:
             case A:
-                if (gameNotStarted) {
-                    west = false;
-                    break;
-                }
                 timer.start();
                 west = true;
                 System.out.println("y =  " + player.getTranslateY() + " x = " + player.getTranslateX());
                 break;
             case RIGHT:
             case D:
-                if (gameNotStarted) {
-                    east = false;
-                    break;
-                }
                 timer.start();
                 east = true;
                 System.out.println("y =  " + player.getTranslateY() + " x = " + player.getTranslateX());
@@ -346,7 +330,7 @@ public class Controller {
                         collectPlastic(Main.game.placePlastic());
                     }
 
-                    if (Main.game.getCurrentRoom() instanceof RoadBuild && talkingRoadbuilder && spaceCount != 0) {
+                    if (Main.game.isRoom(Main.game.RoadBuild) && talkingRoadbuilder && spaceCount != 0) {
                         if (spaceCount == 1) {
                             talking = true;
                             talkNPC(playerText, "Road builder", 3);
@@ -355,7 +339,7 @@ public class Controller {
                             hideDialogBox();
                             spaceCount = 0;
                         }
-                    } else if (Main.game.getCurrentRoom() instanceof RoadBuild && player.getTranslateX() > roadBuilderView.getTranslateX() - 50 && player.getTranslateX() < roadBuilderView.getTranslateX() + 50 && player.getTranslateY() > roadBuilderView.getTranslateY() - 50 && player.getTranslateY() < roadBuilderView.getTranslateY() + 50) {
+                    } else if (Main.game.isRoom(Main.game.RoadBuild) && player.getTranslateX() > roadBuilderView.getTranslateX() - 50 && player.getTranslateX() < roadBuilderView.getTranslateX() + 50 && player.getTranslateY() > roadBuilderView.getTranslateY() - 50 && player.getTranslateY() < roadBuilderView.getTranslateY() + 50) {
                         if (roadBuilder.getInventoryCount() >= 19 && roadBuilder.isNotDamagedBefore()) {
                             roadBuilder.damagedMachine();
                             roadBuilder.setNotDamagedBefore(false);
@@ -391,15 +375,21 @@ public class Controller {
                             }
                             updateInventory();
                         }
-                    } else if (Main.game.getCurrentRoom() instanceof Farm && player.getTranslateX() > farmerNpc.getTranslateX() - 30 && player.getTranslateX() < farmerNpc.getTranslateX() + 30 && player.getTranslateY() > farmerNpc.getTranslateY() - 30 && player.getTranslateY() < farmerNpc.getTranslateY() + 30) {
+                    } else if (Main.game.isRoom(Main.game.Farm) && player.getTranslateX() > farmerNpc.getTranslateX() - 30 && player.getTranslateX() < farmerNpc.getTranslateX() + 30 && player.getTranslateY() > farmerNpc.getTranslateY() - 30 && player.getTranslateY() < farmerNpc.getTranslateY() + 30) {
                         showDialogBox();
-                    } else if (Main.game.getCurrentRoom() instanceof Sdu && player.getTranslateX() > professorNpc.getTranslateX() - 30 && player.getTranslateX() < professorNpc.getTranslateX() + 30 && player.getTranslateY() > professorNpc.getTranslateY() - 30 && player.getTranslateY() < professorNpc.getTranslateY() + 30) {
+                    } else if (Main.game.isRoom(Main.game.Sdu) && player.getTranslateX() > professorNpc.getTranslateX() - 30 && player.getTranslateX() < professorNpc.getTranslateX() + 30 && player.getTranslateY() > professorNpc.getTranslateY() - 30 && player.getTranslateY() < professorNpc.getTranslateY() + 30) {
                         showDialogBox();
-                    } else if (Main.game.getCurrentRoom() instanceof Town && player.getTranslateX() > mechanicNpc.getTranslateX() - 30 && player.getTranslateX() < mechanicNpc.getTranslateX() + 30 && player.getTranslateY() > mechanicNpc.getTranslateY() - 30 && player.getTranslateY() < mechanicNpc.getTranslateY() + 30) {
+                    } else if (Main.game.isRoom(Main.game.Town) && player.getTranslateX() > mechanicNpc.getTranslateX() - 30 && player.getTranslateX() < mechanicNpc.getTranslateX() + 30 && player.getTranslateY() > mechanicNpc.getTranslateY() - 30 && player.getTranslateY() < mechanicNpc.getTranslateY() + 30) {
                         showDialogBox();
                     }
                 }
 
+        }
+        if (gameNotStarted) {
+            north = false;
+            south = false;
+            east = false;
+            west = false;
         }
         NewRoom();
     }
@@ -498,30 +488,30 @@ public class Controller {
 
     private void NewRoom() {
         //North
-        if (Main.game.getCurrentRoom() instanceof RoadBuild && player.getTranslateY() < -202 && player.getTranslateX() > -142.5 && player.getTranslateX() < -82.5) {
+        if (Main.game.isRoom(Main.game.RoadBuild) && player.getTranslateY() < -202 && player.getTranslateX() > -142.5 && player.getTranslateX() < -82.5) {
             changeNorth();
-        } else if (Main.game.getCurrentRoom() instanceof Sdu && player.getTranslateY() < -158 && player.getTranslateX() > -45.5 && player.getTranslateX() < 14) {
+        } else if (Main.game.isRoom(Main.game.Sdu) && player.getTranslateY() < -158 && player.getTranslateX() > -45.5 && player.getTranslateX() < 14) {
             changeNorth();
             //South
-        } else if (Main.game.getCurrentRoom() instanceof RoadBuild && player.getTranslateY() > 208 && player.getTranslateX() > -80 && player.getTranslateX() < 14) {
+        } else if (Main.game.isRoom(Main.game.RoadBuild) && player.getTranslateY() > 208 && player.getTranslateX() > -80 && player.getTranslateX() < 14) {
             changeSouth();
-        } else if (Main.game.getCurrentRoom() instanceof Park && player.getTranslateY() > 208 && player.getTranslateX() > -142.5 && player.getTranslateX() < -82.5) {
+        } else if (Main.game.isRoom(Main.game.Park) && player.getTranslateY() > 208 && player.getTranslateX() > -142.5 && player.getTranslateX() < -82.5) {
             changeSouth();
-        } else if (Main.game.getCurrentRoom() instanceof Park && player.getTranslateY() > 208 && player.getTranslateX() > 68 && player.getTranslateX() < 126) {
+        } else if (Main.game.isRoom(Main.game.Park) && player.getTranslateY() > 208 && player.getTranslateX() > 68 && player.getTranslateX() < 126) {
             changeSouth();
             //West
         } else if (player.getTranslateX() < -328 && player.getTranslateY() > -116.5 && player.getTranslateY() < -61.5) {
             changeWest();
-        } else if (Main.game.getCurrentRoom() instanceof Farm && player.getTranslateX() < -328 && player.getTranslateY() > -96 && player.getTranslateY() < -66) {
+        } else if (Main.game.isRoom(Main.game.Farm) && player.getTranslateX() < -328 && player.getTranslateY() > -96 && player.getTranslateY() < -66) {
             changeWest();
-        } else if (Main.game.getCurrentRoom() instanceof Town && player.getTranslateX() < -328 && player.getTranslateY() > -53 && player.getTranslateY() < -15) {
+        } else if (Main.game.isRoom(Main.game.Town) && player.getTranslateX() < -328 && player.getTranslateY() > -53 && player.getTranslateY() < -15) {
             changeWest();
             //East
-        } else if (Main.game.getCurrentRoom() instanceof Beach && player.getTranslateX() > 328 && player.getTranslateY() > -100 && player.getTranslateY() < -61.5) {
+        } else if (Main.game.isRoom(Main.game.Beach) && player.getTranslateX() > 328 && player.getTranslateY() > -100 && player.getTranslateY() < -61.5) {
             changeEast();
-        } else if (Main.game.getCurrentRoom() instanceof RoadBuild && player.getTranslateX() > 328 && player.getTranslateY() > -116.5 && player.getTranslateY() < -61.5) {
+        } else if (Main.game.isRoom(Main.game.RoadBuild) && player.getTranslateX() > 328 && player.getTranslateY() > -116.5 && player.getTranslateY() < -61.5) {
             changeEast();
-        } else if (Main.game.getCurrentRoom() instanceof Park && player.getTranslateX() > 330 && player.getTranslateY() > -56 && player.getTranslateY() < -15) {
+        } else if (Main.game.isRoom(Main.game.Park) && player.getTranslateX() > 330 && player.getTranslateY() > -56 && player.getTranslateY() < -15) {
             changeEast();
         }
     }
@@ -608,7 +598,7 @@ public class Controller {
         Timeline timeline = new Timeline();
         int FPS = 60;
         KeyFrame frame = new KeyFrame(Duration.millis(1000 / FPS), event -> {
-            if (Main.game.getCurrentRoom() instanceof RoadBuild) {
+            if (Main.game.isRoom(Main.game.RoadBuild)) {
                 if (animationFireSmoke % 20 == 0) {
                     numbersFire = fireAnimation.changePic();
                     smoke.setViewport(new Rectangle2D(numbersFire[0], numbersFire[1], numbersFire[2], numbersFire[3]));
@@ -631,7 +621,7 @@ public class Controller {
         Timeline timeline = new Timeline();
         int FPS = 60;
         KeyFrame frame = new KeyFrame(Duration.millis(1000 / FPS), event -> {
-            if (Main.game.getCurrentRoom() instanceof RoadBuild && roadBuilder.getDamaged() > 0) {
+            if (Main.game.isRoom(Main.game.RoadBuild) && roadBuilder.getDamaged() > 0) {
                 if (animationFireSmokeBrokenMachine % 20 == 0) {
                     numbersBrokenFire = brokeMachineAnimation.changePic();
                     smokeBrokenMachine.setViewport(new Rectangle2D(numbersBrokenFire[0], numbersBrokenFire[1], numbersBrokenFire[2], numbersBrokenFire[3]));
@@ -654,7 +644,7 @@ public class Controller {
         Timeline timeline = new Timeline();
         int FPS = 60;
         KeyFrame frame = new KeyFrame(Duration.millis(1000 / FPS), event -> {
-            if (numberOfMovement != 0 && Main.game.getCurrentRoom() instanceof RoadBuild && roadBuilderView.getTranslateX() > -290) {
+            if (numberOfMovement != 0 && Main.game.isRoom(Main.game.RoadBuild) && roadBuilderView.getTranslateX() > -290) {
                 if (animationDriving % 5 == 0) {
                     roadView.setViewport(new Rectangle2D(-681 + (roadBuilder.getInventoryCount() - numberOfMovement / 4) * 18.9166 + 113.5, 0, 681, 69));
                     roadBuilderView.setViewport(new Rectangle2D(0, 0, 484, 323));
@@ -680,7 +670,7 @@ public class Controller {
             showFarmer();
             showProfessor();
             showMechanic();
-            if (Main.game.getCurrentRoom() instanceof RoadBuild) {
+            if (Main.game.isRoom(Main.game.RoadBuild)) {
                 roadView.setViewport(new Rectangle2D(-681 + (roadBuilder.getInventoryCount() * 18.9166 + 113.5), 0, 681, 69));
                 roadBuilderView.setViewport(new Rectangle2D(0, 0, 484, 323));
                 roadBuilderView.setTranslateX(300 - ((roadBuilder.getInventoryCount() * 18.9166 + 113.5) - 90));
@@ -694,14 +684,14 @@ public class Controller {
 
     public void showProfessor() {
         professorNpc.setTranslateX(3000);
-        if (Main.game.getCurrentRoom() instanceof Sdu) {
+        if (Main.game.isRoom(Main.game.Sdu)) {
             professorNpc.setTranslateX(30);
         }
     }
 
     public void showMechanic() {
         mechanicNpc.setTranslateX(3000);
-        if (Main.game.getCurrentRoom() instanceof Town) {
+        if (Main.game.isRoom(Main.game.Town)) {
             mechanicNpc.setTranslateX(178);
             mechanicNpc.setTranslateY(50);
         }
@@ -709,7 +699,7 @@ public class Controller {
 
     public void showFarmer() {
         farmerNpc.setTranslateX(3000);
-        if (Main.game.getCurrentRoom() instanceof Farm) {
+        if (Main.game.isRoom(Main.game.Farm)) {
             farmerNpc.setTranslateX(190);
             farmerNpc.setTranslateY(2);
         }
@@ -732,7 +722,7 @@ public class Controller {
         textLine2.setTranslateY(-170);
         playerText.setTranslateY(-130);
         //Farmer
-        if (Main.game.getCurrentRoom() instanceof Farm) {
+        if (Main.game.isRoom(Main.game.Farm)) {
             if (farmerTalked == 0) {
                 if (spaceCount == 0 && !farmerTalk) {
                     npcTalk.musicPlayerInfinity();
@@ -790,7 +780,7 @@ public class Controller {
                 }
             }
             //Professor
-        } else if (Main.game.getCurrentRoom() instanceof Sdu) {
+        } else if (Main.game.isRoom(Main.game.Sdu)) {
             if (spaceCount == 0 && !professorTalk) {
                 npcTalk.musicPlayerInfinity();
                 talking = true;
@@ -816,7 +806,7 @@ public class Controller {
             }
         }
         //Mechanic
-        if (Main.game.getCurrentRoom() instanceof Town) {
+        if (Main.game.isRoom(Main.game.Town)) {
             if (roadBuilder.getDamaged() > 0) {
                 if (spaceCount == 0 && !mechanicTalk) {
                     npcTalk.musicPlayerInfinity();
