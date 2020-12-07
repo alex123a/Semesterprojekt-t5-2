@@ -5,14 +5,11 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -20,13 +17,11 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import sample.domain.*;
-import javafx.geometry.Orientation;
 import sample.domain.NPCer.Farmer;
 import sample.domain.NPCer.Mechanic;
 import sample.domain.NPCer.Professor;
@@ -36,12 +31,10 @@ import sample.domain.Rooms.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Array;
-
-import javafx.geometry.Orientation;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Controller {
 
@@ -87,7 +80,7 @@ public class Controller {
     private AudioMusicPlayer repairSound = new AudioMusicPlayer("src/sample/presentation/audio/repairSound.wav");
     private AudioMusicPlayer pickUpSound = new AudioMusicPlayer("src/sample/presentation/audio/pickUpSound.wav");
     private long dialogueAnimation = 0L;
-    private boolean messageOver = false;
+    private boolean isInventoryFull = false;
     private boolean gameOver = false;
 
     @FXML
@@ -257,12 +250,16 @@ public class Controller {
     }
 
     public void collectPlastic(List<Plastic> plasticList) {
+        Timeline timeline = fullInventory();
+        timeline.stop();
         ImageView[] plast = {plast1, plast2, plast3, plast4, plast5, plast6, plast7, plast8, plast9, plast10, plast11, plast12, plast13, plast14, plast15,
                 plast16, plast17, plast18, plast19, plast20};
         if (playerObject.getPlasticInv().size() < 10) {
             for (int i = 0; i < plast.length; i++) {
                 if (plast[i].getTranslateX() - 15 <= player.getTranslateX() && plast[i].getTranslateX() + 15 >= player.getTranslateX()) {
                     if (plast[i].getTranslateY() - 15 <= player.getTranslateY() && plast[i].getTranslateY() + 15 >= player.getTranslateY()) {
+
+
                         pickUpSound.AudioPlayer();
                         playerObject.plasticCollect(plasticList.get(i), Main.game.getCurrentRoom());
                         plast[i].setTranslateX(3000);
@@ -271,39 +268,40 @@ public class Controller {
                 }
             }
         } else if (playerObject.getPlasticInv().size() >= 10) {
-            if (talking) {
-                for (int i = 0; i < plast.length; i++) {
-                    if (plast[i].getTranslateX() - 15 <= player.getTranslateX() && plast[i].getTranslateX() + 15 >= player.getTranslateX()) {
-                        if (plast[i].getTranslateY() - 15 <= player.getTranslateY() && plast[i].getTranslateY() + 15 >= player.getTranslateY()) {
-                            Timeline timeline = new Timeline();
-                            dialogueAnimation = 0;
-                            int FPS = 60;
-                            KeyFrame frame = new KeyFrame(Duration.millis(1000 / FPS), event -> {
-                                playerText.setTranslateY(-130);
-                                talkNPC(playerText, "Player", 0);
-                                if (dialogueAnimation / 120 == 1) {
-                                    messageOver = true;
-                                    hideDialogBox();
-                                }
-                                if (dialogueAnimation < 121) {
-                                    dialogueAnimation++;
-                                }
-                            });
-                            timeline.setCycleCount(timeline.INDEFINITE);
-                            timeline.getKeyFrames().add(frame);
-                            timeline.play();
-                            if (messageOver) {
-                                timeline.stop();
-                                dialogueAnimation = 0;
-                                messageOver = false;
-                            }
-
-                        }
+            for (int i = 0; i < plast.length; i++) {
+                if (plast[i].getTranslateX() - 15 <= player.getTranslateX() && plast[i].getTranslateX() + 15 >= player.getTranslateX()) {
+                    if (plast[i].getTranslateY() - 15 <= player.getTranslateY() && plast[i].getTranslateY() + 15 >= player.getTranslateY()) {
+                        isInventoryFull = true;
                     }
                 }
             }
+            if (isInventoryFull) {
+                timeline.play();
+            }
         }
     }
+
+    public Timeline fullInventory() {
+        Timeline timeline = new Timeline();
+        dialogueAnimation = 0;
+        int FPS = 60;
+        KeyFrame frame = new KeyFrame(Duration.millis(1000 / FPS), event -> {
+            playerText.setTranslateY(-130);
+            talkNPC(playerText, "Player", 0);
+            if (dialogueAnimation / 120 == 1) {
+                hideDialogBox();
+            }
+            if (dialogueAnimation <= 121) {
+                dialogueAnimation++;
+            }
+        });
+        timeline.setCycleCount(timeline.INDEFINITE);
+        timeline.getKeyFrames().add(frame);
+
+        return timeline;
+    }
+
+
 
     /*
     public int adjustInventoryItem(Plastic plastic) {
