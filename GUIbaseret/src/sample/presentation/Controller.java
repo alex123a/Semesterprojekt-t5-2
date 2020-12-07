@@ -403,7 +403,6 @@ public class Controller {
                             playerText.setTranslateY(-130);
                             playerText.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
                             if (spaceCount == 0 && roadBuilder.getDamaged() > 0) {
-                                talking = true;
                                 talkNPC(NPCTextLine, "Road builder", 0);
                                 talkNPC(NPCTextLine1, "Road builder", 1);
                                 talkNPC(NPCTextLine2, "Road builder", 2);
