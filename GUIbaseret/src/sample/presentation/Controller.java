@@ -125,7 +125,8 @@ public class Controller {
     private ImageView map;
     @FXML
     private Rectangle mapBackground;
-
+    @FXML
+    private ImageView dialogNPC;
 
     public void initialize() {
         playerText.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
@@ -184,6 +185,12 @@ public class Controller {
     AnimationTimer timer = new AnimationTimer() {
         @Override
         public void handle(long l) {
+            if (gameNotStarted) {
+                north = false;
+                south = false;
+                east = false;
+                west = false;
+            }
             if (north && player.getTranslateY() > -220) {
                 playerAnimation.setDirection(direction[0]);
                 if (!noAccess.moveBlock(player.getTranslateX(), player.getTranslateY(), 0, -2)) {
@@ -194,8 +201,7 @@ public class Controller {
                     player.setTranslateY(player.getTranslateY() - 2.5);
                 }
                 animationWalk++;
-            }
-            if (south && player.getTranslateY() < 220) {
+            } else if (south && player.getTranslateY() < 220) {
                 playerAnimation.setDirection(direction[1]);
                 if (!noAccess.moveBlock(player.getTranslateX(), player.getTranslateY(), 0, 2)) {
                     if (animationWalk % 13 == 0) {
@@ -206,8 +212,7 @@ public class Controller {
 
                 }
                 animationWalk++;
-            }
-            if (east && player.getTranslateX() > -340) {
+            } else if (east && player.getTranslateX() > -340) {
                 playerAnimation.setDirection(direction[2]);
                 if (!noAccess.moveBlock(player.getTranslateX(), player.getTranslateY(), -2, 0)) {
                     if (animationWalk % 13 == 0) {
@@ -217,8 +222,7 @@ public class Controller {
                     player.setTranslateX(player.getTranslateX() - 2.5);
                 }
                 animationWalk++;
-            }
-            if (west && player.getTranslateX() < 340) {
+            } else if (west && player.getTranslateX() < 340) {
                 playerAnimation.setDirection(direction[3]);
                 if (!noAccess.moveBlock(player.getTranslateX(), player.getTranslateY(), 2, 0)) {
                     if (animationWalk % 13 == 0) {
@@ -358,50 +362,26 @@ public class Controller {
                 break;
             case UP:
             case W:
-                if (gameNotStarted) {
-                    north = false;
-                    break;
-                }
                 timer.start();
                 north = true;
-                west = false;
-                east = false;
                 System.out.println("y =  " + player.getTranslateY() + " x = " + player.getTranslateX());
                 break;
             case DOWN:
             case S:
-                if (gameNotStarted) {
-                    south = false;
-                    break;
-                }
                 timer.start();
                 south = true;
-                west = false;
-                east = false;
                 System.out.println("y =  " + player.getTranslateY() + " x = " + player.getTranslateX());
                 break;
             case LEFT:
             case A:
-                if (gameNotStarted) {
-                    east = false;
-                    break;
-                }
                 timer.start();
                 east = true;
-                north = false;
-                south = false;
                 System.out.println("y =  " + player.getTranslateY() + " x = " + player.getTranslateX());
                 break;
             case RIGHT:
             case D:
-                if (gameNotStarted) {
-                    west = false;
-                    break;
-                }
                 timer.start();
                 west = true;
-                north = false;
-                south = false;
                 System.out.println("y =  " + player.getTranslateY() + " x = " + player.getTranslateX());
                 break;
             case SPACE:
@@ -472,8 +452,8 @@ public class Controller {
                         showDialogBox();
                     }
                 }
-
         }
+
         NewRoom();
     }
 
@@ -835,15 +815,19 @@ public class Controller {
         dialogBox.setTranslateY(3000);
         talking = false;
         npcTalk.AudioStop();
+        dialogNPC.setImage(null);
     }
 
     public void showDialogBox() {
+        dialogBox.setTranslateY(-170);
+        dialogNPC.setTranslateY(-166);
         NPCTextLine.setTranslateY(-210);
         NPCTextLine1.setTranslateY(-190);
         NPCTextLine2.setTranslateY(-170);
         playerText.setTranslateY(-130);
         //Farmer
         if (Main.game.getCurrentRoom() instanceof Farm) {
+            dialogNPC.setImage(new Image("file:src/sample/presentation/pictures/npc/farmer.png"));
             if (farmerTalked == 0) {
                 if (spaceCount == 0 && !farmerTalk) {
                     npcTalk.musicPlayerInfinity();
@@ -877,7 +861,7 @@ public class Controller {
                     if (!farmerTalk) {
                         hideDialogBox();
                         farmerTalked++;
-                    } else if (farmerTalk) {
+                    } else {
                         hideDialogBox();
                         farmerTalk = true;
                     }
@@ -894,7 +878,7 @@ public class Controller {
                     if (!farmerTalk) {
                         hideDialogBox();
                         spaceCount = 0;
-                    } else if (farmerTalk) {
+                    } else {
                         hideDialogBox();
                         farmerTalk = true;
                     }
@@ -902,6 +886,7 @@ public class Controller {
             }
             //Professor
         } else if (Main.game.getCurrentRoom() instanceof Sdu) {
+            dialogNPC.setImage(new Image("file:src/sample/presentation/pictures/npc/Professor.png"));
             if (spaceCount == 0 && !professorTalk) {
                 npcTalk.musicPlayerInfinity();
                 talking = true;
@@ -928,6 +913,7 @@ public class Controller {
         }
         //Mechanic
         if (Main.game.getCurrentRoom() instanceof Town) {
+            dialogNPC.setImage(new Image("file:src/sample/presentation/pictures/npc/Mechanic.png"));
             if (roadBuilder.getDamaged() > 0) {
                 if (spaceCount == 0 && !mechanicTalk) {
                     npcTalk.musicPlayerInfinity();
@@ -970,7 +956,6 @@ public class Controller {
     }
 
     private void talkNPC(Text npcText, String npcType, int index) {
-        dialogBox.setTranslateY(-170);
         npcText.setText(dialog.getNPCText(npcType, index));
     }
 
