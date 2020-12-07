@@ -59,31 +59,15 @@ public class Game {
 
         Town.setExit("west", RoadBuild);
 
-        currentRoom = RoadBuild;
-    }
-
-    private void printHelp() {
-
-        Scanner reader;
-        try {
-            reader = new Scanner(help);
-            System.out.println(reader.nextLine());
-            System.out.println(reader.nextLine());
-            System.out.println(reader.nextLine());
-            System.out.println(reader.nextLine());
-            reader.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("Cannot find the file");
-            e.printStackTrace();
-        }
+        currentRoom = Sdu;
     }
 
     public List<Plastic> placePlastic() {
-        return changedRoom != null ? currentRoom.getPlasticInRoom() : RoadBuild.getPlasticInRoom();
+        return changedRoom != null ? currentRoom.getPlasticInRoom() : Sdu.getPlasticInRoom();
     }
 
     public void goRoom() {
-        Room nextRoom = changedRoom != null ? currentRoom.getExit(changedRoom) : RoadBuild;
+        Room nextRoom = changedRoom != null ? currentRoom.getExit(changedRoom) : Sdu;
 
         currentRoom = nextRoom;
 
