@@ -136,7 +136,6 @@ public class Controller {
         backgroundRoom.setImage(new Image("file:src/sample/presentation/pictures/Backgrounds/StartScreen.png"));
     }
 
-
     public void generatePlasticInRoom(List<Plastic> plasticList) {
         clearPlasticInRoom();
         ImageView[] plast = {plast1, plast2, plast3, plast4, plast5, plast6, plast7, plast8, plast9, plast10, plast11, plast12, plast13, plast14, plast15,
@@ -275,6 +274,7 @@ public class Controller {
                 }
             }
             if (isInventoryFull) {
+                dialogueAnimation = 0;
                 timeline.play();
             }
         }
@@ -282,7 +282,6 @@ public class Controller {
 
     public Timeline fullInventory() {
         Timeline timeline = new Timeline();
-        dialogueAnimation = 0;
         int FPS = 60;
         KeyFrame frame = new KeyFrame(Duration.millis(1000 / FPS), event -> {
             dialogueAnimation++;
@@ -290,9 +289,10 @@ public class Controller {
                 playerText.setTranslateY(-130);
                 talkNPC(playerText, "Player", 0);
                 dialogueAnimation++;
-            } else if (dialogueAnimation / 120 == 1) {
+            } else if (dialogueAnimation == 120) {
                 hideDialogBox();
                 isInventoryFull = false;
+                dialogueAnimation++;
             }
         });
         timeline.setCycleCount(timeline.INDEFINITE);
@@ -345,6 +345,15 @@ public class Controller {
                     Desktop.getDesktop().open(new File("src/sample/presentation/pictures/video/Introduction.mp4"));
                 } catch (IOException e) {
                     e.printStackTrace();
+                }
+                break;
+            case I:
+                if (gameOver) {
+                    try {
+                        Desktop.getDesktop().open(new File("src/sample/presentation/pictures/video/KWS Plasticroad.mp4"));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
                 break;
             case UP:
@@ -511,6 +520,7 @@ public class Controller {
             gameNotStarted = true;
             //Hide images
             hideSlotLines();
+            lockToolSlot.setOpacity(0);
             roadBuilderView.setOpacity(0);
             roadView.setOpacity(0);
             player.setOpacity(0);
