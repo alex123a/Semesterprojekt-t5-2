@@ -4,7 +4,7 @@ import sample.data.ReadFromFile;
 
 public class DialogNPC {
     private String image = "src/sample/presentation/pictures/DialogBox.png";
-    private String farmerText = "src/sample/data/textfiles/npcDescriptions/FarmerText.txt";
+    private String farmerText = "src/sample/data/textfiles/npcDescriptions/FarmText.txt";
     private String professorText = "src/sample/data/textfiles/npcDescriptions/ProfessorText.txt";
     private String mechanicText = "src/sample/data/textfiles/npcDescriptions/VillagerText.txt";
     private String roadbuilderText = "src/sample/data/textfiles/npcDescriptions/RoadbuilderText.txt";

@@ -14,7 +14,7 @@ import java.util.Random;
 public class Farmer extends NPC {
     final private int randomNumber = (new Random()).nextInt(8 - 5 + 1) + 5;
     private Plastic[] plasticForPlayer = new Plastic[randomNumber];
-    // private File file = Paths.get(new File("worldofzuul/NPC/NPC-descriptions/FarmerText.txt").getAbsolutePath()).toFile();
+    // private File file = Paths.get(new File("worldofzuul/NPC/NPC-descriptions/FarmText.txt").getAbsolutePath()).toFile();
     private String file = "src/sample/data/textfiles/npcDescriptions/FarmText.txt";
 
     public Farmer(String name) {
