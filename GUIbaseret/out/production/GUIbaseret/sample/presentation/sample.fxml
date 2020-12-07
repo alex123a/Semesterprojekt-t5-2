@@ -2,7 +2,6 @@
 
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -50,30 +49,25 @@
             <ImageView fx:id="mechanicNpc" fitHeight="45.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true" translateX="3000" />
             <ImageView fx:id="professorNpc" fitHeight="45.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true" translateX="3000" />
             <ImageView fx:id="dialogBox" fitHeight="266.0" fitWidth="635.0" pickOnBounds="true" preserveRatio="true" translateY="3000" />
+            <Text fx:id="textLine" />
             <Text fx:id="textLine1" />
             <Text fx:id="textLine2" />
-            <Text fx:id="textLine3" />
             <Text fx:id="playerText"/>
             <Text fx:id="helpText" text="Press 'H' for help video"/>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
                   <!-- toolset skal blive vist under-->
-                  <Rectangle fx:id="toolRect" arcHeight="5.0" arcWidth="5.0" fill="#d6d6d6" height="45.0" layoutX="657.0" layoutY="453.0" opacity="0" stroke="BLACK" strokeType="INSIDE" width="45.0" />
-                  <ImageView fx:id="lockToolSlot" fitHeight="45.0" fitWidth="45.0" layoutX="663.0" layoutY="453.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@pictures/key-lock-icon.png" />
-                     </image>
-                  </ImageView>
+                  <Rectangle fx:id="toolRect" arcHeight="5.0" arcWidth="5.0" fill="#d6d6d6" height="45.0" layoutX="657.0" layoutY="453.0" stroke="BLACK" strokeType="INSIDE" width="45.0" opacity="0"/>
                   <Rectangle fx:id="inventory" arcHeight="5.0" arcWidth="5.0" fill="#d6d6d6" height="45.0" layoutX="135.0" layoutY="453.0" opacity="0" stroke="BLACK" strokeType="INSIDE" width="450.0" />
-                  <Line fx:id="slot1" endX="180.0" endY="498.0" opacity="0" startX="180.0" startY="453.0" />
-                  <Line fx:id="slot2" endX="225.0" endY="498.0" opacity="0" startX="225.0" startY="453.0" />
-                  <Line fx:id="slot3" endX="270.0" endY="498.0" opacity="0" startX="270.0" startY="453.0" />
-                  <Line fx:id="slot4" endX="315.0" endY="498.0" opacity="0" startX="315.0" startY="453.0" />
-                  <Line fx:id="slot5" endX="360.0" endY="498.0" opacity="0" startX="360.0" startY="453.0" />
-                  <Line fx:id="slot6" endX="405.0" endY="498.0" opacity="0" startX="405.0" startY="453.0" />
-                  <Line fx:id="slot7" endX="450.0" endY="498.0" opacity="0" startX="450.0" startY="453.0" />
-                  <Line fx:id="slot8" endX="495.0" endY="498.0" opacity="0" startX="495.0" startY="453.0" />
-                  <Line fx:id="slot9" endX="540.0" endY="498.0" opacity="0" startX="540.0" startY="453.0" />
+                  <Line fx:id="slot1" endX="180.0" endY="498.0" startX="180.0" startY="453.0" opacity="0" />
+                  <Line fx:id="slot2" endX="225.0" endY="498.0" startX="225.0" startY="453.0" opacity="0"/>
+                  <Line fx:id="slot3" endX="270.0" endY="498.0" startX="270.0" startY="453.0" opacity="0"/>
+                  <Line fx:id="slot4" endX="315.0" endY="498.0" startX="315.0" startY="453.0" opacity="0"/>
+                  <Line fx:id="slot5" endX="360.0" endY="498.0" startX="360.0" startY="453.0" opacity="0"/>
+                  <Line fx:id="slot6" endX="405.0" endY="498.0" startX="405.0" startY="453.0" opacity="0"/>
+                  <Line fx:id="slot7" endX="450.0" endY="498.0" startX="450.0" startY="453.0" opacity="0"/>
+                  <Line fx:id="slot8" endX="495.0" endY="498.0" startX="495.0" startY="453.0" opacity="0"/>
+                  <Line fx:id="slot9" endX="540.0" endY="498.0" startX="540.0" startY="453.0" opacity="0"/>
                   <ImageView fx:id="toolsetImg" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fx:id="item1" fitHeight="45.0" fitWidth="45.0" layoutX="147.0" layoutY="452.0" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fx:id="item2" fitHeight="45.0" fitWidth="45.0" layoutX="192.0" layoutY="452.0" pickOnBounds="true" preserveRatio="true" />
