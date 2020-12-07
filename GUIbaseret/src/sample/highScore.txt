@@ -1,1 +1,1 @@
-2,0 sad 2,05 SAD 2,32 aSKL 
+40 null 40 null 40 null
