@@ -87,7 +87,7 @@ public class Controller {
     private AudioMusicPlayer repairSound = new AudioMusicPlayer("src/sample/presentation/audio/repairSound.wav");
     private AudioMusicPlayer pickUpSound = new AudioMusicPlayer("src/sample/presentation/audio/pickUpSound.wav");
     private long dialogueAnimation = 0L;
-    private boolean messageOver=false;
+    private boolean messageOver = false;
     private boolean gameOver = false;
 
     @FXML
@@ -269,31 +269,34 @@ public class Controller {
                     }
                 }
             }
-        } else {
-            for (int i = 0; i < plast.length; i++) {
-                if (plast[i].getTranslateX() - 15 <= player.getTranslateX() && plast[i].getTranslateX() + 15 >= player.getTranslateX()) {
-                    if (plast[i].getTranslateY() - 15 <= player.getTranslateY() && plast[i].getTranslateY() + 15 >= player.getTranslateY()) {
-                        Timeline timeline = new Timeline();
-                        dialogueAnimation=0;
-                        int FPS = 60;
-                        KeyFrame frame = new KeyFrame(Duration.millis(1000/FPS),event ->{
-                            playerText.setTranslateY(-130);
-                            talkNPC(playerText,"Player",0);
-                            if (dialogueAnimation / 120==1){
-                                messageOver=true;
-                                hideDialogBox();
-                            }
-                            if (dialogueAnimation<121) {
-                                dialogueAnimation++;
-                            }
-                        });
-                        timeline.setCycleCount(timeline.INDEFINITE);
-                        timeline.getKeyFrames().add(frame);
-                        timeline.play();
-                        if (messageOver) {
-                            timeline.stop();
+        } else if (playerObject.getPlasticInv().size() >= 10) {
+            if (talking) {
+                for (int i = 0; i < plast.length; i++) {
+                    if (plast[i].getTranslateX() - 15 <= player.getTranslateX() && plast[i].getTranslateX() + 15 >= player.getTranslateX()) {
+                        if (plast[i].getTranslateY() - 15 <= player.getTranslateY() && plast[i].getTranslateY() + 15 >= player.getTranslateY()) {
+                            Timeline timeline = new Timeline();
                             dialogueAnimation = 0;
-                            messageOver = false;
+                            int FPS = 60;
+                            KeyFrame frame = new KeyFrame(Duration.millis(1000 / FPS), event -> {
+                                playerText.setTranslateY(-130);
+                                talkNPC(playerText, "Player", 0);
+                                if (dialogueAnimation / 120 == 1) {
+                                    messageOver = true;
+                                    hideDialogBox();
+                                }
+                                if (dialogueAnimation < 121) {
+                                    dialogueAnimation++;
+                                }
+                            });
+                            timeline.setCycleCount(timeline.INDEFINITE);
+                            timeline.getKeyFrames().add(frame);
+                            timeline.play();
+                            if (messageOver) {
+                                timeline.stop();
+                                dialogueAnimation = 0;
+                                messageOver = false;
+                            }
+
                         }
                     }
                 }
@@ -925,16 +928,16 @@ public class Controller {
                     mechanicTalk = true;
                 }
             } else if (roadBuilder.getDamaged() == 0) {
-                    if (spaceCount == 0 && !mechanicTalk) {
-                        talking = true;
-                        npcTalk.musicPlayerInfinity();
-                        talkNPC(NPCTextLine, "mechanic", 4);
-                        spaceCount++;
-                    } else if (spaceCount == 1) {
-                        hideDialogBox();
-                        talking = false;
-                        spaceCount = 0;
-                    }
+                if (spaceCount == 0 && !mechanicTalk) {
+                    talking = true;
+                    npcTalk.musicPlayerInfinity();
+                    talkNPC(NPCTextLine, "mechanic", 4);
+                    spaceCount++;
+                } else if (spaceCount == 1) {
+                    hideDialogBox();
+                    talking = false;
+                    spaceCount = 0;
+                }
             }
         }
 
