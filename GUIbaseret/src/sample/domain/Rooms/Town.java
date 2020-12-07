@@ -1,7 +1,6 @@
 package sample.domain.Rooms;
 
 import sample.domain.PlasticElements.*;
-import sample.domain.Room;
 
 import java.util.Random;
 

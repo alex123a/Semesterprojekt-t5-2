@@ -49,9 +49,9 @@
             <ImageView fx:id="mechanicNpc" fitHeight="45.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true" translateX="3000" />
             <ImageView fx:id="professorNpc" fitHeight="45.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true" translateX="3000" />
             <ImageView fx:id="dialogBox" fitHeight="266.0" fitWidth="635.0" pickOnBounds="true" preserveRatio="true" translateY="3000" />
-            <Text fx:id="NPCTextLine" />
-            <Text fx:id="NPCTextLine1" />
-            <Text fx:id="NPCTextLine2" />
+            <Text fx:id="textLine" />
+            <Text fx:id="textLine1" />
+            <Text fx:id="textLine2" />
             <Text fx:id="playerText"/>
             <Text fx:id="helpText" text="Press 'H' for help video"/>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">

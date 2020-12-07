@@ -20,7 +20,7 @@ public class Game {
     final private File welcomeMessage = new File("src/sample/data/textfiles/gameDescriptions/gameDescription.txt");
     final private File help = new File("src/sample/data/textfiles/gameDescriptions/help.txt");
     private static final int roadDone = 30;
-    private Room RoadBuild, Town, Beach, Farm, Park, Sdu;
+    public Room RoadBuild, Town, Beach, Farm, Park, Sdu;
     private Farmer farmer = new Farmer("Farmer");
     private Mechanic mechanic = new Mechanic("Mechanic");
     private Professor professor = new Professor("Professor");
@@ -62,21 +62,6 @@ public class Game {
         currentRoom = RoadBuild;
     }
 
-    private void printHelp() {
-
-        Scanner reader;
-        try {
-            reader = new Scanner(help);
-            System.out.println(reader.nextLine());
-            System.out.println(reader.nextLine());
-            System.out.println(reader.nextLine());
-            System.out.println(reader.nextLine());
-            reader.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("Cannot find the file");
-            e.printStackTrace();
-        }
-    }
 
     public List<Plastic> placePlastic() {
         return changedRoom != null ? currentRoom.getPlasticInRoom() : RoadBuild.getPlasticInRoom();
@@ -110,6 +95,10 @@ public class Game {
 
     public Room getCurrentRoom() {
         return currentRoom;
+    }
+
+    public boolean isRoom(Room room) {
+        return (room.equals(this.currentRoom));
     }
 
     public Farmer getFarmer() {

@@ -5,6 +5,8 @@ import sample.domain.PlasticElements.Plastic;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import sample.domain.Rooms.Room;
 import sample.presentation.Main;
 
 public class Player {

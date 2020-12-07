@@ -1,4 +1,4 @@
-package sample.domain;
+package sample.domain.Rooms;
 
 import sample.domain.PlasticElements.*;
 
@@ -13,12 +13,25 @@ public abstract class Room {
     private HashMap<String, Room> exits;
     private int plasticCount;
     private String pictureRoom;
+    private int coordinate;
+    private boolean x;
+
+    public Room(String pictureRoom, int coordinate, boolean x) {
+        exits = new HashMap<>();
+        this.plasticInRoom = new ArrayList<>();
+        this.plasticCount = this.plasticInRoom.size();
+        this.pictureRoom = pictureRoom;
+        this.coordinate = coordinate;
+        this.x = x;
+    }
 
     public Room(String pictureRoom) {
         exits = new HashMap<>();
         this.plasticInRoom = new ArrayList<>();
         this.plasticCount = this.plasticInRoom.size();
         this.pictureRoom = pictureRoom;
+        this.coordinate = 0;
+        this.x = false;
     }
 
     public void setPlasticArray(Plastic[] randomPlastic) {
