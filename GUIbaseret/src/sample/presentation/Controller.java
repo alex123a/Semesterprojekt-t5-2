@@ -128,7 +128,6 @@ public class Controller {
         textLine1.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
         textLine2.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
         backgroundRoom.setImage(new Image("file:src/sample/presentation/pictures/Backgrounds/StartScreen.png"));
-        backgroundMusic.musicPlayerInfinity();
     }
 
 
@@ -454,6 +453,7 @@ public class Controller {
     }
 
     private void StartGame() {
+        backgroundMusic.AudioStop();
         gameOver = false;
         Main.game.createRooms();
         //Create the images
@@ -484,6 +484,7 @@ public class Controller {
         smokeBrokenMachine();
         //Starts the time for highscorelist
         highScoreTimer.setStartTime();
+        backgroundMusic.musicPlayerInfinity();
     }
 
     private void NewRoom() {
