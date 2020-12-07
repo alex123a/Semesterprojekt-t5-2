@@ -13,6 +13,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Text?>
 
+<?import javafx.scene.control.Label?>
 <GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.presentation.Controller">
    <children>
       <StackPane>
@@ -50,11 +51,15 @@
             <ImageView fx:id="mechanicNpc" fitHeight="45.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true" translateX="3000" />
             <ImageView fx:id="professorNpc" fitHeight="45.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true" translateX="3000" />
             <ImageView fx:id="dialogBox" fitHeight="266.0" fitWidth="635.0" pickOnBounds="true" preserveRatio="true" translateY="3000" />
+            <Rectangle fx:id="mapBackground" arcHeight="5.0" arcWidth="5.0" fill="#d6d6d6" height="420" layoutX="657.0" layoutY="453.0" opacity="0" width="600" translateY="-33"/>
+            <ImageView fx:id="map" fitHeight="420" fitWidth="680" pickOnBounds="true" preserveRatio="true" translateX="3000" translateY="-40"/>
             <Text fx:id="NPCTextLine" />
             <Text fx:id="NPCTextLine1" />
             <Text fx:id="NPCTextLine2" />
             <Text fx:id="playerText" />
-            <Text fx:id="helpText" text="Press 'H' for help video" />
+            <Rectangle fx:id="textBackground" arcHeight="5.0" arcWidth="5.0" fill="#E97451" height="35" layoutX="657.0" layoutY="475.0" width="140" translateY="230" translateX="-300"/>
+            <Text fx:id="helpText" text="Press 'H' for help video" translateY="240" translateX="-296"/>
+            <Text fx:id="mapText" text="Press 'M' for a Map" translateX="-306" translateY="225"/>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
                   <!-- toolset skal blive vist under-->
