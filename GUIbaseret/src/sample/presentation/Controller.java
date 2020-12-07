@@ -520,6 +520,7 @@ public class Controller {
             gameNotStarted = true;
             //Hide images
             hideSlotLines();
+            lockToolSlot.setOpacity(0);
             roadBuilderView.setOpacity(0);
             roadView.setOpacity(0);
             player.setOpacity(0);

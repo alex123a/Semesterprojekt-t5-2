@@ -180,7 +180,7 @@
     <configuration name="Main" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="sample.presentation.Main" />
       <module name="GUIbaseret" />
-      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\janik\Documents\GitHub\Game2\javafx-sdk-15.0.1\lib&quot; --add-modules javafx.controls,javafx.fxml" />
+      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\alexv\Downloads\openjfx-11.0.2_windows-x64_bin-sdk\javafx-sdk-11.0.2\lib&quot; --add-modules javafx.controls,javafx.fxml" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -307,11 +307,11 @@
     <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="191" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1607334557795">
+    <state x="191" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1607343918978">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1920.-221.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1607102565078" />
-    <state x="191" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.680@0.0.1280.680" timestamp="1607334557795" />
+    <state x="191" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.680@0.0.1280.680" timestamp="1607343918978" />
     <state x="416" y="143" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1607340926851">
       <screen x="0" y="0" width="1280" height="680" />
     </state>

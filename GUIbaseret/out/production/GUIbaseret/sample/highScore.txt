@@ -1,1 +1,1 @@
-1,11 Alex 1,3599999999999999 Alex 3,54 valdemar 
+40 null 40 null 40 null
