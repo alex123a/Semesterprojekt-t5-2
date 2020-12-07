@@ -319,6 +319,15 @@ public class Controller {
                     e.printStackTrace();
                 }
                 break;
+            case I:
+                if (gameOver) {
+                    try {
+                        Desktop.getDesktop().open(new File("src/sample/presentation/pictures/video/KWS Plasticroad.mp4"));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                break;
             case UP:
             case W:
                 if (gameNotStarted) {

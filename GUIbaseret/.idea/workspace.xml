@@ -20,9 +20,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/javafx.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/GUIbaseret/sample/presentation/sample.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GUIbaseret/sample/presentation/sample.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/presentation/sample.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/presentation/sample.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GUIbaseret.iml" beforeDir="false" afterPath="$PROJECT_DIR$/GUIbaseret.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GUIbaseret/sample/presentation/Controller$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GUIbaseret/sample/presentation/Controller$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GUIbaseret/sample/presentation/Controller$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GUIbaseret/sample/presentation/Controller$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/GUIbaseret/sample/presentation/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/GUIbaseret/sample/presentation/Controller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/presentation/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/presentation/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/presentation/pictures/Backgrounds/EndScreen.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/presentation/pictures/Backgrounds/EndScreen.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -307,6 +312,10 @@
     </state>
     <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1920.-221.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1607102565078" />
     <state x="191" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.680@0.0.1280.680" timestamp="1607334557795" />
+    <state x="416" y="143" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1607340926851">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="416" y="143" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1280.680@0.0.1280.680" timestamp="1607340926851" />
     <state x="765" y="221" key="#com.intellij.ide.util.MemberChooser" timestamp="1607257586363">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
