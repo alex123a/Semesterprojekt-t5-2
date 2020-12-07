@@ -286,12 +286,13 @@ public class Controller {
         int FPS = 60;
         KeyFrame frame = new KeyFrame(Duration.millis(1000 / FPS), event -> {
             dialogueAnimation++;
-            if (dialogueAnimation == 1) {
+            if (dialogueAnimation == 1 && isInventoryFull) {
                 playerText.setTranslateY(-130);
                 talkNPC(playerText, "Player", 0);
                 dialogueAnimation++;
             } else if (dialogueAnimation / 120 == 1) {
                 hideDialogBox();
+                isInventoryFull = false;
             }
         });
         timeline.setCycleCount(timeline.INDEFINITE);
@@ -458,10 +459,10 @@ public class Controller {
                             numberOfMovement = playerObject.getPlasticInv().size() * 4;
                             if (playerObject.getPlasticInv().size() > 0) {
                                 Main.game.givePlastic();
-                                isInventoryFull = false;
                                 roadbuilderMovingSound.AudioPlayer();
                             }
                             updateInventory();
+                            isInventoryFull = false;
                         }
                     } else if (Main.game.getCurrentRoom() instanceof Farm && player.getTranslateX() > farmerNpc.getTranslateX() - 30 && player.getTranslateX() < farmerNpc.getTranslateX() + 30 && player.getTranslateY() > farmerNpc.getTranslateY() - 30 && player.getTranslateY() < farmerNpc.getTranslateY() + 30) {
                         showDialogBox();
