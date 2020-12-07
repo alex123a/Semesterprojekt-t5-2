@@ -258,8 +258,6 @@ public class Controller {
             for (int i = 0; i < plast.length; i++) {
                 if (plast[i].getTranslateX() - 15 <= player.getTranslateX() && plast[i].getTranslateX() + 15 >= player.getTranslateX()) {
                     if (plast[i].getTranslateY() - 15 <= player.getTranslateY() && plast[i].getTranslateY() + 15 >= player.getTranslateY()) {
-
-
                         pickUpSound.AudioPlayer();
                         playerObject.plasticCollect(plasticList.get(i), Main.game.getCurrentRoom());
                         plast[i].setTranslateX(3000);
@@ -286,18 +284,17 @@ public class Controller {
         dialogueAnimation = 0;
         int FPS = 60;
         KeyFrame frame = new KeyFrame(Duration.millis(1000 / FPS), event -> {
-            playerText.setTranslateY(-130);
-            talkNPC(playerText, "Player", 0);
-            if (dialogueAnimation / 120 == 1) {
-                hideDialogBox();
-            }
-            if (dialogueAnimation <= 121) {
+            dialogueAnimation++;
+            if (dialogueAnimation == 1) {
+                playerText.setTranslateY(-130);
+                talkNPC(playerText, "Player", 0);
                 dialogueAnimation++;
+            } else if (dialogueAnimation / 120 == 1) {
+                hideDialogBox();
             }
         });
         timeline.setCycleCount(timeline.INDEFINITE);
         timeline.getKeyFrames().add(frame);
-
         return timeline;
     }
 
@@ -400,7 +397,7 @@ public class Controller {
                             StartGame();
                             gameNotStarted = false;
                         }
-                    } else {
+                    } else if (!isInventoryFull){
                         collectPlastic(Main.game.placePlastic());
                     }
 
@@ -445,6 +442,7 @@ public class Controller {
                             numberOfMovement = playerObject.getPlasticInv().size() * 4;
                             if (playerObject.getPlasticInv().size() > 0) {
                                 Main.game.givePlastic();
+                                isInventoryFull = false;
                                 roadbuilderMovingSound.AudioPlayer();
                             }
                             updateInventory();
