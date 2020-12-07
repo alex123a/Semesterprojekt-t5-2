@@ -116,22 +116,23 @@ public class Controller {
     @FXML
     private Text playerText;
     @FXML
-    private Text helpText;
-    @FXML
     private Rectangle toolRect;
     @FXML
     private TextField nameField;
     @FXML
     private ImageView lockToolSlot;
+    @FXML
+    private ImageView map;
+    @FXML
+    private Rectangle mapBackground;
 
 
     public void initialize() {
-        helpText.setTranslateY(240);
-        helpText.setTranslateX(-296);
         playerText.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
         NPCTextLine.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
         NPCTextLine1.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
         NPCTextLine2.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
+        map.setImage(new Image("file:src/sample/presentation/pictures/Map.png"));
         backgroundRoom.setImage(new Image("file:src/sample/presentation/pictures/Backgrounds/StartScreen.png"));
     }
 
@@ -330,6 +331,12 @@ public class Controller {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+                }
+                break;
+            case M:
+                if (!gameNotStarted) {
+                    map.setTranslateX(0);
+                    mapBackground.setOpacity(0.7);
                 }
                 break;
             case H:
@@ -611,6 +618,10 @@ public class Controller {
                 timer.stop();
                 animationWalk = 0;
                 west = false;
+                break;
+            case M:
+                map.setTranslateX(3000);
+                mapBackground.setOpacity(0);
                 break;
         }
     }
