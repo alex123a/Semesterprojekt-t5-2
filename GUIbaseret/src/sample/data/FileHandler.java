@@ -21,7 +21,7 @@ public class FileHandler {
 
     public void writeToFile(double slider1, double slider2, double slider3, String text) {
         try {
-            printWriter = new PrintWriter(new FileWriter(new File("src/sample/answers.txt"),true));
+            printWriter = new PrintWriter(new FileWriter(new File("src/sample/answers.txt"), true));
             printWriter.println(Controller.playerObject.getName());
             printWriter.println("Hvad var din viden omkring brugen af plastik i veje, før du prøvet spillet? (0 er ingen viden,  10 er ekspert viden)");
             printWriter.println(slider1);
