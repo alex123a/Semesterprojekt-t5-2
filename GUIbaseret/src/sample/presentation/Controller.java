@@ -105,11 +105,11 @@ public class Controller {
     @FXML
     private ImageView toolsetImg;
     @FXML
+    private Text textLine;
+    @FXML
     private Text textLine1;
     @FXML
-    private Text textLine12;
-    @FXML
-    private Text textLine13;
+    private Text textLine2;
     @FXML
     private Text playerText;
     @FXML
@@ -124,9 +124,9 @@ public class Controller {
         helpText.setTranslateY(240);
         helpText.setTranslateX(-296);
         playerText.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
+        textLine.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
         textLine1.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
-        textLine12.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
-        textLine13.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
+        textLine2.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
         backgroundRoom.setImage(new Image("file:src/sample/presentation/pictures/Backgrounds/StartScreen.png"));
     }
 
@@ -349,19 +349,19 @@ public class Controller {
                         }
 
                         if (roadBuilder.getDamaged() > 0 && !playerObject.getHaveToolset()) {
-                            textLine1.setTranslateY(-210);
+                            textLine.setTranslateY(-210);
+                            textLine.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
+                            textLine1.setTranslateY(-190);
                             textLine1.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
-                            textLine12.setTranslateY(-190);
-                            textLine12.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
-                            textLine13.setTranslateY(-170);
-                            textLine13.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
+                            textLine2.setTranslateY(-170);
+                            textLine2.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
                             playerText.setTranslateY(-130);
                             playerText.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
                             if (spaceCount == 0 && roadBuilder.getDamaged() > 0) {
                                 talking = true;
-                                talkNPC(textLine1, "Road builder", 0);
-                                talkNPC(textLine12, "Road builder", 1);
-                                talkNPC(textLine13, "Road builder", 2);
+                                talkNPC(textLine, "Road builder", 0);
+                                talkNPC(textLine1, "Road builder", 1);
+                                talkNPC(textLine2, "Road builder", 2);
                                 spaceCount++;
                                 talkingRoadbuilder = true;
                             }
@@ -400,7 +400,7 @@ public class Controller {
             if (counterRepair % 60 == 0 && roadBuilder.getDamaged() > 0) {
                 playerObject.getToolset().repairMachine();
                 dialogBox.setTranslateY(-170);
-                textLine12.setText(100 - roadBuilder.getDamaged() + "% repaired");
+                textLine1.setText(100 - roadBuilder.getDamaged() + "% repaired");
             } else if (doneRepairing && roadBuilder.getDamaged() == 0 && !gameOver) {
                 hideDialogBox();
                 toolsetImg.setTranslateX(3000);
@@ -424,12 +424,12 @@ public class Controller {
             playerText.setText("Your " + highScoreTimer.timeScore());
             playerText.setTranslateY(130);
             String[] scoreList = highScoreTimer.setHighScore();
-            textLine1.setTranslateY(-80);
-            textLine12.setTranslateY(0);
-            textLine13.setTranslateY(85);
-            textLine1.setText(scoreList[0]);
-            textLine12.setText(scoreList[1]);
-            textLine13.setText(scoreList[2]);
+            textLine.setTranslateY(-80);
+            textLine1.setTranslateY(0);
+            textLine2.setTranslateY(85);
+            textLine.setText(scoreList[0]);
+            textLine1.setText(scoreList[1]);
+            textLine2.setText(scoreList[2]);
             //resets the road and game
             roadBuilder.setInventoryCount(0);
             gameNotStarted = true;
@@ -708,9 +708,9 @@ public class Controller {
 
     public void hideDialogBox() {
         spaceCount = 0;
+        textLine.setText("");
         textLine1.setText("");
-        textLine12.setText("");
-        textLine13.setText("");
+        textLine2.setText("");
         playerText.setText("");
         dialogBox.setTranslateY(3000);
         talking = false;
@@ -718,9 +718,9 @@ public class Controller {
     }
 
     public void showDialogBox() {
-        textLine1.setTranslateY(-210);
-        textLine12.setTranslateY(-190);
-        textLine13.setTranslateY(-170);
+        textLine.setTranslateY(-210);
+        textLine1.setTranslateY(-190);
+        textLine2.setTranslateY(-170);
         playerText.setTranslateY(-130);
         //Farmer
         if (Main.game.isRoom(Main.game.Farm)) {
@@ -728,27 +728,27 @@ public class Controller {
                 if (spaceCount == 0 && !farmerTalk) {
                     npcTalk.musicPlayerInfinity();
                     talking = true;
-                    talkNPC(textLine1, "farmer", 0);
-                    talkNPC(textLine12, "farmer", 1);
-                    talkNPC(textLine13, "farmer", 2);
+                    talkNPC(textLine, "farmer", 0);
+                    talkNPC(textLine1, "farmer", 1);
+                    talkNPC(textLine2, "farmer", 2);
                     spaceCount++;
                 } else if (spaceCount == 1) {
                     talkNPC(playerText, "farmer", 3);
                     spaceCount++;
                 } else if (spaceCount == 2) {
-                    talkNPC(textLine1, "farmer", 4);
-                    textLine12.setText("");
-                    textLine13.setText("");
+                    talkNPC(textLine, "farmer", 4);
+                    textLine1.setText("");
+                    textLine2.setText("");
                     playerText.setText("");
                     spaceCount++;
                 } else if (spaceCount == 3) {
                     talkNPC(playerText, "farmer", 5);
                     spaceCount++;
                 } else if (spaceCount == 4) {
-                    talkNPC(textLine1, "farmer", 6);
+                    talkNPC(textLine, "farmer", 6);
                     farmerTalk = playerObject.addPlasticInv();
                     if (!farmerTalk) {
-                        talkNPC(textLine1, "farmer", 7);
+                        talkNPC(textLine, "farmer", 7);
                         playerText.setText("");
                     }
                     updateInventory();
@@ -766,7 +766,7 @@ public class Controller {
                 if (spaceCount == 0 && !farmerTalk) {
                     npcTalk.musicPlayerInfinity();
                     talking = true;
-                    talkNPC(textLine1, "farmer", 8);
+                    talkNPC(textLine, "farmer", 8);
                     farmerTalk = playerObject.addPlasticInv();
                     updateInventory();
                     spaceCount++;
@@ -785,17 +785,17 @@ public class Controller {
             if (spaceCount == 0 && !professorTalk) {
                 npcTalk.musicPlayerInfinity();
                 talking = true;
-                talkNPC(textLine1, "professor", 0);
-                talkNPC(textLine12, "professor", 1);
-                talkNPC(textLine13, "professor", 2);
+                talkNPC(textLine, "professor", 0);
+                talkNPC(textLine1, "professor", 1);
+                talkNPC(textLine2, "professor", 2);
                 spaceCount++;
             } else if (spaceCount == 1) {
                 talkNPC(playerText, "professor", 3);
                 spaceCount++;
             } else if (spaceCount == 2) {
-                talkNPC(textLine1, "professor", 4);
-                textLine12.setText("");
-                textLine13.setText("");
+                talkNPC(textLine, "professor", 4);
+                textLine1.setText("");
+                textLine2.setText("");
                 playerText.setText("");
                 spaceCount++;
             } else if (spaceCount == 3) {
@@ -811,15 +811,15 @@ public class Controller {
             if (roadBuilder.getDamaged() > 0) {
                 if (spaceCount == 0 && !mechanicTalk) {
                     npcTalk.musicPlayerInfinity();
-                    talkNPC(textLine1, "mechanic", 0);
-                    talkNPC(textLine12, "mechanic", 1);
+                    talkNPC(textLine, "mechanic", 0);
+                    talkNPC(textLine1, "mechanic", 1);
                     spaceCount++;
                 } else if (spaceCount == 1) {
                     talkNPC(playerText, "mechanic", 2);
                     spaceCount++;
                 } else if (spaceCount == 2) {
-                    talkNPC(textLine1, "mechanic", 3);
-                    textLine12.setText("");
+                    talkNPC(textLine, "mechanic", 3);
+                    textLine1.setText("");
                     playerText.setText("");
                     spaceCount++;
                     playerObject.setToolset(mechanicObject.giveToolset());
@@ -836,7 +836,7 @@ public class Controller {
                     if (spaceCount == 0 && !mechanicTalk) {
                         talking = true;
                         npcTalk.musicPlayerInfinity();
-                        talkNPC(textLine1, "mechanic", 4);
+                        talkNPC(textLine, "mechanic", 4);
                         spaceCount++;
                     } else if (spaceCount == 1) {
                         hideDialogBox();
