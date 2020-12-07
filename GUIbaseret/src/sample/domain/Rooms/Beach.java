@@ -16,7 +16,7 @@ public class Beach extends Room {
     public Plastic[] generatePlasticArray() {
         Random random = new Random();
         int sodaBottles = random.nextInt(3 - 2 + 1) + 2;
-        int milkBottles = random.nextInt(3 - 2 + 1) + 1;
+        int milkBottles = random.nextInt(2 - 1 + 1) + 1;
         int waterBottles = random.nextInt(8 - 7 + 1) + 7;
         numberOfPlastic = new Plastic[sodaBottles + milkBottles + waterBottles];
         for (int i = 0; i < numberOfPlastic.length; i++) {
