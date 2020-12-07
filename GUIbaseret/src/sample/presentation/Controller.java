@@ -248,9 +248,9 @@ public class Controller {
     }
 
     public void collectPlastic(List<Plastic> plasticList) {
+        ImageView[] plast = {plast1, plast2, plast3, plast4, plast5, plast6, plast7, plast8, plast9, plast10, plast11, plast12, plast13, plast14, plast15,
+                plast16, plast17, plast18, plast19, plast20};
         if (playerObject.getPlasticInv().size() < 10) {
-            ImageView[] plast = {plast1, plast2, plast3, plast4, plast5, plast6, plast7, plast8, plast9, plast10, plast11, plast12, plast13, plast14, plast15,
-                    plast16, plast17, plast18, plast19, plast20};
             for (int i = 0; i < plast.length; i++) {
                 if (plast[i].getTranslateX() - 15 <= player.getTranslateX() && plast[i].getTranslateX() + 15 >= player.getTranslateX()) {
                     if (plast[i].getTranslateY() - 15 <= player.getTranslateY() && plast[i].getTranslateY() + 15 >= player.getTranslateY()) {
@@ -262,28 +262,33 @@ public class Controller {
                 }
             }
         } else {
-            // Lige nu bliver tekst vist, hvergang der trykkes space. Dette skal kun ske, når man vil samle plast
-            Timeline timeline = new Timeline();
-            dialogueAnimation=0;
-            int FPS = 60;
-            KeyFrame frame = new KeyFrame(Duration.millis(1000/FPS),event ->{
-                playerText.setTranslateY(-130);
-                talkNPC(playerText,"Player",0);
-                if (dialogueAnimation / 120==1){
-                    messageOver=true;
-                    hideDialogBox();
+            for (int i = 0; i < plast.length; i++) {
+                if (plast[i].getTranslateX() - 15 <= player.getTranslateX() && plast[i].getTranslateX() + 15 >= player.getTranslateX()) {
+                    if (plast[i].getTranslateY() - 15 <= player.getTranslateY() && plast[i].getTranslateY() + 15 >= player.getTranslateY()) {
+                        Timeline timeline = new Timeline();
+                        dialogueAnimation=0;
+                        int FPS = 60;
+                        KeyFrame frame = new KeyFrame(Duration.millis(1000/FPS),event ->{
+                            playerText.setTranslateY(-130);
+                            talkNPC(playerText,"Player",0);
+                            if (dialogueAnimation / 120==1){
+                                messageOver=true;
+                                hideDialogBox();
+                            }
+                            if (dialogueAnimation<121) {
+                                dialogueAnimation++;
+                            }
+                        });
+                        timeline.setCycleCount(timeline.INDEFINITE);
+                        timeline.getKeyFrames().add(frame);
+                        timeline.play();
+                        if (messageOver) {
+                            timeline.stop();
+                            dialogueAnimation = 0;
+                            messageOver = false;
+                        }
+                    }
                 }
-                if (dialogueAnimation<121) {
-                    dialogueAnimation++;
-                }
-            });
-            timeline.setCycleCount(timeline.INDEFINITE);
-            timeline.getKeyFrames().add(frame);
-            timeline.play();
-            if (messageOver) {
-                timeline.stop();
-                dialogueAnimation = 0;
-                messageOver = false;
             }
         }
     }
