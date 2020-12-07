@@ -126,8 +126,6 @@ public class Controller {
     private Rectangle toolRect;
     @FXML
     private TextField nameField;
-    @FXML
-    private ImageView lockToolSlot;
 
 
     public void initialize() {
@@ -443,7 +441,6 @@ public class Controller {
             } else if (doneRepairing && roadBuilder.getDamaged() == 0 && !gameOver) {
                 hideDialogBox();
                 toolsetImg.setTranslateX(3000);
-                lockToolSlot.setOpacity(0.7);
                 doneRepairing = false;
                 repairSound.AudioStop();
             }
@@ -510,7 +507,6 @@ public class Controller {
         smokeBrokenMachine.setImage(new Image("file:src/sample/presentation/pictures/fireSmoke-1.png"));
         //Show images (& hides highscore)
         showSlotLines();
-        lockToolSlot.setOpacity(0.7);
         inventory.setOpacity(0.5);
         toolRect.setOpacity(0.5);
         roadBuilderView.setOpacity(1);
@@ -891,7 +887,6 @@ public class Controller {
                     playerText.setText("");
                     spaceCount++;
                     playerObject.setToolset(mechanicObject.giveToolset());
-                    lockToolSlot.setOpacity(0);
                     toolsetImg.setImage(new Image("file:" + playerObject.getToolset().getImage()));
                     toolsetImg.setTranslateX(650);
                     toolsetImg.setTranslateY(458);
