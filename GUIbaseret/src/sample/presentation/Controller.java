@@ -402,7 +402,7 @@ public class Controller {
                         if (name.matches(".*[0-9].*") || name.matches(".*[A-Z]*.")) {
                             playerObject.setNames(name);
                             nameField.setOpacity(0);
-                            StartGame();
+                            startGame();
                             gameNotStarted = false;
                         }
                     } else if (!isInventoryFull){
@@ -528,7 +528,7 @@ public class Controller {
         }
     }
 
-    private void StartGame() {
+    private void startGame() {
         backgroundMusic.AudioStop();
         gameOver = false;
         Main.game.createRooms();
