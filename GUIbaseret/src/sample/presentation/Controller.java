@@ -61,11 +61,14 @@ public class Controller {
     private SpriteAnimation playerAnimation = new SpriteAnimation(direction[0]);
     private FireAnimation fireAnimation = new FireAnimation();
     private BrokeMachineAnimation brokeMachineAnimation = new BrokeMachineAnimation();
+    private OldLadyAnimation oldLadyAnimation = new OldLadyAnimation();
     private NoAccess noAccess = new NoAccess();
     private double[] numbersPlayer;
     private double[] numbersFire;
     private double[] numbersBrokenFire;
+    private double[] numbersOldLady;
     private long animationWalk = 0L;
+    private long oldLadyWalk = 0L;
     private boolean gameNotStarted = true;
     private ObservableList<ImageView> inventoryObservable = FXCollections.observableList(new ArrayList<ImageView>());
     private long animationFireSmoke = 0L;
@@ -135,6 +138,7 @@ public class Controller {
     private Text mapText;
     @FXML
     private ImageView dialogNPC;
+
 
 
     public void initialize() {
@@ -823,10 +827,25 @@ public class Controller {
     }
 
     public void showOldLady() {
-        oldLadyNPC.setTranslateX(3000);
         if (Main.game.getCurrentRoom() instanceof Park) {
-            oldLadyNPC.setTranslateX(0);
-            oldLadyNPC.setTranslateY(0);
+            oldLadyNPC.setTranslateX(-112);
+            oldLadyNPC.setTranslateY(-126);
+            Timeline timeline = new Timeline();
+            int FPS = 60;
+            KeyFrame frame = new KeyFrame(Duration.millis(1000 / FPS), event -> {
+                if (oldLadyWalk % 100 == 0) {
+                    oldLadyWalk = 0;
+                    oldLadyNPC.setTranslateY(oldLadyNPC.getTranslateY() + 10);
+                    numbersOldLady = oldLadyAnimation.changePic();
+                    oldLadyNPC.setViewport(new Rectangle2D(numbersOldLady[0], numbersOldLady[1], numbersOldLady[2], numbersOldLady[3]));
+                }
+                oldLadyWalk++;
+            });
+            timeline.setCycleCount(timeline.INDEFINITE);
+            timeline.getKeyFrames().add(frame);
+            timeline.play();
+        } else {
+            oldLadyNPC.setTranslateX(3000);
         }
     }
 
@@ -979,6 +998,7 @@ public class Controller {
             }
         } else if (Main.game.getCurrentRoom() instanceof Park) {
             if (spaceCount == 0) {
+                dialogNPC.setImage(new Image("file:src/sample/presentation/pictures/npc/OldLady.png"));
                 npcTalk.musicPlayerInfinity();
                 talking = true;
                 talkNPC(NPCTextLine, "oldLady", 0);
@@ -986,7 +1006,7 @@ public class Controller {
                 talkNPC(NPCTextLine2, "oldLady", 2);
                 spaceCount++;
             } else if (spaceCount == 1) {
-                int road = (int) (((double)roadBuilder.getInventoryCount()/(double)Main.game.getRoadDone())*100);
+                int road = (int) (((double) roadBuilder.getInventoryCount() / (double) Main.game.getRoadDone()) * 100);
                 playerText.setText("I have built " + road + "% of the road.");
                 spaceCount++;
             } else if (spaceCount == 2) {
