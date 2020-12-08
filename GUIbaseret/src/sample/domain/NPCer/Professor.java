@@ -1,10 +1,5 @@
 package sample.domain.NPCer;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
 public class Professor extends NPC {
     //Insert path into config file.
     private String file = "src/sample/data/textfiles/npcDescriptions/ProfessorText.txt";

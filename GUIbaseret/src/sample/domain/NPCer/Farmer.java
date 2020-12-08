@@ -18,7 +18,7 @@ public class Farmer extends NPC {
     private String file = "src/sample/data/textfiles/npcDescriptions/FarmText.txt";
 
     public Farmer(String name) {
-        super(name,"src/sample/presentation/pictures/npc/farmer.png");
+        super(name, "src/sample/presentation/pictures/npc/farmer.png");
         fillPlasticArray();
     }
 
@@ -34,8 +34,9 @@ public class Farmer extends NPC {
     }
 
     public void emptyPlasticForPlayer() {
-        List<Plastic> newInv = Controller.playerObject.getPlasticInv();;
-        for (Plastic plastic: plasticForPlayer) {
+        List<Plastic> newInv = Controller.playerObject.getPlasticInv();
+        ;
+        for (Plastic plastic : plasticForPlayer) {
             newInv.add(plastic);
         }
         Controller.playerObject.setPlasticInv(newInv);
