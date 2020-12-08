@@ -1,6 +1,6 @@
 package sample.domain;
 
-import sample.data.ReadFromFile;
+import sample.data.FileHandler;
 
 public class DialogNPC {
     private String image = "src/sample/presentation/pictures/DialogBox.png";
@@ -8,6 +8,7 @@ public class DialogNPC {
     private String professorText = "src/sample/data/textfiles/npcDescriptions/ProfessorText.txt";
     private String mechanicText = "src/sample/data/textfiles/npcDescriptions/VillagerText.txt";
     private String roadbuilderText = "src/sample/data/textfiles/npcDescriptions/RoadbuilderText.txt";
+    private String playerText = "src/sample/data/textfiles/npcDescriptions/Playertext.txt";
 
 
 
@@ -15,19 +16,27 @@ public class DialogNPC {
         return image;
     }
 
-    public String getNPCText (String NPC, int num) {
-        if (NPC.equals("farmer")) {
-            ReadFromFile getNPCText = new ReadFromFile();
-            return getNPCText.ReadFile(farmerText,num);
-        } else if (NPC.equals("professor")) {
-            ReadFromFile getNPCText = new ReadFromFile();
-            return getNPCText.ReadFile(professorText,num);
-        } else if (NPC.equals("mechanic")) {
-            ReadFromFile getNPCText = new ReadFromFile();
-            return getNPCText.ReadFile(mechanicText,num);
-        } else if (NPC.equals("Road builder")) {
-            ReadFromFile getNPCText = new ReadFromFile();
-            return getNPCText.ReadFile(roadbuilderText,num);
+    public String getNPCText(String character, int index) {
+        if (character.equals("farmer")) {
+            FileHandler getNPCText = new FileHandler();
+            var text = getNPCText.ReadFile(farmerText, index);
+            return text;
+        } else if (character.equals("professor")) {
+            FileHandler getNPCText = new FileHandler();
+            var text = getNPCText.ReadFile(professorText, index);
+            return text;
+        } else if (character.equals("mechanic")) {
+            FileHandler getNPCText = new FileHandler();
+            var text = getNPCText.ReadFile(mechanicText, index);
+            return text;
+        } else if (character.equals("Road builder")) {
+            FileHandler getNPCText = new FileHandler();
+            var text = getNPCText.ReadFile(roadbuilderText, index);
+            return text;
+        } else if (character.equals("Player")) {
+            FileHandler getNPCText = new FileHandler();
+            var text = getNPCText.ReadFile(playerText, index);
+            return text;
         }
         return "not possible";
     }
