@@ -1,6 +1,6 @@
 package sample.domain;
 
-import sample.data.ReadFromFile;
+import sample.data.FileHandler;
 
 public class DialogNPC {
     private String image = "src/sample/presentation/pictures/DialogBox.png";
@@ -14,25 +14,25 @@ public class DialogNPC {
         return image;
     }
 
-    public String getNPCText (String character, int index) {
+    public String getNPCText(String character, int index) {
         if (character.equals("farmer")) {
-            ReadFromFile getNPCText = new ReadFromFile();
-            var text = getNPCText.ReadFile(farmerText,index);
+            FileHandler getNPCText = new FileHandler();
+            var text = getNPCText.ReadFile(farmerText, index);
             return text;
         } else if (character.equals("professor")) {
-            ReadFromFile getNPCText = new ReadFromFile();
-            var text = getNPCText.ReadFile(professorText,index);
+            FileHandler getNPCText = new FileHandler();
+            var text = getNPCText.ReadFile(professorText, index);
             return text;
         } else if (character.equals("mechanic")) {
-            ReadFromFile getNPCText = new ReadFromFile();
-            var text = getNPCText.ReadFile(mechanicText,index);
+            FileHandler getNPCText = new FileHandler();
+            var text = getNPCText.ReadFile(mechanicText, index);
             return text;
         } else if (character.equals("Road builder")) {
-            ReadFromFile getNPCText = new ReadFromFile();
-            var text =  getNPCText.ReadFile(roadbuilderText,index);
+            FileHandler getNPCText = new FileHandler();
+            var text = getNPCText.ReadFile(roadbuilderText, index);
             return text;
         } else if (character.equals("Player")) {
-            ReadFromFile getNPCText = new ReadFromFile();
+            FileHandler getNPCText = new FileHandler();
             var text = getNPCText.ReadFile(playerText, index);
             return text;
         }

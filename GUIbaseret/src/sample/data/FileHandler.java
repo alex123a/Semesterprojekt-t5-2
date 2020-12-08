@@ -1,19 +1,27 @@
 package sample.data;
 
-import sample.domain.DataTransferAsk;
-import sample.domain.Player;
 import sample.presentation.Controller;
-import sample.presentation.ControllerAsk;
 
 import java.io.*;
-import java.util.Scanner;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
-public class WriteToFile {
+public class FileHandler {
     private PrintWriter printWriter;
+
+    public String ReadFile(String path, int index) {
+        String line = "";
+        try {
+            return Files.readAllLines(Paths.get(path)).get(index);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return line;
+    }
 
     public void writeToFile(double slider1, double slider2, double slider3, String text) {
         try {
-            printWriter = new PrintWriter(new FileWriter(new File("src/sample/answers.txt"),true));
+            printWriter = new PrintWriter(new FileWriter(new File("src/sample/answers.txt"), true));
             printWriter.println(Controller.playerObject.getName());
             printWriter.println("Hvad var din viden omkring brugen af plastik i veje, før du prøvet spillet? (0 er ingen viden,  10 er ekspert viden)");
             printWriter.println(slider1);
@@ -32,5 +40,3 @@ public class WriteToFile {
         }
     }
 }
-
-
