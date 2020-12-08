@@ -56,6 +56,7 @@ public class Controller {
     private boolean professorTalk = false;
     private boolean mechanicTalk = false;
     private boolean talking = false;
+    private boolean firstTimeEntering = true;
     private String[] direction = {"North", "South", "West", "East"};
     private SpriteAnimation playerAnimation = new SpriteAnimation(direction[0]);
     private FireAnimation fireAnimation = new FireAnimation();
@@ -651,6 +652,11 @@ public class Controller {
             showFarmer();
             showProfessor();
             showMechanic();
+            if (firstTimeEntering) {
+                showDialogBox();
+                NPCTextLine.setTranslateY(-210);
+                talkNPC(NPCTextLine, "Road builder", 4);
+            }
         }
     }
 
@@ -843,19 +849,6 @@ public class Controller {
         NPCTextLine2.setTranslateY(-170);
         playerText.setTranslateY(-130);
 
-        if (Main.game.getCurrentRoom() instanceof RoadBuild) {
-            if (!roadbuilderTalked) {
-                talkNPC(NPCTextLine, "roadbuilder", 4);
-                if (spaceCount == 1) {
-                    npcTalk.musicPlayerInfinity();
-                    talkNPC(NPCTextLine, "roadbuilder", 0);
-                    talkNPC(NPCTextLine1, "roadbuilder", 1);
-                    talkNPC(NPCTextLine2, "roadbuilder", 2);
-                    spaceCount++;
-
-                }
-            }
-        }
         //Farmer
         if (Main.game.getCurrentRoom() instanceof Farm) {
             if (farmerTalked == 0) {
