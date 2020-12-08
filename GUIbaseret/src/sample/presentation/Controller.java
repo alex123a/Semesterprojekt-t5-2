@@ -653,6 +653,10 @@ public class Controller {
         if (Main.game.getCurrentRoom() instanceof Park) {
             showBird();
         }
+        if (!roadbuilderTalked) {
+            NPCTextLine.setTranslateY(-210);
+            talkNPC(NPCTextLine, "Road builder", 4);
+        }
     }
 
     public void changeNorth() {
@@ -670,10 +674,7 @@ public class Controller {
                 showFarmer();
                 showProfessor();
                 showMechanic();
-                if (!roadbuilderTalked) {
-                    NPCTextLine.setTranslateY(-210);
-                    talkNPC(NPCTextLine, "Road builder", 4);
-                }
+                checkForNpcs();
             }
         }
     }
@@ -695,6 +696,7 @@ public class Controller {
             hideDialogBox();
             showRoadBuilderRoad();
             generatePlasticInRoom(Main.game.placePlastic());
+            checkForNpcs();
         }
     }
 
@@ -715,6 +717,7 @@ public class Controller {
             hideDialogBox();
             showRoadBuilderRoad();
             generatePlasticInRoom(Main.game.placePlastic());
+            checkForNpcs();
         }
     }
 
@@ -735,6 +738,7 @@ public class Controller {
             hideDialogBox();
             showRoadBuilderRoad();
             generatePlasticInRoom(Main.game.placePlastic());
+            checkForNpcs();
         }
     }
 
