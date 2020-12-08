@@ -643,77 +643,85 @@ public class Controller {
 
     public void changeNorth() {
         if (professorTalk) {
-            if (!(Main.game.getCurrentRoom() instanceof Beach || Main.game.getCurrentRoom() instanceof Farm || Main.game.getCurrentRoom() instanceof Town || Main.game.getCurrentRoom() instanceof Park)) {
-                player.setTranslateY(204);
-            }
-            Game.changedRoom = "north";
-            Main.game.goRoom();
-            backgroundRoom.setImage(new Image("file:" + background));
-            hideDialogBox();
-            showRoadBuilderRoad();
-            generatePlasticInRoom(Main.game.placePlastic());
-            showFarmer();
-            showProfessor();
-            showMechanic();
-            if (!roadbuilderTalked) {
-                NPCTextLine.setTranslateY(-210);
-                talkNPC(NPCTextLine, "Road builder", 4);
+            if (!(Main.game.getCurrentRoom() instanceof RoadBuild) || Main.game.getCurrentRoom() instanceof RoadBuild ^ !roadbuilderTalked) {
+                if (!(Main.game.getCurrentRoom() instanceof Beach || Main.game.getCurrentRoom() instanceof Farm || Main.game.getCurrentRoom() instanceof Town || Main.game.getCurrentRoom() instanceof Park)) {
+                    player.setTranslateY(204);
+                }
+                Game.changedRoom = "north";
+                Main.game.goRoom();
+                backgroundRoom.setImage(new Image("file:" + background));
+                hideDialogBox();
+                showRoadBuilderRoad();
+                generatePlasticInRoom(Main.game.placePlastic());
+                showFarmer();
+                showProfessor();
+                showMechanic();
+                if (!roadbuilderTalked) {
+                    NPCTextLine.setTranslateY(-210);
+                    talkNPC(NPCTextLine, "Road builder", 4);
+                }
             }
         }
     }
 
     public void changeSouth() {
-        if (!(Main.game.getCurrentRoom() instanceof Beach || Main.game.getCurrentRoom() instanceof Farm || Main.game.getCurrentRoom() instanceof Town || Main.game.getCurrentRoom() instanceof Sdu)) {
-            player.setTranslateY(-200);
+        if (roadbuilderTalked) {
+            if (!(Main.game.getCurrentRoom() instanceof Beach || Main.game.getCurrentRoom() instanceof Farm || Main.game.getCurrentRoom() instanceof Town || Main.game.getCurrentRoom() instanceof Sdu)) {
+                player.setTranslateY(-200);
+            }
+            if (Main.game.getCurrentRoom() instanceof Park) {
+                player.setTranslateX(-117.5);
+            }
+            if (Main.game.getCurrentRoom() instanceof RoadBuild) {
+                player.setTranslateY(-150);
+            }
+            Game.changedRoom = "south";
+            Main.game.goRoom();
+            backgroundRoom.setImage(new Image("file:" + background));
+            hideDialogBox();
+            showRoadBuilderRoad();
+            generatePlasticInRoom(Main.game.placePlastic());
         }
-        if (Main.game.getCurrentRoom() instanceof Park) {
-            player.setTranslateX(-117.5);
-        }
-        if (Main.game.getCurrentRoom() instanceof RoadBuild) {
-            player.setTranslateY(-150);
-        }
-        Game.changedRoom = "south";
-        Main.game.goRoom();
-        backgroundRoom.setImage(new Image("file:" + background));
-        hideDialogBox();
-        showRoadBuilderRoad();
-        generatePlasticInRoom(Main.game.placePlastic());
     }
 
     public void changeWest() {
-        if (!(Main.game.getCurrentRoom() instanceof Beach || Main.game.getCurrentRoom() instanceof Sdu || Main.game.getCurrentRoom() instanceof Park)) {
-            player.setTranslateX(327);
+        if (roadbuilderTalked) {
+            if (!(Main.game.getCurrentRoom() instanceof Beach || Main.game.getCurrentRoom() instanceof Sdu || Main.game.getCurrentRoom() instanceof Park)) {
+                player.setTranslateX(327);
+            }
+            if (Main.game.getCurrentRoom() instanceof Town) {
+                player.setTranslateY(-77);
+            }
+            if (Main.game.getCurrentRoom() instanceof Farm) {
+                player.setTranslateY(-33.5);
+            }
+            Game.changedRoom = "west";
+            Main.game.goRoom();
+            backgroundRoom.setImage(new Image("file:" + background));
+            hideDialogBox();
+            showRoadBuilderRoad();
+            generatePlasticInRoom(Main.game.placePlastic());
         }
-        if (Main.game.getCurrentRoom() instanceof Town) {
-            player.setTranslateY(-77);
-        }
-        if (Main.game.getCurrentRoom() instanceof Farm) {
-            player.setTranslateY(-33.5);
-        }
-        Game.changedRoom = "west";
-        Main.game.goRoom();
-        backgroundRoom.setImage(new Image("file:" + background));
-        hideDialogBox();
-        showRoadBuilderRoad();
-        generatePlasticInRoom(Main.game.placePlastic());
     }
 
     public void changeEast() {
-        if (!(Main.game.getCurrentRoom() instanceof Sdu || Main.game.getCurrentRoom() instanceof Town || Main.game.getCurrentRoom() instanceof Farm)) {
-            player.setTranslateX(-327);
+        if (roadbuilderTalked) {
+            if (!(Main.game.getCurrentRoom() instanceof Sdu || Main.game.getCurrentRoom() instanceof Town || Main.game.getCurrentRoom() instanceof Farm)) {
+                player.setTranslateX(-327);
+            }
+            if (Main.game.getCurrentRoom() instanceof RoadBuild) {
+                player.setTranslateY(-30);
+            }
+            if (Main.game.getCurrentRoom() instanceof Park) {
+                player.setTranslateY(-76);
+            }
+            Game.changedRoom = "east";
+            Main.game.goRoom();
+            backgroundRoom.setImage(new Image("file:" + background));
+            hideDialogBox();
+            showRoadBuilderRoad();
+            generatePlasticInRoom(Main.game.placePlastic());
         }
-        if (Main.game.getCurrentRoom() instanceof RoadBuild) {
-            player.setTranslateY(-30);
-        }
-        if (Main.game.getCurrentRoom() instanceof Park) {
-            player.setTranslateY(-76);
-        }
-        Game.changedRoom = "east";
-        Main.game.goRoom();
-        backgroundRoom.setImage(new Image("file:" + background));
-        hideDialogBox();
-        showRoadBuilderRoad();
-        generatePlasticInRoom(Main.game.placePlastic());
     }
 
     public void smokeMachine() {
@@ -876,7 +884,7 @@ public class Controller {
                 spaceCount++;
             } else if (spaceCount == 4) {
                 hideDialogBox();
-                professorTalk = true;
+                roadbuilderTalked = true;
             }
         }
         //Farmer
