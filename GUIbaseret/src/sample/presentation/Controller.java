@@ -1014,22 +1014,22 @@ public class Controller {
             } else if (spaceCount == 3) {
                 hideDialogBox();
             }
-        } else if (Main.game.getCurrentRoom() instanceof Beach){
-            if (spaceCount==0){
+        } else if (Main.game.getCurrentRoom() instanceof Beach) {
+            if (spaceCount == 0) {
                 dialogNPC.setImage(new Image("file:src/sample/presentation/pictures/npc/fisherMan.png"));
                 npcTalk.musicPlayerInfinity();
                 talking = true;
-                talkNPC(NPCTextLine,"Fisherman",0);
+                talkNPC(NPCTextLine, "Fisherman", 0);
                 spaceCount++;
-            } else if (spaceCount==1){
+            } else if (spaceCount == 1) {
                 NPCTextLine.setText("");
-                talkNPC(NPCTextLine,"Fisherman",1);
+                talkNPC(NPCTextLine, "Fisherman", 1);
                 spaceCount++;
-            } else if(spaceCount==2){
+            } else if (spaceCount == 2) {
                 NPCTextLine.setText("");
-                talkNPC(NPCTextLine,"Fisherman",2);
+                talkNPC(NPCTextLine, "Fisherman", 2);
                 spaceCount++;
-            } else if(spaceCount==3){
+            } else if (spaceCount == 3) {
                 hideDialogBox();
             }
         }
