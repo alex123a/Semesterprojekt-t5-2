@@ -12,6 +12,10 @@ public class NoAccess {
     private int[] yCordinatesTree = new int[]{36, 86, 44, 86, 106, 192, 114, 154, 129, 171, 134, 174, -245, -206, -221, -188};
     private int[] xCordinateBush = new int[]{-210,-295,-340,-182,77,62,305,152,275,315,-77};
     private int[] yCordinateBush = new int[]{64,46,159,181,129,169,99,-216,-208,-191,128};
+    private int[] xCordinatesTreeFarm = new int[]{-324,-312,-182,-182,-319,-307,248,255,298,315};
+    private int[] yCordinatesTreeFarm = new int[]{91,116,-221,-221,-186,-153,36,71,104,144};
+    private int[] xCordinatesPalm = new int[]{92,117,252,274,14,34,157,179,14,37,267,287,-25,0};
+    private int[] yCordinatesPalm = new int[]{-220,-170,-221,-193,-78,-26,-21,26,101,144,81,126,-221,-193};
 
     public boolean moveBlock(double objx, double objy, int x, int y) {
         boolean cantMove = false;
@@ -50,7 +54,7 @@ public class NoAccess {
         }
         //Beach
         if (Main.game.getCurrentRoom() instanceof Beach) {
-            Rectangle ocean = new Rectangle(-340.5, -220, 240, 500);
+            Rectangle ocean = new Rectangle(-340.5, -221, 240, 500);
             if (ocean.contains(objx + x, objy + y)) {
                 cantMove = true;
             }
@@ -60,6 +64,9 @@ public class NoAccess {
             }
             Rectangle ladyNoTwo = new Rectangle(155, 170, 80, 40);
             if (ladyNoTwo.contains(objx + x, objy + y)) {
+                cantMove = true;
+            }
+            if(palmIdentifyer(xCordinatesPalm,yCordinatesPalm,objx,objy,x,y)){
                 cantMove = true;
             }
         }
@@ -80,6 +87,9 @@ public class NoAccess {
             }
             Rectangle farmer = new Rectangle(170, -6, 43, 50);
             if (farmer.contains(objx + x, objy + y)) {
+                cantMove = true;
+            }
+            if (treeIdentifyer(xCordinatesTreeFarm, yCordinatesTreeFarm, objx, objy, x, y)) {
                 cantMove = true;
             }
         }
@@ -253,5 +263,20 @@ public class NoAccess {
         }
         return inrange;
 
+    }
+    public boolean palmIdentifyer(int[] xCordinates, int[] yCordinates, double objx, double objy, int x, int y) {
+        Area tree = new Area();
+        boolean inrange = false;
+        for (int i = 0; i < xCordinates.length; i++) {
+            Area treeCrown = new Area(new java.awt.Rectangle(xCordinates[i], yCordinates[i], 80, 55));
+            i++;
+            Area treeStem = new Area(new java.awt.Rectangle(xCordinates[i], yCordinates[i], 25, 60));
+            tree.add(treeCrown);
+            tree.add(treeStem);
+            if (tree.contains(objx + x, objy + y)) {
+                inrange = true;
+            }
+        }
+        return inrange;
     }
 }
