@@ -24,6 +24,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import sample.domain.*;
 import sample.domain.NPCer.Farmer;
+import sample.domain.NPCer.Fisherman;
 import sample.domain.NPCer.Mechanic;
 import sample.domain.NPCer.Professor;
 import sample.domain.PlasticElements.*;
@@ -47,6 +48,7 @@ public class Controller {
     public static Professor professorObject = new Professor("Professor");
     public static Mechanic mechanicObject = new Mechanic("Mechanic");
     public static Farmer farmerObject = new Farmer("Farmer");
+    public static Fisherman fishermanObject = new Fisherman("Fisherman");
     public static DialogNPC dialog = new DialogNPC();
     public static Timer highScoreTimer = new Timer();
     private boolean north, south, east, west;
@@ -104,6 +106,8 @@ public class Controller {
     public ImageView mechanicNpc;
     @FXML
     public ImageView farmerNpc;
+    @FXML
+    ImageView fishermanNpc;
     @FXML
     public ImageView dialogBox;
     @FXML
@@ -537,6 +541,7 @@ public class Controller {
         professorNpc.setImage(new Image("file:" + professorObject.getImage()));
         mechanicNpc.setImage(new Image("file:" + mechanicObject.getImage()));
         farmerNpc.setImage(new Image("file:" + farmerObject.getImage()));
+        fishermanNpc.setImage(new Image("file:" + fishermanObject.getImage()));
         dialogBox.setImage(new Image("file:" + dialog.getImage()));
         smoke.setImage(new Image("file:src/sample/presentation/pictures/buildSmoke.png"));
         smokeBrokenMachine.setImage(new Image("file:src/sample/presentation/pictures/fireSmoke-1.png"));
@@ -771,6 +776,7 @@ public class Controller {
             showFarmer();
             showProfessor();
             showMechanic();
+            showFisherman();
             if (Main.game.getCurrentRoom() instanceof RoadBuild) {
                 roadView.setViewport(new Rectangle2D(-681 + (roadBuilder.getInventoryCount() * 18.9166 + 113.5), 0, 681, 69));
             } else {
@@ -810,6 +816,14 @@ public class Controller {
         if (Main.game.getCurrentRoom() instanceof Farm) {
             farmerNpc.setTranslateX(190);
             farmerNpc.setTranslateY(2);
+        }
+    }
+
+    public void showFisherman(){
+        fishermanNpc.setTranslateX(3000);
+        if (Main.game.getCurrentRoom() instanceof Beach){
+            fishermanNpc.setTranslateX(-83);
+            fishermanNpc.setTranslateY(-171);
         }
     }
 
