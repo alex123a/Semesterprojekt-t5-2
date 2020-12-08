@@ -94,6 +94,8 @@ public class Controller {
     private boolean isInventoryFull = false;
     private boolean gameOver = false;
     private int animationBird = 0;
+    private Timeline oldLadyTimeline = new Timeline();
+    private Timeline pigeonTimeline = new Timeline();
 
     @FXML
     private ImageView backgroundRoom;
@@ -585,6 +587,7 @@ public class Controller {
         movementMachine();
         smokeMachine();
         smokeBrokenMachine();
+        checkForNpcs();
         //Starts the time for highscorelist
         highScoreTimer.setStartTime();
         backgroundMusic.musicPlayerInfinity();
@@ -654,9 +657,18 @@ public class Controller {
     }
 
     public void checkForNpcs() {
+        showBirdAnimation();
+        showOldLady();
+    }
+
+    public void showNpcs() {
         if (Main.game.getCurrentRoom() instanceof Park) {
-            showBird();
-            showOldLady();
+            pigeon.setOpacity(1);
+            oldLadyNPC.setOpacity(1);
+
+        } else {
+            pigeon.setOpacity(0);
+            oldLadyNPC.setOpacity(0);
         }
     }
 
@@ -675,7 +687,7 @@ public class Controller {
                 showFarmer();
                 showProfessor();
                 showMechanic();
-                checkForNpcs();
+                showNpcs();
                 if (!roadbuilderTalked) {
                     NPCTextLine.setTranslateY(-210);
                     talkNPC(NPCTextLine, "Road builder", 4);
@@ -701,7 +713,7 @@ public class Controller {
             hideDialogBox();
             showRoadBuilderRoad();
             generatePlasticInRoom(Main.game.placePlastic());
-            checkForNpcs();
+            showNpcs();
         }
     }
 
@@ -722,7 +734,7 @@ public class Controller {
             hideDialogBox();
             showRoadBuilderRoad();
             generatePlasticInRoom(Main.game.placePlastic());
-            checkForNpcs();
+            showNpcs();
         }
     }
 
@@ -743,7 +755,7 @@ public class Controller {
             hideDialogBox();
             showRoadBuilderRoad();
             generatePlasticInRoom(Main.game.placePlastic());
-            checkForNpcs();
+            showNpcs();
         }
     }
 
@@ -867,18 +879,7 @@ public class Controller {
         }
     }
 
-    public void showBird() {
-        pigeon.setTranslateX(3000);
-        if (Main.game.getCurrentRoom() instanceof Park) {
-            pigeon.setTranslateX(-190);
-            pigeon.setTranslateY(65);
-            animationBird = 0;
-            birdAnimation();
-        }
-    }
-
-    public void birdAnimation() {
-        Timeline timeline = new Timeline();
+    public void showBirdAnimation() {
         int FPS = 60;
         KeyFrame frame = new KeyFrame(Duration.millis(1000 / FPS), event -> {
             if (Main.game.getCurrentRoom() instanceof Park) {
@@ -900,13 +901,11 @@ public class Controller {
                     pigeon.setTranslateX(pigeonWidth);
                 }
                 animationBird++;
-            } else {
-                pigeon.setTranslateX(3000);
             }
         });
-        timeline.setCycleCount(timeline.INDEFINITE);
-        timeline.getKeyFrames().add(frame);
-        timeline.play();
+        pigeonTimeline.setCycleCount(pigeonTimeline.INDEFINITE);
+        pigeonTimeline.getKeyFrames().add(frame);
+        pigeonTimeline.play();
     }
 
     public void showFisherman() {
@@ -918,12 +917,8 @@ public class Controller {
     }
 
     public void showOldLady() {
-        oldLadyNPC.setTranslateX(3000);
         oldLadyWalk = 0;
         if (Main.game.getCurrentRoom() instanceof Park) {
-            oldLadyNPC.setTranslateX(-112);
-            oldLadyNPC.setTranslateY(-185);
-            Timeline timeline = new Timeline();
             int FPS = 60;
             KeyFrame frame = new KeyFrame(Duration.millis(1000 / FPS), event -> {
                 if (talking) {
@@ -943,9 +938,9 @@ public class Controller {
                 }
                 oldLadyWalk++;
             });
-            timeline.setCycleCount(timeline.INDEFINITE);
-            timeline.getKeyFrames().add(frame);
-            timeline.play();
+            oldLadyTimeline.setCycleCount(oldLadyTimeline.INDEFINITE);
+            oldLadyTimeline.getKeyFrames().add(frame);
+            oldLadyTimeline.play();
         }
     }
 
