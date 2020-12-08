@@ -21,7 +21,6 @@ public class RoadBuilder {
     public void damagedMachine() {
         if (inventoryCount >= 19 && !haveSpoken) {
             damaged = 100;
-            System.out.println("Machine: \"Oh no i have stopped working, talk to the mechanic in the town\"");
             haveSpoken = true;
         }
     }

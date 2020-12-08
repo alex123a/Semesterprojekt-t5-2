@@ -14,11 +14,11 @@ import java.util.Random;
 public class Farmer extends NPC {
     final private int randomNumber = (new Random()).nextInt(8 - 5 + 1) + 5;
     private Plastic[] plasticForPlayer = new Plastic[randomNumber];
-    // private File file = Paths.get(new File("worldofzuul/NPC/NPC-descriptions/FarmerenText.txt").getAbsolutePath()).toFile();
-    private String file = "src/sample/data/textfiles/npcDescriptions/FarmerenText.txt";
+    // private File file = Paths.get(new File("worldofzuul/NPC/NPC-descriptions/FarmText.txt").getAbsolutePath()).toFile();
+    private String file = "src/sample/data/textfiles/npcDescriptions/FarmText.txt";
 
     public Farmer(String name) {
-        super(name,"src/sample/presentation/pictures/npc/farmer.png");
+        super(name, "src/sample/presentation/pictures/npc/farmer.png");
         fillPlasticArray();
     }
 
@@ -34,8 +34,9 @@ public class Farmer extends NPC {
     }
 
     public void emptyPlasticForPlayer() {
-        List<Plastic> newInv = Controller.playerObject.getPlasticInv();;
-        for (Plastic plastic: plasticForPlayer) {
+        List<Plastic> newInv = Controller.playerObject.getPlasticInv();
+        ;
+        for (Plastic plastic : plasticForPlayer) {
             newInv.add(plastic);
         }
         Controller.playerObject.setPlasticInv(newInv);
