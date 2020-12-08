@@ -652,10 +652,7 @@ public class Controller {
     public void checkForNpcs() {
         if (Main.game.getCurrentRoom() instanceof Park) {
             showBird();
-        }
-        if (!roadbuilderTalked) {
-            NPCTextLine.setTranslateY(-210);
-            talkNPC(NPCTextLine, "Road builder", 4);
+            showOldLady();
         }
     }
 
@@ -675,6 +672,10 @@ public class Controller {
                 showProfessor();
                 showMechanic();
                 checkForNpcs();
+                if (!roadbuilderTalked) {
+                    NPCTextLine.setTranslateY(-210);
+                    talkNPC(NPCTextLine, "Road builder", 4);
+                }
             }
         }
     }
@@ -819,7 +820,6 @@ public class Controller {
             showProfessor();
             showMechanic();
             showFisherman();
-            showOldLady();
             if (Main.game.getCurrentRoom() instanceof RoadBuild) {
                 roadView.setViewport(new Rectangle2D(-681 + (roadBuilder.getInventoryCount() * 18.9166 + 113.5), 0, 681, 69));
             } else {
@@ -884,13 +884,13 @@ public class Controller {
                     pigeon.setViewport(new Rectangle2D(numbersPig[0], numbersPig[1], numbersPig[2], numbersPig[3]));
                     double pigeonHeight = pigeon.getTranslateY();
                     double pigeonWidth = pigeon.getTranslateX();
-                    if (numbersPig[4] % 48 <= 12) {
+                    if (numbersPig[4] % 48 > 0 && numbersPig[4] % 48 <= 12) {
                         pigeonHeight += 10;
                     } else if (numbersPig[4] % 48 > 12 && numbersPig[4] % 48 <= 24) {
                         pigeonWidth -= 10;
                     } else if (numbersPig[4] % 48 > 24 && numbersPig[4] % 48 <= 36) {
                         pigeonHeight -= 10;
-                    } else {
+                    } else if (numbersPig[4] % 48 > 36 && numbersPig[4] % 48 < 48 || numbersPig[4] % 48 == 0) {
                         pigeonWidth += 10;
                     }
                     pigeon.setTranslateY(pigeonHeight);
@@ -904,6 +904,8 @@ public class Controller {
         timeline.setCycleCount(timeline.INDEFINITE);
         timeline.getKeyFrames().add(frame);
         timeline.play();
+    }
+
     public void showFisherman() {
         fishermanNpc.setTranslateX(3000);
         if (Main.game.getCurrentRoom() instanceof Beach) {
