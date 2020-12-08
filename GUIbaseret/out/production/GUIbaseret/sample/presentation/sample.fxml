@@ -50,7 +50,8 @@
             <ImageView fx:id="farmerNpc" fitHeight="45.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true" translateX="3000" />
             <ImageView fx:id="mechanicNpc" fitHeight="45.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true" translateX="3000" />
             <ImageView fx:id="professorNpc" fitHeight="45.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true" translateX="3000" />
-            <ImageView fx:id="oldLadyNPC" fitHeight="59.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true" translateX="3000" />
+            <ImageView fx:id="pigeon" fitHeight="45.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true" translateX="3000" />
+            <ImageView fx:id="oldLadyNPC" fitHeight="48.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true" translateX="3000" />
             <ImageView fx:id="fishermanNpc" fitHeight="59.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true" translateX="3000" />
             <ImageView fx:id="dialogBox" fitHeight="266.0" fitWidth="635.0" pickOnBounds="true" preserveRatio="true" translateY="3000" />
             <ImageView fx:id="dialogNPC" fitHeight="85.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" translateX="300" translateY="-166" />
