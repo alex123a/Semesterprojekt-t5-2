@@ -689,6 +689,9 @@ public class Controller {
                 showMechanic();
                 showNpcs();
                 if (!roadbuilderTalked) {
+                    dialogNPC.setImage(new Image("file:src/sample/presentation/pictures/RoadBuilder.png"));
+                    dialogNPC.setScaleX(3.5);
+                    dialogNPC.setScaleY(3.5);
                     NPCTextLine.setTranslateY(-210);
                     talkNPC(NPCTextLine, "Road builder", 4);
                 }
@@ -966,6 +969,7 @@ public class Controller {
 
         //Roadbuilder
         if (Main.game.getCurrentRoom() instanceof RoadBuild) {
+            dialogNPC.setImage(new Image("file:src/sample/presentation/pictures/RoadBuilder.png"));
             if (spaceCount == 0 && !roadbuilderTalked) {
                 npcTalk.musicPlayerInfinity();
                 talking = true;
@@ -987,6 +991,8 @@ public class Controller {
                 talkNPC(playerText, "Road builder", 11);
                 spaceCount++;
             } else if (spaceCount == 4) {
+                dialogNPC.setScaleX(1);
+                dialogNPC.setScaleY(1);
                 hideDialogBox();
                 roadbuilderTalked = true;
             }
