@@ -35,7 +35,6 @@ import java.io.IOException;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Controller {
 
@@ -60,10 +59,12 @@ public class Controller {
     private SpriteAnimation playerAnimation = new SpriteAnimation(direction[0]);
     private FireAnimation fireAnimation = new FireAnimation();
     private BrokeMachineAnimation brokeMachineAnimation = new BrokeMachineAnimation();
+    private PigeonAnimation pigeonAnimation = new PigeonAnimation();
     private NoAccess noAccess = new NoAccess();
     private double[] numbersPlayer;
     private double[] numbersFire;
     private double[] numbersBrokenFire;
+    private double[] numbersPig;
     private long animationWalk = 0L;
     private boolean gameNotStarted = true;
     private ObservableList<ImageView> inventoryObservable = FXCollections.observableList(new ArrayList<ImageView>());
@@ -83,6 +84,7 @@ public class Controller {
     private long dialogueAnimation = 0L;
     private boolean isInventoryFull = false;
     private boolean gameOver = false;
+    private int animationBird = 0;
 
     @FXML
     private ImageView backgroundRoom;
@@ -132,6 +134,8 @@ public class Controller {
     private Text mapText;
     @FXML
     private ImageView dialogNPC;
+    @FXML
+    public ImageView pigeon = new ImageView("file:src/sample/presentation/pictures/birds.png");
 
     public void initialize() {
         playerText.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
@@ -537,6 +541,7 @@ public class Controller {
         professorNpc.setImage(new Image("file:" + professorObject.getImage()));
         mechanicNpc.setImage(new Image("file:" + mechanicObject.getImage()));
         farmerNpc.setImage(new Image("file:" + farmerObject.getImage()));
+        pigeon.setImage(new Image("file:src/sample/presentation/pictures/birds.png"));
         dialogBox.setImage(new Image("file:" + dialog.getImage()));
         smoke.setImage(new Image("file:src/sample/presentation/pictures/buildSmoke.png"));
         smokeBrokenMachine.setImage(new Image("file:src/sample/presentation/pictures/fireSmoke-1.png"));
@@ -624,6 +629,12 @@ public class Controller {
         }
     }
 
+    public void checkForNpcs() {
+        if (Main.game.getCurrentRoom() instanceof Park) {
+            showBird();
+        }
+    }
+
     public void changeNorth() {
         if (professorTalk) {
             if (!(Main.game.getCurrentRoom() instanceof Beach || Main.game.getCurrentRoom() instanceof Farm || Main.game.getCurrentRoom() instanceof Town || Main.game.getCurrentRoom() instanceof Park)) {
@@ -635,9 +646,7 @@ public class Controller {
             hideDialogBox();
             showRoadBuilderRoad();
             generatePlasticInRoom(Main.game.placePlastic());
-            showFarmer();
-            showProfessor();
-            showMechanic();
+            checkForNpcs();
         }
     }
 
@@ -657,6 +666,7 @@ public class Controller {
         hideDialogBox();
         showRoadBuilderRoad();
         generatePlasticInRoom(Main.game.placePlastic());
+        checkForNpcs();
     }
 
     public void changeWest() {
@@ -675,6 +685,7 @@ public class Controller {
         hideDialogBox();
         showRoadBuilderRoad();
         generatePlasticInRoom(Main.game.placePlastic());
+        checkForNpcs();
     }
 
     public void changeEast() {
@@ -693,6 +704,7 @@ public class Controller {
         hideDialogBox();
         showRoadBuilderRoad();
         generatePlasticInRoom(Main.game.placePlastic());
+        checkForNpcs();
     }
 
     public void smokeMachine() {
@@ -805,12 +817,56 @@ public class Controller {
         }
     }
 
+
     public void showFarmer() {
         farmerNpc.setTranslateX(3000);
         if (Main.game.getCurrentRoom() instanceof Farm) {
             farmerNpc.setTranslateX(190);
             farmerNpc.setTranslateY(2);
         }
+    }
+
+    public void showBird() {
+        pigeon.setTranslateX(3000);
+        if (Main.game.getCurrentRoom() instanceof Park) {
+            pigeon.setTranslateX(-190);
+            pigeon.setTranslateY(65);
+            animationBird = 0;
+            birdAnimation();
+        }
+    }
+
+    public void birdAnimation() {
+        Timeline timeline = new Timeline();
+        int FPS = 60;
+        KeyFrame frame = new KeyFrame(Duration.millis(1000 / FPS), event -> {
+            if (Main.game.getCurrentRoom() instanceof Park) {
+                if (animationBird % 20 == 0) {
+                    //TODO ændre denne del så den passer til fuglen
+                    numbersPig = pigeonAnimation.changePic();
+                    pigeon.setViewport(new Rectangle2D(numbersPig[0], numbersPig[1], numbersPig[2], numbersPig[3]));
+                    double pigeonHeight = pigeon.getTranslateY();
+                    double pigeonWidth = pigeon.getTranslateX();
+                    if (numbersPig[4] % 48 <= 12) {
+                        pigeonHeight += 10;
+                    } else if (numbersPig[4] % 48 > 12 && numbersPig[4] % 48 <= 24) {
+                        pigeonWidth -= 10;
+                    } else if (numbersPig[4] % 48 > 24 && numbersPig[4] % 48 <= 36) {
+                        pigeonHeight -= 10;
+                    } else {
+                        pigeonWidth += 10;
+                    }
+                    pigeon.setTranslateY(pigeonHeight);
+                    pigeon.setTranslateX(pigeonWidth);
+                }
+                animationBird++;
+            } else {
+                pigeon.setTranslateX(3000);
+            }
+        });
+        timeline.setCycleCount(timeline.INDEFINITE);
+        timeline.getKeyFrames().add(frame);
+        timeline.play();
     }
 
     public void hideDialogBox() {
