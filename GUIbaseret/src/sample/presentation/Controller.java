@@ -65,10 +65,12 @@ public class Controller {
     private SpriteAnimation playerAnimation = new SpriteAnimation(direction[0]);
     private FireAnimation fireAnimation = new FireAnimation();
     private BrokeMachineAnimation brokeMachineAnimation = new BrokeMachineAnimation();
+    private PigeonAnimation pigeonAnimation = new PigeonAnimation();
     private NoAccess noAccess = new NoAccess();
     private double[] numbersPlayer;
     private double[] numbersFire;
     private double[] numbersBrokenFire;
+    private double[] numbersPig;
     private long animationWalk = 0L;
     private boolean gameNotStarted = true;
     private ObservableList<ImageView> inventoryObservable = FXCollections.observableList(new ArrayList<ImageView>());
@@ -88,6 +90,7 @@ public class Controller {
     private long dialogueAnimation = 0L;
     private boolean isInventoryFull = false;
     private boolean gameOver = false;
+    private int animationBird = 0;
 
     @FXML
     private ImageView backgroundRoom;
@@ -141,6 +144,8 @@ public class Controller {
     private Text mapText;
     @FXML
     private ImageView dialogNPC;
+    @FXML
+    public ImageView pigeon = new ImageView("file:src/sample/presentation/pictures/birds.png");
 
 
     public void initialize() {
@@ -554,6 +559,7 @@ public class Controller {
         professorNpc.setImage(new Image("file:" + professorObject.getImage()));
         mechanicNpc.setImage(new Image("file:" + mechanicObject.getImage()));
         farmerNpc.setImage(new Image("file:" + farmerObject.getImage()));
+        pigeon.setImage(new Image("file:src/sample/presentation/pictures/birds.png"));
         fishermanNpc.setImage(new Image("file:" + fishermanObject.getImage()));
         oldLadyNPC.setImage(new Image("file:" + oldLadyObject.getImage()));
         dialogBox.setImage(new Image("file:" + dialog.getImage()));
@@ -643,6 +649,13 @@ public class Controller {
         }
     }
 
+    public void checkForNpcs() {
+        if (Main.game.getCurrentRoom() instanceof Park) {
+            showBird();
+            showOldLady();
+        }
+    }
+
     public void changeNorth() {
         if (professorTalk) {
             if (!(Main.game.getCurrentRoom() instanceof RoadBuild) || Main.game.getCurrentRoom() instanceof RoadBuild ^ !roadbuilderTalked) {
@@ -658,6 +671,7 @@ public class Controller {
                 showFarmer();
                 showProfessor();
                 showMechanic();
+                checkForNpcs();
                 if (!roadbuilderTalked) {
                     NPCTextLine.setTranslateY(-210);
                     talkNPC(NPCTextLine, "Road builder", 4);
@@ -683,6 +697,7 @@ public class Controller {
             hideDialogBox();
             showRoadBuilderRoad();
             generatePlasticInRoom(Main.game.placePlastic());
+            checkForNpcs();
         }
     }
 
@@ -703,6 +718,7 @@ public class Controller {
             hideDialogBox();
             showRoadBuilderRoad();
             generatePlasticInRoom(Main.game.placePlastic());
+            checkForNpcs();
         }
     }
 
@@ -723,6 +739,7 @@ public class Controller {
             hideDialogBox();
             showRoadBuilderRoad();
             generatePlasticInRoom(Main.game.placePlastic());
+            checkForNpcs();
         }
     }
 
@@ -803,7 +820,6 @@ public class Controller {
             showProfessor();
             showMechanic();
             showFisherman();
-            showOldLady();
             if (Main.game.getCurrentRoom() instanceof RoadBuild) {
                 roadView.setViewport(new Rectangle2D(-681 + (roadBuilder.getInventoryCount() * 18.9166 + 113.5), 0, 681, 69));
             } else {
@@ -838,12 +854,56 @@ public class Controller {
         }
     }
 
+
     public void showFarmer() {
         farmerNpc.setTranslateX(3000);
         if (Main.game.getCurrentRoom() instanceof Farm) {
             farmerNpc.setTranslateX(190);
             farmerNpc.setTranslateY(2);
         }
+    }
+
+    public void showBird() {
+        pigeon.setTranslateX(3000);
+        if (Main.game.getCurrentRoom() instanceof Park) {
+            pigeon.setTranslateX(-190);
+            pigeon.setTranslateY(65);
+            animationBird = 0;
+            birdAnimation();
+        }
+    }
+
+    public void birdAnimation() {
+        Timeline timeline = new Timeline();
+        int FPS = 60;
+        KeyFrame frame = new KeyFrame(Duration.millis(1000 / FPS), event -> {
+            if (Main.game.getCurrentRoom() instanceof Park) {
+                if (animationBird % 20 == 0) {
+                    //TODO ændre denne del så den passer til fuglen
+                    numbersPig = pigeonAnimation.changePic();
+                    pigeon.setViewport(new Rectangle2D(numbersPig[0], numbersPig[1], numbersPig[2], numbersPig[3]));
+                    double pigeonHeight = pigeon.getTranslateY();
+                    double pigeonWidth = pigeon.getTranslateX();
+                    if (numbersPig[4] % 48 > 0 && numbersPig[4] % 48 <= 12) {
+                        pigeonHeight += 10;
+                    } else if (numbersPig[4] % 48 > 12 && numbersPig[4] % 48 <= 24) {
+                        pigeonWidth -= 10;
+                    } else if (numbersPig[4] % 48 > 24 && numbersPig[4] % 48 <= 36) {
+                        pigeonHeight -= 10;
+                    } else if (numbersPig[4] % 48 > 36 && numbersPig[4] % 48 < 48 || numbersPig[4] % 48 == 0) {
+                        pigeonWidth += 10;
+                    }
+                    pigeon.setTranslateY(pigeonHeight);
+                    pigeon.setTranslateX(pigeonWidth);
+                }
+                animationBird++;
+            } else {
+                pigeon.setTranslateX(3000);
+            }
+        });
+        timeline.setCycleCount(timeline.INDEFINITE);
+        timeline.getKeyFrames().add(frame);
+        timeline.play();
     }
 
     public void showFisherman() {
