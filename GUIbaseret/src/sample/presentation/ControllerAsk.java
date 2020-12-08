@@ -5,12 +5,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
-import sample.data.WriteToFile;
 import sample.domain.DataTransferAsk;
 
 
 public class ControllerAsk {
-    private static WriteToFile saveAsk = new WriteToFile();
     public static Stage theStage;
     DataTransferAsk dataTransferAsk = new DataTransferAsk();
 
