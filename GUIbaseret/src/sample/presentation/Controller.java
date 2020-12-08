@@ -51,6 +51,7 @@ public class Controller {
     private boolean north, south, east, west;
     private int spaceCount = 0;
     private int farmerTalked = 0;
+    private boolean roadbuilderTalked = false;
     private boolean farmerTalk = false;
     private boolean professorTalk = false;
     private boolean mechanicTalk = false;
@@ -254,7 +255,7 @@ public class Controller {
         timeline.stop();
         ImageView[] plast = {plast1, plast2, plast3, plast4, plast5, plast6, plast7, plast8, plast9, plast10, plast11, plast12, plast13, plast14, plast15,
                 plast16, plast17, plast18, plast19, plast20};
-        if (playerObject.getPlasticInv().size() < 10) {
+        if (playerObject.getPlasticInv().size() < 10 && roadbuilderTalked) {
             for (int i = 0; i < plast.length; i++) {
                 if (plast[i].getTranslateX() - 15 <= player.getTranslateX() && plast[i].getTranslateX() + 15 >= player.getTranslateX()) {
                     if (plast[i].getTranslateY() - 15 <= player.getTranslateY() && plast[i].getTranslateY() + 15 >= player.getTranslateY()) {
@@ -420,7 +421,6 @@ public class Controller {
 
                     if (Main.game.getCurrentRoom() instanceof RoadBuild && talkingRoadbuilder && spaceCount != 0) {
                         if (spaceCount == 1) {
-                            talking = true;
                             talkNPC(playerText, "Road builder", 3);
                             spaceCount++;
                         } else if (spaceCount == 2) {
@@ -463,6 +463,7 @@ public class Controller {
                             updateInventory();
                             isInventoryFull = false;
                         }
+
                     } else if (Main.game.getCurrentRoom() instanceof Farm && player.getTranslateX() > farmerNpc.getTranslateX() - 30 && player.getTranslateX() < farmerNpc.getTranslateX() + 30 && player.getTranslateY() > farmerNpc.getTranslateY() - 30 && player.getTranslateY() < farmerNpc.getTranslateY() + 30) {
                         showDialogBox();
                     } else if (Main.game.getCurrentRoom() instanceof Sdu && player.getTranslateX() > professorNpc.getTranslateX() - 30 && player.getTranslateX() < professorNpc.getTranslateX() + 30 && player.getTranslateY() > professorNpc.getTranslateY() - 30 && player.getTranslateY() < professorNpc.getTranslateY() + 30) {
@@ -841,6 +842,20 @@ public class Controller {
         NPCTextLine1.setTranslateY(-190);
         NPCTextLine2.setTranslateY(-170);
         playerText.setTranslateY(-130);
+
+        if (Main.game.getCurrentRoom() instanceof RoadBuild) {
+            if (!roadbuilderTalked) {
+                talkNPC(NPCTextLine, "roadbuilder", 4);
+                if (spaceCount == 1) {
+                    npcTalk.musicPlayerInfinity();
+                    talkNPC(NPCTextLine, "roadbuilder", 0);
+                    talkNPC(NPCTextLine1, "roadbuilder", 1);
+                    talkNPC(NPCTextLine2, "roadbuilder", 2);
+                    spaceCount++;
+
+                }
+            }
+        }
         //Farmer
         if (Main.game.getCurrentRoom() instanceof Farm) {
             if (farmerTalked == 0) {
@@ -918,9 +933,12 @@ public class Controller {
                 playerText.setText("");
                 spaceCount++;
             } else if (spaceCount == 3) {
-                talkNPC(playerText, "professor", 5);
+                talkNPC(NPCTextLine, "professor", 5);
                 spaceCount++;
             } else if (spaceCount == 4) {
+                talkNPC(playerText, "professor", 6);
+                spaceCount++;
+            } else if (spaceCount == 5) {
                 hideDialogBox();
                 professorTalk = true;
             }
