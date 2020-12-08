@@ -4,13 +4,14 @@ import sample.data.FileHandler;
 
 public class DialogNPC {
     private String image = "src/sample/presentation/pictures/DialogBox.png";
-    private String farmerText = "src/sample/data/textfiles/npcDescriptions/FarmerenText.txt";
+    private String farmerText = "src/sample/data/textfiles/npcDescriptions/FarmerText.txt";
     private String professorText = "src/sample/data/textfiles/npcDescriptions/ProfessorText.txt";
     private String mechanicText = "src/sample/data/textfiles/npcDescriptions/VillagerText.txt";
-    private String roadbuilderText = "src/sample/data/textfiles/npcDescriptions/DamagedMachine.txt";
+    private String roadbuilderText = "src/sample/data/textfiles/npcDescriptions/RoadbuilderText.txt";
     private String playerText = "src/sample/data/textfiles/playerDescriptions/PlayerText.txt";
     private String fishermanText = "src/sample/data/textfiles/npcDescriptions/FishermanText.txt";
     private String oldLadyText = "src/sample/data/textfiles/npcDescriptions/OldLadyText.txt";
+
 
     public String getImage() {
         return image;
