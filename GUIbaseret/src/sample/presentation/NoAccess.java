@@ -3,7 +3,20 @@ package sample.presentation;
 import javafx.scene.shape.Rectangle;
 import sample.domain.Rooms.*;
 
+import java.awt.geom.Area;
+
+
 public class NoAccess {
+
+    private int[] xCordinatesTree = new int[]{27, 38, 132, 145, 177, 144, 245, 265, -132, -125, -272, -262, 20, 30, 92, 102};
+    private int[] yCordinatesTree = new int[]{36, 86, 44, 86, 106, 192, 114, 154, 129, 171, 134, 174, -245, -206, -221, -188};
+    private int[] xCordinateBush = new int[]{-210,-295,-340,-182,77,62,305,152,275,315,-77};
+    private int[] yCordinateBush = new int[]{64,46,159,181,129,169,99,-216,-208,-191,128};
+    private int[] xCordinatesTreeFarm = new int[]{-324,-312,-182,-182,-319,-307,248,255,298,315};
+    private int[] yCordinatesTreeFarm = new int[]{91,116,-221,-221,-186,-153,36,71,104,144};
+    private int[] xCordinatesPalm = new int[]{92,117,252,274,14,34,157,179,14,37,267,287,-25,0};
+    private int[] yCordinatesPalm = new int[]{-220,-170,-221,-193,-78,-26,-21,26,101,144,81,126,-221,-193};
+
     public boolean moveBlock(double objx, double objy, int x, int y) {
         boolean cantMove = false;
         //RoadBuild
@@ -21,10 +34,27 @@ public class NoAccess {
             if (rightButtomWall.contains(objx + x, objy + y)) {
                 cantMove = true;
             }
+            /*
+            Rectangle treeCrown = new Rectangle(25,36.5,55,50);
+            if(treeCrown.contains(objx+x,objy+y)){
+                cantMove =true;
+            }
+            Rectangle treeStem = new Rectangle(38,86,15,34);{
+                if(treeStem.contains(objx+x, objy+y))
+                    cantMove = true;
+            }
+
+             */
+            if (treeIdentifyer(xCordinatesTree, yCordinatesTree, objx, objy, x, y)) {
+                cantMove = true;
+            }
+            if (bushIdentifyer(xCordinateBush, yCordinateBush, objx, objy, x, y)) {
+                cantMove = true;
+            }
         }
         //Beach
         if (Main.game.getCurrentRoom() instanceof Beach) {
-            Rectangle ocean = new Rectangle(-340.5, -220, 240, 500);
+            Rectangle ocean = new Rectangle(-340.5, -221, 240, 500);
             if (ocean.contains(objx + x, objy + y)) {
                 cantMove = true;
             }
@@ -34,6 +64,9 @@ public class NoAccess {
             }
             Rectangle ladyNoTwo = new Rectangle(155, 170, 80, 40);
             if (ladyNoTwo.contains(objx + x, objy + y)) {
+                cantMove = true;
+            }
+            if(palmIdentifyer(xCordinatesPalm,yCordinatesPalm,objx,objy,x,y)){
                 cantMove = true;
             }
         }
@@ -54,6 +87,9 @@ public class NoAccess {
             }
             Rectangle farmer = new Rectangle(170, -6, 43, 50);
             if (farmer.contains(objx + x, objy + y)) {
+                cantMove = true;
+            }
+            if (treeIdentifyer(xCordinatesTreeFarm, yCordinatesTreeFarm, objx, objy, x, y)) {
                 cantMove = true;
             }
         }
@@ -103,32 +139,32 @@ public class NoAccess {
             if (labyrinthOuterTop.contains(objx + x, objy + y)) {
                 cantMove = true;
             }
-            Rectangle labyrinthOuterButtom = new Rectangle(187.5,-111,200,30);
-            if(labyrinthOuterButtom.contains(objx + x, objy + y)){
+            Rectangle labyrinthOuterButtom = new Rectangle(187.5, -111, 200, 30);
+            if (labyrinthOuterButtom.contains(objx + x, objy + y)) {
                 cantMove = true;
             }
-            Rectangle labyrinthFirstWall = new Rectangle(160,-150,70,30);
-            if(labyrinthFirstWall.contains(objx + x, objy + y)){
+            Rectangle labyrinthFirstWall = new Rectangle(160, -150, 70, 30);
+            if (labyrinthFirstWall.contains(objx + x, objy + y)) {
                 cantMove = true;
             }
-            Rectangle labyrinthSecondWall = new Rectangle(255,-150,30,55);
-            if(labyrinthSecondWall.contains(objx + x, objy + y)){
+            Rectangle labyrinthSecondWall = new Rectangle(255, -150, 30, 55);
+            if (labyrinthSecondWall.contains(objx + x, objy + y)) {
                 cantMove = true;
             }
-            Rectangle labyrinthVertiWallOne = new Rectangle(180,-221,30,60);
-            if(labyrinthVertiWallOne.contains(objx + x, objy + y)){
+            Rectangle labyrinthVertiWallOne = new Rectangle(180, -221, 30, 60);
+            if (labyrinthVertiWallOne.contains(objx + x, objy + y)) {
                 cantMove = true;
             }
-            Rectangle labyrinthVertiWallTwo = new Rectangle(233,-223,30,66);
-            if(labyrinthVertiWallTwo.contains(objx + x, objy + y)){
+            Rectangle labyrinthVertiWallTwo = new Rectangle(233, -223, 30, 66);
+            if (labyrinthVertiWallTwo.contains(objx + x, objy + y)) {
                 cantMove = true;
             }
-            Rectangle labyrinthHoriWallOne = new Rectangle(265,-213,50,30);
-            if(labyrinthHoriWallOne.contains(objx + x, objy + y)){
+            Rectangle labyrinthHoriWallOne = new Rectangle(265, -213, 50, 30);
+            if (labyrinthHoriWallOne.contains(objx + x, objy + y)) {
                 cantMove = true;
             }
-            Rectangle labyrinthVertiWallThree = new Rectangle(298,-212,30,70);
-            if(labyrinthVertiWallThree.contains(objx + x, objy + y)){
+            Rectangle labyrinthVertiWallThree = new Rectangle(298, -212, 30, 70);
+            if (labyrinthVertiWallThree.contains(objx + x, objy + y)) {
                 cantMove = true;
             }
 
@@ -196,6 +232,51 @@ public class NoAccess {
                 cantMove = true;
             }
         }
+
+
         return cantMove;
+    }
+
+    public boolean treeIdentifyer(int[] xCordinates, int[] yCordinates, double objx, double objy, int x, int y) {
+        Area tree = new Area();
+        boolean inrange = false;
+        for (int i = 0; i < xCordinates.length; i++) {
+            Area treeCrown = new Area(new java.awt.Rectangle(xCordinates[i], yCordinates[i], 55, 50));
+            i++;
+            Area treeStem = new Area(new java.awt.Rectangle(xCordinates[i], yCordinates[i], 15, 34));
+            tree.add(treeCrown);
+            tree.add(treeStem);
+            if (tree.contains(objx + x, objy + y)) {
+                inrange = true;
+            }
+        }
+        return inrange;
+    }
+
+    public boolean bushIdentifyer(int[] xCordinates, int[] yCordinates, double objx, double objy, int x, int y) {
+        boolean inrange = false;
+        for (int i = 0; i < xCordinates.length; i++) {
+            Area treeCrown = new Area(new java.awt.Rectangle(xCordinates[i], yCordinates[i], 33, 33));
+            if (treeCrown.contains(objx + x, objy + y)) {
+                inrange = true;
+            }
+        }
+        return inrange;
+
+    }
+    public boolean palmIdentifyer(int[] xCordinates, int[] yCordinates, double objx, double objy, int x, int y) {
+        Area tree = new Area();
+        boolean inrange = false;
+        for (int i = 0; i < xCordinates.length; i++) {
+            Area treeCrown = new Area(new java.awt.Rectangle(xCordinates[i], yCordinates[i], 80, 55));
+            i++;
+            Area treeStem = new Area(new java.awt.Rectangle(xCordinates[i], yCordinates[i], 25, 60));
+            tree.add(treeCrown);
+            tree.add(treeStem);
+            if (tree.contains(objx + x, objy + y)) {
+                inrange = true;
+            }
+        }
+        return inrange;
     }
 }
