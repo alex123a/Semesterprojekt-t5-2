@@ -108,7 +108,8 @@ public class Controller {
     @FXML
     public ImageView farmerNpc;
     @FXML
-    ImageView fishermanNpc;
+    public ImageView fishermanNpc;
+    @FXML
     public ImageView oldLadyNPC;
     @FXML
     public ImageView dialogBox;
@@ -832,6 +833,9 @@ public class Controller {
         if (Main.game.getCurrentRoom() instanceof Beach) {
             fishermanNpc.setTranslateX(-126);
             fishermanNpc.setTranslateY(-134);
+        }
+    }
+
     public void showOldLady() {
         oldLadyNPC.setTranslateX(3000);
         if (Main.game.getCurrentRoom() instanceof Park) {
@@ -996,7 +1000,7 @@ public class Controller {
                 talkNPC(NPCTextLine2, "oldLady", 2);
                 spaceCount++;
             } else if (spaceCount == 1) {
-                int road = (int) (((double)roadBuilder.getInventoryCount()/(double)Main.game.getRoadDone())*100);
+                int road = (int) (((double) roadBuilder.getInventoryCount() / (double) Main.game.getRoadDone()) * 100);
                 playerText.setText("I have built " + road + "% of the road.");
                 spaceCount++;
             } else if (spaceCount == 2) {
@@ -1145,3 +1149,4 @@ public class Controller {
     @FXML
     private Line slot9;
 }
+    
