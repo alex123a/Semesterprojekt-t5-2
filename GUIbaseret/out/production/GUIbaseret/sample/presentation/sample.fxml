@@ -57,9 +57,11 @@
             <Text fx:id="NPCTextLine1" />
             <Text fx:id="NPCTextLine2" />
             <Text fx:id="playerText" />
+
             <Rectangle fx:id="textBackground" arcHeight="5.0" arcWidth="5.0" fill="#E97451" height="35" layoutX="657.0" layoutY="475.0" width="140" translateY="230" translateX="-300"/>
             <Text fx:id="helpText" text="Press 'H' for help video" translateY="240" translateX="-296"/>
             <Text fx:id="mapText" text="Press 'M' for a Map" translateX="-306" translateY="225"/>
+
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
                   <!-- toolset skal blive vist under-->
