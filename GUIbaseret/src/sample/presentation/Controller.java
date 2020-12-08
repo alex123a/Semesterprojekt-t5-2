@@ -647,7 +647,6 @@ public class Controller {
             hideDialogBox();
             showRoadBuilderRoad();
             generatePlasticInRoom(Main.game.placePlastic());
-            showOldLady();
         }
     }
 
@@ -667,7 +666,6 @@ public class Controller {
         hideDialogBox();
         showRoadBuilderRoad();
         generatePlasticInRoom(Main.game.placePlastic());
-        showOldLady();
     }
 
     public void changeWest() {
@@ -686,7 +684,6 @@ public class Controller {
         hideDialogBox();
         showRoadBuilderRoad();
         generatePlasticInRoom(Main.game.placePlastic());
-        showOldLady();
     }
 
     public void changeEast() {
@@ -705,7 +702,6 @@ public class Controller {
         hideDialogBox();
         showRoadBuilderRoad();
         generatePlasticInRoom(Main.game.placePlastic());
-        showOldLady();
     }
 
     public void smokeMachine() {
