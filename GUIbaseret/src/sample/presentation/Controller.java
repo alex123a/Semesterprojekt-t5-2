@@ -24,6 +24,7 @@ import javafx.scene.text.Text;
 import sample.domain.*;
 import sample.domain.NPCer.Farmer;
 import sample.domain.NPCer.Mechanic;
+import sample.domain.NPCer.OldLady;
 import sample.domain.NPCer.Professor;
 import sample.domain.PlasticElements.*;
 import sample.domain.Rooms.*;
@@ -34,7 +35,6 @@ import java.io.IOException;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Controller {
 
@@ -46,6 +46,7 @@ public class Controller {
     public static Professor professorObject = new Professor("Professor");
     public static Mechanic mechanicObject = new Mechanic("Mechanic");
     public static Farmer farmerObject = new Farmer("Farmer");
+    public static OldLady oldLadyObject = new OldLady("OldLady");
     public static DialogNPC dialog = new DialogNPC();
     public static Timer highScoreTimer = new Timer();
     private boolean north, south, east, west;
@@ -104,6 +105,8 @@ public class Controller {
     @FXML
     public ImageView farmerNpc;
     @FXML
+    public ImageView oldLadyNPC;
+    @FXML
     public ImageView dialogBox;
     @FXML
     private ImageView toolsetImg;
@@ -125,6 +128,7 @@ public class Controller {
     private ImageView map;
     @FXML
     private Rectangle mapBackground;
+
 
 
     public void initialize() {
@@ -470,7 +474,10 @@ public class Controller {
                         showDialogBox();
                     } else if (Main.game.getCurrentRoom() instanceof Town && player.getTranslateX() > mechanicNpc.getTranslateX() - 30 && player.getTranslateX() < mechanicNpc.getTranslateX() + 30 && player.getTranslateY() > mechanicNpc.getTranslateY() - 30 && player.getTranslateY() < mechanicNpc.getTranslateY() + 30) {
                         showDialogBox();
+                    } else if (Main.game.getCurrentRoom() instanceof Park && player.getTranslateX() > oldLadyNPC.getTranslateX() - 30 && player.getTranslateX() < oldLadyNPC.getTranslateX() + 30 && player.getTranslateY() > oldLadyNPC.getTranslateY() - 30 && player.getTranslateY() < oldLadyNPC.getTranslateY() + 30) {
+                        showDialogBox();
                     }
+
                 }
 
         }
@@ -551,6 +558,7 @@ public class Controller {
         professorNpc.setImage(new Image("file:" + professorObject.getImage()));
         mechanicNpc.setImage(new Image("file:" + mechanicObject.getImage()));
         farmerNpc.setImage(new Image("file:" + farmerObject.getImage()));
+        oldLadyNPC.setImage(new Image("file:" + oldLadyObject.getImage()));
         dialogBox.setImage(new Image("file:" + dialog.getImage()));
         smoke.setImage(new Image("file:src/sample/presentation/pictures/buildSmoke.png"));
         smokeBrokenMachine.setImage(new Image("file:src/sample/presentation/pictures/fireSmoke-1.png"));
@@ -784,6 +792,7 @@ public class Controller {
             showFarmer();
             showProfessor();
             showMechanic();
+            showOldLady();
             if (Main.game.getCurrentRoom() instanceof RoadBuild) {
                 roadView.setViewport(new Rectangle2D(-681 + (roadBuilder.getInventoryCount() * 18.9166 + 113.5), 0, 681, 69));
             } else {
@@ -823,6 +832,14 @@ public class Controller {
         if (Main.game.getCurrentRoom() instanceof Farm) {
             farmerNpc.setTranslateX(190);
             farmerNpc.setTranslateY(2);
+        }
+    }
+
+    public void showOldLady() {
+        oldLadyNPC.setTranslateX(3000);
+        if (Main.game.getCurrentRoom() instanceof Park) {
+            oldLadyNPC.setTranslateX(0);
+            oldLadyNPC.setTranslateY(0);
         }
     }
 
@@ -925,9 +942,8 @@ public class Controller {
                 hideDialogBox();
                 professorTalk = true;
             }
-        }
-        //Mechanic
-        if (Main.game.getCurrentRoom() instanceof Town) {
+            //Mechanic
+        } else if (Main.game.getCurrentRoom() instanceof Town) {
             if (roadBuilder.getDamaged() > 0) {
                 if (spaceCount == 0 && !mechanicTalk) {
                     npcTalk.musicPlayerInfinity();
@@ -964,6 +980,27 @@ public class Controller {
                     talking = false;
                     spaceCount = 0;
                 }
+            }
+        } else if (Main.game.getCurrentRoom() instanceof Park) {
+            if (spaceCount == 0) {
+                npcTalk.musicPlayerInfinity();
+                talking = true;
+                talkNPC(NPCTextLine, "oldLady", 0);
+                talkNPC(NPCTextLine1, "oldLady", 1);
+                talkNPC(NPCTextLine2, "oldLady", 2);
+                spaceCount++;
+            } else if (spaceCount == 1) {
+                int road = (int) (((double)roadBuilder.getInventoryCount()/(double)Main.game.getRoadDone())*100);
+                playerText.setText("I have built " + road + "% of the road.");
+                spaceCount++;
+            } else if (spaceCount == 2) {
+                talkNPC(NPCTextLine, "oldLady", 3);
+                NPCTextLine1.setText("");
+                NPCTextLine2.setText("");
+                playerText.setText("");
+                spaceCount++;
+            } else if (spaceCount == 3) {
+                hideDialogBox();
             }
         }
 
