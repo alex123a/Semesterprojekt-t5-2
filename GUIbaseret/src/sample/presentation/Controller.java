@@ -819,9 +819,9 @@ public class Controller {
         }
     }
 
-    public void showFisherman(){
+    public void showFisherman() {
         fishermanNpc.setTranslateX(3000);
-        if (Main.game.getCurrentRoom() instanceof Beach){
+        if (Main.game.getCurrentRoom() instanceof Beach) {
             fishermanNpc.setTranslateX(-83);
             fishermanNpc.setTranslateY(-171);
         }
