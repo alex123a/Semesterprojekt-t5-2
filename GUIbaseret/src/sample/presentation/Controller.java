@@ -1132,8 +1132,7 @@ public class Controller {
             }
         } else if (Main.game.getCurrentRoom() instanceof Park) {
             if (spaceCount == 0) {
-                dialogNPC.setImage(new Image("file:src/sample/presentation/pictures/npc/OldLady.png"));
-                dialogNPC.setViewport(new Rectangle2D(0,0,32,48));
+                dialogNPC.setImage(new Image("file:src/sample/presentation/pictures/npc/OldLadyScale.png"));
                 npcTalk.musicPlayerInfinity();
                 talking = true;
                 talkNPC(NPCTextLine, "oldLady", 0);
