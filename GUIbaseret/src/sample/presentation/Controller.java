@@ -416,11 +416,11 @@ public class Controller {
                             startGame();
                             gameNotStarted = false;
                         }
-                    } else if (!isInventoryFull){
+                    } else if (!isInventoryFull) {
                         collectPlastic(Main.game.placePlastic());
                     }
 
-                    if (Main.game.getCurrentRoom() instanceof RoadBuild && talkingRoadbuilder && spaceCount != 0) {
+                    if (Main.game.getCurrentRoom() instanceof RoadBuild && talkingRoadbuilder && spaceCount != 0 && roadbuilderTalked) {
                         if (spaceCount == 1) {
                             talkNPC(playerText, "Road builder", 3);
                             spaceCount++;
@@ -429,7 +429,10 @@ public class Controller {
                             spaceCount = 0;
                         }
                     } else if (Main.game.getCurrentRoom() instanceof RoadBuild && player.getTranslateX() > roadBuilderView.getTranslateX() - 50 && player.getTranslateX() < roadBuilderView.getTranslateX() + 50 && player.getTranslateY() > roadBuilderView.getTranslateY() - 50 && player.getTranslateY() < roadBuilderView.getTranslateY() + 50) {
-                        if (roadBuilder.getInventoryCount() >= 19 && roadBuilder.isNotDamagedBefore()) {
+                        if (!roadbuilderTalked) {
+                            showDialogBox();
+                        }
+                        if (roadBuilder.getInventoryCount() >= 19 && roadBuilder.isNotDamagedBefore() && roadbuilderTalked) {
                             roadBuilder.damagedMachine();
                             roadBuilder.setNotDamagedBefore(false);
                             roadbuilderCrashSound.AudioPlayer();
@@ -652,8 +655,7 @@ public class Controller {
             showFarmer();
             showProfessor();
             showMechanic();
-            if (firstTimeEntering) {
-                showDialogBox();
+            if (!roadbuilderTalked) {
                 NPCTextLine.setTranslateY(-210);
                 talkNPC(NPCTextLine, "Road builder", 4);
             }
@@ -849,6 +851,34 @@ public class Controller {
         NPCTextLine2.setTranslateY(-170);
         playerText.setTranslateY(-130);
 
+
+        //Roadbuilder
+        if (Main.game.getCurrentRoom() instanceof RoadBuild) {
+            if (spaceCount == 0 && !roadbuilderTalked) {
+                npcTalk.musicPlayerInfinity();
+                talking = true;
+                talkNPC(NPCTextLine, "Road builder", 5);
+                talkNPC(NPCTextLine1, "Road builder", 6);
+                spaceCount++;
+            } else if (spaceCount == 1) {
+                talkNPC(NPCTextLine, "Road builder", 7);
+                talkNPC(NPCTextLine1, "Road builder", 8);
+                talkNPC(NPCTextLine2, "Road builder", 9);
+                spaceCount++;
+            } else if (spaceCount == 2) {
+                talkNPC(NPCTextLine, "Road builder", 10);
+                NPCTextLine1.setText("");
+                NPCTextLine2.setText("");
+                spaceCount++;
+            } else if (spaceCount == 3) {
+                NPCTextLine1.setText("");
+                talkNPC(playerText, "Road builder", 11);
+                spaceCount++;
+            } else if (spaceCount == 4) {
+                hideDialogBox();
+                professorTalk = true;
+            }
+        }
         //Farmer
         if (Main.game.getCurrentRoom() instanceof Farm) {
             if (farmerTalked == 0) {
