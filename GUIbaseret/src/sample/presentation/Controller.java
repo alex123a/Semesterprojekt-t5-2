@@ -465,6 +465,8 @@ public class Controller {
                         showDialogBox();
                     } else if (Main.game.getCurrentRoom() instanceof Park && player.getTranslateX() > oldLadyNPC.getTranslateX() - 30 && player.getTranslateX() < oldLadyNPC.getTranslateX() + 30 && player.getTranslateY() > oldLadyNPC.getTranslateY() - 30 && player.getTranslateY() < oldLadyNPC.getTranslateY() + 30) {
                         showDialogBox();
+                    } else if (Main.game.getCurrentRoom() instanceof Beach && player.getTranslateX() > fishermanNpc.getTranslateX() - 30 && player.getTranslateX() < fishermanNpc.getTranslateX() + 30 && player.getTranslateY() > fishermanNpc.getTranslateY() - 30 && player.getTranslateY() < fishermanNpc.getTranslateY() + 30) {
+                        showDialogBox();
                     }
 
                 }
@@ -1012,6 +1014,24 @@ public class Controller {
             } else if (spaceCount == 3) {
                 hideDialogBox();
             }
+        } else if (Main.game.getCurrentRoom() instanceof Beach){
+            if (spaceCount==0){
+                dialogNPC.setImage(new Image("file:src/sample/presentation/pictures/npc/fisherMan.png"));
+                npcTalk.musicPlayerInfinity();
+                talking = true;
+                talkNPC(NPCTextLine,"Fisherman",0);
+                spaceCount++;
+            } else if (spaceCount==1){
+                NPCTextLine.setText("");
+                talkNPC(NPCTextLine,"Fisherman",1);
+                spaceCount++;
+            } else if(spaceCount==2){
+                NPCTextLine.setText("");
+                talkNPC(NPCTextLine,"Fisherman",2);
+                spaceCount++;
+            } else if(spaceCount==3){
+                hideDialogBox();
+            }
         }
 
     }
@@ -1149,4 +1169,4 @@ public class Controller {
     @FXML
     private Line slot9;
 }
-    
+

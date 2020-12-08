@@ -23,26 +23,27 @@ public class DialogNPC {
             return text;
         } else if (character.equals("professor")) {
             FileHandler getNPCText = new FileHandler();
-            var text = getNPCText.ReadFile(professorText, index);
+            String text = getNPCText.ReadFile(professorText, index);
             return text;
         } else if (character.equals("mechanic")) {
             FileHandler getNPCText = new FileHandler();
-            var text = getNPCText.ReadFile(mechanicText, index);
+            String text = getNPCText.ReadFile(mechanicText, index);
             return text;
         } else if (character.equals("Road builder")) {
             FileHandler getNPCText = new FileHandler();
-            var text = getNPCText.ReadFile(roadbuilderText, index);
+            String text = getNPCText.ReadFile(roadbuilderText, index);
             return text;
         } else if (character.equals("Player")) {
             FileHandler getNPCText = new FileHandler();
-            var text = getNPCText.ReadFile(playerText, index);
+            String text = getNPCText.ReadFile(playerText, index);
             return text;
         } else if (character.equals("Fisherman")) {
             FileHandler getNPCText = new FileHandler();
-            var text = getNPCText.ReadFile(fishermanText, index);
+            String text = getNPCText.ReadFile(fishermanText, index);
+            return text;
         } else if (character.equals("oldLady")) {
             FileHandler getNPCText = new FileHandler();
-            var text = getNPCText.ReadFile(oldLadyText, index);
+            String text = getNPCText.ReadFile(oldLadyText, index);
             return text;
         }
         return "not possible";
