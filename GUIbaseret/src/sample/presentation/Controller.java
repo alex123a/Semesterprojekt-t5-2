@@ -14,6 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
@@ -51,7 +52,7 @@ public class Controller {
     public static Timer highScoreTimer = new Timer();
     private boolean north, south, east, west;
     private int spaceCount = 0;
-    private int farmerTalked = 0;
+    private boolean farmerTalked = true;
     private boolean farmerTalk = false;
     private boolean professorTalk = false;
     private boolean mechanicTalk = false;
@@ -128,7 +129,12 @@ public class Controller {
     private ImageView map;
     @FXML
     private Rectangle mapBackground;
-
+    @FXML
+    private Rectangle startMouseClick;
+    @FXML
+    private Text mapText;
+    @FXML
+    private ImageView dialogNPC;
 
 
     public void initialize() {
@@ -188,6 +194,12 @@ public class Controller {
     AnimationTimer timer = new AnimationTimer() {
         @Override
         public void handle(long l) {
+            if (gameNotStarted) {
+                north = false;
+                south = false;
+                east = false;
+                west = false;
+            }
             if (north && player.getTranslateY() > -220) {
                 playerAnimation.setDirection(direction[0]);
                 if (!noAccess.moveBlock(player.getTranslateX(), player.getTranslateY(), 0, -2)) {
@@ -198,8 +210,7 @@ public class Controller {
                     player.setTranslateY(player.getTranslateY() - 2.5);
                 }
                 animationWalk++;
-            }
-            if (south && player.getTranslateY() < 220) {
+            } else if (south && player.getTranslateY() < 220) {
                 playerAnimation.setDirection(direction[1]);
                 if (!noAccess.moveBlock(player.getTranslateX(), player.getTranslateY(), 0, 2)) {
                     if (animationWalk % 13 == 0) {
@@ -210,8 +221,7 @@ public class Controller {
 
                 }
                 animationWalk++;
-            }
-            if (east && player.getTranslateX() > -340) {
+            } else if (east && player.getTranslateX() > -340) {
                 playerAnimation.setDirection(direction[2]);
                 if (!noAccess.moveBlock(player.getTranslateX(), player.getTranslateY(), -2, 0)) {
                     if (animationWalk % 13 == 0) {
@@ -221,8 +231,7 @@ public class Controller {
                     player.setTranslateX(player.getTranslateX() - 2.5);
                 }
                 animationWalk++;
-            }
-            if (west && player.getTranslateX() < 340) {
+            } else if (west && player.getTranslateX() < 340) {
                 playerAnimation.setDirection(direction[3]);
                 if (!noAccess.moveBlock(player.getTranslateX(), player.getTranslateY(), 2, 0)) {
                     if (animationWalk % 13 == 0) {
@@ -362,50 +371,26 @@ public class Controller {
                 break;
             case UP:
             case W:
-                if (gameNotStarted) {
-                    north = false;
-                    break;
-                }
                 timer.start();
                 north = true;
-                west = false;
-                east = false;
                 System.out.println("y =  " + player.getTranslateY() + " x = " + player.getTranslateX());
                 break;
             case DOWN:
             case S:
-                if (gameNotStarted) {
-                    south = false;
-                    break;
-                }
                 timer.start();
                 south = true;
-                west = false;
-                east = false;
                 System.out.println("y =  " + player.getTranslateY() + " x = " + player.getTranslateX());
                 break;
             case LEFT:
             case A:
-                if (gameNotStarted) {
-                    east = false;
-                    break;
-                }
                 timer.start();
                 east = true;
-                north = false;
-                south = false;
                 System.out.println("y =  " + player.getTranslateY() + " x = " + player.getTranslateX());
                 break;
             case RIGHT:
             case D:
-                if (gameNotStarted) {
-                    west = false;
-                    break;
-                }
                 timer.start();
                 west = true;
-                north = false;
-                south = false;
                 System.out.println("y =  " + player.getTranslateY() + " x = " + player.getTranslateX());
                 break;
             case SPACE:
@@ -418,7 +403,7 @@ public class Controller {
                             startGame();
                             gameNotStarted = false;
                         }
-                    } else if (!isInventoryFull){
+                    } else if (!isInventoryFull) {
                         collectPlastic(Main.game.placePlastic());
                     }
 
@@ -479,8 +464,8 @@ public class Controller {
                     }
 
                 }
-
         }
+
         NewRoom();
     }
 
@@ -527,6 +512,7 @@ public class Controller {
             gameNotStarted = true;
             //Hide images
             hideSlotLines();
+            mapText.setOpacity(0);
             lockToolSlot.setOpacity(0);
             roadBuilderView.setOpacity(0);
             roadView.setOpacity(0);
@@ -564,6 +550,7 @@ public class Controller {
         smokeBrokenMachine.setImage(new Image("file:src/sample/presentation/pictures/fireSmoke-1.png"));
         //Show images (& hides highscore)
         showSlotLines();
+        mapText.setOpacity(1);
         lockToolSlot.setOpacity(0.7);
         inventory.setOpacity(0.5);
         toolRect.setOpacity(0.5);
@@ -852,6 +839,7 @@ public class Controller {
         dialogBox.setTranslateY(3000);
         talking = false;
         npcTalk.AudioStop();
+        dialogNPC.setImage(null);
     }
 
     public void showDialogBox() {
@@ -861,8 +849,9 @@ public class Controller {
         playerText.setTranslateY(-130);
         //Farmer
         if (Main.game.getCurrentRoom() instanceof Farm) {
-            if (farmerTalked == 0) {
+            if (farmerTalked) {
                 if (spaceCount == 0 && !farmerTalk) {
+                    dialogNPC.setImage(new Image("file:src/sample/presentation/pictures/npc/farmer.png"));
                     npcTalk.musicPlayerInfinity();
                     talking = true;
                     talkNPC(NPCTextLine, "farmer", 0);
@@ -893,25 +882,29 @@ public class Controller {
                 } else if (spaceCount == 5) {
                     if (!farmerTalk) {
                         hideDialogBox();
-                        farmerTalked++;
-                    } else if (farmerTalk) {
+                        farmerTalked = false;
+                    } else {
                         hideDialogBox();
-                        farmerTalk = true;
                     }
                 }
-            } else if (farmerTalked > 0) {
+            } else {
                 if (spaceCount == 0 && !farmerTalk) {
+                    dialogNPC.setImage(new Image("file:src/sample/presentation/pictures/npc/farmer.png"));
                     npcTalk.musicPlayerInfinity();
                     talking = true;
                     talkNPC(NPCTextLine, "farmer", 8);
                     farmerTalk = playerObject.addPlasticInv();
                     updateInventory();
                     spaceCount++;
+                    if (!farmerTalk) {
+                        talkNPC(NPCTextLine, "farmer", 7);
+                        playerText.setText("");
+                    }
                 } else if (spaceCount == 1) {
                     if (!farmerTalk) {
                         hideDialogBox();
                         spaceCount = 0;
-                    } else if (farmerTalk) {
+                    } else {
                         hideDialogBox();
                         farmerTalk = true;
                     }
@@ -920,6 +913,7 @@ public class Controller {
             //Professor
         } else if (Main.game.getCurrentRoom() instanceof Sdu) {
             if (spaceCount == 0 && !professorTalk) {
+                dialogNPC.setImage(new Image("file:src/sample/presentation/pictures/npc/Professor.png"));
                 npcTalk.musicPlayerInfinity();
                 talking = true;
                 talkNPC(NPCTextLine, "professor", 0);
@@ -946,6 +940,7 @@ public class Controller {
         } else if (Main.game.getCurrentRoom() instanceof Town) {
             if (roadBuilder.getDamaged() > 0) {
                 if (spaceCount == 0 && !mechanicTalk) {
+                    dialogNPC.setImage(new Image("file:src/sample/presentation/pictures/npc/Mechanic.png"));
                     npcTalk.musicPlayerInfinity();
                     talkNPC(NPCTextLine, "mechanic", 0);
                     talkNPC(NPCTextLine1, "mechanic", 1);
@@ -971,6 +966,7 @@ public class Controller {
                 }
             } else if (roadBuilder.getDamaged() == 0) {
                 if (spaceCount == 0 && !mechanicTalk) {
+                    dialogNPC.setImage(new Image("file:src/sample/presentation/pictures/npc/Mechanic.png"));
                     talking = true;
                     npcTalk.musicPlayerInfinity();
                     talkNPC(NPCTextLine, "mechanic", 4);
@@ -1024,6 +1020,18 @@ public class Controller {
 
         for (Line line : lines) {
             line.setOpacity(0.5);
+        }
+    }
+
+    public void startGameRect(MouseEvent mouseEvent) {
+        if (gameNotStarted) {
+            String name = nameField.getText();
+            if (name.matches(".*[0-9].*") || name.matches(".*[A-Z]*.")) {
+                playerObject.setNames(name);
+                nameField.setOpacity(0);
+                startGame();
+                gameNotStarted = false;
+            }
         }
     }
 

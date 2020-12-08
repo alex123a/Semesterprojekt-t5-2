@@ -52,6 +52,7 @@
             <ImageView fx:id="professorNpc" fitHeight="45.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true" translateX="3000" />
             <ImageView fx:id="oldLadyNPC" fitHeight="45.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true" translateX="3000" />
             <ImageView fx:id="dialogBox" fitHeight="266.0" fitWidth="635.0" pickOnBounds="true" preserveRatio="true" translateY="3000" />
+            <ImageView fx:id="dialogNPC" fitHeight="85.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" translateX="300" translateY="-166" />
             <Rectangle fx:id="mapBackground" arcHeight="5.0" arcWidth="5.0" fill="#d6d6d6" height="420" layoutX="657.0" layoutY="453.0" opacity="0" width="600" translateY="-33"/>
             <ImageView fx:id="map" fitHeight="420" fitWidth="680" pickOnBounds="true" preserveRatio="true" translateX="3000" translateY="-40"/>
             <Text fx:id="NPCTextLine" />
@@ -61,7 +62,7 @@
 
             <Rectangle fx:id="textBackground" arcHeight="5.0" arcWidth="5.0" fill="#E97451" height="35" layoutX="657.0" layoutY="475.0" width="140" translateY="230" translateX="-300"/>
             <Text fx:id="helpText" text="Press 'H' for help video" translateY="240" translateX="-296"/>
-            <Text fx:id="mapText" text="Press 'M' for a Map" translateX="-306" translateY="225"/>
+            <Text fx:id="mapText" text="Press 'M' for a Map" translateX="-306" translateY="225" opacity="0"/>
 
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
@@ -96,6 +97,7 @@
                </children>
             </AnchorPane><!--TabPane only for movement with arrows, because the other Panes is not in focus to use arrow keys-->
             <TabPane onKeyPressed="#movePlayer" onKeyReleased="#stopPlayer" />
+            <Rectangle fx:id="startMouseClick" arcHeight="5.0" arcWidth="5.0" height="34" translateX="0.0" translateY="177.0" width="350" onMouseClicked="#startGameRect" opacity="0"/>
             <TextField fx:id="nameField" maxWidth="120" translateY="-96" />
          </children>
       </StackPane>
