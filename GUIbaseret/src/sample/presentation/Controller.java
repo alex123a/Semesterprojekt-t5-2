@@ -14,6 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
@@ -125,6 +126,10 @@ public class Controller {
     private ImageView map;
     @FXML
     private Rectangle mapBackground;
+    @FXML
+    private Rectangle startMouseClick;
+    @FXML
+    private Text mapText;
     @FXML
     private ImageView dialogNPC;
 
@@ -500,6 +505,7 @@ public class Controller {
             gameNotStarted = true;
             //Hide images
             hideSlotLines();
+            mapText.setOpacity(0);
             lockToolSlot.setOpacity(0);
             roadBuilderView.setOpacity(0);
             roadView.setOpacity(0);
@@ -536,6 +542,7 @@ public class Controller {
         smokeBrokenMachine.setImage(new Image("file:src/sample/presentation/pictures/fireSmoke-1.png"));
         //Show images (& hides highscore)
         showSlotLines();
+        mapText.setOpacity(1);
         lockToolSlot.setOpacity(0.7);
         inventory.setOpacity(0.5);
         toolRect.setOpacity(0.5);
@@ -976,6 +983,18 @@ public class Controller {
 
         for (Line line : lines) {
             line.setOpacity(0.5);
+        }
+    }
+
+    public void startGameRect(MouseEvent mouseEvent) {
+        if (gameNotStarted) {
+            String name = nameField.getText();
+            if (name.matches(".*[0-9].*") || name.matches(".*[A-Z]*.")) {
+                playerObject.setNames(name);
+                nameField.setOpacity(0);
+                startGame();
+                gameNotStarted = false;
+            }
         }
     }
 
