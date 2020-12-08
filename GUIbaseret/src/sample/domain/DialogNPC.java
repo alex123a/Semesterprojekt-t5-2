@@ -10,6 +10,7 @@ public class DialogNPC {
     private String roadbuilderText = "src/sample/data/textfiles/npcDescriptions/DamagedMachine.txt";
     private String playerText = "src/sample/data/textfiles/playerDescriptions/PlayerText.txt";
     private String fishermanText = "src/sample/data/textfiles/npcDescriptions/FishermanText.txt";
+    private String oldLadyText = "src/sample/data/textfiles/npcDescriptions/OldLadyText.txt";
 
     public String getImage() {
         return image;
@@ -39,6 +40,9 @@ public class DialogNPC {
         } else if (character.equals("Fisherman")) {
             FileHandler getNPCText = new FileHandler();
             var text = getNPCText.ReadFile(fishermanText, index);
+        } else if (character.equals("oldLady")) {
+            FileHandler getNPCText = new FileHandler();
+            var text = getNPCText.ReadFile(oldLadyText, index);
             return text;
         }
         return "not possible";
