@@ -647,9 +647,7 @@ public class Controller {
             hideDialogBox();
             showRoadBuilderRoad();
             generatePlasticInRoom(Main.game.placePlastic());
-            showFarmer();
-            showProfessor();
-            showMechanic();
+            showOldLady();
         }
     }
 
@@ -669,6 +667,7 @@ public class Controller {
         hideDialogBox();
         showRoadBuilderRoad();
         generatePlasticInRoom(Main.game.placePlastic());
+        showOldLady();
     }
 
     public void changeWest() {
@@ -687,6 +686,7 @@ public class Controller {
         hideDialogBox();
         showRoadBuilderRoad();
         generatePlasticInRoom(Main.game.placePlastic());
+        showOldLady();
     }
 
     public void changeEast() {
@@ -705,6 +705,7 @@ public class Controller {
         hideDialogBox();
         showRoadBuilderRoad();
         generatePlasticInRoom(Main.game.placePlastic());
+        showOldLady();
     }
 
     public void smokeMachine() {
@@ -783,7 +784,6 @@ public class Controller {
             showFarmer();
             showProfessor();
             showMechanic();
-            showOldLady();
             if (Main.game.getCurrentRoom() instanceof RoadBuild) {
                 roadView.setViewport(new Rectangle2D(-681 + (roadBuilder.getInventoryCount() * 18.9166 + 113.5), 0, 681, 69));
             } else {
@@ -827,17 +827,27 @@ public class Controller {
     }
 
     public void showOldLady() {
+        oldLadyWalk = 0;
         if (Main.game.getCurrentRoom() instanceof Park) {
             oldLadyNPC.setTranslateX(-112);
-            oldLadyNPC.setTranslateY(-126);
+            oldLadyNPC.setTranslateY(-185);
             Timeline timeline = new Timeline();
             int FPS = 60;
             KeyFrame frame = new KeyFrame(Duration.millis(1000 / FPS), event -> {
-                if (oldLadyWalk % 100 == 0) {
-                    oldLadyWalk = 0;
-                    oldLadyNPC.setTranslateY(oldLadyNPC.getTranslateY() + 10);
-                    numbersOldLady = oldLadyAnimation.changePic();
-                    oldLadyNPC.setViewport(new Rectangle2D(numbersOldLady[0], numbersOldLady[1], numbersOldLady[2], numbersOldLady[3]));
+                if (talking) {
+                    oldLadyNPC.setViewport(new Rectangle2D(0, 0, numbersOldLady[2], numbersOldLady[3]));
+                } else if (oldLadyWalk % 20 == 0) {
+                    if (oldLadyWalk < 500) {
+                        numbersOldLady = oldLadyAnimation.changePic();
+                        oldLadyNPC.setViewport(new Rectangle2D(numbersOldLady[0], numbersOldLady[1], numbersOldLady[2], numbersOldLady[3]));
+                        oldLadyNPC.setTranslateY(oldLadyNPC.getTranslateY() + 10);
+                    } else if (oldLadyWalk < 1000) {
+                        numbersOldLady = oldLadyAnimation.changePic();
+                        oldLadyNPC.setViewport(new Rectangle2D(numbersOldLady[0], 144, numbersOldLady[2], numbersOldLady[3]));
+                        oldLadyNPC.setTranslateY(oldLadyNPC.getTranslateY() - 10);
+                    } else {
+                        oldLadyWalk = 0;
+                    }
                 }
                 oldLadyWalk++;
             });
@@ -999,6 +1009,7 @@ public class Controller {
         } else if (Main.game.getCurrentRoom() instanceof Park) {
             if (spaceCount == 0) {
                 dialogNPC.setImage(new Image("file:src/sample/presentation/pictures/npc/OldLady.png"));
+                dialogNPC.setViewport(new Rectangle2D(0,0,32,48));
                 npcTalk.musicPlayerInfinity();
                 talking = true;
                 talkNPC(NPCTextLine, "oldLady", 0);
