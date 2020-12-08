@@ -918,9 +918,9 @@ public class Controller {
 
     public void showOldLady() {
         oldLadyWalk = 0;
-        if (Main.game.getCurrentRoom() instanceof Park) {
-            int FPS = 60;
-            KeyFrame frame = new KeyFrame(Duration.millis(1000 / FPS), event -> {
+        int FPS = 60;
+        KeyFrame frame = new KeyFrame(Duration.millis(1000 / FPS), event -> {
+            if (Main.game.getCurrentRoom() instanceof Park) {
                 if (talking) {
                     oldLadyNPC.setViewport(new Rectangle2D(0, 0, numbersOldLady[2], numbersOldLady[3]));
                 } else if (oldLadyWalk % 20 == 0) {
@@ -937,11 +937,12 @@ public class Controller {
                     }
                 }
                 oldLadyWalk++;
-            });
-            oldLadyTimeline.setCycleCount(oldLadyTimeline.INDEFINITE);
-            oldLadyTimeline.getKeyFrames().add(frame);
-            oldLadyTimeline.play();
-        }
+            }
+        });
+        oldLadyTimeline.setCycleCount(oldLadyTimeline.INDEFINITE);
+        oldLadyTimeline.getKeyFrames().add(frame);
+        oldLadyTimeline.play();
+
     }
 
     public void hideDialogBox() {
