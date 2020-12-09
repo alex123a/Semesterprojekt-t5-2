@@ -1,6 +1,11 @@
 package sample.presentation;
 
 public class SpriteAnimation implements Animation {
+    /**
+     * @param direction The direction the player is walking
+     */
+
+    // Counter to find the next picture
     private int count = 0;
     private int widthNumPictures = 4;
     private int heightNumPictures = 4;
@@ -18,6 +23,7 @@ public class SpriteAnimation implements Animation {
     }
 
     public double[] changePic() {
+        // Count should only be reset if the player tries a new direction else it should just continue the next animation
         if (!direction.equals(lastDirection)) {
             count = 0;
             lastDirection = direction;
@@ -26,6 +32,8 @@ public class SpriteAnimation implements Animation {
         int whichPicWidth = 0;
         int whichPicHeight = 0;
 
+        // Giving the next picture by the direction the player walks
+        // The % is for keep repeating the same 4 pictures in the direction the player is walking.
         if (direction.equals("South")) {
             whichPicWidth = (count % 4) * picWidth;
             whichPicHeight = 0;
@@ -40,10 +48,9 @@ public class SpriteAnimation implements Animation {
             whichPicHeight = picHeight * 3;
         }
 
-        // System.out.println("Width " + whichPicWidth + " height " + whichPicHeight);
-        
         count++;
         double[] numbers = {whichPicWidth, whichPicHeight, picWidth, picHeight};
+
         return numbers;
     }
 

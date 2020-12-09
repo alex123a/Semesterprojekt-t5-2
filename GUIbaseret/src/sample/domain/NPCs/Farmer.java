@@ -31,7 +31,6 @@ public class Farmer extends NPC {
 
     public void emptyPlasticForPlayer() {
         List<Plastic> newInv = Main.game.getPlayerObject().getPlasticInv();
-        ;
         for (Plastic plastic : plasticForPlayer) {
             newInv.add(plastic);
         }
