@@ -6,7 +6,6 @@ import sample.presentation.Main;
 import java.util.List;
 import java.util.Random;
 
-//This class inherits from the NPC class
 public class Farmer extends NPC {
     // Decides random size of plastic for plasticPlayer
     final private int randomNumber = (new Random()).nextInt(8 - 5 + 1) + 5;

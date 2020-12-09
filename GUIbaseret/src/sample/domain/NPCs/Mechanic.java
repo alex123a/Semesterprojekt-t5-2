@@ -2,7 +2,6 @@ package sample.domain.NPCs;
 
 import sample.presentation.Main;
 
-//This class inherits from the NPC class
 public class Mechanic extends NPC {
     private boolean gaveToolset = false;
 
