@@ -3,8 +3,6 @@ package sample.domain;
 import sample.domain.NPCs.*;
 import sample.domain.PlasticElements.Plastic;
 import sample.domain.Rooms.*;
-
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,8 +30,9 @@ public class Game {
         createRooms();
     }
 
-
+    //Creates the rooms and their associations to the other rooms.
     public void createRooms() {
+        //The rooms is created
         RoadBuild = new RoadBuild();
         Town = new Town();
         Beach = new Beach();
@@ -41,6 +40,7 @@ public class Game {
         Park = new Park();
         Sdu = new Sdu();
 
+        //The exits for each room is created.
         RoadBuild.setExit("east", Town);
         RoadBuild.setExit("south", Sdu);
         RoadBuild.setExit("west", Beach);
@@ -57,29 +57,38 @@ public class Game {
 
         Town.setExit("west", RoadBuild);
 
+        //currentRoom sets the start room.
         currentRoom = Sdu;
     }
 
+    //Gets the plastic for the current room/new room, because each room have different amount of plastic.
     public List<Plastic> placePlastic() {
         return changedRoom != null ? currentRoom.getPlasticInRoom() : Sdu.getPlasticInRoom();
     }
 
+    //Handles how the player changes room.
     public void goRoom() {
         Room nextRoom = changedRoom != null ? currentRoom.getExit(changedRoom) : Sdu;
 
+        //sets the current room to the room the player are going
         currentRoom = nextRoom;
 
+        //Removes the exits for the past room and sets up some new for the current room.
         Controller.roomExit.removeAll(currentDirections);
         for (String directions : currentRoom.getExits().keySet()) {
             currentDirections.add(directions);
         }
-
         Controller.roomExit.addAll(currentDirections);
         currentDirections.removeAll(currentDirections);
+
         currentRoom.getPlasticTypes();
+
+        //Sets the new background for the room
         Controller.background = currentRoom.getPictureRoom();
     }
 
+    //Gets the players inventory and adds it to the roadbuilder, so it can build road
+    //Resets the player inventory so the player can collect more plastic.
     public void givePlastic() {
         List<Plastic> plasticInv = playerObject.getPlasticInv();
         roadBuilder.inventory(plasticInv);

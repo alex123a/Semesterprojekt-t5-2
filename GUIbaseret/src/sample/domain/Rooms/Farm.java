@@ -11,6 +11,7 @@ public class Farm extends Room {
         super.setPlasticArray(generatePlasticArray());
     }
 
+    //Two plastic pieces is put into the the numberOfPlastic array. Which will be displayed in the room by the Controller class.
     public Plastic[] generatePlasticArray() {
         int cleaningPlastics = 2;
         this.numberOfPlastic = new Plastic[cleaningPlastics];
