@@ -398,6 +398,15 @@ public class Controller {
                     } else if (Main.game.getCurrentRoom() instanceof RoadBuild && player.getTranslateX() > roadBuilderView.getTranslateX() - 50 && player.getTranslateX() < roadBuilderView.getTranslateX() + 50 && player.getTranslateY() > roadBuilderView.getTranslateY() - 50 && player.getTranslateY() < roadBuilderView.getTranslateY() + 50) {
                         // Damaged dialog run here, which controls messages for when it break down and when it is getting repaired.
                         damagedDialog();
+                        if (Main.game.getRoadBuilder().getDamaged() == 0) {
+                            numberOfMovement = Main.game.getPlayerObject().getPlasticInv().size() * 4;
+                            if (Main.game.getPlayerObject().getPlasticInv().size() > 0) {
+                                Main.game.givePlastic();
+                                roadbuilderMovingSound.AudioPlayer();
+                            }
+                            updateInventory();
+                            isInventoryFull = false;
+                        }
                     } else if (Main.game.getCurrentRoom() instanceof Farm && player.getTranslateX() > farmerNpc.getTranslateX() - 30 && player.getTranslateX() < farmerNpc.getTranslateX() + 30 && player.getTranslateY() > farmerNpc.getTranslateY() - 30 && player.getTranslateY() < farmerNpc.getTranslateY() + 30) {
                         showDialogBox();
                     } else if (Main.game.getCurrentRoom() instanceof Sdu && player.getTranslateX() > professorNpc.getTranslateX() - 30 && player.getTranslateX() < professorNpc.getTranslateX() + 30 && player.getTranslateY() > professorNpc.getTranslateY() - 30 && player.getTranslateY() < professorNpc.getTranslateY() + 30) {
@@ -539,8 +548,9 @@ public class Controller {
         // Reset for another run
     }
 
-    // Nulstiller alt
+    // Reset all
     public void restartGame() {
+        // Stopping and removing KeyFrames from timelines
         fullInventoryTimeline.stop();
         repairTimeline.stop();
         smokeTimeline.stop();
@@ -548,6 +558,14 @@ public class Controller {
         movementTimeline.stop();
         pigeonTimeline.stop();
         oldLadyTimeline.stop();
+        fullInventoryTimeline.getKeyFrames().clear();
+        repairTimeline.getKeyFrames().clear();
+        smokeTimeline.getKeyFrames().clear();
+        brokenMachineTimeline.getKeyFrames().clear();
+        movementTimeline.getKeyFrames().clear();
+        pigeonTimeline.getKeyFrames().clear();
+        oldLadyTimeline.getKeyFrames().clear();
+
         generalFarmerTalk = true;
         roadbuilderTalk = false;
         farmerTalk = false;
@@ -1197,15 +1215,6 @@ public class Controller {
                 spaceCount++;
                 talkingRoadbuilder = true;
             }
-        // If nothing wrong with roudbuilder it should just get the plastic and move the machine
-        } else if (Main.game.getRoadBuilder().getDamaged() == 0) {
-            numberOfMovement = Main.game.getPlayerObject().getPlasticInv().size() * 4;
-            if (Main.game.getPlayerObject().getPlasticInv().size() > 0) {
-                Main.game.givePlastic();
-                roadbuilderMovingSound.AudioPlayer();
-            }
-            updateInventory();
-            isInventoryFull = false;
         }
     }
 
