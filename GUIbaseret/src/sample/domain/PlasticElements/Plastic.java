@@ -3,17 +3,27 @@ package sample.domain.PlasticElements;
 import java.util.Random;
 
 public class Plastic {
+    /**
+     * @param name name of the plastic type
+     * @param image path to the image of the plastic type
+     * @param adjustXForInventory makes the x-value for the specific plastic image fit in the inventory
+     */
     private double[] position = new double[2];
     private String image;
     private String name;
     private static int counter = 0;
     private int adjustXForInventory;
 
+
+    //If the plastic object created Isn't specified
     public Plastic() {
         this.name = "Unknown plastic type";
         counter++;
     }
 
+    /*Creating af specified piece of plastic and adjusting it's picture in the inventory slots and when
+    the plastic is set in the map.
+     */
     public Plastic(String name, String image, int adjustXForInventory) {
         this.name = name;
         this.image = image;
@@ -22,6 +32,7 @@ public class Plastic {
         this.newPosition();
     }
 
+    //Spawning the plastic in random locations on the map
     public void newPosition() {
         Random random = new Random();
         this.position[0] = random.nextInt( 320 + 320 + 1) - 320;
