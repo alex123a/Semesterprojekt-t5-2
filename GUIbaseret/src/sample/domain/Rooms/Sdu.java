@@ -8,6 +8,7 @@ public class Sdu extends Room {
         super("src/sample/presentation/pictures/Backgrounds/SDU.png");
     }
 
+    //None plastic elements in the SDU
     public Plastic[] generatePlasticArray() {
         return new Plastic[0];
     }
