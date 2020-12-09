@@ -530,12 +530,25 @@ public class Controller {
         player.setTranslateX(-40);
         player.setTranslateY(0);
         // Reset for another run
-        Main.game.getRoadBuilder().resetNotDamagedBefore();
-        Main.game.getMechanicObject().resetGaveToolSet();
-        roadbuilderTalk = false;
-        professorTalk = false;
-        Main.game.getPlayerObject().resetHaveToolset();
+        restartGame();
+    }
 
+    public void restartGame() {
+        generalFarmerTalk = true;
+        roadbuilderTalk = false;
+        farmerTalk = false;
+        professorTalk = false;
+        mechanicTalk = false;
+        talking = false;
+        gameNotStarted = true;
+        talkingRoadbuilder = false;
+        doneRepairing = true;
+        isInventoryFull = false;
+        gameOver = false;
+        Main.game.getRoadBuilder().setNotDamagedBefore(true);
+        Main.game.getMechanicObject().resetGaveToolSet();
+        Main.game.getPlayerObject().resetHaveToolset();
+        Main.game.getRoadBuilder().setHaveSpoken(false);
     }
 
     // Positions in a room where you have to go to change room

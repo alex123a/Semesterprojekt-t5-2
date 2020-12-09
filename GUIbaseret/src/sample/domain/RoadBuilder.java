@@ -57,12 +57,11 @@ public class RoadBuilder {
         return notDamagedBefore;
     }
 
-    public void resetNotDamagedBefore() {
-        this.notDamagedBefore = true;
-    }
-
     public void setNotDamagedBefore(boolean notDamagedBefore) {
         this.notDamagedBefore = notDamagedBefore;
     }
 
+    public void setHaveSpoken(boolean haveSpoken) {
+        this.haveSpoken = haveSpoken;
+    }
 }
