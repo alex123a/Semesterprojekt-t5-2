@@ -9,11 +9,18 @@ import java.util.Set;
 import java.util.List;
 
 public abstract class Room {
+    /**
+     * @param pictureRoom a path to the picture
+     */
     private ArrayList<Plastic> plasticInRoom;
     private HashMap<String, Room> exits;
     private int plasticCount;
     private String pictureRoom;
 
+    /*
+    Setup for each room. Sets the exits in a hashmap.
+    Puts the plastic in the room into an new arraylist.
+    */
     public Room(String pictureRoom) {
         exits = new HashMap<>();
         this.plasticInRoom = new ArrayList<>();
@@ -21,12 +28,14 @@ public abstract class Room {
         this.pictureRoom = pictureRoom;
     }
 
+    //Sets the plastic in the room
     public void setPlasticArray(Plastic[] randomPlastic) {
         this.plasticInRoom = new ArrayList<>(Arrays.asList(randomPlastic));
         this.plasticInRoom = new ArrayList<>(Arrays.asList(randomPlastic));
         this.plasticCount = this.plasticInRoom.size();
     }
 
+    //Sets the exits for the direction of each room.
     public void setExit(String direction, Room neighbor) 
     {
         exits.put(direction, neighbor);
@@ -37,6 +46,7 @@ public abstract class Room {
         return exits.get(direction);
     }
 
+    //Plus all the plastics in the room into one array with the types.
     public void getPlasticTypes() {
         int[] numberOfPlastic = new int[4];
         for (Plastic plastic: plasticInRoom) {
