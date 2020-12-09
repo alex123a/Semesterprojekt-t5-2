@@ -3,15 +3,12 @@ package sample.presentation;
 import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
@@ -32,7 +29,6 @@ import java.util.List;
 public class Controller {
 
     public static List<String> roomExit = new ArrayList<>();
-    private ObservableList<ImageView> inventoryObservable = FXCollections.observableList(new ArrayList<ImageView>());
     public static String background;
     public static DialogNPC dialog = new DialogNPC();
     public static Timer highScoreTimer = new Timer();
@@ -132,7 +128,7 @@ public class Controller {
     @FXML
     public ImageView pigeon;
 
-
+    // Initialize run right after all @FXML attributes have been ran.
     public void initialize() {
         //Sets the font for the text.
         playerText.setFont(Font.font("Dialog", FontWeight.BOLD, 11));
@@ -144,19 +140,24 @@ public class Controller {
         backgroundRoom.setImage(new Image("file:src/sample/presentation/pictures/Backgrounds/StartScreen.png"));
     }
 
+    // Generates plastic in room and use the moveblock method to secure the plastic does not spawn in no go zones
     public void generatePlasticInRoom(List<Plastic> plasticList) {
+        // Starting withh cleaing all plastic images from the room, before showing the relevant plastic pieces.
         clearPlasticInRoom();
         ImageView[] plast = {plast1, plast2, plast3, plast4, plast5, plast6, plast7, plast8, plast9, plast10, plast11, plast12, plast13, plast14, plast15,
                 plast16, plast17, plast18, plast19, plast20};
 
         for (int i = 0; i < plasticList.size(); i++) {
+            // Checking every element in the plastic list and ignores the indexes who has a value of null.
             if (plasticList.get(i) != null) {
+                // Setting the image on a imageview, where the image is from the same slot in the plastic list.
                 plast[i].setImage(new Image("file:" + plasticList.get(i).getImage()));
+                // Getting the random generated position from the plastic instance
                 plast[i].setTranslateX(plasticList.get(i).getPosition()[0]);
                 plast[i].setTranslateY(plasticList.get(i).getPosition()[1]);
                 plast[i].setFitHeight(30);
                 plast[i].setFitWidth(30);
-                // Kode til at give plastik ny position hvis de falder inden for no go zonerne.
+                // If plastic pieces position is equal to a position in a no-go zone, it will get assigned a new position.
                 if (noAccess.moveBlock(plast[i].getTranslateX(), plast[i].getTranslateY(), 0, -2)) {
                     plasticList.get(i).newPosition();
                     generatePlasticInRoom(plasticList);
@@ -178,6 +179,7 @@ public class Controller {
         }
     }
 
+    // Placing all images away from the screen
     public void clearPlasticInRoom() {
         ImageView[] plast = {plast1, plast2, plast3, plast4, plast5, plast6, plast7, plast8, plast9, plast10, plast11, plast12, plast13, plast14, plast15,
                 plast16, plast17, plast18, plast19, plast20};
@@ -188,7 +190,8 @@ public class Controller {
         }
     }
 
-
+    // timer's job is to check the wished direction to move, and run the method which move the player
+    // It uses the hz on your screen and use your amount of screen Hz for every second
     AnimationTimer timer = new AnimationTimer() {
         @Override
         public void handle(long l) {
@@ -199,7 +202,7 @@ public class Controller {
                 east = false;
                 west = false;
             }
-            //Because it is in 'else if' statements the player can't move obliquely, and one direction at a time.
+            //Because it is in 'else if' statements the player can't move obliquely, and one direction at a time
             //Therefore we only have four directions, instead of eight. (ex. south-east)
             if (north && player.getTranslateY() > -220) {
                 animationHandle(0,0,-2);
@@ -213,13 +216,19 @@ public class Controller {
         }
     };
 
+    // Move the player and change picture to make animation
     public void animationHandle(int dir, int x, int y) {
+        // Set the direction in the playerAnimation class, so the animation will be for the direction the player walk
         playerAnimation.setDirection(direction[dir]);
+        // Checking for no-go zones before walking
         if (!noAccess.moveBlock(player.getTranslateX(), player.getTranslateY(), x, y)) {
+            // Every 13 frame it change pic to make animation effect.
             if (animationWalk % 13 == 0) {
                 numbersPlayer = playerAnimation.changePic();
+                // Setting a viewport with a rectangle on top of the player sprite sheet, and only show what is in the rectangle
                 player.setViewport(new Rectangle2D(numbersPlayer[0], numbersPlayer[1], numbersPlayer[2], numbersPlayer[3]));
             }
+            // Moving player in the direction
             switch (direction[dir]) {
                 case "North":
                     player.setTranslateY(player.getTranslateY() - 2.5);
@@ -235,18 +244,20 @@ public class Controller {
                     break;
             }
         }
+        // Frame counter
         animationWalk++;
     }
 
-    // Need this method
+    // Updating inventory slots so you can see the items the player have in his inventory list
     public void updateInventory() {
         ImageView[] inventoryItems = {item1, item2, item3, item4, item5, item6, item7, item8, item9, item10};
-        inventoryObservable.removeAll();
         ArrayList<Plastic> playersInv = new ArrayList<>(Main.game.getPlayerObject().getPlasticInv());
         for (int i = 0; i < inventoryItems.length; i++) {
             if (i < Main.game.getPlayerObject().getPlasticInv().size()) {
+                // Placing the Image from the plastic objects in the inventory slots
                 inventoryItems[i].setImage(new Image("file:" + playersInv.get(i).getImage()));
-                //Plastic imageviews have a standard layout in the FXML document, which makes us use LayoutX here instead of TranslateX
+                // Plastic imageviews have a standard layout in the FXML document, which makes us use LayoutX here instead of TranslateX
+                // Starter position is 147, i is which inventory slot and 45 is size of one inventory slot. Then it adds the adjusted value to center plastic item.
                 inventoryItems[i].setLayoutX((147 + i * 45) + Main.game.getPlayerObject().getPlasticInv().get(i).getAdjustXForInventory());
             } else {
                 inventoryItems[i].setImage(null);
@@ -255,8 +266,6 @@ public class Controller {
     }
 
     public void collectPlastic(List<Plastic> plasticList) {
-        Timeline timeline = fullInventory();
-        timeline.stop();
         ImageView[] plast = {plast1, plast2, plast3, plast4, plast5, plast6, plast7, plast8, plast9, plast10, plast11, plast12, plast13, plast14, plast15,
                 plast16, plast17, plast18, plast19, plast20};
         if (Main.game.getPlayerObject().getPlasticInv().size() < 10 && roadbuilderTalk) {
@@ -279,13 +288,19 @@ public class Controller {
                     }
                 }
             }
+            // Running timeline if it's full
             if (isInventoryFull) {
+                // Making timeline
+                Timeline timeline = fullInventory();
+                // Restarting frame counter and starting timeline
                 dialogueAnimation = 0;
                 timeline.play();
+
             }
         }
     }
 
+    // Showing message with full inventory for 120 frames and the KeyFrame is set to 60 FPS (frames), so it will show the message for 2 seconds.
     public Timeline fullInventory() {
         Timeline timeline = new Timeline();
         int FPS = 60;
@@ -306,6 +321,7 @@ public class Controller {
         return timeline;
     }
 
+    // Checks for keyevents on keyboard and find out what it should respond to the key.
     public void movePlayer(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {
             case P:
@@ -363,6 +379,7 @@ public class Controller {
                         collectPlastic(Main.game.placePlastic());
                     }
                     if (Main.game.getCurrentRoom() instanceof RoadBuild && talkingRoadbuilder && spaceCount != 0 && roadbuilderTalk) {
+                        // Player saying he will go to the town and talk with mechanic. It is placed here so you can walk away from the roadbuilder and still click space to finish talk with roadbuilder
                         if (spaceCount == 1) {
                             talkNPC(playerText, "Road builder", 3);
                             spaceCount++;
@@ -371,6 +388,7 @@ public class Controller {
                             spaceCount = 0;
                         }
                     } else if (Main.game.getCurrentRoom() instanceof RoadBuild && player.getTranslateX() > roadBuilderView.getTranslateX() - 50 && player.getTranslateX() < roadBuilderView.getTranslateX() + 50 && player.getTranslateY() > roadBuilderView.getTranslateY() - 50 && player.getTranslateY() < roadBuilderView.getTranslateY() + 50) {
+                        // Damaged dialog run here, which controls messages for when it break down and when it is getting repaired.
                         damagedDialog();
                     } else if (Main.game.getCurrentRoom() instanceof Farm && player.getTranslateX() > farmerNpc.getTranslateX() - 30 && player.getTranslateX() < farmerNpc.getTranslateX() + 30 && player.getTranslateY() > farmerNpc.getTranslateY() - 30 && player.getTranslateY() < farmerNpc.getTranslateY() + 30) {
                         showDialogBox();
@@ -386,10 +404,11 @@ public class Controller {
 
                 }
         }
-
+        // Checking if player walks out of the room and into a new one
         NewRoom();
     }
 
+    // Naming player and give the player object the name
     private void namePlayer() {
         String name = nameField.getText();
         if (name.matches(".*[0-9].*") || name.matches(".*[A-Z]*.")) {
@@ -400,10 +419,13 @@ public class Controller {
         }
     }
 
+    // Reparing machine
     public void repairMachine() {
+        // timeline and FPS are explained earlier
         Timeline timeline = new Timeline();
         int FPS = 60;
         KeyFrame frame = new KeyFrame(Duration.millis(1000 / FPS), event -> {
+            // Repairing every 60 frame (60/60 frames pr second), so every second.
             if (counterRepair % 60 == 0 && Main.game.getRoadBuilder().getDamaged() > 0) {
                 Main.game.getPlayerObject().getToolset().repairMachine();
                 dialogBox.setTranslateY(-170);
@@ -422,6 +444,7 @@ public class Controller {
         timeline.play();
     }
 
+    // End game, removing all elements there isn't needed for end screen.
     private void endGame() {
         if (Main.game.getRoadBuilder().getInventoryCount() >= Main.game.getRoadDone()) {
             gameOver = true;
@@ -462,6 +485,7 @@ public class Controller {
         }
     }
 
+    // start games places all relevant things on screen, and setting images on all imageviews.
     private void startGame() {
         //Starts the background music
         backgroundMusic.AudioStop();
@@ -502,32 +526,34 @@ public class Controller {
         //Starts the time for highscorelist
         highScoreTimer.setStartTime();
         backgroundMusic.musicPlayerInfinity();
-        //sets the players start postion
+        //sets the players start position
         player.setTranslateX(-40);
         player.setTranslateY(0);
     }
 
+    // Positions in a room where you have to go to change room
     private void NewRoom() {
-        //North
+        // North
+        // Exit in the direction North, where you have to be less than -202 in Y, and between -142.5 and -82.5 in X.
         if (Main.game.getCurrentRoom() instanceof RoadBuild && player.getTranslateY() < -202 && player.getTranslateX() > -142.5 && player.getTranslateX() < -82.5) {
             changeNorth();
         } else if (Main.game.getCurrentRoom() instanceof Sdu && player.getTranslateY() < -158 && player.getTranslateX() > -45.5 && player.getTranslateX() < 14) {
             changeNorth();
-            //South
+        // South
         } else if (Main.game.getCurrentRoom() instanceof RoadBuild && player.getTranslateY() > 208 && player.getTranslateX() > -80 && player.getTranslateX() < 14) {
             changeSouth();
         } else if (Main.game.getCurrentRoom() instanceof Park && player.getTranslateY() > 208 && player.getTranslateX() > -142.5 && player.getTranslateX() < -82.5) {
             changeSouth();
         } else if (Main.game.getCurrentRoom() instanceof Park && player.getTranslateY() > 208 && player.getTranslateX() > 68 && player.getTranslateX() < 126) {
             changeSouth();
-            //West
+        // West
         } else if (player.getTranslateX() < -328 && player.getTranslateY() > -116.5 && player.getTranslateY() < -61.5) {
             changeWest();
         } else if (Main.game.getCurrentRoom() instanceof Farm && player.getTranslateX() < -328 && player.getTranslateY() > -96 && player.getTranslateY() < -66) {
             changeWest();
         } else if (Main.game.getCurrentRoom() instanceof Town && player.getTranslateX() < -328 && player.getTranslateY() > -53 && player.getTranslateY() < -15) {
             changeWest();
-            //East
+        // East
         } else if (Main.game.getCurrentRoom() instanceof Beach && player.getTranslateX() > 328 && player.getTranslateY() > -100 && player.getTranslateY() < -61.5) {
             changeEast();
         } else if (Main.game.getCurrentRoom() instanceof RoadBuild && player.getTranslateX() > 328 && player.getTranslateY() > -116.5 && player.getTranslateY() < -61.5) {
@@ -537,6 +563,7 @@ public class Controller {
         }
     }
 
+    // Setting direction as false and stops timer, if player lift his finger from the key. Therefore it will stop the animation and not move player.
     public void stopPlayer(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {
             case UP:
@@ -570,12 +597,14 @@ public class Controller {
         }
     }
 
+    // Rendering the three NPCS in startgame method
     public void checkForNpcs() {
         showBirdAnimation();
         showOldLady();
         showProfessor();
     }
 
+    // This method is for when the player change room, then it run this method to check for which new NPCs should get rendered and be on the screen
     public void showNPCs(String dir) {
         Game.changedRoom = dir;
         Main.game.goRoom();
@@ -597,7 +626,9 @@ public class Controller {
         }
     }
 
+    // Take the exit towards North
     public void changeNorth() {
+        // professorTalk check is so that the player speaks to the professor before going to roadbuild room first time.
         if (professorTalk) {
             if (!(Main.game.getCurrentRoom() instanceof RoadBuild) || Main.game.getCurrentRoom() instanceof RoadBuild ^ !roadbuilderTalk) {
                 if (Main.game.getCurrentRoom() instanceof RoadBuild || Main.game.getCurrentRoom() instanceof Sdu) {
@@ -605,6 +636,7 @@ public class Controller {
                 }
 
                 showNPCs("north");
+                // First time player enter roadbuild he has to speak to the roadbuilder machine.
                 if (!roadbuilderTalk) {
                     dialogNPC.setImage(new Image("file:src/sample/presentation/pictures/keyItems/RoadBuilder.png"));
                     dialogNPC.setScaleX(3.5);
@@ -616,6 +648,7 @@ public class Controller {
         }
     }
 
+    // Taking the exit towards south
     public void changeSouth() {
         if (roadbuilderTalk) {
             if (Main.game.getCurrentRoom() instanceof Park || Main.game.getCurrentRoom() instanceof RoadBuild) {
@@ -631,6 +664,7 @@ public class Controller {
         }
     }
 
+    // Taking the exit towards west
     public void changeWest() {
         if (roadbuilderTalk) {
             if (Main.game.getCurrentRoom() instanceof RoadBuild || Main.game.getCurrentRoom() instanceof Town || Main.game.getCurrentRoom() instanceof Farm) {
@@ -646,6 +680,7 @@ public class Controller {
         }
     }
 
+    // Taking the exit towards east
     public void changeEast() {
         if (roadbuilderTalk) {
             if (Main.game.getCurrentRoom() instanceof Beach || Main.game.getCurrentRoom() instanceof Park || Main.game.getCurrentRoom() instanceof RoadBuild) {
@@ -661,14 +696,18 @@ public class Controller {
         }
     }
 
+    // The smoke the roadbuilder always make. This method is making the animation.
     public void smokeMachine() {
         Timeline timeline = new Timeline();
         int FPS = 60;
         KeyFrame frame = new KeyFrame(Duration.millis(1000 / FPS), event -> {
             if (Main.game.getCurrentRoom() instanceof RoadBuild) {
                 if (animationFireSmoke % 20 == 0) {
+                    // Gets the array of the position of the picture and the size
                     numbersFire = fireAnimation.changePic();
+                    // Setting the viewport from the positions of the next picture
                     smoke.setViewport(new Rectangle2D(numbersFire[0], numbersFire[1], numbersFire[2], numbersFire[3]));
+                    // Changing the position so it looks like smoke going up and backwards
                     double smokeHeight = roadBuilderView.getTranslateY() - numbersFire[0] / 22 - 40;
                     double smokeWidth = roadBuilderView.getTranslateX() + numbersFire[0] / 22 + 43;
                     smoke.setTranslateY(smokeHeight);
@@ -676,6 +715,7 @@ public class Controller {
                 }
                 animationFireSmoke++;
             } else {
+                // If the room isn't roadbuilder the smoke will be away from the screen
                 smoke.setTranslateX(3000);
             }
         });
@@ -684,6 +724,7 @@ public class Controller {
         timeline.play();
     }
 
+    // Smoke animation for when the machine break down. Check the method over to see explanation of how it works.
     public void smokeBrokenMachine() {
         Timeline timeline = new Timeline();
         int FPS = 60;
@@ -707,15 +748,19 @@ public class Controller {
         timeline.play();
     }
 
+    // Movement of machine.
     public void movementMachine() {
         Timeline timeline = new Timeline();
         int FPS = 60;
         KeyFrame frame = new KeyFrame(Duration.millis(1000 / FPS), event -> {
+            // Checking how many movements is left. One movement (numberOfMovements) is one piece of plastic.
             if (numberOfMovement != 0 && Main.game.getCurrentRoom() instanceof RoadBuild && roadBuilderView.getTranslateX() > -290) {
                 if (animationDriving % 5 == 0) {
-                    roadView.setViewport(new Rectangle2D(-681 + (Main.game.getRoadBuilder().getInventoryCount() - numberOfMovement / 4) * 18.9166 + 113.5, 0, 681, 69));
+                    // The roadview has 113.5 showed to begin with, and then add 18.9166 for every piece of plastic the roadbuilder get.
+                    roadView.setViewport(new Rectangle2D(-681 + (Main.game.getRoadBuilder().getInventoryCount() - numberOfMovement) * 18.9166 + 113.5, 0, 681, 69));
                     roadBuilderView.setViewport(new Rectangle2D(0, 0, 484, 323));
-                    roadBuilderView.setTranslateX((300 - ((Main.game.getRoadBuilder().getInventoryCount() - numberOfMovement / 4) * 18.9166 + 113.5) + 90));
+                    // Moving roadbuilder with the road
+                    roadBuilderView.setTranslateX((300 - ((Main.game.getRoadBuilder().getInventoryCount() - numberOfMovement) * 18.9166 + 113.5) + 90));
                     --numberOfMovement;
                 }
                 animationDriving++;
@@ -730,6 +775,7 @@ public class Controller {
         timeline.play();
     }
 
+    // Show road
     public void showRoad() {
         if (Main.game.getRoadBuilder().getInventoryCount() >= 30) {
             endGame();
@@ -741,9 +787,9 @@ public class Controller {
             }
             showRoadBuilder();
         }
-
     }
 
+    // Show roadbuilder
     public void showRoadBuilder() {
         if (Main.game.getCurrentRoom() instanceof RoadBuild) {
             roadBuilderView.setViewport(new Rectangle2D(0, 0, 484, 323));
@@ -753,6 +799,7 @@ public class Controller {
         }
     }
 
+    // Show professor
     public void showProfessor() {
         if (Main.game.getCurrentRoom() instanceof Sdu) {
             professorNpc.setTranslateX(30);
@@ -761,6 +808,7 @@ public class Controller {
         }
     }
 
+    // Show mechanic
     public void showMechanic() {
         if (Main.game.getCurrentRoom() instanceof Town) {
             mechanicNpc.setTranslateX(178);
@@ -770,6 +818,7 @@ public class Controller {
         }
     }
 
+    // Show farmer
     public void showFarmer() {
         if (Main.game.getCurrentRoom() instanceof Farm) {
             farmerNpc.setTranslateX(190);
@@ -779,6 +828,7 @@ public class Controller {
         }
     }
 
+    // Show fisherman
     public void showFisherman() {
         if (Main.game.getCurrentRoom() instanceof Beach) {
             fishermanNpc.setTranslateX(-126);
@@ -788,14 +838,17 @@ public class Controller {
         }
     }
 
+    // Bird animation and walk
     public void showBirdAnimation() {
         int FPS = 60;
         Timeline pigeonTimeline = new Timeline();
         KeyFrame frame = new KeyFrame(Duration.millis(1000 / FPS), event -> {
             if (Main.game.getCurrentRoom() instanceof Park) {
                 if (animationBird % 20 == 0) {
+                    // Doing the animation same direction as the bird walk
                     numbersPig = pigeonAnimation.changePic();
                     pigeon.setViewport(new Rectangle2D(numbersPig[0], numbersPig[1], numbersPig[2], numbersPig[3]));
+                    // Finding out which direction it should walk. It walks the same distance in all diretions, so it will make a rectangle while walking.
                     double pigeonHeight = pigeon.getTranslateY();
                     double pigeonWidth = pigeon.getTranslateX();
                     if (numbersPig[4] % 48 > 0 && numbersPig[4] % 48 <= 12) {
@@ -818,12 +871,14 @@ public class Controller {
         pigeonTimeline.play();
     }
 
+    // Old lady movement and animation
     public void showOldLady() {
         oldLadyWalk = 0;
         int FPS = 60;
         Timeline oldLadyTimeline = new Timeline();
         KeyFrame frame = new KeyFrame(Duration.millis(1000 / FPS), event -> {
             if (Main.game.getCurrentRoom() instanceof Park) {
+                // If the player and old lady is talking she stands still, else she moves either down or up in a straight line.
                 if (talking) {
                     oldLadyNPC.setViewport(new Rectangle2D(0, 0, numbersOldLady[2], numbersOldLady[3]));
                 } else if (oldLadyWalk % 20 == 0) {
@@ -848,6 +903,7 @@ public class Controller {
 
     }
 
+    // Hide dialogBox
     public void hideDialogBox() {
         spaceCount = 0;
         NPCTextLine.setText("");
@@ -860,12 +916,13 @@ public class Controller {
         dialogNPC.setImage(null);
     }
 
+    // Show dialog box. Getting the next text line there should be rendered.
     public void showDialogBox() {
         NPCTextLine.setTranslateY(-210);
         NPCTextLine1.setTranslateY(-190);
         NPCTextLine2.setTranslateY(-170);
         playerText.setTranslateY(-130);
-        //Roadbuilder
+        // Roadbuilder
         if (Main.game.getCurrentRoom() instanceof RoadBuild) {
             dialogNPC.setImage(new Image("file:src/sample/presentation/pictures/keyItems/RoadBuilder.png"));
             if (spaceCount == 0 && !roadbuilderTalk) {
@@ -895,7 +952,7 @@ public class Controller {
                 roadbuilderTalk = true;
             }
         }
-        //Farmer
+        // Farmer
         if (Main.game.getCurrentRoom() instanceof Farm) {
             if (generalFarmerTalk) {
                 if (spaceCount == 0 && !farmerTalk) {
@@ -920,6 +977,7 @@ public class Controller {
                     spaceCount++;
                 } else if (spaceCount == 4) {
                     talkNPC(NPCTextLine, "farmer", 6);
+                    // Adding farmers plastic list to players inventory
                     farmerTalk = Main.game.getPlayerObject().addPlasticInv();
                     if (!farmerTalk) {
                         talkNPC(NPCTextLine, "farmer", 7);
@@ -958,7 +1016,7 @@ public class Controller {
                     }
                 }
             }
-            //Professor
+        // Professor
         } else if (Main.game.getCurrentRoom() instanceof Sdu) {
             if (spaceCount == 0 && !professorTalk) {
                 dialogNPC.setImage(new Image("file:src/sample/presentation/pictures/npc/Professor.png"));
@@ -987,8 +1045,9 @@ public class Controller {
                 hideDialogBox();
                 professorTalk = true;
             }
-            //Mechanic
+        // Mechanic
         } else if (Main.game.getCurrentRoom() instanceof Town) {
+            // Conversation if roadbuilder is damaged
             if (Main.game.getRoadBuilder().getDamaged() > 0) {
                 if (spaceCount == 0 && !mechanicTalk) {
                     dialogNPC.setImage(new Image("file:src/sample/presentation/pictures/npc/Mechanic.png"));
@@ -1004,6 +1063,7 @@ public class Controller {
                     NPCTextLine1.setText("");
                     playerText.setText("");
                     spaceCount++;
+                    // Getting the toolset from mechanic and placing it on the player object
                     Main.game.getPlayerObject().setToolset(Main.game.getMechanicObject().giveToolset());
                     lockToolSlot.setOpacity(0);
                     toolsetImg.setImage(new Image("file:" + Main.game.getPlayerObject().getToolset().getImage()));
@@ -1015,6 +1075,7 @@ public class Controller {
                     hideDialogBox();
                     mechanicTalk = true;
                 }
+            // Conversation for when the roadbuilder isn't damaged
             } else if (Main.game.getRoadBuilder().getDamaged() == 0) {
                 if (spaceCount == 0 && !mechanicTalk) {
                     dialogNPC.setImage(new Image("file:src/sample/presentation/pictures/npc/Mechanic.png"));
@@ -1028,6 +1089,7 @@ public class Controller {
                     spaceCount = 0;
                 }
             }
+        // Old lady
         } else if (Main.game.getCurrentRoom() instanceof Park) {
             if (spaceCount == 0) {
                 dialogNPC.setImage(new Image("file:src/sample/presentation/pictures/npc/OldLadyScale.png"));
@@ -1038,6 +1100,7 @@ public class Controller {
                 talkNPC(NPCTextLine2, "oldLady", 2);
                 spaceCount++;
             } else if (spaceCount == 1) {
+                // Player tells the old lady how many % of the road he has build.
                 int road = (int) (((double) Main.game.getRoadBuilder().getInventoryCount() / (double) Main.game.getRoadDone()) * 100);
                 playerText.setText("I have built " + road + "% of the road.");
                 spaceCount++;
@@ -1075,6 +1138,8 @@ public class Controller {
         if (!roadbuilderTalk) {
             showDialogBox();
         }
+
+        // When you try to give plastic to the machine when it's inventorycount is 19 or larger, then it will break down.
         if (Main.game.getRoadBuilder().getInventoryCount() >= 19 && Main.game.getRoadBuilder().isNotDamagedBefore() && roadbuilderTalk) {
             dialogNPC.setImage(new Image("file:src/sample/presentation/pictures/keyItems/RoadBuilder.png"));
             dialogNPC.setScaleX(3.5);
@@ -1082,11 +1147,13 @@ public class Controller {
             Main.game.getRoadBuilder().damagedMachine();
             Main.game.getRoadBuilder().setNotDamagedBefore(false);
             roadbuilderCrashSound.AudioPlayer();
+        // If you have the toolset and interact with it, then it will be repaired.
         } else if (Main.game.getPlayerObject().getHaveToolset() && Main.game.getRoadBuilder().getDamaged() > 0) {
             repairSound.musicPlayerInfinity();
             repairMachine();
         }
 
+        // Roadbuilder tell Player to get the toolset from mechanic
         if (Main.game.getRoadBuilder().getDamaged() > 0 && !Main.game.getPlayerObject().getHaveToolset()) {
             NPCTextLine.setTranslateY(-210);
             NPCTextLine1.setTranslateY(-190);
@@ -1101,9 +1168,9 @@ public class Controller {
                 spaceCount++;
                 talkingRoadbuilder = true;
             }
-
+        // If nothing wrong with roudbuilder it should just get the plastic and move the machine
         } else if (Main.game.getRoadBuilder().getDamaged() == 0) {
-            numberOfMovement = Main.game.getPlayerObject().getPlasticInv().size() * 4;
+            numberOfMovement = Main.game.getPlayerObject().getPlasticInv().size();
             if (Main.game.getPlayerObject().getPlasticInv().size() > 0) {
                 Main.game.givePlastic();
                 roadbuilderMovingSound.AudioPlayer();
@@ -1113,11 +1180,14 @@ public class Controller {
         }
     }
 
+    // Setting the text in the dialog box with the index (used for line - 1 in the text files)
     private void talkNPC(Text npcText, String npcType, int index) {
         dialogBox.setTranslateY(-170);
+        // npcType is the NPC
         npcText.setText(dialog.getNPCText(npcType, index));
     }
 
+    // Hide inventory slots (lines breaking up the inventory slots)
     public void hideSlotLines() {
         Line[] lines = {slot1, slot2, slot3, slot4, slot5, slot6, slot7, slot8, slot9};
 
@@ -1126,6 +1196,7 @@ public class Controller {
         }
     }
 
+    // Show inventory slots (lines breaking up the inventory slots)
     public void showSlotLines() {
         Line[] lines = {slot1, slot2, slot3, slot4, slot5, slot6, slot7, slot8, slot9};
 
@@ -1134,11 +1205,15 @@ public class Controller {
         }
     }
 
-    public void startGameRect(MouseEvent mouseEvent) {
+    // Rectangle on start screen so you can start by clicking and not only with spacebar.
+    public void startGameRect() {
         if (gameNotStarted) {
             namePlayer();
         }
     }
+
+
+    // A lot of imageviews and lines for inventory and plastic
 
     @FXML
     private ImageView plast1 = new ImageView();

@@ -2,8 +2,8 @@ package sample.presentation;
 
 public class OldLadyAnimation implements Animation {
     private int count = 0;
-    private final double picWidth = 32; //128 / 32
-    private final double picHeight = 48; //192 / 48
+    private final double picWidth = 32;
+    private final double picHeight = 48;
 
 
     @Override
