@@ -388,7 +388,7 @@ public class Controller {
                             spaceCount = 0;
                         }
                     } else if (Main.game.getCurrentRoom() instanceof RoadBuild && player.getTranslateX() > roadBuilderView.getTranslateX() - 50 && player.getTranslateX() < roadBuilderView.getTranslateX() + 50 && player.getTranslateY() > roadBuilderView.getTranslateY() - 50 && player.getTranslateY() < roadBuilderView.getTranslateY() + 50) {
-                        // Damaged dialog run here, which controls messages for when it brake down and when it is getting repaired.
+                        // Damaged dialog run here, which controls messages for when it break down and when it is getting repaired.
                         damagedDialog();
                     } else if (Main.game.getCurrentRoom() instanceof Farm && player.getTranslateX() > farmerNpc.getTranslateX() - 30 && player.getTranslateX() < farmerNpc.getTranslateX() + 30 && player.getTranslateY() > farmerNpc.getTranslateY() - 30 && player.getTranslateY() < farmerNpc.getTranslateY() + 30) {
                         showDialogBox();
@@ -526,7 +526,7 @@ public class Controller {
         //Starts the time for highscorelist
         highScoreTimer.setStartTime();
         backgroundMusic.musicPlayerInfinity();
-        //sets the players start postion
+        //sets the players start position
         player.setTranslateX(-40);
         player.setTranslateY(0);
     }
@@ -563,7 +563,7 @@ public class Controller {
         }
     }
 
-    // Setting direction as false and stops timer, if player lift his finger from the key. Therefor it will stop the animation and not move player.
+    // Setting direction as false and stops timer, if player lift his finger from the key. Therefore it will stop the animation and not move player.
     public void stopPlayer(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {
             case UP:
@@ -724,7 +724,7 @@ public class Controller {
         timeline.play();
     }
 
-    // Smoke animation for when the machine brake down. Check the method over to se explaination of how it works.
+    // Smoke animation for when the machine break down. Check the method over to see explanation of how it works.
     public void smokeBrokenMachine() {
         Timeline timeline = new Timeline();
         int FPS = 60;
@@ -775,7 +775,7 @@ public class Controller {
         timeline.play();
     }
 
-    // Shows the road
+    // Show road
     public void showRoad() {
         if (Main.game.getRoadBuilder().getInventoryCount() >= 30) {
             endGame();
@@ -789,7 +789,7 @@ public class Controller {
         }
     }
 
-    // Shows the roadbuilder
+    // Show roadbuilder
     public void showRoadBuilder() {
         if (Main.game.getCurrentRoom() instanceof RoadBuild) {
             roadBuilderView.setViewport(new Rectangle2D(0, 0, 484, 323));
@@ -799,7 +799,7 @@ public class Controller {
         }
     }
 
-    // Shows the professor
+    // Show professor
     public void showProfessor() {
         if (Main.game.getCurrentRoom() instanceof Sdu) {
             professorNpc.setTranslateX(30);
@@ -808,7 +808,7 @@ public class Controller {
         }
     }
 
-    // Shows the mechanic
+    // Show mechanic
     public void showMechanic() {
         if (Main.game.getCurrentRoom() instanceof Town) {
             mechanicNpc.setTranslateX(178);
@@ -818,7 +818,7 @@ public class Controller {
         }
     }
 
-    // Shows the farmer
+    // Show farmer
     public void showFarmer() {
         if (Main.game.getCurrentRoom() instanceof Farm) {
             farmerNpc.setTranslateX(190);
@@ -828,7 +828,7 @@ public class Controller {
         }
     }
 
-    // Shows the fisherman
+    // Show fisherman
     public void showFisherman() {
         if (Main.game.getCurrentRoom() instanceof Beach) {
             fishermanNpc.setTranslateX(-126);
@@ -903,7 +903,7 @@ public class Controller {
 
     }
 
-    // Hiding dialogBox
+    // Hide dialogBox
     public void hideDialogBox() {
         spaceCount = 0;
         NPCTextLine.setText("");
@@ -922,7 +922,7 @@ public class Controller {
         NPCTextLine1.setTranslateY(-190);
         NPCTextLine2.setTranslateY(-170);
         playerText.setTranslateY(-130);
-        //Roadbuilder
+        // Roadbuilder
         if (Main.game.getCurrentRoom() instanceof RoadBuild) {
             dialogNPC.setImage(new Image("file:src/sample/presentation/pictures/keyItems/RoadBuilder.png"));
             if (spaceCount == 0 && !roadbuilderTalk) {
@@ -952,7 +952,7 @@ public class Controller {
                 roadbuilderTalk = true;
             }
         }
-        //Farmer
+        // Farmer
         if (Main.game.getCurrentRoom() instanceof Farm) {
             if (generalFarmerTalk) {
                 if (spaceCount == 0 && !farmerTalk) {
@@ -1016,7 +1016,7 @@ public class Controller {
                     }
                 }
             }
-        //Professor
+        // Professor
         } else if (Main.game.getCurrentRoom() instanceof Sdu) {
             if (spaceCount == 0 && !professorTalk) {
                 dialogNPC.setImage(new Image("file:src/sample/presentation/pictures/npc/Professor.png"));
@@ -1045,7 +1045,7 @@ public class Controller {
                 hideDialogBox();
                 professorTalk = true;
             }
-        //Mechanic
+        // Mechanic
         } else if (Main.game.getCurrentRoom() instanceof Town) {
             // Conversation if roadbuilder is damaged
             if (Main.game.getRoadBuilder().getDamaged() > 0) {
