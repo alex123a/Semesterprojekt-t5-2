@@ -73,6 +73,15 @@ public class Controller {
     private final AudioMusicPlayer repairSound = new AudioMusicPlayer("src/sample/presentation/audio/repairSound.wav");
     private final AudioMusicPlayer pickUpSound = new AudioMusicPlayer("src/sample/presentation/audio/pickUpSound.wav");
 
+    // Timelines
+    Timeline repairTimeline = new Timeline();
+    Timeline fullInventoryTimeline = new Timeline();
+    Timeline smokeTimeline = new Timeline();
+    Timeline brokenMachineTimeline = new Timeline();
+    Timeline movementTimeline = new Timeline();
+    Timeline pigeonTimeline = new Timeline();
+    Timeline oldLadyTimeline = new Timeline();
+
     @FXML
     private ImageView backgroundRoom;
     @FXML
@@ -302,7 +311,6 @@ public class Controller {
 
     // Showing message with full inventory for 120 frames and the KeyFrame is set to 60 FPS (frames), so it will show the message for 2 seconds.
     public Timeline fullInventory() {
-        Timeline timeline = new Timeline();
         int FPS = 60;
         KeyFrame frame = new KeyFrame(Duration.millis(1000 / FPS), event -> {
             dialogueAnimation++;
@@ -316,9 +324,9 @@ public class Controller {
                 dialogueAnimation++;
             }
         });
-        timeline.setCycleCount(timeline.INDEFINITE);
-        timeline.getKeyFrames().add(frame);
-        return timeline;
+        fullInventoryTimeline.setCycleCount(fullInventoryTimeline.INDEFINITE);
+        fullInventoryTimeline.getKeyFrames().add(frame);
+        return fullInventoryTimeline;
     }
 
     // Checks for keyevents on keyboard and find out what it should respond to the key.
@@ -422,7 +430,6 @@ public class Controller {
     // Reparing machine
     public void repairMachine() {
         // timeline and FPS are explained earlier
-        Timeline timeline = new Timeline();
         int FPS = 60;
         KeyFrame frame = new KeyFrame(Duration.millis(1000 / FPS), event -> {
             // Repairing every 60 frame (60/60 frames pr second), so every second.
@@ -439,14 +446,15 @@ public class Controller {
             }
             counterRepair++;
         });
-        timeline.setCycleCount(timeline.INDEFINITE);
-        timeline.getKeyFrames().add(frame);
-        timeline.play();
+        repairTimeline.setCycleCount(repairTimeline.INDEFINITE);
+        repairTimeline.getKeyFrames().add(frame);
+        repairTimeline.play();
     }
 
     // End game, removing all elements there isn't needed for end screen.
     private void endGame() {
         if (Main.game.getRoadBuilder().getInventoryCount() >= Main.game.getRoadDone()) {
+            backgroundMusic.AudioStop();
             gameOver = true;
             //Sets the highscorebackground
             backgroundRoom.setImage(new Image("file:src/sample/presentation/pictures/Backgrounds/EndScreen.png"));
@@ -487,8 +495,7 @@ public class Controller {
 
     // start games places all relevant things on screen, and setting images on all imageviews.
     private void startGame() {
-        //Starts the background music
-        backgroundMusic.AudioStop();
+        restartGame();
         gameOver = false;
         Main.game.createRooms();
         //Create the images
@@ -530,10 +537,17 @@ public class Controller {
         player.setTranslateX(-40);
         player.setTranslateY(0);
         // Reset for another run
-        restartGame();
     }
 
+    // Nulstiller alt
     public void restartGame() {
+        fullInventoryTimeline.stop();
+        repairTimeline.stop();
+        smokeTimeline.stop();
+        brokenMachineTimeline.stop();
+        movementTimeline.stop();
+        pigeonTimeline.stop();
+        oldLadyTimeline.stop();
         generalFarmerTalk = true;
         roadbuilderTalk = false;
         farmerTalk = false;
@@ -718,7 +732,6 @@ public class Controller {
 
     // The smoke the roadbuilder always make. This method is making the animation.
     public void smokeMachine() {
-        Timeline timeline = new Timeline();
         int FPS = 60;
         KeyFrame frame = new KeyFrame(Duration.millis(1000 / FPS), event -> {
             if (Main.game.getCurrentRoom() instanceof RoadBuild) {
@@ -739,14 +752,13 @@ public class Controller {
                 smoke.setTranslateX(3000);
             }
         });
-        timeline.setCycleCount(timeline.INDEFINITE);
-        timeline.getKeyFrames().add(frame);
-        timeline.play();
+        smokeTimeline.setCycleCount(smokeTimeline.INDEFINITE);
+        smokeTimeline.getKeyFrames().add(frame);
+        smokeTimeline.play();
     }
 
     // Smoke animation for when the machine break down. Check the method over to see explanation of how it works.
     public void smokeBrokenMachine() {
-        Timeline timeline = new Timeline();
         int FPS = 60;
         KeyFrame frame = new KeyFrame(Duration.millis(1000 / FPS), event -> {
             if (Main.game.getCurrentRoom() instanceof RoadBuild && Main.game.getRoadBuilder().getDamaged() > 0) {
@@ -763,14 +775,13 @@ public class Controller {
                 smokeBrokenMachine.setTranslateX(3000);
             }
         });
-        timeline.setCycleCount(timeline.INDEFINITE);
-        timeline.getKeyFrames().add(frame);
-        timeline.play();
+        brokenMachineTimeline.setCycleCount(brokenMachineTimeline.INDEFINITE);
+        brokenMachineTimeline.getKeyFrames().add(frame);
+        brokenMachineTimeline.play();
     }
 
     // Movement of machine.
     public void movementMachine() {
-        Timeline timeline = new Timeline();
         int FPS = 60;
         KeyFrame frame = new KeyFrame(Duration.millis(1000 / FPS), event -> {
             // Checking how many movements is left. One movement (numberOfMovements) is one piece of plastic.
@@ -790,9 +801,9 @@ public class Controller {
             }
 
         });
-        timeline.setCycleCount(timeline.INDEFINITE);
-        timeline.getKeyFrames().add(frame);
-        timeline.play();
+        movementTimeline.setCycleCount(movementTimeline.INDEFINITE);
+        movementTimeline.getKeyFrames().add(frame);
+        movementTimeline.play();
     }
 
     // Show road
@@ -861,7 +872,6 @@ public class Controller {
     // Bird animation and walk
     public void showBirdAnimation() {
         int FPS = 60;
-        Timeline pigeonTimeline = new Timeline();
         KeyFrame frame = new KeyFrame(Duration.millis(1000 / FPS), event -> {
             if (Main.game.getCurrentRoom() instanceof Park) {
                 if (animationBird % 20 == 0) {
@@ -895,7 +905,6 @@ public class Controller {
     public void showOldLady() {
         oldLadyWalk = 0;
         int FPS = 60;
-        Timeline oldLadyTimeline = new Timeline();
         KeyFrame frame = new KeyFrame(Duration.millis(1000 / FPS), event -> {
             if (Main.game.getCurrentRoom() instanceof Park) {
                 // If the player and old lady is talking she stands still, else she moves either down or up in a straight line.
