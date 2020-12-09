@@ -1,13 +1,9 @@
-package sample.domain.NPCer;
+package sample.domain.NPCs;
 
 import sample.domain.PlasticElements.*;
-import sample.domain.Player;
 import sample.presentation.Controller;
+import sample.presentation.Main;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.Random;
 
@@ -34,12 +30,12 @@ public class Farmer extends NPC {
     }
 
     public void emptyPlasticForPlayer() {
-        List<Plastic> newInv = Controller.playerObject.getPlasticInv();
+        List<Plastic> newInv = Main.game.getPlayerObject().getPlasticInv();
         ;
         for (Plastic plastic : plasticForPlayer) {
             newInv.add(plastic);
         }
-        Controller.playerObject.setPlasticInv(newInv);
+        Main.game.getPlayerObject().setPlasticInv(newInv);
         this.plasticForPlayer = null;
     }
 

@@ -72,7 +72,7 @@
                   <Rectangle fx:id="toolRect" arcHeight="5.0" arcWidth="5.0" fill="#d6d6d6" height="45.0" layoutX="657.0" layoutY="453.0" opacity="0" stroke="BLACK" strokeType="INSIDE" width="45.0" />
                   <ImageView fx:id="lockToolSlot" fitHeight="45.0" fitWidth="45.0" layoutX="663.0" layoutY="453.0" pickOnBounds="true" preserveRatio="true" opacity="0">
                      <image>
-                        <Image url="@pictures/key-lock-icon.png" />
+                        <Image url="@pictures/keyItems/key-lock-icon.png" />
                      </image>
                   </ImageView>
                   <Rectangle fx:id="inventory" arcHeight="5.0" arcWidth="5.0" fill="#d6d6d6" height="45.0" layoutX="135.0" layoutY="453.0" opacity="0" stroke="BLACK" strokeType="INSIDE" width="450.0" />

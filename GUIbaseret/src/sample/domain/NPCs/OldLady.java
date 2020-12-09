@@ -1,4 +1,4 @@
-package sample.domain.NPCer;
+package sample.domain.NPCs;
 
 public class OldLady extends NPC {
 

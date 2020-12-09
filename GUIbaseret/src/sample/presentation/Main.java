@@ -21,7 +21,7 @@ public class Main extends Application {
         primaryStage.setTitle("Plastic Road");
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
-        primaryStage.getIcons().add(new Image("file:src/sample/presentation/pictures/TrafficCone.png"));
+        primaryStage.getIcons().add(new Image("file:src/sample/presentation/pictures/keyItems/TrafficCone.png"));
         primaryStage.show();
     }
 

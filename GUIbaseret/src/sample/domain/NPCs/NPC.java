@@ -1,4 +1,4 @@
-package sample.domain.NPCer;
+package sample.domain.NPCs;
 
 public abstract class NPC {
     private String name;

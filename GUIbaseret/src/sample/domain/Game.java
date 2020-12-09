@@ -1,33 +1,31 @@
 package sample.domain;
 
-import sample.domain.NPCer.*;
+import sample.domain.NPCs.*;
 import sample.domain.PlasticElements.Plastic;
 import sample.domain.Rooms.*;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 import sample.presentation.Controller;
 
 
 public class Game {
-    public static String[] startDirections = {"north", "south", "west", "east"};
 
+    public static String[] startDirections = {"north", "south", "west", "east"};
     private Room currentRoom;
-    final private File welcomeMessage = new File("src/sample/data/textfiles/gameDescriptions/gameDescription.txt");
-    final private File help = new File("src/sample/data/textfiles/gameDescriptions/help.txt");
     private static final int roadDone = 30;
     private Room RoadBuild, Town, Beach, Farm, Park, Sdu;
-    private Farmer farmer = new Farmer("Farmer");
-    private Mechanic mechanic = new Mechanic("Mechanic");
-    private Professor professor = new Professor("Professor");
-    private Toolset toolset = new Toolset();
-    // private List<String> currentDirections = new ArrayList<>(Arrays.asList(startDirections));
+    private Player playerObject = new Player();
+    private RoadBuilder roadBuilder = new RoadBuilder();
+    private Professor professorObject = new Professor("Professor");
+    private Mechanic mechanicObject = new Mechanic("Mechanic");
+    private Farmer farmerObject = new Farmer("Farmer");
+    private Fisherman fishermanObject = new Fisherman("Fisherman");
+    private OldLady oldLadyObject = new OldLady("OldLady");
+    public Road road = new Road();
     private List<String> currentDirections = new ArrayList<>();
-    //sæt privat
     public static String changedRoom;
 
     public Game() {
@@ -83,9 +81,9 @@ public class Game {
     }
 
     public void givePlastic() {
-        List<Plastic> plasticInv = Controller.playerObject.getPlasticInv();
-        Controller.roadBuilder.inventory(plasticInv);
-        Controller.playerObject.resetPlasticInv();
+        List<Plastic> plasticInv = playerObject.getPlasticInv();
+        roadBuilder.inventory(plasticInv);
+        playerObject.resetPlasticInv();
     }
 
     public int getRoadDone() {
@@ -96,7 +94,35 @@ public class Game {
         return currentRoom;
     }
 
-    public Farmer getFarmer() {
-        return farmer;
+    public Player getPlayerObject() {
+        return playerObject;
+    }
+
+    public RoadBuilder getRoadBuilder() {
+        return roadBuilder;
+    }
+
+    public Professor getProfessorObject() {
+        return professorObject;
+    }
+
+    public Mechanic getMechanicObject() {
+        return mechanicObject;
+    }
+
+    public Farmer getFarmerObject() {
+        return farmerObject;
+    }
+
+    public Fisherman getFishermanObject() {
+        return fishermanObject;
+    }
+
+    public OldLady getOldLadyObject() {
+        return oldLadyObject;
+    }
+
+    public Road getRoad() {
+        return road;
     }
 }
