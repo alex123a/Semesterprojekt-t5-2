@@ -191,7 +191,7 @@ public class Controller {
     }
 
     // timer's job is to check the wished direction to move, and run the method which move the player
-    // It uses the hz on your screen and says (yourScreensHz for every second)
+    // It uses the hz on your screen and use your amount of screen Hz for every second
     AnimationTimer timer = new AnimationTimer() {
         @Override
         public void handle(long l) {
@@ -204,7 +204,6 @@ public class Controller {
             }
             //Because it is in 'else if' statements the player can't move obliquely, and one direction at a time
             //Therefore we only have four directions, instead of eight. (ex. south-east)
-            //
             if (north && player.getTranslateY() > -220) {
                 animationHandle(0,0,-2);
             } else if (south && player.getTranslateY() < 220) {
