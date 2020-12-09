@@ -1,6 +1,7 @@
 package sample.data;
 
 import sample.presentation.Controller;
+import sample.presentation.Main;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -22,7 +23,7 @@ public class FileHandler {
     public void writeToFile(double slider1, double slider2, double slider3, String text) {
         try {
             printWriter = new PrintWriter(new FileWriter(new File("src/sample/answers.txt"), true));
-            printWriter.println(Controller.playerObject.getName());
+            printWriter.println(Main.game.getPlayerObject().getName());
             printWriter.println("Hvad var din viden omkring brugen af plastik i veje, før du prøvet spillet? (0 er ingen viden,  10 er ekspert viden)");
             printWriter.println(slider1);
             printWriter.println("Hvor større er dit kendskab til brugen af plastik til udlægges af ny vej?(0 er ingen forskel, 10 er stor forskel)");

@@ -32,16 +32,6 @@ public abstract class Room {
         exits.put(direction, neighbor);
     }
 
-    private String getExitString()
-    {
-        String returnString = "Exits:";
-        Set<String> keys = exits.keySet();
-        for(String exit : keys) {
-            returnString += " " + exit;
-        }
-        return returnString;
-    }
-
     public Room getExit(String direction) 
     {
         return exits.get(direction);
@@ -60,16 +50,6 @@ public abstract class Room {
                 numberOfPlastic[3]++;
             }
         }
-
-        String[] typer = {"Cleaning products", "Juice bottles", "Milk bottles", "Water bottles"};
-        System.out.println("Total of " + plasticInRoom.size() + " plastic pieces");
-        for (int i = 0; i < numberOfPlastic.length; i++) {
-            if (numberOfPlastic[i] != 0) {
-                System.out.print("There is " + numberOfPlastic[i] + " of the type " + typer[i] + " ");
-            }
-        }
-        System.out.println();
-
     }
 
     public List<Plastic> getPlasticInRoom() {
@@ -79,19 +59,6 @@ public abstract class Room {
     public void removePlastic(Plastic plastic) {
         plasticInRoom.set(plasticInRoom.indexOf(plastic), null);
     }
-
-    /*
-    public Plastic getPlastic() {
-        Plastic plastic = new Plastic();
-        if (plasticInRoom.size() > 0) {
-            plasticInRoom.remove(plasticCount-1);
-            plasticCount--;
-            System.out.println("You have collected 1 piece of plastic, there is " + plasticCount + " pieces of plastic left in the room");
-        }
-        return plastic;
-    }
-
-    */
 
     public abstract Plastic[] generatePlasticArray();
 

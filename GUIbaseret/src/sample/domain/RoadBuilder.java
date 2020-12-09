@@ -10,7 +10,7 @@ public class RoadBuilder {
     private int damaged = 0;
     private boolean haveSpoken = false;
     private boolean notDamagedBefore = true;
-    private String image = "src/sample/presentation/pictures/RoadBuilder.png";
+    private String image = "src/sample/presentation/pictures/keyItems/RoadBuilder.png";
 
 
     public int inventory(List<Plastic> plastic) {
