@@ -77,5 +77,9 @@ public class Player {
     public void setToolset(Toolset toolset) {
         this.toolset = toolset;
     }
+
+    public void resetHaveToolset() {
+        haveToolset = false;
+    }
 }
 

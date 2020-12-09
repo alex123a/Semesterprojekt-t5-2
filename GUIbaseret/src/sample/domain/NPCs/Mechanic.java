@@ -15,4 +15,8 @@ public class Mechanic extends NPC {
         Main.game.getPlayerObject().setHaveToolset(true);
         return new Toolset();
     }
+
+    public void resetGaveToolSet() {
+        this.gaveToolset = false;
+    }
 }

@@ -517,18 +517,25 @@ public class Controller {
         player.setOpacity(1);
         smoke.setOpacity(1);
         hideDialogBox();
-        //Generates plastic and runs the animations
+        // Generates plastic and runs the animations
         generatePlasticInRoom(Main.game.placePlastic());
         movementMachine();
         smokeMachine();
         smokeBrokenMachine();
         checkForNpcs();
-        //Starts the time for highscorelist
+        // Starts the time for highscorelist
         highScoreTimer.setStartTime();
         backgroundMusic.musicPlayerInfinity();
-        //sets the players start position
+        // sets the players start position
         player.setTranslateX(-40);
         player.setTranslateY(0);
+        // Reset for another run
+        Main.game.getRoadBuilder().resetNotDamagedBefore();
+        Main.game.getMechanicObject().resetGaveToolSet();
+        roadbuilderTalk = false;
+        professorTalk = false;
+        Main.game.getPlayerObject().resetHaveToolset();
+
     }
 
     // Positions in a room where you have to go to change room
@@ -757,10 +764,10 @@ public class Controller {
             if (numberOfMovement != 0 && Main.game.getCurrentRoom() instanceof RoadBuild && roadBuilderView.getTranslateX() > -290) {
                 if (animationDriving % 5 == 0) {
                     // The roadview has 113.5 showed to begin with, and then add 18.9166 for every piece of plastic the roadbuilder get.
-                    roadView.setViewport(new Rectangle2D(-681 + (Main.game.getRoadBuilder().getInventoryCount() - numberOfMovement) * 18.9166 + 113.5, 0, 681, 69));
+                    roadView.setViewport(new Rectangle2D(-681 + (Main.game.getRoadBuilder().getInventoryCount() - numberOfMovement / 4) * 18.9166 + 113.5, 0, 681, 69));
                     roadBuilderView.setViewport(new Rectangle2D(0, 0, 484, 323));
                     // Moving roadbuilder with the road
-                    roadBuilderView.setTranslateX((300 - ((Main.game.getRoadBuilder().getInventoryCount() - numberOfMovement) * 18.9166 + 113.5) + 90));
+                    roadBuilderView.setTranslateX((300 - ((Main.game.getRoadBuilder().getInventoryCount() - numberOfMovement / 4) * 18.9166 + 113.5) + 90));
                     --numberOfMovement;
                 }
                 animationDriving++;
@@ -1170,7 +1177,7 @@ public class Controller {
             }
         // If nothing wrong with roudbuilder it should just get the plastic and move the machine
         } else if (Main.game.getRoadBuilder().getDamaged() == 0) {
-            numberOfMovement = Main.game.getPlayerObject().getPlasticInv().size();
+            numberOfMovement = Main.game.getPlayerObject().getPlasticInv().size() * 4;
             if (Main.game.getPlayerObject().getPlasticInv().size() > 0) {
                 Main.game.givePlastic();
                 roadbuilderMovingSound.AudioPlayer();
