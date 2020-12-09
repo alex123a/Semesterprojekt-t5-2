@@ -1,6 +1,7 @@
 package sample.domain;
 
 import sample.presentation.Controller;
+import sample.presentation.Main;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -54,7 +55,7 @@ public class Timer {
     public String[] setHighScore() {
         //Printer de tre højeste score ind på vores dokument
         readHighScore();
-        String[] highScores = {time + " " + Controller.playerObject.getName(), time1 + " " + name1, time2 + " " + name2, time3 + " " + name3};
+        String[] highScores = {time + " " + Main.game.getPlayerObject().getName(), time1 + " " + name1, time2 + " " + name2, time3 + " " + name3};
         Arrays.sort(highScores);
         String printTime1 = String.valueOf(highScores[0]);
         String printTime2 = String.valueOf(highScores[1]);

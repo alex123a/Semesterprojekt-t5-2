@@ -1,6 +1,6 @@
 package sample.domain;
 
-import sample.domain.NPCer.Toolset;
+import sample.domain.NPCs.Toolset;
 import sample.domain.PlasticElements.Plastic;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,7 +12,7 @@ public class Player {
     private List<Plastic> plasticInv = new ArrayList();
     private boolean haveToolset = false;
     private Toolset toolset;
-    private String image = "src/sample/presentation/pictures/Playergame.png";
+    private String image = "src/sample/presentation/pictures/keyItems/Playergame.png";
 
     public void setNames (String name) {
         this.name = name;
@@ -22,14 +22,11 @@ public class Player {
         return name;
     }
 
-    // plasticCollect skal fjerne en den plastik fra rummet som den står oven på.
+    // plasticCollect will remove the plastic pieces the player stands on.
     public void plasticCollect(Plastic piece, Room room) {
         if (room.getPlasticInRoom().size() > 0) {
             plasticInv.add(piece);
             room.removePlastic(piece);
-            System.out.println(plasticInv.size());
-        } else {
-            System.out.println("This room is empty");
         }
     }
 
@@ -42,8 +39,8 @@ public class Player {
     }
 
     public boolean addPlasticInv() {
-        if (plasticInv.size() <= 10 - Main.game.getFarmer().getPlasticForPlayer().length) {
-            plasticInv.addAll(Arrays.asList(Main.game.getFarmer().getPlasticForPlayer()));
+        if (plasticInv.size() <= 10 - Main.game.getFarmerObject().getPlasticForPlayer().length) {
+            plasticInv.addAll(Arrays.asList(Main.game.getFarmerObject().getPlasticForPlayer()));
             return true;
         }
         return false;

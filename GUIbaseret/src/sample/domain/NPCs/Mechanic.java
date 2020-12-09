@@ -1,12 +1,7 @@
-package sample.domain.NPCer;
+package sample.domain.NPCs;
 
-import sample.domain.Player;
 import sample.presentation.Controller;
-
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import sample.presentation.Main;
 
 public class Mechanic extends NPC {
     private boolean gaveToolset = false;
@@ -19,7 +14,7 @@ public class Mechanic extends NPC {
 
     public Toolset giveToolset() {
         this.gaveToolset = true;
-        Controller.playerObject.setHaveToolset(true);
+        Main.game.getPlayerObject().setHaveToolset(true);
         return new Toolset();
     }
 }
