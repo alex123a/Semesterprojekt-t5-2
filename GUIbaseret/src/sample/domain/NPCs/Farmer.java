@@ -9,7 +9,6 @@ import java.util.Random;
 public class Farmer extends NPC {
     /*
         randomNumber decides random size of plastic for plasticPlayer
-        random.nextInt gives a random number
         The bound inside the parentheses is the the number that maximum can be created minus one.
         The number outside is merged with the number in the parentheses
     */
