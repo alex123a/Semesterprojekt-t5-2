@@ -26,8 +26,10 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
+        //Starts the game loop in the game Class.
         game = new Game();
         game.goRoom();
+        //Sets up the start room
         Controller.roomExit = new ArrayList<>(Arrays.asList(Game.startDirections));
         launch(args);
     }
