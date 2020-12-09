@@ -1,12 +1,8 @@
 package sample.domain;
-
-import sample.presentation.Controller;
 import sample.presentation.Main;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Scanner;
@@ -18,16 +14,18 @@ public class Timer {
     private String name1, name2, name3;
     final private File highScore = new File("src/sample/highScore.txt");
 
+
     public void setStartTime() {
         startTime = new Date();
     }
-
     public void setEndTime() {
         endTime = new Date();
     }
 
+    //Calculates the timescore for the highscore list
     public String timeScore() {
         long timeScore = endTime.getTime() - startTime.getTime();
+        //Changes from milliseconds to display units
         long seconds = timeScore / 1000;
         double secondsDisplay = seconds % 60;
         double minutesDisplay = seconds / 60;
@@ -35,8 +33,8 @@ public class Timer {
         return "Time: " + (int) minutesDisplay + " minutes and " + (int) secondsDisplay + " seconds";
     }
 
+    //Reads the highscores from the HighScore textfile.
     public void readHighScore() {
-        //Henter highscore listen
         Scanner reader;
         try {
             reader = new Scanner(highScore);
@@ -52,8 +50,9 @@ public class Timer {
         }
     }
 
+    //Prints the three highest scores to the textfile HighScore
     public String[] setHighScore() {
-        //Printer de tre højeste score ind på vores dokument
+        //Reads, sorts and prints the highscores from first to third place
         readHighScore();
         String[] highScores = {time + " " + Main.game.getPlayerObject().getName(), time1 + " " + name1, time2 + " " + name2, time3 + " " + name3};
         Arrays.sort(highScores);
@@ -63,7 +62,7 @@ public class Timer {
         PrintWriter writer;
         try {
             writer = new PrintWriter(highScore);
-            //ændrer '.' til ',' da reader ikke kan læse '.'
+            //Changes '.' to ',' since reader can't read '.'
             writer.print(printTime1.replace(".", ",") + " ");
             writer.print(printTime2.replace(".", ",") + " ");
             writer.print(printTime3.replace(".", ",") + " ");
