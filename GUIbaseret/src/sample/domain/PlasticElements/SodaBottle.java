@@ -1,6 +1,5 @@
 package sample.domain.PlasticElements;
 
-//This class inherits from the Plastic class
 public class SodaBottle extends Plastic {
     private static int counterForSodaBottles = 0;
 
