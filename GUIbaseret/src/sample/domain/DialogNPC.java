@@ -3,7 +3,6 @@ package sample.domain;
 import sample.data.FileHandler;
 
 public class DialogNPC {
-    //Paths for textFiles
     private String image = "src/sample/presentation/pictures/keyItems/DialogBox.png";
     private String farmerText = "src/sample/data/textfiles/npcDescriptions/FarmerText.txt";
     private String professorText = "src/sample/data/textfiles/npcDescriptions/ProfessorText.txt";

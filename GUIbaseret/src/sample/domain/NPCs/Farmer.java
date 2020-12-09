@@ -7,7 +7,12 @@ import java.util.List;
 import java.util.Random;
 
 public class Farmer extends NPC {
-    // Decides random size of plastic for plasticPlayer
+    /*
+        randomNumber decides random size of plastic for plasticPlayer
+        random.nextInt gives a random number
+        The bound inside the parentheses is the the number that maximum can be created minus one.
+        The number outside is merged with the number in the parentheses
+    */
     final private int randomNumber = (new Random()).nextInt(8 - 5 + 1) + 5;
     private Plastic[] plasticForPlayer = new Plastic[randomNumber];
 
@@ -30,16 +35,6 @@ public class Farmer extends NPC {
 
     public Plastic[] getPlasticForPlayer() {
         return this.plasticForPlayer;
-    }
-
-    // Is this method used??
-    public void emptyPlasticForPlayer() {
-        List<Plastic> newInv = Main.game.getPlayerObject().getPlasticInv();
-        for (Plastic plastic : plasticForPlayer) {
-            newInv.add(plastic);
-        }
-        Main.game.getPlayerObject().setPlasticInv(newInv);
-        this.plasticForPlayer = null;
     }
 
 }
