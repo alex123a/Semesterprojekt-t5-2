@@ -419,7 +419,7 @@ public class Controller {
         }
     }
 
-    // Repaing machine
+    // Reparing machine
     public void repairMachine() {
         // timeline and FPS are explained earlier
         Timeline timeline = new Timeline();
