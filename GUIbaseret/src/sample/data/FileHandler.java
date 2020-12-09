@@ -14,7 +14,7 @@ public class FileHandler {
     public String ReadFile(String path, int index) {
         String line = "";
         try {
-            // Files loades the file, that is given from the path in the parameters of the method.
+            // Loades the file, that is given from the path in the parameters of the method.
             // readallLines reads all the lines, and then .get(index) is used to get the specific line line in the text field you want.
             return Files.readAllLines(Paths.get(path)).get(index);
         } catch (IOException e) {
@@ -40,7 +40,6 @@ public class FileHandler {
             printWriter.println("Noget generel feedback til spillet som helhed?");
             printWriter.println(text);
             printWriter.println("");
-            // closes the printwriter
             printWriter.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
