@@ -10,8 +10,8 @@ public class NoAccess {
 
     private int[] xCordinatesTree = new int[]{27, 38, 132, 145, 177, 144, 245, 265, -132, -125, -272, -262, 20, 30, 92, 102};
     private int[] yCordinatesTree = new int[]{36, 86, 44, 86, 106, 192, 114, 154, 129, 171, 134, 174, -245, -206, -221, -188};
-    private int[] xCordinateBush = new int[]{-210,-295,-340,-182,77,62,305,152,275,315,-77};
-    private int[] yCordinateBush = new int[]{64,46,159,181,129,169,99,-216,-208,-191,128};
+    private int[] xCordinateBush = new int[]{-210,-295,-340,-182,62,305,152,275,315,-77};
+    private int[] yCordinateBush = new int[]{64,46,159,181,169,99,-216,-208,-191,128};
     private int[] xCordinatesTreeFarm = new int[]{-324,-312,-182,-182,-319,-307,248,255,298,315};
     private int[] yCordinatesTreeFarm = new int[]{91,116,-221,-221,-186,-153,36,71,104,144};
     private int[] xCordinatesPalm = new int[]{92,117,252,274,14,34,157,179,14,37,267,287,-25,0};
