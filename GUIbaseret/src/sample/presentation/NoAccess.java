@@ -8,14 +8,14 @@ import java.awt.geom.Area;
 
 public class NoAccess {
     // The arrays in the as atributs are cordinates for the objects on the map.
-    private int[] xCordinatesTree = new int[]{27, 38, 132, 145, 177, 144, 245, 265, -132, -125, -272, -262, 20, 30, 92, 102};
-    private int[] yCordinatesTree = new int[]{36, 86, 44, 86, 106, 192, 114, 154, 129, 171, 134, 174, -245, -206, -221, -188};
-    private int[] xCordinateBush = new int[]{-210,-295,-340,-182,62,305,152,275,315,-77};
-    private int[] yCordinateBush = new int[]{64,46,159,181,169,99,-216,-208,-191,128};
-    private int[] xCordinatesTreeFarm = new int[]{-324,-312,-182,-182,-319,-307,248,255,298,315};
-    private int[] yCordinatesTreeFarm = new int[]{91,116,-221,-221,-186,-153,36,71,104,144};
-    private int[] xCordinatesPalm = new int[]{92,117,252,274,14,34,157,179,14,37,267,287,-25,0};
-    private int[] yCordinatesPalm = new int[]{-220,-170,-221,-193,-78,-26,-21,26,101,144,81,126,-221,-193};
+    private int[] xCordinatesTree = {27, 38, 132, 145, 177, 144, 245, 265, -132, -125, -272, -262, 20, 30, 92, 102};
+    private int[] yCordinatesTree = {36, 86, 44, 86, 106, 192, 114, 154, 129, 171, 134, 174, -245, -206, -221, -188};
+    private int[] xCordinateBush = {-210,-295,-340,-182,62,305,152,275,315};
+    private int[] yCordinateBush = {64,46,159,181,169,99,-216,-208,-191};
+    private int[] xCordinatesTreeFarm = {-324,-312,-182,-182,-319,-307,248,255,298,315};
+    private int[] yCordinatesTreeFarm = {91,116,-221,-221,-186,-153,36,71,104,144};
+    private int[] xCordinatesPalm = {92,117,252,274,14,34,157,179,14,37,267,287,-25,0};
+    private int[] yCordinatesPalm = {-220,-170,-221,-193,-78,-26,-21,26,101,144,81,126,-221,-193};
 
     // This method is returning a boolean that determines if the player should walk or not
     // The parameters objx and objy, are the cordinates of the player objects on the map
