@@ -14,7 +14,7 @@ public class RoadBuild extends Room {
     //Five plastic pieces is put into the the numberOfPlastic array. Which will be displayed in the room by the Controller class.
     public Plastic[] generatePlasticArray() {
         int sodaBottles = 2;
-        int waterBottles = 18; //3
+        int waterBottles = 3;
         numberOfPlastic = new Plastic[waterBottles + sodaBottles];
 
         for (int i = 0; i < numberOfPlastic.length; i++) {
