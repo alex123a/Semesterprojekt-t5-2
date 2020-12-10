@@ -380,45 +380,43 @@ public class Controller {
                 east = true;
                 break;
             case SPACE:
-                if (numberOfMovement == 0) {
-                    if (gameNotStarted) {
-                        namePlayer();
-                    } else if (!isInventoryFull) {
-                        collectPlastic(Main.game.placePlastic());
-                    }
-                    if (Main.game.getCurrentRoom() instanceof RoadBuild && talkingRoadbuilder && spaceCount != 0 && roadbuilderTalk) {
-                        // Player saying he will go to the town and talk with mechanic. It is placed here so you can walk away from the roadbuilder and still click space to finish talk with roadbuilder
-                        if (spaceCount == 1) {
-                            talkNPC(playerText, "Road builder", 3);
-                            spaceCount++;
-                        } else if (spaceCount == 2) {
-                            hideDialogBox();
-                            spaceCount = 0;
-                        }
-                    } else if (Main.game.getCurrentRoom() instanceof RoadBuild && player.getTranslateX() > roadBuilderView.getTranslateX() - 50 && player.getTranslateX() < roadBuilderView.getTranslateX() + 50 && player.getTranslateY() > roadBuilderView.getTranslateY() - 50 && player.getTranslateY() < roadBuilderView.getTranslateY() + 50) {
-                        // Damaged dialog run here, which controls messages for when it break down and when it is getting repaired.
-                        damagedDialog();
-                        if (Main.game.getRoadBuilder().getDamaged() == 0) {
-                            numberOfMovement = Main.game.getPlayerObject().getPlasticInv().size() * 4;
-                            if (Main.game.getPlayerObject().getPlasticInv().size() > 0) {
-                                Main.game.givePlastic();
-                                roadbuilderMovingSound.AudioPlayer();
-                            }
-                            updateInventory();
-                            isInventoryFull = false;
-                        }
-                    } else if (Main.game.getCurrentRoom() instanceof Farm && player.getTranslateX() > farmerNpc.getTranslateX() - 30 && player.getTranslateX() < farmerNpc.getTranslateX() + 30 && player.getTranslateY() > farmerNpc.getTranslateY() - 30 && player.getTranslateY() < farmerNpc.getTranslateY() + 30) {
-                        showDialogBox();
-                    } else if (Main.game.getCurrentRoom() instanceof Sdu && player.getTranslateX() > professorNpc.getTranslateX() - 30 && player.getTranslateX() < professorNpc.getTranslateX() + 30 && player.getTranslateY() > professorNpc.getTranslateY() - 30 && player.getTranslateY() < professorNpc.getTranslateY() + 30) {
-                        showDialogBox();
-                    } else if (Main.game.getCurrentRoom() instanceof Town && player.getTranslateX() > mechanicNpc.getTranslateX() - 30 && player.getTranslateX() < mechanicNpc.getTranslateX() + 30 && player.getTranslateY() > mechanicNpc.getTranslateY() - 30 && player.getTranslateY() < mechanicNpc.getTranslateY() + 30) {
-                        showDialogBox();
-                    } else if (Main.game.getCurrentRoom() instanceof Park && player.getTranslateX() > oldLadyNPC.getTranslateX() - 30 && player.getTranslateX() < oldLadyNPC.getTranslateX() + 30 && player.getTranslateY() > oldLadyNPC.getTranslateY() - 30 && player.getTranslateY() < oldLadyNPC.getTranslateY() + 30) {
-                        showDialogBox();
-                    } else if (Main.game.getCurrentRoom() instanceof Beach && player.getTranslateX() > fishermanNpc.getTranslateX() - 30 && player.getTranslateX() < fishermanNpc.getTranslateX() + 30 && player.getTranslateY() > fishermanNpc.getTranslateY() - 30 && player.getTranslateY() < fishermanNpc.getTranslateY() + 30) {
-                        showDialogBox();
-                    }
+                if (gameNotStarted) {
+                    namePlayer();
+                } else if (!isInventoryFull) {
+                    collectPlastic(Main.game.placePlastic());
+                }
 
+                if (Main.game.getCurrentRoom() instanceof RoadBuild && talkingRoadbuilder && spaceCount != 0 && roadbuilderTalk) {
+                    // Player saying he will go to the town and talk with mechanic. It is placed here so you can walk away from the roadbuilder and still click space to finish talk with roadbuilder
+                    if (spaceCount == 1) {
+                        talkNPC(playerText, "Road builder", 3);
+                        spaceCount++;
+                    } else if (spaceCount == 2) {
+                        hideDialogBox();
+                        spaceCount = 0;
+                    }
+                } else if (Main.game.getCurrentRoom() instanceof RoadBuild && player.getTranslateX() > roadBuilderView.getTranslateX() - 50 && player.getTranslateX() < roadBuilderView.getTranslateX() + 50 && player.getTranslateY() > roadBuilderView.getTranslateY() - 50 && player.getTranslateY() < roadBuilderView.getTranslateY() + 50) {
+                    // Damaged dialog run here, which controls messages for when it break down and when it is getting repaired.
+                    damagedDialog();
+                    if (Main.game.getRoadBuilder().getDamaged() == 0 && numberOfMovement == 0) {
+                        numberOfMovement = Main.game.getPlayerObject().getPlasticInv().size() * 4;
+                        if (Main.game.getPlayerObject().getPlasticInv().size() > 0) {
+                            Main.game.givePlastic();
+                            roadbuilderMovingSound.AudioPlayer();
+                        }
+                        updateInventory();
+                        isInventoryFull = false;
+                    }
+                } else if (Main.game.getCurrentRoom() instanceof Farm && player.getTranslateX() > farmerNpc.getTranslateX() - 30 && player.getTranslateX() < farmerNpc.getTranslateX() + 30 && player.getTranslateY() > farmerNpc.getTranslateY() - 30 && player.getTranslateY() < farmerNpc.getTranslateY() + 30) {
+                    showDialogBox();
+                } else if (Main.game.getCurrentRoom() instanceof Sdu && player.getTranslateX() > professorNpc.getTranslateX() - 30 && player.getTranslateX() < professorNpc.getTranslateX() + 30 && player.getTranslateY() > professorNpc.getTranslateY() - 30 && player.getTranslateY() < professorNpc.getTranslateY() + 30) {
+                    showDialogBox();
+                } else if (Main.game.getCurrentRoom() instanceof Town && player.getTranslateX() > mechanicNpc.getTranslateX() - 30 && player.getTranslateX() < mechanicNpc.getTranslateX() + 30 && player.getTranslateY() > mechanicNpc.getTranslateY() - 30 && player.getTranslateY() < mechanicNpc.getTranslateY() + 30) {
+                    showDialogBox();
+                } else if (Main.game.getCurrentRoom() instanceof Park && player.getTranslateX() > oldLadyNPC.getTranslateX() - 30 && player.getTranslateX() < oldLadyNPC.getTranslateX() + 30 && player.getTranslateY() > oldLadyNPC.getTranslateY() - 30 && player.getTranslateY() < oldLadyNPC.getTranslateY() + 30) {
+                    showDialogBox();
+                } else if (Main.game.getCurrentRoom() instanceof Beach && player.getTranslateX() > fishermanNpc.getTranslateX() - 30 && player.getTranslateX() < fishermanNpc.getTranslateX() + 30 && player.getTranslateY() > fishermanNpc.getTranslateY() - 30 && player.getTranslateY() < fishermanNpc.getTranslateY() + 30) {
+                    showDialogBox();
                 }
         }
         // Checking if player walks out of the room and into a new one
@@ -431,7 +429,7 @@ public class Controller {
         }
 
         // When you try to give plastic to the machine when it's inventorycount is 19 or larger, then it will break down.
-        if (Main.game.getRoadBuilder().getInventoryCount() >= 19 && Main.game.getRoadBuilder().isNotDamagedBefore() && roadbuilderTalk) {
+        if (Main.game.getRoadBuilder().getInventoryCount() >= 19 && Main.game.getRoadBuilder().isNotDamagedBefore() && roadbuilderTalk && numberOfMovement == 0) {
             dialogNPC.setImage(new Image("file:src/sample/presentation/pictures/keyItems/RoadBuilder.png"));
             dialogNPC.setScaleX(3.5);
             dialogNPC.setScaleY(3.5);
@@ -1323,8 +1321,6 @@ public class Controller {
 
     @FXML
     private ImageView item10;
-
-    // De 9 slot linjer under inkaplser de 10 inventory pladser
 
     @FXML
     private Line slot1;
