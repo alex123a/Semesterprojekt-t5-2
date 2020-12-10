@@ -425,6 +425,43 @@ public class Controller {
         NewRoom();
     }
 
+    public void damagedDialog() {
+        if (!roadbuilderTalk) {
+            showDialogBox();
+        }
+
+        // When you try to give plastic to the machine when it's inventorycount is 19 or larger, then it will break down.
+        if (Main.game.getRoadBuilder().getInventoryCount() >= 19 && Main.game.getRoadBuilder().isNotDamagedBefore() && roadbuilderTalk) {
+            dialogNPC.setImage(new Image("file:src/sample/presentation/pictures/keyItems/RoadBuilder.png"));
+            dialogNPC.setScaleX(3.5);
+            dialogNPC.setScaleY(3.5);
+            Main.game.getRoadBuilder().damagedMachine();
+            Main.game.getRoadBuilder().setNotDamagedBefore(false);
+            roadbuilderCrashSound.AudioPlayer();
+            // If you have the toolset and interact with it, then it will be repaired.
+        } else if (Main.game.getPlayerObject().getHaveToolset() && Main.game.getRoadBuilder().getDamaged() > 0) {
+            repairSound.musicPlayerInfinity();
+            repairMachine();
+        }
+
+        // Roadbuilder tell Player to get the toolset from mechanic
+        if (Main.game.getRoadBuilder().getDamaged() > 0 && !Main.game.getPlayerObject().getHaveToolset()) {
+            NPCTextLine.setTranslateY(-210);
+            NPCTextLine1.setTranslateY(-190);
+            NPCTextLine2.setTranslateY(-170);
+            playerText.setTranslateY(-130);
+            if (spaceCount == 0 && Main.game.getRoadBuilder().getDamaged() > 0) {
+                dialogNPC.setScaleX(1);
+                dialogNPC.setScaleY(1);
+                talkNPC(NPCTextLine, "Road builder", 0);
+                talkNPC(NPCTextLine1, "Road builder", 1);
+                talkNPC(NPCTextLine2, "Road builder", 2);
+                spaceCount++;
+                talkingRoadbuilder = true;
+            }
+        }
+    }
+
     // Naming player and give the player object the name
     private void namePlayer() {
         String name = nameField.getText();
@@ -1177,43 +1214,6 @@ public class Controller {
                 spaceCount++;
             } else if (spaceCount == 3) {
                 hideDialogBox();
-            }
-        }
-    }
-
-    public void damagedDialog() {
-        if (!roadbuilderTalk) {
-            showDialogBox();
-        }
-
-        // When you try to give plastic to the machine when it's inventorycount is 19 or larger, then it will break down.
-        if (Main.game.getRoadBuilder().getInventoryCount() >= 19 && Main.game.getRoadBuilder().isNotDamagedBefore() && roadbuilderTalk) {
-            dialogNPC.setImage(new Image("file:src/sample/presentation/pictures/keyItems/RoadBuilder.png"));
-            dialogNPC.setScaleX(3.5);
-            dialogNPC.setScaleY(3.5);
-            Main.game.getRoadBuilder().damagedMachine();
-            Main.game.getRoadBuilder().setNotDamagedBefore(false);
-            roadbuilderCrashSound.AudioPlayer();
-        // If you have the toolset and interact with it, then it will be repaired.
-        } else if (Main.game.getPlayerObject().getHaveToolset() && Main.game.getRoadBuilder().getDamaged() > 0) {
-            repairSound.musicPlayerInfinity();
-            repairMachine();
-        }
-
-        // Roadbuilder tell Player to get the toolset from mechanic
-        if (Main.game.getRoadBuilder().getDamaged() > 0 && !Main.game.getPlayerObject().getHaveToolset()) {
-            NPCTextLine.setTranslateY(-210);
-            NPCTextLine1.setTranslateY(-190);
-            NPCTextLine2.setTranslateY(-170);
-            playerText.setTranslateY(-130);
-            if (spaceCount == 0 && Main.game.getRoadBuilder().getDamaged() > 0) {
-                dialogNPC.setScaleX(1);
-                dialogNPC.setScaleY(1);
-                talkNPC(NPCTextLine, "Road builder", 0);
-                talkNPC(NPCTextLine1, "Road builder", 1);
-                talkNPC(NPCTextLine2, "Road builder", 2);
-                spaceCount++;
-                talkingRoadbuilder = true;
             }
         }
     }
