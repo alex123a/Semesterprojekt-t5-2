@@ -1,1 +1,1 @@
-0,59 sad 1,11 Alex 1,18 sad 
+30,2 Ole 50,3 Jeppe 59,4 Anders
