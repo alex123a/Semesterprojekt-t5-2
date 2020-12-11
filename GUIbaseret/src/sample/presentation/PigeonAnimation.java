@@ -11,9 +11,9 @@ public class PigeonAnimation implements Animation{
 
     @Override
     public double[] changePic() {
-        //TODO Tilpas det under til pigeon animation
         double whichPicWidth = 0;
         double whichPicHeight = 0;
+        // Finding the next picture and the direction the pigeon is currently walking
         if (count % 48 < 12) {
             whichPicWidth = startPixelX + (count % widthNumPictures) * picWidth;
             whichPicHeight = 0;
@@ -28,6 +28,7 @@ public class PigeonAnimation implements Animation{
             whichPicHeight = picHeight * 2;
         }
         count++;
+        // The reason why it gives count with is, so that count not only decides which picture but also which direction it should walk.
         double[] numbers = {whichPicWidth, whichPicHeight, picWidth, picHeight, count};
         return numbers;
     }

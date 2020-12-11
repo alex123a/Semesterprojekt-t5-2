@@ -3,7 +3,7 @@ package sample.domain;
 import sample.data.FileHandler;
 
 public class DialogNPC {
-    private String image = "src/sample/presentation/pictures/DialogBox.png";
+    private String image = "src/sample/presentation/pictures/keyItems/DialogBox.png";
     private String farmerText = "src/sample/data/textfiles/npcDescriptions/FarmerText.txt";
     private String professorText = "src/sample/data/textfiles/npcDescriptions/ProfessorText.txt";
     private String mechanicText = "src/sample/data/textfiles/npcDescriptions/VillagerText.txt";
@@ -17,10 +17,13 @@ public class DialogNPC {
         return image;
     }
 
+    // Is used to read from textfiles
     public String getNPCText(String character, int index) {
+        // if the character name matches on of these if statements, their textfile will be loaded.
+        // else, it will return a string with no content from the textfiles.
         if (character.equals("farmer")) {
             FileHandler getNPCText = new FileHandler();
-            var text = getNPCText.ReadFile(farmerText, index);
+            String text = getNPCText.ReadFile(farmerText, index);
             return text;
         } else if (character.equals("professor")) {
             FileHandler getNPCText = new FileHandler();

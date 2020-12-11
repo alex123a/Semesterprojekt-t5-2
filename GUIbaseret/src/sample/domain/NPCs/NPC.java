@@ -1,10 +1,14 @@
-package sample.domain.NPCer;
+package sample.domain.NPCs;
 
 public abstract class NPC {
     private String name;
     private boolean talking = false;
     private String image;
 
+    /**
+     * @param name  is used to assign a name to each NPC
+     * @param image is used to find the image path
+     */
     public NPC(String name, String image) {
         this.name = name;
         this.image = image;

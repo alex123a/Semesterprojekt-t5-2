@@ -1,1 +1,1 @@
-1,11 Alex 1,3599999999999999 Alex 2,07 fred 
+30,2 Ole 50,3 Jeppe 59,4 Anders

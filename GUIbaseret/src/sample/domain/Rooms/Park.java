@@ -11,6 +11,7 @@ public class Park extends Room {
         super.setPlasticArray(generatePlasticArray());
     }
 
+    //Three plastic pieces is put into the the numberOfPlastic array. Which will be displayed in the room by the Controller class.
     public Plastic[] generatePlasticArray() {
         int waterBottles = 3;
         numberOfPlastic = new Plastic[waterBottles];

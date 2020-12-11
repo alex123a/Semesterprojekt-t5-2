@@ -9,11 +9,18 @@ import java.util.Set;
 import java.util.List;
 
 public abstract class Room {
+    /**
+     * @param pictureRoom a path to the picture
+     */
     private ArrayList<Plastic> plasticInRoom;
     private HashMap<String, Room> exits;
     private int plasticCount;
     private String pictureRoom;
 
+    /*
+    Setup for each room. Sets the exits in a hashmap.
+    Puts the plastic in the room into an new arraylist.
+    */
     public Room(String pictureRoom) {
         exits = new HashMap<>();
         this.plasticInRoom = new ArrayList<>();
@@ -21,25 +28,17 @@ public abstract class Room {
         this.pictureRoom = pictureRoom;
     }
 
+    //Sets the plastic in the room
     public void setPlasticArray(Plastic[] randomPlastic) {
         this.plasticInRoom = new ArrayList<>(Arrays.asList(randomPlastic));
         this.plasticInRoom = new ArrayList<>(Arrays.asList(randomPlastic));
         this.plasticCount = this.plasticInRoom.size();
     }
 
+    //Sets the exits for the direction of each room.
     public void setExit(String direction, Room neighbor) 
     {
         exits.put(direction, neighbor);
-    }
-
-    private String getExitString()
-    {
-        String returnString = "Exits:";
-        Set<String> keys = exits.keySet();
-        for(String exit : keys) {
-            returnString += " " + exit;
-        }
-        return returnString;
     }
 
     public Room getExit(String direction) 
@@ -47,6 +46,7 @@ public abstract class Room {
         return exits.get(direction);
     }
 
+    //Plus all the plastics in the room into one array with the types.
     public void getPlasticTypes() {
         int[] numberOfPlastic = new int[4];
         for (Plastic plastic: plasticInRoom) {
@@ -60,16 +60,6 @@ public abstract class Room {
                 numberOfPlastic[3]++;
             }
         }
-
-        String[] typer = {"Cleaning products", "Juice bottles", "Milk bottles", "Water bottles"};
-        System.out.println("Total of " + plasticInRoom.size() + " plastic pieces");
-        for (int i = 0; i < numberOfPlastic.length; i++) {
-            if (numberOfPlastic[i] != 0) {
-                System.out.print("There is " + numberOfPlastic[i] + " of the type " + typer[i] + " ");
-            }
-        }
-        System.out.println();
-
     }
 
     public List<Plastic> getPlasticInRoom() {
@@ -79,19 +69,6 @@ public abstract class Room {
     public void removePlastic(Plastic plastic) {
         plasticInRoom.set(plasticInRoom.indexOf(plastic), null);
     }
-
-    /*
-    public Plastic getPlastic() {
-        Plastic plastic = new Plastic();
-        if (plasticInRoom.size() > 0) {
-            plasticInRoom.remove(plasticCount-1);
-            plasticCount--;
-            System.out.println("You have collected 1 piece of plastic, there is " + plasticCount + " pieces of plastic left in the room");
-        }
-        return plastic;
-    }
-
-    */
 
     public abstract Plastic[] generatePlasticArray();
 

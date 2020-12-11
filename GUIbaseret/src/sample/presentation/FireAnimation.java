@@ -14,29 +14,5 @@ public class FireAnimation implements Animation {
         double[] numbers = {whichPicWidth, whichPicHeight, picWidth, picHeight};
         return numbers;
     }
-
-    public int getCount() {
-        return count;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
-    }
-
-    public int getWidthNumPictures() {
-        return widthNumPictures;
-    }
-
-    public void setWidthNumPictures(int widthNumPictures) {
-        this.widthNumPictures = widthNumPictures;
-    }
-
-    public double getPicWidth() {
-        return picWidth;
-    }
-
-    public double getPicHeight() {
-        return picHeight;
-    }
 }
 

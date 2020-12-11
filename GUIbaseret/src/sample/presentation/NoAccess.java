@@ -7,21 +7,26 @@ import java.awt.geom.Area;
 
 
 public class NoAccess {
+    // The arrays in the as atributs are cordinates for the objects on the map.
+    private int[] xCordinatesTree = {27, 38, 132, 145, 177, 144, 245, 265, -132, -125, -272, -262, 20, 30, 92, 102};
+    private int[] yCordinatesTree = {36, 86, 44, 86, 106, 192, 114, 154, 129, 171, 134, 174, -245, -206, -221, -188};
+    private int[] xCordinateBush = {-210,-295,-340,-182,62,305,152,275,315};
+    private int[] yCordinateBush = {64,46,159,181,169,99,-216,-208,-191};
+    private int[] xCordinatesTreeFarm = {-324,-312,-182,-182,-319,-307,248,255,298,315};
+    private int[] yCordinatesTreeFarm = {91,116,-221,-221,-186,-153,36,71,104,144};
+    private int[] xCordinatesPalm = {92,117,252,274,14,34,157,179,14,37,267,287,-25,0};
+    private int[] yCordinatesPalm = {-220,-170,-221,-193,-78,-26,-21,26,101,144,81,126,-221,-193};
 
-    private int[] xCordinatesTree = new int[]{27, 38, 132, 145, 177, 144, 245, 265, -132, -125, -272, -262, 20, 30, 92, 102};
-    private int[] yCordinatesTree = new int[]{36, 86, 44, 86, 106, 192, 114, 154, 129, 171, 134, 174, -245, -206, -221, -188};
-    private int[] xCordinateBush = new int[]{-210,-295,-340,-182,77,62,305,152,275,315,-77};
-    private int[] yCordinateBush = new int[]{64,46,159,181,129,169,99,-216,-208,-191,128};
-    private int[] xCordinatesTreeFarm = new int[]{-324,-312,-182,-182,-319,-307,248,255,298,315};
-    private int[] yCordinatesTreeFarm = new int[]{91,116,-221,-221,-186,-153,36,71,104,144};
-    private int[] xCordinatesPalm = new int[]{92,117,252,274,14,34,157,179,14,37,267,287,-25,0};
-    private int[] yCordinatesPalm = new int[]{-220,-170,-221,-193,-78,-26,-21,26,101,144,81,126,-221,-193};
-
+    // This method is returning a boolean that determines if the player should walk or not
+    // The parameters objx and objy, are the cordinates of the player objects on the map
+    // x and y are buffer values, so that the player only can move close to the rectangles, but not on the
+    // if the players touches the a rectangle he wont be albe to move agian.
     public boolean moveBlock(double objx, double objy, int x, int y) {
+        // the boolean has to be false in the begning, so the player can move
         boolean cantMove = false;
-        //RoadBuild
+        //RoadBuild room restrictions
         if (Main.game.getCurrentRoom() instanceof RoadBuild) {
-            // tree in top left conor.
+            // Here a rectangle is defined, and then if the player object is +x and +y close to, he wont be able to move
             Rectangle topLeftTrees = new Rectangle(-340, -220, 180, 120);
             if (topLeftTrees.contains(objx + x, objy + y)) {
                 cantMove = true;
@@ -34,17 +39,8 @@ public class NoAccess {
             if (rightButtomWall.contains(objx + x, objy + y)) {
                 cantMove = true;
             }
-            /*
-            Rectangle treeCrown = new Rectangle(25,36.5,55,50);
-            if(treeCrown.contains(objx+x,objy+y)){
-                cantMove =true;
-            }
-            Rectangle treeStem = new Rectangle(38,86,15,34);{
-                if(treeStem.contains(objx+x, objy+y))
-                    cantMove = true;
-            }
-
-             */
+            // A methode has been made, for trees and bushes, with the same parameters as moveblock.
+            // It is onlue been made for bushees, tree and palm because they have the same size.
             if (treeIdentifyer(xCordinatesTree, yCordinatesTree, objx, objy, x, y)) {
                 cantMove = true;
             }
@@ -236,23 +232,34 @@ public class NoAccess {
 
         return cantMove;
     }
-
+    // Returns a boolean that says if the player are x and y cloes to the area.
+    // Has the same atributes as the MoveBlock but also cordinates from the class atributes
     public boolean treeIdentifyer(int[] xCordinates, int[] yCordinates, double objx, double objy, int x, int y) {
+        // Area of the tree is made.
         Area tree = new Area();
+        // Defines boolean
         boolean inrange = false;
+        // This for loop runs through the cordinates in the class atribute arrays, and makes new area.
         for (int i = 0; i < xCordinates.length; i++) {
+            // The tree crown area is made and put into posotion
             Area treeCrown = new Area(new java.awt.Rectangle(xCordinates[i], yCordinates[i], 55, 50));
+            // The arrays are setup so that index 0 is the three crown and index 1 is the tree stem
+            // Therefor count it one up
             i++;
+            // Creates the area for the tree stem
             Area treeStem = new Area(new java.awt.Rectangle(xCordinates[i], yCordinates[i], 15, 34));
+            // Adds the to areas into one area
             tree.add(treeCrown);
             tree.add(treeStem);
+            // If statement that checks if the player is to close to the tree
             if (tree.contains(objx + x, objy + y)) {
+                // returns inrange true, is the player is to close
                 inrange = true;
             }
         }
         return inrange;
     }
-
+    // Same logic as the method above, just with a diffrent sized area
     public boolean bushIdentifyer(int[] xCordinates, int[] yCordinates, double objx, double objy, int x, int y) {
         boolean inrange = false;
         for (int i = 0; i < xCordinates.length; i++) {
@@ -264,6 +271,7 @@ public class NoAccess {
         return inrange;
 
     }
+    // Same logic as the methods above, just with a diffrent sized areas
     public boolean palmIdentifyer(int[] xCordinates, int[] yCordinates, double objx, double objy, int x, int y) {
         Area tree = new Area();
         boolean inrange = false;
